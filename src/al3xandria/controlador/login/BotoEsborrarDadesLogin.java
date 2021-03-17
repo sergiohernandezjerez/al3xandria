@@ -6,11 +6,11 @@ import java.awt.event.MouseListener;
 import al3xandria.vista.headPanel.HeadPanel;
 
 
-public class BotoCancelLogin implements MouseListener{
+public class BotoEsborrarDadesLogin implements MouseListener{
 	
 	private HeadPanel headPanel;
 	
-	public BotoCancelLogin(HeadPanel view) {
+	public BotoEsborrarDadesLogin(HeadPanel view) {
 		this.headPanel =  view;
 	}
 

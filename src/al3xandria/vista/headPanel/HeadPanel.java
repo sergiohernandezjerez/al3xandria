@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import al3xandria.controlador.login.BotoCancelLogin;
+import al3xandria.controlador.login.BotoEsborrarDadesLogin;
 import al3xandria.controlador.login.BotoLoginLogout;
 import al3xandria.controlador.login.Controller;
 import al3xandria.strings.ExternalizeStrings;
@@ -27,7 +27,7 @@ public class HeadPanel extends JPanel{
 	private JLabel contrasenyaLoginLabel;
 	private JLabel hasOblidatLaContrasenyaLabel;
 	private JButton nouUsuariButton;
-	private JLabel cancelLoginLabel;
+	private JLabel esborrarDadesLoginLabel;
 	private JButton ferLoginButton;
 	private Icons icones;
 	
@@ -86,14 +86,14 @@ public class HeadPanel extends JPanel{
 		nouUsuariButton.setToolTipText(ExternalizeStrings.getString("HeadPanel.nouUsuariButtonToltip")); 
 		add(nouUsuariButton);
 		
-		cancelLoginLabel = new JLabel(ExternalizeStrings.getString("HeadPanel.cancelLabel")); 
-		cancelLoginLabel.setFont(new Font("Tahoma", Font.PLAIN, 9)); 
-		cancelLoginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		cancelLoginLabel.setForeground(Color.RED);
-		cancelLoginLabel.setBounds(646, 75, 47, 14);
-		cancelLoginLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.cancelLabelToltip")); 
-		cancelLoginLabel.addMouseListener(new BotoCancelLogin(this));
-		add(cancelLoginLabel);
+		esborrarDadesLoginLabel = new JLabel(ExternalizeStrings.getString("HeadPanel.cancelLabel")); 
+		esborrarDadesLoginLabel.setFont(new Font("Tahoma", Font.PLAIN, 9)); 
+		esborrarDadesLoginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		esborrarDadesLoginLabel.setForeground(Color.RED);
+		esborrarDadesLoginLabel.setBounds(646, 75, 47, 14);
+		esborrarDadesLoginLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.cancelLabelToltip")); 
+		esborrarDadesLoginLabel.addMouseListener(new BotoEsborrarDadesLogin(this));
+		add(esborrarDadesLoginLabel);
 				
 		ferLoginButton = new JButton(ExternalizeStrings.getString("HeadPanel.loginButton")); 
 		ferLoginButton.setBounds(825, 18, 100, 27);
@@ -166,11 +166,11 @@ public class HeadPanel extends JPanel{
 	}
 
 	public JLabel getCancelLoginLabel() {
-		return cancelLoginLabel;
+		return esborrarDadesLoginLabel;
 	}
 
 	public void setCancelLoginLabel(JLabel cancelLoginLabel) {
-		this.cancelLoginLabel = cancelLoginLabel;
+		this.esborrarDadesLoginLabel = cancelLoginLabel;
 	}
 
 	public JButton getFerLoginButton() {
