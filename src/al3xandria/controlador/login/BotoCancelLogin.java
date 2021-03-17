@@ -18,7 +18,8 @@ public class BotoCancelLogin implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		headPanel.getEmailintroduitPerLusuari().setText("");
-		headPanel.getContrasenyaLoginLabel().setText("");
+		headPanel.getContrasenyaIntroduidaPerLusuari().setText("");
+		headPanel.getEmailintroduitPerLusuari().requestFocus();
 		
 	}
 

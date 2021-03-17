@@ -1,6 +1,7 @@
 package al3xandria.vista.icons;
 
 import java.awt.Image;
+import java.io.File;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -19,34 +20,34 @@ public class Icons {
 	private Icon usuariConectatIcon;
 
 	public Icons() {
-		consultaLlbresIcon = new ImageIcon(new ImageIcon("F:\\workSpaces\\eclipse\\Al3xandria\\resources\\consultaLlibresIcon.png").
+		consultaLlbresIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "consultaLlibresIcon.png").
 				getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		
-		consultaComentarisIcon = new ImageIcon(new ImageIcon("F:\\workSpaces\\eclipse\\Al3xandria\\resources\\consultaComentarisIcon.png").
+		consultaComentarisIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "consultaComentarisIcon.png").
 				getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		
-		consultaPrestecsIcon = new ImageIcon(new ImageIcon("F:\\workSpaces\\eclipse\\Al3xandria\\resources\\consultaPrestecsIcon.png").
+		consultaPrestecsIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "consultaPrestecsIcon.png").
 				getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		
-		administrarUsuarisIcon = new ImageIcon(new ImageIcon("F:\\workSpaces\\eclipse\\Al3xandria\\resources\\administrarUsuarisIcon.png").
+		administrarUsuarisIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "administrarUsuarisIcon.png").
 				getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		
-		administrarPrestecsIcon = new ImageIcon(new ImageIcon("F:\\workSpaces\\eclipse\\Al3xandria\\resources\\administrarPrestecsIcon.png").
+		administrarPrestecsIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "administrarPrestecsIcon.png").
 				getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		
-		administrarLibresIcon = new ImageIcon(new ImageIcon("F:\\workSpaces\\eclipse\\Al3xandria\\resources\\administrarLlibresIcon.png").
+		administrarLibresIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "administrarLlibresIcon.png").
 				getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		
-		administrarComentarisIcon = new ImageIcon(new ImageIcon("F:\\workSpaces\\eclipse\\Al3xandria\\resources\\administrarComentarisIcon.png").
+		administrarComentarisIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "administrarComentarisIcon.png").
 				getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		
-		usuariNoConectatIcon = new ImageIcon(new ImageIcon("F:\\workSpaces\\eclipse\\Al3xandria\\resources\\usuariNoConectatIcon.png").
+		usuariNoConectatIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "usuariNoConectatIcon.png").
 				getImage().getScaledInstance(32, 32, Image.SCALE_AREA_AVERAGING));
 		
-		usuariConectatIcon = new ImageIcon(new ImageIcon("F:\\workSpaces\\eclipse\\Al3xandria\\resources\\usuariConectatIcon.png").
+		usuariConectatIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "usuariConectatIcon.png").
 				getImage().getScaledInstance(32, 32, Image.SCALE_AREA_AVERAGING));
 				
-		logoAlexandria = new ImageIcon("F:\\workSpaces\\eclipse\\Al3xandria\\resources\\logo.png");
+		logoAlexandria = new ImageIcon("." + File.separator + "resources" + File.separator + "logo.png");
 	}
 	
 	

@@ -138,11 +138,11 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getCancelLoginLabel().setEnabled(false);
 		headPanel.getHasOblidatLaContrasenyaLabel().setEnabled(false);
 		
-		headPanel.getEmailintroduitPerLusuari().setToolTipText("");
-		headPanel.getContrasenyaIntroduidaPerLusuari().setToolTipText("");
-		headPanel.getNouUsuariButton().setToolTipText("");
-		headPanel.getCancelLoginLabel().setToolTipText("");
-		headPanel.getHasOblidatLaContrasenyaLabel().setToolTipText("");
+		headPanel.getEmailintroduitPerLusuari().setToolTipText(null);
+		headPanel.getContrasenyaIntroduidaPerLusuari().setToolTipText(null);
+		headPanel.getNouUsuariButton().setToolTipText(null);
+		headPanel.getCancelLoginLabel().setToolTipText(null);
+		headPanel.getHasOblidatLaContrasenyaLabel().setToolTipText(null);
 		
 	}
 
@@ -152,6 +152,12 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getCancelLoginLabel().setEnabled(true);
 		headPanel.getContrasenyaIntroduidaPerLusuari().setEnabled(true);
 		headPanel.getHasOblidatLaContrasenyaLabel().setEnabled(true);
+		
+		headPanel.getEmailintroduitPerLusuari().setToolTipText(ExternalizeStrings.getString("HeadPanel.emailIntroduitPerLusuariToltip"));
+		headPanel.getContrasenyaIntroduidaPerLusuari().setToolTipText(ExternalizeStrings.getString("HeadPanel.contrasenyaIntroduidaPerLusuariToltip"));
+		headPanel.getNouUsuariButton().setToolTipText(ExternalizeStrings.getString("HeadPanel.nouUsuariButtonToltip"));
+		headPanel.getCancelLoginLabel().setToolTipText(ExternalizeStrings.getString("HeadPanel.cancelLabelToltip"));
+		headPanel.getHasOblidatLaContrasenyaLabel().setToolTipText(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaToltip"));
 	}
 
 	public void usuariAFetLogin() {
@@ -202,7 +208,7 @@ public class BotoLoginLogout implements ActionListener {
 
 	public void setPanelLoginDefault() {
 		headPanel.getFerLoginButton().setText("Login"); 
-		headPanel.getFerLoginButton().setToolTipText(ExternalizeStrings.getString("HeadPanel.loginButtonTolTip"));
+		headPanel.getFerLoginButton().setToolTipText(ExternalizeStrings.getString("HeadPanel.loginButtonToltip"));
 		headPanel.getEmailintroduitPerLusuari().setText(""); 
 		footPanel.getEstasConectatComLabel().setText(ExternalizeStrings.getString("FootPanel.estasConectatComLabelNoConectat")); 
 		footPanel.getTipuUsuariLabel().setText(ExternalizeStrings.getString("FootPanel.tipusUsuariAnominLabel"));

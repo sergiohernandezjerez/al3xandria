@@ -24,7 +24,7 @@ public class EnviarLoginServer {
 	               
 	               BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	   				String data = input.readLine();
-
+System.out.println(data);
 	   			dadesDelServidor = data.split(",");
 	               
 	               socket.close();
