@@ -38,7 +38,7 @@ public class BotoLoginLogout implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String emailUsuariIntroduit = headPanel.getEmailintroduitPerLusuari().getText();
-		String contrasenyaUsuariIntroduida = headPanel.getContrasenyaIntroduidaPerLusuari().getText();
+		
 		String estatDelBotoLogin = headPanel.getFerLoginButton().getText();
 
 		if (estatDelBotoLogin.equals("Login")) { 
@@ -55,7 +55,8 @@ public class BotoLoginLogout implements ActionListener {
 	
 	public void enviarDadesPerFerLogin() {
 		String emailUsuariIntroduit = headPanel.getEmailintroduitPerLusuari().getText();
-		enviarLoginServer = new EnviarLoginServer(emailUsuariIntroduit);
+		String contrasenyaUsuariIntroduida = headPanel.getContrasenyaIntroduidaPerLusuari().getText();
+		enviarLoginServer = new EnviarLoginServer(emailUsuariIntroduit );
 		dadesRebudesDelServidor = enviarLoginServer.getDadesDelServidor();
 
 		if (dadesRebudesDelServidor[0].equals("0")) { 

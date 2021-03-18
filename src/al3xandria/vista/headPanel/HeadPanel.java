@@ -35,7 +35,6 @@ public class HeadPanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	
 	public HeadPanel(FootPanel footPanel, CentralPanel centralPanel) {
 		icones = new Icons();
@@ -69,9 +68,7 @@ public class HeadPanel extends JPanel{
 		contrasenyaIntroduidaPerLusuari.setBounds(695, 49, 120, 27);
 		contrasenyaIntroduidaPerLusuari.setToolTipText(ExternalizeStrings.getString("HeadPanel.contrasenyaIntroduidaPerLusuariToltip")); 
 		contrasenyaIntroduidaPerLusuari.setColumns(10);
-		add(contrasenyaIntroduidaPerLusuari);
-
-				
+		add(contrasenyaIntroduidaPerLusuari);	
 			
 		hasOblidatLaContrasenyaLabel = new JLabel(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaLabel")); 
 		hasOblidatLaContrasenyaLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -105,7 +102,6 @@ public class HeadPanel extends JPanel{
 	public void setController(Controller controller) {
 	}
 
-	
 	
 	
 	/*-------------------------- Getters and Setters Methods --------------------------*/
