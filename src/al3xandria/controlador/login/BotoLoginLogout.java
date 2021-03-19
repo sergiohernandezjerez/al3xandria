@@ -56,7 +56,7 @@ public class BotoLoginLogout implements ActionListener {
 	public void enviarDadesPerFerLogin() {
 		String emailUsuariIntroduit = headPanel.getEmailintroduitPerLusuari().getText();
 		String contrasenyaUsuariIntroduida = headPanel.getContrasenyaIntroduidaPerLusuari().getText();
-		enviarLoginServer = new EnviarLoginServer(emailUsuariIntroduit );
+		enviarLoginServer = new EnviarLoginServer(emailUsuariIntroduit, contrasenyaUsuariIntroduida );
 		dadesRebudesDelServidor = enviarLoginServer.getDadesDelServidor();
 
 		if (dadesRebudesDelServidor[0].equals("0")) { 
@@ -67,7 +67,7 @@ public class BotoLoginLogout implements ActionListener {
 	}
 	
 	public void enviarDadesPerFerLogout() {
-		enviarLoginServer = new EnviarLoginServer("logout"); 
+		enviarLoginServer = new EnviarLoginServer("logout", ""); 
 		dadesRebudesDelServidor = enviarLoginServer.getDadesDelServidor();
 		if (dadesRebudesDelServidor[0].equals("0")) { 
 			avisDeLogout();

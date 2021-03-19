@@ -8,59 +8,22 @@ package al3xandria.mockserver.sockets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.text.DateFormat;
-import java.util.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import al3xandria.mockserver.commands.Parser;
-import al3xandria.mockserver.commands.SocketCommand;
-import al3xandria.mockserver.controller.ResponseMap;
+import al3xandria.model.conexioDB.ConsultasBD;
+
 
 /**
  * Class that implements MockServer with sockets
  * @author professor
  */
 public class MockSocketsServer {
-    
-    private ResponseMap m;
-    Parser parser;
-    
-    /**
-     * Creates a MockServer
-     * @param port port to listen
-     * @param m ResponseMap to be used
-     */
-    public MockSocketsServer(int port, ResponseMap m) {
-        this.m=m;
-        this.parser=new Parser(){};
-    }
-    
-    /**
-     * Creates a MockServer
-     * @param port port to listen
-     * @param m ResponseMap to be used
-     * @param parser Parser to be used
-     */
-    public MockSocketsServer(int port, ResponseMap m, Parser parser) {
-        this.m=m;
-        this.parser=parser;
-    }    
-
-    
-    private  void replay(Socket client, String data){
-        Thread t=new Thread(()->{
-            try {
-                answer(client, data);
-            } catch (IOException e) {
-                showIOErrorInformation(e);
-            }
-        });
-        
-        t.run();
-    }
-    
-    /**
+	/**
      * Launches server
      * @param port to be listened
      */
@@ -77,41 +40,41 @@ public class MockSocketsServer {
                         new InputStreamReader(client.getInputStream()));
 
                 String data = input.readLine();
-                System.out.println(thisMoment()+" Received: "+data);
-                replay(client,data);
+                System.out.println(" Received: "+data);
+                String[] dadesLogin = data.split(",");
                 
-            }
-        } catch (IOException e) {
-            showIOErrorInformation(e);
-        }
-    }
-    
-    private void answer (Socket client, String data) throws IOException{
-        String textSent="";
-        try{
-            SocketCommand skc=parser.parse(data);
-            textSent=m.respond(client, skc, parser);
-            client.close();
-            
-        } catch(IOException e){
-            showIOErrorInformation(e);
-        } catch(Exception e){
-            if(!client.isClosed()){
-                textSent=m.sendBadRequest(client, parser);
+                ConsultasBD consultasBD = new ConsultasBD();
+    			
+        		ResultSet single = consultasBD.consultarLogin(dadesLogin[0], dadesLogin[1]);
+        		try {
+        			while(single.next()) {
+        				System.out.println(
+        						single.getString("nom") + " " + 
+        								single.getString("cognoms") + " " +
+        								single.getString("dni") + " " + 
+        								single.getString("tipus_usuari") + " " +
+        								single.getString("carnet") + " " +
+        								single.getString("email") + " " + 
+        								single.getString("contrasenya"));
+        			}
+        		} catch (SQLException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+        		
+                PrintWriter output = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
+                String textSent="0,14,false";
+                
+                output.println(textSent);
                 client.close();
             }
-        }finally{
-            if(textSent.length()!=0)
-                System.out.println(thisMoment()+" Sent: "+textSent);
+        } catch (IOException e) {
+           e.printStackTrace();
         }
     }
-    private void showIOErrorInformation(Exception e){
-        System.err.println("Input/Output error:"+e.getMessage());
-    }
     
-    private String thisMoment(){
-        return DateFormat.getDateTimeInstance().format(new Date());
-    }
-     
+
+    
+      
 }
  

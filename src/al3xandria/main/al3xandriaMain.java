@@ -1,11 +1,15 @@
 package al3xandria.main;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 import al3xandria.controlador.login.Controller;
 import al3xandria.model.Usuari;
+import al3xandria.model.conexioDB.ConsultasBD;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.headPanel.HeadPanel;
@@ -32,8 +36,8 @@ public class al3xandriaMain {
 			  e.printStackTrace();
 			 }
 		Usuari usuari = new Usuari();
-		
 			
+		
 		Controller controller = new Controller();
 		CentralPanel centralPanel = new CentralPanel();
 		FootPanel footPanel = new FootPanel();
@@ -62,5 +66,7 @@ public class al3xandriaMain {
 		
 		framePrincipal.setVisible(true);
 	}
+	
+	
 
 }

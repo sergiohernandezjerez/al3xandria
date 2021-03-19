@@ -10,12 +10,12 @@ public class EnviarLoginServer {
 	
 	private String[] dadesDelServidor;
 
-	public EnviarLoginServer(String dades) {
+	public EnviarLoginServer(String dades, String contrasenya) {
 		
 		if(dades!=null) {
 			 try{ 
 	               
-	               String cadena = dades;  
+	               String cadena = dades + "," + contrasenya;  
 	           
 	               Socket socket = new Socket("localhost", 5555);
 

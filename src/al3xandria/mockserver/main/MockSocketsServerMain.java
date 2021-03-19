@@ -32,7 +32,7 @@ public class MockSocketsServerMain {
         
         fillMap(map);
 
-        MockSocketsServer mss = new MockSocketsServer(port, map, new CommaSeparatedParser());
+        MockSocketsServer mss = new MockSocketsServer();
         
         mss.run(port);
        
