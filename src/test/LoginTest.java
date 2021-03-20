@@ -8,16 +8,16 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import al3xandria.model.ControlDeDades;
-import al3xandria.model.EnviarLoginServer;
+import al3xandria.model.ComunicacioServer;
 
 class LoginTest {
 	
-	EnviarLoginServer enviarLogin;
+	ComunicacioServer enviarLogin;
 	ControlDeDades controlDeDades;
 
 	@Test
 	void testEnviamentLoginCorrecteUser() {
-		enviarLogin = new EnviarLoginServer("login@user.com");
+		enviarLogin = new ComunicacioServer("login@user.com");
 		String[] retorn = enviarLogin.getDadesDelServidor();
 		assertEquals("0", retorn[0]);
 		assertEquals("false", retorn[2]);
@@ -25,7 +25,7 @@ class LoginTest {
 	
 	@Test
 	void testEnviamentLoginCorrecteAdministrador() {
-		enviarLogin = new EnviarLoginServer("login@admin.com");
+		enviarLogin = new ComunicacioServer("login@admin.com");
 		String[] retorn = enviarLogin.getDadesDelServidor();
 		assertEquals("0", retorn[0]);
 		assertEquals("true", retorn[2]);
@@ -33,14 +33,14 @@ class LoginTest {
 
 	@Test
 	void testEnviamentLoginIncorrecte() {
-		enviarLogin = new EnviarLoginServer("dflksjdf");
+		enviarLogin = new ComunicacioServer("dflksjdf");
 		String[] retorn = enviarLogin.getDadesDelServidor();
 		assertEquals("400", retorn[0]);
 	}
 	
 	@Test
 	void testEnviamentLoginEnBlanc() {
-		enviarLogin = new EnviarLoginServer("");
+		enviarLogin = new ComunicacioServer("");
 		String[] retorn = enviarLogin.getDadesDelServidor();
 		assertEquals("400", retorn[0]);
 	}

@@ -10,12 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import al3xandria.controlador.login.BotoEsborrarDadesLogin;
-import al3xandria.controlador.login.BotoLoginLogout;
-import al3xandria.controlador.login.Controller;
+
+import al3xandria.controlador.interficie.ControladorHeadPanel;
 import al3xandria.strings.ExternalizeStrings;
-import al3xandria.vista.centralPanel.CentralPanel;
-import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.icons.Icons;
 
 public class HeadPanel extends JPanel{
@@ -27,8 +24,8 @@ public class HeadPanel extends JPanel{
 	private JLabel contrasenyaLoginLabel;
 	private JLabel hasOblidatLaContrasenyaLabel;
 	private JButton nouUsuariButton;
-	private JLabel esborrarDadesLoginLabel;
-	private JButton ferLoginButton;
+	public JLabel esborrarDadesLoginLabel;
+	public JButton ferLoginButton;
 	private Icons icones;
 	
 	/**
@@ -36,7 +33,7 @@ public class HeadPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public HeadPanel(FootPanel footPanel, CentralPanel centralPanel) {
+	public HeadPanel() {
 		icones = new Icons();
 		
 		setBorder(new LineBorder(SystemColor.activeCaption));
@@ -88,19 +85,18 @@ public class HeadPanel extends JPanel{
 		esborrarDadesLoginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		esborrarDadesLoginLabel.setForeground(Color.RED);
 		esborrarDadesLoginLabel.setBounds(646, 75, 47, 14);
-		esborrarDadesLoginLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.cancelLabelToltip")); 
-		esborrarDadesLoginLabel.addMouseListener(new BotoEsborrarDadesLogin(this));
+		esborrarDadesLoginLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.cancelLabelToltip"));
+		esborrarDadesLoginLabel.addMouseListener(new ControladorHeadPanel(this));
 		add(esborrarDadesLoginLabel);
-				
 		ferLoginButton = new JButton(ExternalizeStrings.getString("HeadPanel.loginButton")); 
 		ferLoginButton.setBounds(825, 18, 100, 27);
 		ferLoginButton.setToolTipText(ExternalizeStrings.getString("HeadPanel.loginButtonToltip")); 
-		ferLoginButton.addActionListener(new BotoLoginLogout(this, footPanel, centralPanel));
+		ferLoginButton.addActionListener(new ControladorHeadPanel(this));
+			
+			
 		add(ferLoginButton);
 	}
 	
-	public void setController(Controller controller) {
-	}
 
 	
 	

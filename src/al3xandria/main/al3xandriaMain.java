@@ -1,15 +1,13 @@
 package al3xandria.main;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import al3xandria.controlador.login.Controller;
-import al3xandria.model.Usuari;
-import al3xandria.model.conexioDB.ConsultasBD;
+import al3xandria.controlador.interficie.ControladorCentralPanel;
+import al3xandria.controlador.interficie.ControladorFootPanel;
+import al3xandria.controlador.interficie.ControladorHeadPanel;
+import al3xandria.controlador.interficie.ControladorInterficie;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.headPanel.HeadPanel;
@@ -35,35 +33,21 @@ public class al3xandriaMain {
 			 {
 			  e.printStackTrace();
 			 }
-		Usuari usuari = new Usuari();
-			
+	
+	
 		
-		Controller controller = new Controller();
-		CentralPanel centralPanel = new CentralPanel();
+		HeadPanel headPanel = new HeadPanel();
 		FootPanel footPanel = new FootPanel();
-		HeadPanel headPanel = new HeadPanel(footPanel, centralPanel);
-		
+		CentralPanel centralPanel = new CentralPanel();
 		PrincipalFrame framePrincipal = new PrincipalFrame();
+		ControladorInterficie controladorInterficie = new ControladorInterficie(framePrincipal, headPanel, centralPanel, footPanel);
+		ControladorHeadPanel controladorHeadPanel = new ControladorHeadPanel(headPanel, footPanel);
+		ControladorFootPanel controladorFootPanel = new ControladorFootPanel(footPanel);
+		
+		ControladorCentralPanel controladorCentralPanel = new ControladorCentralPanel(centralPanel);
+		
 
-		
-		
-		usuari.setController(controller);
-		centralPanel.setController(controller);
-		framePrincipal.setController(controller);
-		footPanel.setController(controller);
-		headPanel.setController(controller);
-		
-		controller.setFramePrincipal(framePrincipal);
-		controller.setCentralPanel(centralPanel);
-		controller.setFootPanel(footPanel);
-		controller.setHeadPanel(headPanel);
-		controller.setUsuariPanel(usuari);
-		
-		controller.addHeadPanel();
-		controller.addCentralPanel();
-		controller.addFootPanel();
-		
-		
+		controladorInterficie.crearPrincipalFrame();
 		framePrincipal.setVisible(true);
 	}
 	
