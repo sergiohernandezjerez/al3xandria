@@ -2,8 +2,6 @@ package al3xandria.model;
 
 import java.util.Observable;
 
-import al3xandria.controlador.login.Controller;
-
 public class Usuari extends Observable{
 	
 	private String nomUsuari;
@@ -137,9 +135,6 @@ public class Usuari extends Observable{
 		this.idConexio = idConexio;
 	}
 
-	public void setController(Controller controller) {
-		
-	}
 
 
 	

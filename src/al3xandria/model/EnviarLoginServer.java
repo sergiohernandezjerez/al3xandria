@@ -5,27 +5,36 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.Delayed;
 
 public class EnviarLoginServer {
 	
 	private String[] dadesDelServidor;
+	private String[] logoutStrings = {"0"};
 
 	public EnviarLoginServer(String dades) {
 		
 		if(dades!=null) {
 			 try{ 
 	               
-	               String cadena = dades;  
+	               
 	           
 	               Socket socket = new Socket("localhost", 5555);
-
-	               PrintWriter output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-	               output.println(cadena);
 	               
-	               BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	   				String data = input.readLine();
-	   				System.out.println(data);
-	   				dadesDelServidor = data.split(",");
+
+	PrintWriter output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+    System.out.println("enviado al server: " + dades);
+	output.println(dades);
+    
+    BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		String data = input.readLine();
+		System.out.println("recibido del server login: " + data);
+		dadesDelServidor = data.split(",");
+    
+
+	               
+	               
+	              
 	               
 	               socket.close();
 

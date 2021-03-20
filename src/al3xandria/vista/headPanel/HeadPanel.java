@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import al3xandria.controlador.login.BotoEsborrarDadesLogin;
 import al3xandria.controlador.login.BotoLoginLogout;
-import al3xandria.controlador.login.Controller;
 import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
@@ -99,8 +98,6 @@ public class HeadPanel extends JPanel{
 		add(ferLoginButton);
 	}
 	
-	public void setController(Controller controller) {
-	}
 
 	
 	

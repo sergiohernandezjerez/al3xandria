@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import al3xandria.controlador.login.Controller;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.headPanel.HeadPanel;
@@ -20,6 +19,9 @@ public class PrincipalFrame extends JFrame{
 	private FootPanel footPanel;
 	private JPanel contentPane;
 	private CentralPanel centralPanel;
+
+
+	private HeadPanel headPanel;
 	
 	public PrincipalFrame() {
 		setResizable(false);
@@ -39,13 +41,13 @@ public class PrincipalFrame extends JFrame{
 	private void iniciarComponents() {
 		centralPanel = new CentralPanel();
 		footPanel = new FootPanel();
-		new HeadPanel(footPanel, centralPanel);
+		headPanel = new HeadPanel(footPanel, centralPanel);
+		add(centralPanel);
+		add(footPanel);
+		add(headPanel);
 					
 	}
 	
-	public void setController(Controller controller) {
-		
-	}
 
 
 	

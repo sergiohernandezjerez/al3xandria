@@ -6,7 +6,6 @@ import java.awt.SystemColor;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import al3xandria.controlador.login.Controller;
 import al3xandria.vista.icons.Icons;
 
 import javax.swing.JTabbedPane;
@@ -59,8 +58,6 @@ public class CentralPanel extends JPanel{
 		
 	}
 
-	public void setController(Controller controller) {
-	}
 	
 
 public void setUsuariPanel() {

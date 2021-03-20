@@ -5,9 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.ToolTipManager;
-import javax.swing.plaf.metal.MetalToolTipUI;
-
 import al3xandria.model.ControlDeDades;
 import al3xandria.model.EnviarLoginServer;
 import al3xandria.strings.ExternalizeStrings;
@@ -24,6 +21,7 @@ public class BotoLoginLogout implements ActionListener {
 	private CentralPanel centralPanel;
 	private EnviarLoginServer enviarLoginServer;
 	private String[] dadesRebudesDelServidor;
+	private String idSessio;
 
 	
 	public BotoLoginLogout(HeadPanel headPanel, FootPanel footPanel, CentralPanel centralPanel) {
@@ -56,10 +54,11 @@ public class BotoLoginLogout implements ActionListener {
 	public void enviarDadesPerFerLogin() {
 		String emailUsuariIntroduit = headPanel.getEmailintroduitPerLusuari().getText();
 		String contrasenyaUsuariIntroduida = headPanel.getContrasenyaIntroduidaPerLusuari().getText();
-		enviarLoginServer = new EnviarLoginServer(emailUsuariIntroduit );
+		enviarLoginServer = new EnviarLoginServer("login" + "," + emailUsuariIntroduit + "," + contrasenyaUsuariIntroduida );
 		dadesRebudesDelServidor = enviarLoginServer.getDadesDelServidor();
 
 		if (dadesRebudesDelServidor[0].equals("0")) { 
+			idSessio = dadesRebudesDelServidor[1];
 			permisPerFerLogin();
 		} else {
 			errorDadesPerFerLogin();
@@ -67,7 +66,7 @@ public class BotoLoginLogout implements ActionListener {
 	}
 	
 	public void enviarDadesPerFerLogout() {
-		enviarLoginServer = new EnviarLoginServer("logout"); 
+		enviarLoginServer = new EnviarLoginServer("logout," + idSessio); 
 		dadesRebudesDelServidor = enviarLoginServer.getDadesDelServidor();
 		if (dadesRebudesDelServidor[0].equals("0")) { 
 			avisDeLogout();
