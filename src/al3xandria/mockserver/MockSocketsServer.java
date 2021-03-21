@@ -13,6 +13,12 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import al3xandria.model.usuaris.GestioUsuaris;
+import al3xandria.model.usuaris.Usuari;
 
 /**
  * Class that implements MockServer with sockets
@@ -20,8 +26,10 @@ import java.util.ArrayList;
  */
 public class MockSocketsServer {
     
-	private ArrayList<String> idsSessio = new ArrayList<String>();
+	private Map<String, String> idsSessio = new HashMap<String, String>();
+	
 	String textSent;
+	GestioUsuaris gestioUsuaris;
          
     /**
      * Launches server
@@ -58,35 +66,84 @@ public class MockSocketsServer {
     }
     
    
-    private void tratamentDadesRebudes(String data) {
+    public void tratamentDadesRebudes(String data) {
 		String[] separateData = data.split(",");
 		if(separateData[0].equals("login")) {
-			textSent = consultaLogin(separateData[1], separateData[2]);
+			if(!usuariJaHaFetLogin(separateData[1])) {
+				setTextSent(consultaLogin(separateData[1], separateData[2]));
+			}else {
+				setTextSent("550");
+			}
+			
 		}else {
-			textSent = consultaLogout(separateData[1]);
+			setTextSent(consultaLogout(separateData[1]));
 		}
 	}
 
 
-	private String consultaLogout(String string) {
+	private boolean usuariJaHaFetLogin(String email) {
+		boolean usuariJaHaFetLogin = false;
+		if(idsSessio.size()>0) {
+			for(Object value: idsSessio.values()) {
+				System.out.println(value);
+			    if (value.equals(email)) {
+					usuariJaHaFetLogin = true;
+				}
+			}
+		}
+		
+		
+		return usuariJaHaFetLogin;
+	}
+
+
+	public String consultaLogout(String idSessio) {
 		String paraLogout = "440";
-		if(idsSessio.contains(string)) {
+		if(idsSessio.containsKey(idSessio)) {
+			idsSessio.remove(idSessio);
 			paraLogout = "0";
 		}
 		return paraLogout;
 	}
 
 
-	private String consultaLogin(String string, String string2) {
-		idsSessio.add("14");
-		return "0,14,false";
+	public String consultaLogin(String email, String contrasenya) {
+		String resultatConsulta = "";
+		gestioUsuaris = new GestioUsuaris();
+		Usuari usuari = new Usuari();
+		usuari = gestioUsuaris.buscarUsuari(email, contrasenya);
+		System.out.println(usuari);
+		if(usuari != null) {
+			usuari.setIdSessio(generaIdSessio(usuari.getContrasenya()));
+			idsSessio.put(usuari.getIdSessio(), usuari.getEmail());
+			resultatConsulta = "0" + "," + usuari.getIdSessio() + "," + usuari.getTipus();
+		}else {
+			resultatConsulta = "440";
+		}
+		
+		return resultatConsulta;
+	}
+
+
+	private String generaIdSessio(String contrasenya) {
+		String idSessio = contrasenya + numeroAleatori();
+		return idSessio;
+	}
+
+
+	private int numeroAleatori() {
+		 Random rd = new Random();
+	     int numeroAleatori = rd.nextInt(100) + 1;
+	     return numeroAleatori;
 	}
 
 
 	private void showIOErrorInformation(Exception e){
         System.err.println("Input/Output error:"+e.getMessage());
     }
-
+public void setTextSent(String textSent) {
+	this.textSent = textSent;
+}
      
 }
  

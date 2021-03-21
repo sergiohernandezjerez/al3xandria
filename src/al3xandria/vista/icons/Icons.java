@@ -18,6 +18,7 @@ public class Icons {
 	private Icon consultaPrestecsIcon;
 	private Icon usuariNoConectatIcon;
 	private Icon usuariConectatIcon;
+	private Icon mostrarContrasenyaIcon;
 
 	public Icons() {
 		consultaLlbresIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "consultaLlibresIcon.png").
@@ -41,6 +42,10 @@ public class Icons {
 		administrarComentarisIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "administrarComentarisIcon.png").
 				getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		
+		mostrarContrasenyaIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "mostrarContrasenyaIcon.png").
+				getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+		
+		
 		usuariNoConectatIcon = new ImageIcon(new ImageIcon("." + File.separator + "resources" + File.separator + "usuariNoConectatIcon.png").
 				getImage().getScaledInstance(32, 32, Image.SCALE_AREA_AVERAGING));
 		
@@ -51,6 +56,8 @@ public class Icons {
 	}
 	
 	
+	
+	/*-------------------------- Getters and Setters Methods --------------------------*/
 	public Icon getConsultaLlbresIcon() {
 		return consultaLlbresIcon;
 	}
@@ -99,6 +106,10 @@ public class Icons {
 	
 	public Icon getUsuariNoConectatIcon() {
 		return usuariNoConectatIcon;
+	}
+	
+	public Icon getMostrarContrasenyaIcon() {
+		return mostrarContrasenyaIcon;
 	}
 	
 }

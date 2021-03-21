@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import al3xandria.controlador.login.BotoEsborrarDadesLogin;
 import al3xandria.controlador.login.BotoLoginLogout;
+import al3xandria.controlador.login.BotoMostarOcultarContrasenya;
 import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
@@ -20,7 +21,7 @@ import al3xandria.vista.icons.Icons;
 public class HeadPanel extends JPanel{
 	
 	private JTextField emailintroduitPerLusuari;
-	private JTextField contrasenyaIntroduidaPerLusuari;
+	private JPasswordField contrasenyaIntroduidaPerLusuari;
 	private JLabel logoDeLaplicacio;
 	private JLabel emailLoginLabel;
 	private JLabel contrasenyaLoginLabel;
@@ -34,6 +35,7 @@ public class HeadPanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JLabel mostrarContrasenya;
 	
 	public HeadPanel(FootPanel footPanel, CentralPanel centralPanel) {
 		icones = new Icons();
@@ -67,6 +69,7 @@ public class HeadPanel extends JPanel{
 		contrasenyaIntroduidaPerLusuari.setBounds(695, 49, 120, 27);
 		contrasenyaIntroduidaPerLusuari.setToolTipText(ExternalizeStrings.getString("HeadPanel.contrasenyaIntroduidaPerLusuariToltip")); 
 		contrasenyaIntroduidaPerLusuari.setColumns(10);
+		contrasenyaIntroduidaPerLusuari.setEchoChar('*');
 		add(contrasenyaIntroduidaPerLusuari);	
 			
 		hasOblidatLaContrasenyaLabel = new JLabel(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaLabel")); 
@@ -96,6 +99,14 @@ public class HeadPanel extends JPanel{
 		ferLoginButton.setToolTipText(ExternalizeStrings.getString("HeadPanel.loginButtonToltip")); 
 		ferLoginButton.addActionListener(new BotoLoginLogout(this, footPanel, centralPanel));
 		add(ferLoginButton);
+		
+		mostrarContrasenya = new JLabel("");
+		mostrarContrasenya.setIcon(icones.getMostrarContrasenyaIcon());
+		mostrarContrasenya.setBounds(795, 29, 20, 20);
+		mostrarContrasenya.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mostrarContrasenya.setToolTipText(ExternalizeStrings.getString("HeadPanel.mostrarContrasenyaToltip"));
+		mostrarContrasenya.addMouseListener(new BotoMostarOcultarContrasenya(this));
+		add(mostrarContrasenya);
 	}
 	
 
@@ -110,11 +121,11 @@ public class HeadPanel extends JPanel{
 		this.emailintroduitPerLusuari = emailintroduitPerLusuari;
 	}
 
-	public JTextField getContrasenyaIntroduidaPerLusuari() {
+	public JPasswordField getContrasenyaIntroduidaPerLusuari() {
 		return contrasenyaIntroduidaPerLusuari;
 	}
 
-	public void setContrasenyaIntroduidaPerLusuari(JTextField contrasenyaIntroduidaPerLusuari) {
+	public void setContrasenyaIntroduidaPerLusuari(JPasswordField contrasenyaIntroduidaPerLusuari) {
 		this.contrasenyaIntroduidaPerLusuari = contrasenyaIntroduidaPerLusuari;
 	}
 
@@ -181,10 +192,13 @@ public class HeadPanel extends JPanel{
 	public void setIcones(Icons icones) {
 		this.icones = icones;
 	}
-
 	
+	public void setMostrarContrasenya(JLabel mostrarContrasenya) {
+		this.mostrarContrasenya = mostrarContrasenya;
+	}
 	
-	
-	
+	public JLabel getMostrarContrasenya() {
+		return mostrarContrasenya;
+	}
 	
 }

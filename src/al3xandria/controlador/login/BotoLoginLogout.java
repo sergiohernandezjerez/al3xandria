@@ -36,9 +36,11 @@ public class BotoLoginLogout implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String emailUsuariIntroduit = headPanel.getEmailintroduitPerLusuari().getText();
-		
 		String estatDelBotoLogin = headPanel.getFerLoginButton().getText();
-
+        String campEmail = headPanel.getEmailintroduitPerLusuari().getText();
+        String campContrasenya = headPanel.getContrasenyaIntroduidaPerLusuari().getText();
+		
+        if(comprovarCampsOmplerts(campEmail, campContrasenya)) {
 		if (estatDelBotoLogin.equals("Login")) { 
 			if(controlDeDades.comprovacioEmail(emailUsuariIntroduit)) {
 				enviarDadesPerFerLogin();
@@ -49,8 +51,23 @@ public class BotoLoginLogout implements ActionListener {
 		} else if (estatDelBotoLogin.equals("Logout")) { 
 			enviarDadesPerFerLogout();
 		}
+        }
 	}
 	
+	private boolean comprovarCampsOmplerts(String email, String contrasenya) {
+		boolean totOmplert = false;
+		if(email.length()==0) {
+			errorCampEmailBuit();
+		} else if(contrasenya.length()==0) {
+			errorCampContrasenyaBuit();
+		}else {
+			totOmplert = true;
+		}
+		
+		return totOmplert;
+	}
+
+
 	public void enviarDadesPerFerLogin() {
 		String emailUsuariIntroduit = headPanel.getEmailintroduitPerLusuari().getText();
 		String contrasenyaUsuariIntroduida = headPanel.getContrasenyaIntroduidaPerLusuari().getText();
@@ -58,9 +75,12 @@ public class BotoLoginLogout implements ActionListener {
 		dadesRebudesDelServidor = enviarLoginServer.getDadesDelServidor();
 
 		if (dadesRebudesDelServidor[0].equals("0")) { 
+			
 			idSessio = dadesRebudesDelServidor[1];
 			permisPerFerLogin();
-		} else {
+		} else if(dadesRebudesDelServidor[0].equals("550")){
+			errorUsuariJaHaFetLogin();
+		}else {
 			errorDadesPerFerLogin();
 		}
 	}
@@ -70,7 +90,8 @@ public class BotoLoginLogout implements ActionListener {
 		dadesRebudesDelServidor = enviarLoginServer.getDadesDelServidor();
 		if (dadesRebudesDelServidor[0].equals("0")) { 
 			avisDeLogout();
-		} else {
+		}else {
+			
 			errorPeticioDeLogout();
 		}
 	}
@@ -78,7 +99,7 @@ public class BotoLoginLogout implements ActionListener {
 	public void permisPerFerLogin() {
 		footPanel.setUsuariIconOn();
 		desactivaElPanelPerFerLogin();
-		if (dadesRebudesDelServidor[2].equals("true")) { 
+		if (dadesRebudesDelServidor[2].equals("administrador")) { 
 			tipusUsuari = "Administrador"; 
 		} else {
 			tipusUsuari = "Usuari"; 
@@ -112,14 +133,34 @@ public class BotoLoginLogout implements ActionListener {
 				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorDadesPerFerLogin"), 
 				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorDadesPerFerLogin"), 
 				JOptionPane.ERROR_MESSAGE);
-		headPanel.getEmailintroduitPerLusuari().setText(""); 
-		headPanel.getContrasenyaLoginLabel().setText(""); 
+		headPanel.getEmailintroduitPerLusuari().requestFocus();;
+	}
+	
+	public void errorCampEmailBuit() {
+		JOptionPane.showMessageDialog(headPanel, 
+				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorCampEmailBuit"), 
+				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), 
+				JOptionPane.ERROR_MESSAGE); 
+	}
+	
+	public void errorCampContrasenyaBuit() {
+		JOptionPane.showMessageDialog(headPanel, 
+				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorCampContrasenyaBuit"), 
+				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), 
+				JOptionPane.ERROR_MESSAGE); 
 	}
 
 	public void errorPeticioDeLogout() {
 		JOptionPane.showMessageDialog(headPanel, 
 				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorPeticioDeLogout"), 
 				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorPeticioDeLogout"), 
+				JOptionPane.ERROR_MESSAGE); 
+	}
+	
+	public void errorUsuariJaHaFetLogin() {
+		JOptionPane.showMessageDialog(headPanel, 
+				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorUsuariJaHaFetLogin"), 
+				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorUsuariJaHaFetLogin"), 
 				JOptionPane.ERROR_MESSAGE); 
 	}
 	
@@ -137,12 +178,14 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getNouUsuariButton().setEnabled(false);
 		headPanel.getCancelLoginLabel().setEnabled(false);
 		headPanel.getHasOblidatLaContrasenyaLabel().setEnabled(false);
+		headPanel.getMostrarContrasenya().setEnabled(false);
 		
 		headPanel.getEmailintroduitPerLusuari().setToolTipText(null);
 		headPanel.getContrasenyaIntroduidaPerLusuari().setToolTipText(null);
 		headPanel.getNouUsuariButton().setToolTipText(null);
 		headPanel.getCancelLoginLabel().setToolTipText(null);
 		headPanel.getHasOblidatLaContrasenyaLabel().setToolTipText(null);
+		headPanel.getMostrarContrasenya().setToolTipText(null);
 		
 	}
 
@@ -152,12 +195,14 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getCancelLoginLabel().setEnabled(true);
 		headPanel.getContrasenyaIntroduidaPerLusuari().setEnabled(true);
 		headPanel.getHasOblidatLaContrasenyaLabel().setEnabled(true);
+		headPanel.getMostrarContrasenya().setEnabled(true);
 		
 		headPanel.getEmailintroduitPerLusuari().setToolTipText(ExternalizeStrings.getString("HeadPanel.emailIntroduitPerLusuariToltip"));
 		headPanel.getContrasenyaIntroduidaPerLusuari().setToolTipText(ExternalizeStrings.getString("HeadPanel.contrasenyaIntroduidaPerLusuariToltip"));
 		headPanel.getNouUsuariButton().setToolTipText(ExternalizeStrings.getString("HeadPanel.nouUsuariButtonToltip"));
 		headPanel.getCancelLoginLabel().setToolTipText(ExternalizeStrings.getString("HeadPanel.cancelLabelToltip"));
 		headPanel.getHasOblidatLaContrasenyaLabel().setToolTipText(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaToltip"));
+		headPanel.getMostrarContrasenya().setToolTipText(ExternalizeStrings.getString("HeadPanel.mostrarContrasenyaToltip"));
 	}
 
 	public void usuariAFetLogin() {
@@ -210,6 +255,7 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getFerLoginButton().setText("Login"); 
 		headPanel.getFerLoginButton().setToolTipText(ExternalizeStrings.getString("HeadPanel.loginButtonToltip"));
 		headPanel.getEmailintroduitPerLusuari().setText(""); 
+		headPanel.getContrasenyaIntroduidaPerLusuari().setText("");
 		footPanel.getEstasConectatComLabel().setText(ExternalizeStrings.getString("FootPanel.estasConectatComLabelNoConectat")); 
 		footPanel.getTipuUsuariLabel().setText(ExternalizeStrings.getString("FootPanel.tipusUsuariAnominLabel"));
 	}
