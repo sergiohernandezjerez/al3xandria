@@ -13,6 +13,7 @@ import javax.swing.border.LineBorder;
 import al3xandria.controlador.login.BotoEsborrarDadesLogin;
 import al3xandria.controlador.login.BotoLoginLogout;
 import al3xandria.controlador.login.BotoMostarOcultarContrasenya;
+import al3xandria.controlador.login.HeadPanelControlador;
 import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
@@ -94,7 +95,7 @@ public class HeadPanel extends JPanel{
 		esborrarDadesLoginLabel.setForeground(Color.decode("#38006b"));
 		esborrarDadesLoginLabel.setBounds(646, 75, 47, 14);
 		esborrarDadesLoginLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.cancelLabelToltip")); 
-		esborrarDadesLoginLabel.addMouseListener(new BotoEsborrarDadesLogin(this));
+		esborrarDadesLoginLabel.addMouseListener(new HeadPanelControlador(this));
 		add(esborrarDadesLoginLabel);
 				
 		ferLoginButton = new JButton(ExternalizeStrings.getString("HeadPanel.loginButton")); 
@@ -110,7 +111,7 @@ public class HeadPanel extends JPanel{
 		mostrarContrasenya.setBounds(795, 27, 20, 20);
 		mostrarContrasenya.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mostrarContrasenya.setToolTipText(ExternalizeStrings.getString("HeadPanel.mostrarContrasenyaToltip"));
-		mostrarContrasenya.addMouseListener(new BotoMostarOcultarContrasenya(this));
+		mostrarContrasenya.addMouseListener(new HeadPanelControlador(this));
 		add(mostrarContrasenya);
 	}
 	
@@ -174,12 +175,12 @@ public class HeadPanel extends JPanel{
 		this.nouUsuariButton = nouUsuariButton;
 	}
 
-	public JLabel getCancelLoginLabel() {
+	public JLabel getEsborrarDadesLoginLabel() {
 		return esborrarDadesLoginLabel;
 	}
-
-	public void setCancelLoginLabel(JLabel cancelLoginLabel) {
-		this.esborrarDadesLoginLabel = cancelLoginLabel;
+	
+	public void setEsborrarDadesLoginLabel(JLabel esborrarDadesLoginLabel) {
+		this.esborrarDadesLoginLabel = esborrarDadesLoginLabel;
 	}
 
 	public JButton getFerLoginButton() {
