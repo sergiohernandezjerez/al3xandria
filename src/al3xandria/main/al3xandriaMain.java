@@ -6,6 +6,9 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
+import al3xandria.controlador.centralPanel.CentralPanelControlador;
+import al3xandria.controlador.footPanel.FootPanelControlador;
+import al3xandria.controlador.headPanel.HeadPanelControlador;
 import al3xandria.model.usuaris.Usuari;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
@@ -33,16 +36,18 @@ public class al3xandriaMain {
 			 {
 			  e.printStackTrace();
 			 }
-		
-			
 
 		CentralPanel centralPanel = new CentralPanel();
 		FootPanel footPanel = new FootPanel();
-		HeadPanel headPanel = new HeadPanel(footPanel, centralPanel);
+		HeadPanel headPanel = new HeadPanel();
+		HeadPanelControlador headPanelControlador = new HeadPanelControlador(headPanel);
+		FootPanelControlador footPanelControlador = new FootPanelControlador(footPanel);
+		CentralPanelControlador centralPanelControlador = new CentralPanelControlador(centralPanel);
 		
-		PrincipalFrame framePrincipal = new PrincipalFrame();
 
-		
+
+
+		PrincipalFrame framePrincipal = new PrincipalFrame(headPanel, centralPanel, footPanel);
 		
 		framePrincipal.setVisible(true);
 	}

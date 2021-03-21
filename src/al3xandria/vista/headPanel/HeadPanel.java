@@ -10,12 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import al3xandria.controlador.login.BotoEsborrarDadesLogin;
-import al3xandria.controlador.login.BotoLoginLogout;
-import al3xandria.controlador.login.BotoMostarOcultarContrasenya;
-import al3xandria.controlador.login.HeadPanelControlador;
+
+import al3xandria.controlador.headPanel.HeadPanelControlador;
 import al3xandria.strings.ExternalizeStrings;
-import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.icons.Icons;
 
@@ -31,6 +28,8 @@ public class HeadPanel extends JPanel{
 	private JLabel esborrarDadesLoginLabel;
 	private JButton ferLoginButton;
 	private Icons icones;
+	private FootPanel footPanel;
+	private HeadPanelControlador headPanelControlador;
 	
 	/**
 	 * 
@@ -38,7 +37,8 @@ public class HeadPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JLabel mostrarContrasenya;
 	
-	public HeadPanel(FootPanel footPanel, CentralPanel centralPanel) {
+	public HeadPanel() {
+
 		setBackground(Color.WHITE);
 		icones = new Icons();
 		
@@ -46,6 +46,11 @@ public class HeadPanel extends JPanel{
 		setBounds(10, 3, 963, 99);
 		setLayout(null);
 		
+		iniciarComponents();
+	}
+	
+		
+	public void iniciarComponents() {
 		logoDeLaplicacio = new JLabel(""); 
 		logoDeLaplicacio.setIcon(icones.getLogoAlexandria());
 		logoDeLaplicacio.setBounds(15, 11, 300, 75);
@@ -103,7 +108,7 @@ public class HeadPanel extends JPanel{
 		ferLoginButton.setBounds(825, 18, 100, 27);
 		ferLoginButton.setBackground(Color.decode("#6a1b9a"));
 		ferLoginButton.setToolTipText(ExternalizeStrings.getString("HeadPanel.loginButtonToltip")); 
-		ferLoginButton.addActionListener(new BotoLoginLogout(this, footPanel, centralPanel));
+		ferLoginButton.addActionListener(new HeadPanelControlador(this));
 		add(ferLoginButton);
 		
 		mostrarContrasenya = new JLabel("");
@@ -114,11 +119,14 @@ public class HeadPanel extends JPanel{
 		mostrarContrasenya.addMouseListener(new HeadPanelControlador(this));
 		add(mostrarContrasenya);
 	}
-	
-
+		
 	
 	
 	/*-------------------------- Getters and Setters Methods --------------------------*/
+	public void setHeadPanelControlador(HeadPanelControlador headPanelControlador) {
+		this.headPanelControlador = headPanelControlador;
+	}
+	
 	public JTextField getEmailintroduitPerLusuari() {
 		return emailintroduitPerLusuari;
 	}
@@ -127,6 +135,11 @@ public class HeadPanel extends JPanel{
 		this.emailintroduitPerLusuari = emailintroduitPerLusuari;
 	}
 
+	public String getContrasenyaIntroduidaPerLusuariToString() {
+		String contrasenya = new String(contrasenyaIntroduidaPerLusuari.getPassword());
+		return contrasenya;
+	}
+	
 	public JPasswordField getContrasenyaIntroduidaPerLusuari() {
 		return contrasenyaIntroduidaPerLusuari;
 	}

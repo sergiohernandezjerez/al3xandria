@@ -3,14 +3,18 @@ package al3xandria.model;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import al3xandria.controlador.headPanel.HeadPanelMissatges;
+
 public class ControlDeDades {
 
 	private String numeroDeCarnet;
 	private String dni;
 	private String email;
+	
+	private HeadPanelMissatges headPanelMissatges;
 
 	public ControlDeDades() {
-
+		headPanelMissatges = new HeadPanelMissatges();
 	}
 
 	private boolean comprovacioValidezaDNI(int partNumerica, char lletraFinal) {
@@ -54,6 +58,20 @@ public class ControlDeDades {
 
 		this.numeroDeCarnet = numeroDeCarnetGenerat;
 	}
+	
+	public boolean comprovarCampsOmplerts(String email, String contrasenya) {
+		boolean totOmplert = false;
+		if(email.length()==0) {
+			headPanelMissatges.errorCampEmailBuit();
+		} else if(contrasenya.length()==0) {
+			headPanelMissatges.errorCampContrasenyaBuit();
+		}else {
+			totOmplert = true;
+		}
+		
+		return totOmplert;
+	}
+	
 
 	/*-------------------------- Getters and Setters Methods --------------------------*/
 	public String getNumeroDeCarnet() {

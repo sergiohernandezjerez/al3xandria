@@ -8,16 +8,16 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import al3xandria.model.ControlDeDades;
-import al3xandria.model.EnviarLoginServer;
+import al3xandria.model.communicacioServer.EnviaRepDadesServidor;
 
 class LoginTest {
 	
-	EnviarLoginServer enviarLogin;
+	EnviaRepDadesServidor enviarLogin;
 	ControlDeDades controlDeDades;
 
 	@Test
 	void testEnviamentLoginCorrecteUser() {
-		enviarLogin = new EnviarLoginServer("login@user.com");
+		enviarLogin = new EnviaRepDadesServidor("login@user.com");
 		String[] retorn = enviarLogin.getDadesDelServidor();
 		assertEquals("0", retorn[0]);
 		assertEquals("false", retorn[2]);
@@ -25,7 +25,7 @@ class LoginTest {
 	
 	@Test
 	void testEnviamentLoginCorrecteAdministrador() {
-		enviarLogin = new EnviarLoginServer("login@admin.com");
+		enviarLogin = new EnviaRepDadesServidor("login@admin.com");
 		String[] retorn = enviarLogin.getDadesDelServidor();
 		assertEquals("0", retorn[0]);
 		assertEquals("true", retorn[2]);
@@ -33,14 +33,14 @@ class LoginTest {
 
 	@Test
 	void testEnviamentLoginIncorrecte() {
-		enviarLogin = new EnviarLoginServer("dflksjdf");
+		enviarLogin = new EnviaRepDadesServidor("dflksjdf");
 		String[] retorn = enviarLogin.getDadesDelServidor();
 		assertEquals("400", retorn[0]);
 	}
 	
 	@Test
 	void testEnviamentLoginEnBlanc() {
-		enviarLogin = new EnviarLoginServer("");
+		enviarLogin = new EnviaRepDadesServidor("");
 		String[] retorn = enviarLogin.getDadesDelServidor();
 		assertEquals("400", retorn[0]);
 	}

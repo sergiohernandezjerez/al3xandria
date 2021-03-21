@@ -5,6 +5,7 @@ import java.awt.SystemColor;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import al3xandria.controlador.footPanel.FootPanelControlador;
 import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.icons.Icons;
 
@@ -31,6 +32,8 @@ public class FootPanel extends JPanel{
 	private JLabel emailLabel;
 	private JLabel idSessioLabel;
 	private JLabel estatUsuariIcon;
+	
+	private FootPanelControlador footPanelControlador;
 	
 
 	public FootPanel() {
@@ -83,9 +86,6 @@ public class FootPanel extends JPanel{
 		
 	}
 	
-	public void setUsuariIconOn() {
-		estatUsuariIcon.setIcon(icons.getUsuariConectatIcon());
-	}
 	
 	public void setUsuariIconOff() {
 		estatUsuariIcon.setIcon(icons.getUsuariNoConectatIcon());
@@ -141,9 +141,17 @@ public class FootPanel extends JPanel{
 		this.idSessioLabel = idSessioLabel;
 	}
 
+	public JLabel getEstatUsuariIcon() {
+		return estatUsuariIcon;
+	}
 	
+	public void setEstatUsuariIcon(JLabel estatUsuariIcon) {
+		this.estatUsuariIcon = estatUsuariIcon;
+	}
 	
-	
+	public void setFootPanelControlador(FootPanelControlador footPanelControlador) {
+		this.footPanelControlador = footPanelControlador;
+	}
 	
 	
 }

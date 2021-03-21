@@ -4,9 +4,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import al3xandria.controlador.headPanel.HeadPanelControlador;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.headPanel.HeadPanel;
+import al3xandria.vista.icons.Icons;
 
 public class PrincipalFrame extends JFrame{
 		
@@ -15,15 +17,20 @@ public class PrincipalFrame extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private HeadPanelControlador headPanelControlador;
 	
 	private FootPanel footPanel;
 	private JPanel contentPane;
 	private CentralPanel centralPanel;
+	private Icons icons;
 
 
 	private HeadPanel headPanel;
 	
-	public PrincipalFrame() {
+	public PrincipalFrame(HeadPanel headPanel, CentralPanel centralPanel, FootPanel footPanel) {
+		this.headPanel = headPanel;
+		this.centralPanel = centralPanel;
+		this.footPanel = footPanel;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Al3xandria");
@@ -39,14 +46,15 @@ public class PrincipalFrame extends JFrame{
 
 
 	private void iniciarComponents() {
-		centralPanel = new CentralPanel();
-		footPanel = new FootPanel();
-		headPanel = new HeadPanel(footPanel, centralPanel);
+
+		icons = new Icons();
 		add(centralPanel);
 		add(footPanel);
 		add(headPanel);
 					
 	}
+	
+	
 	
 
 
