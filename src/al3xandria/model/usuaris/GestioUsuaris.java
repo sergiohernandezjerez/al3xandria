@@ -46,7 +46,7 @@ public class GestioUsuaris {
 		Usuari usuariTrobat = null;
 		for (Usuari usuari : llistatUsuaris) {
 			if(usuari.getEmail().equals(email) && usuari.getContrasenya().equals(contrasenya)) {
-				usuariTrobat = new Usuari(usuari.getEmail(), usuari.getContrasenya(), usuari.getContrasenya());
+				usuariTrobat = new Usuari(usuari.getEmail(), usuari.getContrasenya(), usuari.getTipus());
 			}
 		}
 		
