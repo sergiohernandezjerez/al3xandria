@@ -2,6 +2,8 @@ package al3xandria.main;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
 import al3xandria.model.usuaris.Usuari;
@@ -20,6 +22,7 @@ public class al3xandriaMain {
 			 
 			  JFrame.setDefaultLookAndFeelDecorated(true);
 			  JDialog.setDefaultLookAndFeelDecorated(true);
+			  
 			  UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 			  //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 			  //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");

@@ -38,6 +38,7 @@ public class HeadPanel extends JPanel{
 	private JLabel mostrarContrasenya;
 	
 	public HeadPanel(FootPanel footPanel, CentralPanel centralPanel) {
+		setBackground(Color.WHITE);
 		icones = new Icons();
 		
 		setBorder(new LineBorder(SystemColor.activeCaption));
@@ -74,35 +75,39 @@ public class HeadPanel extends JPanel{
 			
 		hasOblidatLaContrasenyaLabel = new JLabel(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaLabel")); 
 		hasOblidatLaContrasenyaLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		hasOblidatLaContrasenyaLabel.setForeground(new Color(0, 128, 0));
+		hasOblidatLaContrasenyaLabel.setForeground(Color.decode("#00838f"));
 		hasOblidatLaContrasenyaLabel.setFont(new Font("Tahoma", Font.PLAIN, 9)); 
 		hasOblidatLaContrasenyaLabel.setBounds(700, 75, 120, 14);
 		hasOblidatLaContrasenyaLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaToltip")); 
 		add(hasOblidatLaContrasenyaLabel);
 		
 		nouUsuariButton = new JButton(ExternalizeStrings.getString("HeadPanel.nouUsuariButton")); 
+		nouUsuariButton.setForeground(Color.WHITE);
 		nouUsuariButton.setBounds(825, 49, 100, 27);
+		nouUsuariButton.setBackground(Color.decode("#00838f"));
 		nouUsuariButton.setToolTipText(ExternalizeStrings.getString("HeadPanel.nouUsuariButtonToltip")); 
 		add(nouUsuariButton);
 		
 		esborrarDadesLoginLabel = new JLabel(ExternalizeStrings.getString("HeadPanel.cancelLabel")); 
 		esborrarDadesLoginLabel.setFont(new Font("Tahoma", Font.PLAIN, 9)); 
 		esborrarDadesLoginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		esborrarDadesLoginLabel.setForeground(Color.RED);
+		esborrarDadesLoginLabel.setForeground(Color.decode("#38006b"));
 		esborrarDadesLoginLabel.setBounds(646, 75, 47, 14);
 		esborrarDadesLoginLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.cancelLabelToltip")); 
 		esborrarDadesLoginLabel.addMouseListener(new BotoEsborrarDadesLogin(this));
 		add(esborrarDadesLoginLabel);
 				
 		ferLoginButton = new JButton(ExternalizeStrings.getString("HeadPanel.loginButton")); 
+		ferLoginButton.setForeground(Color.WHITE);
 		ferLoginButton.setBounds(825, 18, 100, 27);
+		ferLoginButton.setBackground(Color.decode("#6a1b9a"));
 		ferLoginButton.setToolTipText(ExternalizeStrings.getString("HeadPanel.loginButtonToltip")); 
 		ferLoginButton.addActionListener(new BotoLoginLogout(this, footPanel, centralPanel));
 		add(ferLoginButton);
 		
 		mostrarContrasenya = new JLabel("");
 		mostrarContrasenya.setIcon(icones.getMostrarContrasenyaIcon());
-		mostrarContrasenya.setBounds(795, 29, 20, 20);
+		mostrarContrasenya.setBounds(795, 27, 20, 20);
 		mostrarContrasenya.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mostrarContrasenya.setToolTipText(ExternalizeStrings.getString("HeadPanel.mostrarContrasenyaToltip"));
 		mostrarContrasenya.addMouseListener(new BotoMostarOcultarContrasenya(this));

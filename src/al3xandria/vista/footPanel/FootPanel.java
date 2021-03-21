@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class FootPanel extends JPanel{
 
@@ -33,7 +34,8 @@ public class FootPanel extends JPanel{
 	
 
 	public FootPanel() {
-		setBorder(new LineBorder(SystemColor.activeCaption));
+		setBackground(Color.WHITE);
+		setBorder(new LineBorder(Color.decode("#00838f")));
 		setBounds(10, 674, 963, 84);
 		setLayout(null);
 		

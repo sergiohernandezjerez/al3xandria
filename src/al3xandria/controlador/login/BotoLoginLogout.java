@@ -38,7 +38,7 @@ public class BotoLoginLogout implements ActionListener {
 		String emailUsuariIntroduit = headPanel.getEmailintroduitPerLusuari().getText();
 		String estatDelBotoLogin = headPanel.getFerLoginButton().getText();
         String campEmail = headPanel.getEmailintroduitPerLusuari().getText();
-        String campContrasenya = headPanel.getContrasenyaIntroduidaPerLusuari().getText();
+        String campContrasenya = headPanel.getContrasenyaIntroduidaPerLusuari().getPassword().toString();
 		
         if(comprovarCampsOmplerts(campEmail, campContrasenya)) {
 		if (estatDelBotoLogin.equals("Login")) { 
