@@ -6,6 +6,12 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 
+
+/**
+ * clase per crear el panel de consulta de llibres
+ * @author SergioHernandez
+ *
+ */
 public class ConsultaLLibres extends JPanel {
 
 	/**
@@ -13,9 +19,6 @@ public class ConsultaLLibres extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Create the panel.
-	 */
 	public ConsultaLLibres() {
 		setBackground(Color.WHITE);
 		setLayout(new BorderLayout(0, 0));

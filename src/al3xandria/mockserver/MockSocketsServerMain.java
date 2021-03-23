@@ -12,7 +12,7 @@ import java.io.IOException;
 public class MockSocketsServerMain {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		int port = 5555;
+		int port = 5556;
 
 		MockSocketsServer mss = new MockSocketsServer();
 

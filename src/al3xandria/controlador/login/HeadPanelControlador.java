@@ -17,10 +17,15 @@ public class HeadPanelControlador implements ActionListener, MouseListener {
 
 	private HeadPanel headPanel;
 
+	/**
+	 * Constructor
+	 * @param headPanel  --> el JPanel que controlarà
+	 */
 	public HeadPanelControlador(HeadPanel headPanel) {
 		this.headPanel = headPanel;
 	}
 
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// es prem el boto d'esborrar les dades introduïdes

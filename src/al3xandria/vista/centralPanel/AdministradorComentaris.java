@@ -6,6 +6,12 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 
+
+/**
+ * clase per crear el panel d'adminsitració de comentaris
+ * @author SergioHernandez
+ *
+ */
 public class AdministradorComentaris extends JPanel {
 
 	/**
@@ -13,9 +19,7 @@ public class AdministradorComentaris extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Create the panel.
-	 */
+
 	public AdministradorComentaris() {
 		setLayout(new BorderLayout());
 		

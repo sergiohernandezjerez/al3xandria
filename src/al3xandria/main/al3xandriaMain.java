@@ -4,9 +4,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import al3xandria.vista.centralPanel.CentralPanel;
-import al3xandria.vista.footPanel.FootPanel;
-import al3xandria.vista.headPanel.HeadPanel;
 import al3xandria.vista.principal.PrincipalFrame;
 
 /**
@@ -21,7 +18,7 @@ public class al3xandriaMain {
 
 		try {
 
-			// Utilizo els Looks and Feel per canviar l'aspecta de l'aplicació
+			// Utilizo els Looks and Feel per canviar l'aparença de l'aplicació
 			JFrame.setDefaultLookAndFeelDecorated(true);
 			JDialog.setDefaultLookAndFeelDecorated(true);
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -33,13 +30,9 @@ public class al3xandriaMain {
 			e.printStackTrace();
 		}
 
-		CentralPanel centralPanel = new CentralPanel();
-		FootPanel footPanel = new FootPanel();
-		HeadPanel headPanel = new HeadPanel(footPanel, centralPanel);
-
-		PrincipalFrame framePrincipal = new PrincipalFrame();
-
-		framePrincipal.setVisible(true);
+	
+		PrincipalFrame principalFrame = new PrincipalFrame();
+		principalFrame.setVisible(true);
 	}
 
 }

@@ -17,6 +17,12 @@ import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.icons.Icons;
 
+/**
+ * clase que crea el HeadPanel
+ * 
+ * @author SergioHernandez
+ *
+ */
 public class HeadPanel extends JPanel {
 
 	private JTextField emailintroduitPerLusuari;
@@ -29,6 +35,7 @@ public class HeadPanel extends JPanel {
 	private JLabel esborrarDadesLoginLabel;
 	private JButton ferLoginButton;
 	private Icons icones;
+	private String tipusUsuari;
 
 	/**
 	 * 
@@ -37,6 +44,7 @@ public class HeadPanel extends JPanel {
 	private JLabel mostrarContrasenya;
 
 	public HeadPanel(FootPanel footPanel, CentralPanel centralPanel) {
+		setTipusUsuari(null);
 		setBackground(Color.WHITE);
 		icones = new Icons();
 
@@ -61,36 +69,37 @@ public class HeadPanel extends JPanel {
 		emailintroduitPerLusuari = new JTextField();
 		emailintroduitPerLusuari.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		emailintroduitPerLusuari.setBounds(505, 49, 180, 27);
-		emailintroduitPerLusuari
-				.setToolTipText(ExternalizeStrings.getString("HeadPanel.emailIntroduitPerLusuariToltip"));
+		emailintroduitPerLusuari.setToolTipText(ExternalizeStrings.getString("HeadPanel.emailIntroduitPerLusuariToltip"));
 		emailintroduitPerLusuari.setColumns(10);
 		add(emailintroduitPerLusuari);
 
 		contrasenyaIntroduidaPerLusuari = new JPasswordField();
 		contrasenyaIntroduidaPerLusuari.setBounds(695, 49, 120, 27);
-		contrasenyaIntroduidaPerLusuari
-				.setToolTipText(ExternalizeStrings.getString("HeadPanel.contrasenyaIntroduidaPerLusuariToltip"));
+		contrasenyaIntroduidaPerLusuari.setToolTipText(
+				ExternalizeStrings.getString("HeadPanel.contrasenyaIntroduidaPerLusuariToltip"));
 		contrasenyaIntroduidaPerLusuari.setColumns(10);
 		contrasenyaIntroduidaPerLusuari.setEchoChar('*');
 		add(contrasenyaIntroduidaPerLusuari);
 
-		hasOblidatLaContrasenyaLabel = new JLabel(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaLabel"));
+		hasOblidatLaContrasenyaLabel = new JLabel(
+				ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaLabel"));
 		hasOblidatLaContrasenyaLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		hasOblidatLaContrasenyaLabel.setForeground(Color.decode("#00838f"));
 		hasOblidatLaContrasenyaLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		hasOblidatLaContrasenyaLabel.setBounds(700, 75, 120, 14);
-		hasOblidatLaContrasenyaLabel
-				.setToolTipText(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaToltip"));
+		hasOblidatLaContrasenyaLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaToltip"));
 		add(hasOblidatLaContrasenyaLabel);
 
-		nouUsuariButton = new JButton(ExternalizeStrings.getString("HeadPanel.nouUsuariButton"));
+		nouUsuariButton = new JButton(
+				ExternalizeStrings.getString("HeadPanel.nouUsuariButton"));
 		nouUsuariButton.setForeground(Color.WHITE);
 		nouUsuariButton.setBounds(825, 49, 100, 27);
 		nouUsuariButton.setBackground(Color.decode("#00838f"));
 		nouUsuariButton.setToolTipText(ExternalizeStrings.getString("HeadPanel.nouUsuariButtonToltip"));
 		add(nouUsuariButton);
 
-		esborrarDadesLoginLabel = new JLabel(ExternalizeStrings.getString("HeadPanel.cancelLabel"));
+		esborrarDadesLoginLabel = new JLabel(
+				ExternalizeStrings.getString("HeadPanel.cancelLabel"));
 		esborrarDadesLoginLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		esborrarDadesLoginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		esborrarDadesLoginLabel.setForeground(Color.decode("#38006b"));
@@ -99,7 +108,8 @@ public class HeadPanel extends JPanel {
 		esborrarDadesLoginLabel.addMouseListener(new HeadPanelControlador(this));
 		add(esborrarDadesLoginLabel);
 
-		ferLoginButton = new JButton(ExternalizeStrings.getString("HeadPanel.loginButton"));
+		ferLoginButton = new JButton(
+				ExternalizeStrings.getString("HeadPanel.loginButton"));
 		ferLoginButton.setForeground(Color.WHITE);
 		ferLoginButton.setBounds(825, 18, 100, 27);
 		ferLoginButton.setBackground(Color.decode("#6a1b9a"));
@@ -115,6 +125,23 @@ public class HeadPanel extends JPanel {
 		mostrarContrasenya.addMouseListener(new HeadPanelControlador(this));
 		add(mostrarContrasenya);
 	}
+	
+	
+	/**
+	 * Converteix la contrasenya introduïda en un String
+	 * @return String  --> contrasenya introduïda per l'usuari
+	 * @author SergioHernandez
+	 */
+	public String getContrasenyaIntroduidaPerLusuariToString() {
+		String contrasenya = new String(contrasenyaIntroduidaPerLusuari.getPassword());
+		return contrasenya;
+	}
+	
+	public void esborraEmailContrasenyaIntroduits() {
+		emailintroduitPerLusuari.setText("");
+		contrasenyaIntroduidaPerLusuari.setText("");
+	}
+	
 
 	/*-------------------------- Getters and Setters Methods --------------------------*/
 	public JTextField getEmailintroduitPerLusuari() {
@@ -129,11 +156,7 @@ public class HeadPanel extends JPanel {
 		return contrasenyaIntroduidaPerLusuari;
 	}
 
-	public String getContrasenyaIntroduidaPerLusuariToString() {
-		String contrasenya = new String(contrasenyaIntroduidaPerLusuari.getPassword());
-		return contrasenya;
-	}
-
+	
 	public void setContrasenyaIntroduidaPerLusuari(JPasswordField contrasenyaIntroduidaPerLusuari) {
 		this.contrasenyaIntroduidaPerLusuari = contrasenyaIntroduidaPerLusuari;
 	}
@@ -210,4 +233,13 @@ public class HeadPanel extends JPanel {
 		return mostrarContrasenya;
 	}
 
+	public void setTipusUsuari(String tipusUsuari) {
+		this.tipusUsuari = tipusUsuari;
+	}
+	
+	public String getTipusUsuari() {
+		return tipusUsuari;
+	}
+	
+	
 }

@@ -1,18 +1,22 @@
 package al3xandria.model.usuaris;
 
-import java.util.Observable;
 
-public class Usuari extends Observable{
+/**
+ * Clase Usuari per crear els usuaris de la biblioteca
+ * @author SergioHernandez
+ *
+ */
+public class Usuari {
 
 	private String email;
-private String contrasenya;
+	private String contrasenya;
 	private String tipus;
 	private String idSessio;
-	
+
 	public Usuari() {
-		
+
 	}
-	
+
 	public Usuari(String email, String contrasenya, String tipus) {
 		this.email = email;
 		this.contrasenya = contrasenya;
@@ -20,16 +24,13 @@ private String contrasenya;
 		this.idSessio = null;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Usuari [email=" + email + ", contrasenya=" + contrasenya + ", tipus=" + tipus + ", idConexio="
 				+ idSessio + "]";
 	}
-	
-	
+
 	/*-------------------------- equals and hashcode Methods --------------------------*/
-	
 
 	@Override
 	public int hashCode() {
@@ -41,7 +42,6 @@ private String contrasenya;
 		result = prime * result + ((tipus == null) ? 0 : tipus.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -75,8 +75,7 @@ private String contrasenya;
 		return true;
 	}
 
-
-/*-------------------------- Getters and Setters Methods --------------------------*/
+	/*-------------------------- Getters and Setters Methods --------------------------*/
 
 	public String getEmail() {
 		return email;
@@ -109,5 +108,5 @@ private String contrasenya;
 	public void setIdSessio(String idSessio) {
 		this.idSessio = idSessio;
 	}
-	
+
 }

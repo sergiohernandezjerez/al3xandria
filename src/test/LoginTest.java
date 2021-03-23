@@ -8,43 +8,38 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import al3xandria.model.ControlDeDades;
-import al3xandria.model.EnviarLoginServer;
+import al3xandria.model.ComunicacioClientServidor;
 
 class LoginTest {
 	
-	EnviarLoginServer enviarLogin;
+	ComunicacioClientServidor enviarLogin;
 	ControlDeDades controlDeDades;
 
 	@Test
-	void testEnviamentLoginCorrecteUser() {
-		enviarLogin = new EnviarLoginServer("login@user.com");
+	void testEnviamentLoginCorrecteUsuari() {
+		enviarLogin = new ComunicacioClientServidor("login,pere@pere.com,pere");
 		String[] retorn = enviarLogin.getDadesDelServidor();
 		assertEquals("0", retorn[0]);
-		assertEquals("false", retorn[2]);
+		assertEquals("Usuari", retorn[2]);
 	}
 	
 	@Test
 	void testEnviamentLoginCorrecteAdministrador() {
-		enviarLogin = new EnviarLoginServer("login@admin.com");
+		enviarLogin = new ComunicacioClientServidor("login,pilar@pilar.com,pilar");
 		String[] retorn = enviarLogin.getDadesDelServidor();
 		assertEquals("0", retorn[0]);
-		assertEquals("true", retorn[2]);
+		assertEquals("Administrador", retorn[2]);
+	}
+	
+	@Test
+	void testEnviamentLogoutCorrecteUsuari() {
+		enviarLogin = new ComunicacioClientServidor("logoutOK,pere@pere.com");
+		String[] retorn = enviarLogin.getDadesDelServidor();
+		assertEquals("0", retorn[0]);
+		assertEquals("Usuari", retorn[2]);
 	}
 
-	@Test
-	void testEnviamentLoginIncorrecte() {
-		enviarLogin = new EnviarLoginServer("dflksjdf");
-		String[] retorn = enviarLogin.getDadesDelServidor();
-		assertEquals("400", retorn[0]);
-	}
-	
-	@Test
-	void testEnviamentLoginEnBlanc() {
-		enviarLogin = new EnviarLoginServer("");
-		String[] retorn = enviarLogin.getDadesDelServidor();
-		assertEquals("400", retorn[0]);
-	}
-	
+			
 	@Test
 	void testFormatEmailCorrecte() {
 		controlDeDades = new ControlDeDades();

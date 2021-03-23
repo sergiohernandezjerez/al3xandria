@@ -1,1 +1,12 @@
 al3xandria.controlador.login
+al3xandria.main
+al3xandria.mockserver
+al3xandria.model
+al3xandria.model.usuaris
+al3xandria.strings
+al3xandria.vista.centralPanel
+al3xandria.vista.footPanel
+al3xandria.vista.headPanel
+al3xandria.vista.icons
+al3xandria.vista.principal
+test

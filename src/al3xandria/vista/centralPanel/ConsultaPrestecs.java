@@ -5,6 +5,12 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 
+
+/**
+ * clase per crear el panel de consulta de prèstecs
+ * @author SergioHernandez
+ *
+ */
 public class ConsultaPrestecs extends JPanel {
 
 	/**
@@ -12,9 +18,6 @@ public class ConsultaPrestecs extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Create the panel.
-	 */
 	public ConsultaPrestecs() {
 		setLayout(new BorderLayout());
 		

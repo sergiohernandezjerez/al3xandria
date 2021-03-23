@@ -1,5 +1,11 @@
 package al3xandria.model.usuaris;
 
+/**
+ * Clase main per probar la gestió d'usuaris. 
+ * No es fa servir al programa
+ * @author SergioHernandez
+ *
+ */
 public class UsuariMain {
 
 	public static void main(String[] args) {

@@ -3,10 +3,9 @@ package al3xandria.controlador.login;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import al3xandria.model.ControlDeDades;
-import al3xandria.model.EnviarLoginServer;
+import al3xandria.model.ComunicacioClientServidor;
 import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
@@ -14,6 +13,7 @@ import al3xandria.vista.headPanel.HeadPanel;
 
 /**
  * Classe que controla tot el que succeeix quan es prem el boto de login/logout
+ * 
  * @author SergioHernandez
  *
  */
@@ -24,13 +24,20 @@ public class BotoLoginLogout implements ActionListener {
 	private HeadPanel headPanel;
 	private FootPanel footPanel;
 	private CentralPanel centralPanel;
-	private EnviarLoginServer enviarLoginServer;
+	private ComunicacioClientServidor enviarInformacioAlServidor;
 	private String[] dadesRebudesDelServidor;
 	private String idSessio;
 	private String emailUsuariIntroduit;
 	private String estatDelBotoLogin;
 	private String contrasenyaUsuariIntroduida;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param headPanel    --> Panel HeadPanel
+	 * @param footPanel    --> Panel FootPanel
+	 * @param centralPanel --> Panel CentralPanel
+	 */
 	public BotoLoginLogout(HeadPanel headPanel, FootPanel footPanel, CentralPanel centralPanel) {
 		this.headPanel = headPanel;
 		this.footPanel = footPanel;
@@ -39,6 +46,14 @@ public class BotoLoginLogout implements ActionListener {
 		controlDeDades = new ControlDeDades();
 	}
 
+	/**
+	 * Escolta quan es fa clic al botó Login i comprova si els camps estan omplerts
+	 * i si el format de l'email és correcte. Si la funció del botó es Login envia
+	 * les dades per fer login i si és Logout, envia les dades per fer logout. Tambè
+	 * mostra els errors de camps buit i format d'email incorrecte
+	 * 
+	 * @author SergioHernandez
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		emailUsuariIntroduit = headPanel.getEmailintroduitPerLusuari().getText();
@@ -48,7 +63,7 @@ public class BotoLoginLogout implements ActionListener {
 		if (comprovarCampsOmplerts(emailUsuariIntroduit, contrasenyaUsuariIntroduida)) {
 			if (estatDelBotoLogin.equals("Login")) {
 				if (controlDeDades.comprovacioEmail(emailUsuariIntroduit)) {
-					
+
 					enviarDadesPerFerLogin();
 				} else {
 					errorEnElFormatDelEmailIntroduit();
@@ -62,9 +77,10 @@ public class BotoLoginLogout implements ActionListener {
 
 	/**
 	 * Comprova si els camps de text JTextField no estan buits
-	 * @param email -> camp de text que pertany al email
+	 * 
+	 * @param email       -> camp de text que pertany al email
 	 * @param contrasenya -> camp de text que pertany a la contrasenya
-	 * @return true si els dos camps estan omplerts
+	 * @return true si els dos camps estan omplerts | false si no ho estan
 	 * @author SergioHernandez
 	 */
 	private boolean comprovarCampsOmplerts(String email, String contrasenya) {
@@ -81,78 +97,71 @@ public class BotoLoginLogout implements ActionListener {
 	}
 
 	/**
-	 * Envia tres valors separats per comes (login, email, contrasenya) i rep la resposta del servidor:<br>
+	 * Envia tres valors separats per comes (login, email, contrasenya) i rep la
+	 * resposta del servidor:<br>
 	 * usuari trobat: 0,idSessio, tipus d'usuari --> dona permís per fer login<br>
-	 * usuari no trobat: 440  --> mostra missatge error<br>
-	 * usuari ja està logeat: 550  --> mostra missatge error
+	 * usuari no trobat: 440 --> mostra missatge error<br>
+	 * usuari ja està logeat: 550 --> mostra missatge error
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void enviarDadesPerFerLogin() {
-		enviarLoginServer = new EnviarLoginServer(
+		enviarInformacioAlServidor = new ComunicacioClientServidor(
 				"login" + "," + emailUsuariIntroduit + "," + contrasenyaUsuariIntroduida);
-		dadesRebudesDelServidor = enviarLoginServer.getDadesDelServidor();
-
-		if (dadesRebudesDelServidor[0].equals("0")) {
-
-			idSessio = dadesRebudesDelServidor[1];
-			permisPerFerLogin();
-		} else if (dadesRebudesDelServidor[0].equals("550")) {
-			errorUsuariJaHaFetLogin();
-		} else if(dadesRebudesDelServidor[0].equals("440")) {
-			errorDadesPerFerLogin();
+		dadesRebudesDelServidor = enviarInformacioAlServidor.getDadesDelServidor();
+		if (dadesRebudesDelServidor != null) {
+			if (dadesRebudesDelServidor[0].equals("0")) {
+				idSessio = dadesRebudesDelServidor[1];
+				permisPerFerLogin();
+			} else if (dadesRebudesDelServidor[0].equals("550")) {
+				errorUsuariJaHaFetLogin();
+			} else if (dadesRebudesDelServidor[0].equals("440")) {
+				errorDadesPerFerLogin();
+			}
 		}
+
 	}
-	
 
 	/**
-	 * Envia dos valors separats per comes (logout, idSessio) i rep la resposta del servidor<br>
-	 * 	logout correcte: 0  --> mostra avís de logout<br>
-	 * 	el logout no s'ha pogut fer: 440  -->  mostra missatge error<br>
+	 * Envia dos valors separats per comes (logout, idSessio) i rep la resposta del
+	 * servidor<br>
+	 * logout correcte: 0 --> mostra avís de logout<br>
+	 * el logout no s'ha pogut fer: 440 --> mostra missatge error<br>
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void enviarDadesPerFerLogout() {
-		enviarLoginServer = new EnviarLoginServer("logout," + idSessio);
-		dadesRebudesDelServidor = enviarLoginServer.getDadesDelServidor();
+		enviarInformacioAlServidor = new ComunicacioClientServidor("logout," + idSessio);
+		dadesRebudesDelServidor = enviarInformacioAlServidor.getDadesDelServidor();
 		if (dadesRebudesDelServidor[0].equals("0")) {
 			avisDeLogout();
-		} else if (dadesRebudesDelServidor[0].equals("440")){
+		} else if (dadesRebudesDelServidor[0].equals("440")) {
 			errorPeticioDeLogout();
 		}
 	}
 
-	
 	/**
 	 * Si té permis per fer login, assigna el tipus d'usuari i fa login
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void permisPerFerLogin() {
 		footPanel.setUsuariIconOn();
 		desactivaElPanelPerFerLogin();
-		if (dadesRebudesDelServidor[2].equals("administrador")) {
+		if (dadesRebudesDelServidor[2].equals("Administrador")) {
 			tipusUsuari = "Administrador";
+
 		} else {
 			tipusUsuari = "Usuari";
 		}
 
 		usuariAFetLogin();
 	}
-	
-	
-	/**
-	 * Si té permís per fer logout el fa
-	 * @author SergioHernandez
-	 */
-	public void permisPerFerLogout() {
-		activaElPanelPerFerLogin();
-		footPanel.setUsuariIconOff();
-		usuariAFetLogout();
 
-	}
-	
-	
 	/**
-	 * Modifica el HeadPanel i el FootPanel per mostrar l'informació necesaria 
-	 * i segons el tipus d'usuari mostra el panel central
+	 * Modifica el HeadPanel i el FootPanel per mostrar l'informació necesaria i
+	 * segons el tipus d'usuari mostra el panel central
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void usuariAFetLogin() {
@@ -176,13 +185,13 @@ public class BotoLoginLogout implements ActionListener {
 		default:
 			break;
 		}
-
+		headPanel.setTipusUsuari(tipusUsuari);
 	}
 
-	
 	/**
-	 * Torna el panel de login al seu estat per defecte
-	 * i modifica el panel central a l'estat per defecte
+	 * Torna el panel de login al seu estat per defecte i modifica el panel central
+	 * a l'estat per defecte
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void usuariAFetLogout() {
@@ -202,30 +211,43 @@ public class BotoLoginLogout implements ActionListener {
 		default:
 			break;
 		}
+		headPanel.setTipusUsuari(null);
 	}
-	
-	
+
 	/**
 	 * Missatge que mostra un avís per fer logout i demana confirmació
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void avisDeLogout() {
-		JOptionPane optionPaneAvisDeLogout = new JOptionPane(
-				ExternalizeStrings.getString("BotoLoginLogout.optionPaneAvisDeLogout"), JOptionPane.QUESTION_MESSAGE,
-				JOptionPane.YES_NO_OPTION);
-		JDialog dialogAvisDeLogout = optionPaneAvisDeLogout.createDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.dialogAvisDeLogout"));
-		dialogAvisDeLogout.setVisible(true);
-		Object respostaUsuariPerFerLogout = optionPaneAvisDeLogout.getValue().toString();
-		if (respostaUsuariPerFerLogout.equals("0")) {
+
+		int valor = JOptionPane.showConfirmDialog(headPanel,
+				ExternalizeStrings.getString("BotoLoginLogout.optionPaneAvisDeLogout"),
+				ExternalizeStrings.getString("BotoLoginLogout.dialogAvisDeLogout"), JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE, null);
+		if (valor == JOptionPane.YES_OPTION) {
+			enviarInformacioAlServidor = new ComunicacioClientServidor("logoutOK," + emailUsuariIntroduit);
 			permisPerFerLogout();
 		}
+
 	}
 
-	
 	/**
-	 * Missatge que mostra un avís quan les dades introduïdes 
-	 * no pertanyen a un usuari
+	 * Si té permís per fer logout el fa
+	 * 
+	 * @author SergioHernandez
+	 */
+	public void permisPerFerLogout() {
+		activaElPanelPerFerLogin();
+		footPanel.setUsuariIconOff();
+		usuariAFetLogout();
+
+	}
+
+	/**
+	 * Missatge que mostra un avís quan les dades introduïdes no pertanyen a un
+	 * usuari
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void errorDadesPerFerLogin() {
@@ -234,12 +256,11 @@ public class BotoLoginLogout implements ActionListener {
 				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorDadesPerFerLogin"),
 				JOptionPane.ERROR_MESSAGE);
 		headPanel.getEmailintroduitPerLusuari().requestFocus();
-		;
 	}
 
-	
 	/**
 	 * Missatge que mostra un avís quan el camp email està buit
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void errorCampEmailBuit() {
@@ -248,9 +269,9 @@ public class BotoLoginLogout implements ActionListener {
 				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), JOptionPane.ERROR_MESSAGE);
 	}
 
-	
 	/**
 	 * Missatge que mostra un avís quan el camp contrasenya està buit
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void errorCampContrasenyaBuit() {
@@ -259,9 +280,9 @@ public class BotoLoginLogout implements ActionListener {
 				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), JOptionPane.ERROR_MESSAGE);
 	}
 
-	
 	/**
 	 * Missatge que mostra un avís quan hi ha hagut un error al fer logout
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void errorPeticioDeLogout() {
@@ -271,10 +292,10 @@ public class BotoLoginLogout implements ActionListener {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	
 	/**
-	 * Missatge que mostra un avís quan l'usuari intenta 
-	 * fer login i ja té una sessió oberta
+	 * Missatge que mostra un avís quan l'usuari intenta fer login i ja té una
+	 * sessió oberta
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void errorUsuariJaHaFetLogin() {
@@ -284,10 +305,9 @@ public class BotoLoginLogout implements ActionListener {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	
 	/**
-	 * Missatge que mostra un avís quan el format de l'email 
-	 * no és correcte
+	 * Missatge que mostra un avís quan el format de l'email no és correcte
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void errorEnElFormatDelEmailIntroduit() {
@@ -297,9 +317,9 @@ public class BotoLoginLogout implements ActionListener {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	
 	/**
 	 * Quan es fa login desconecte el panel de login
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void desactivaElPanelPerFerLogin() {
@@ -319,9 +339,9 @@ public class BotoLoginLogout implements ActionListener {
 
 	}
 
-	
 	/**
 	 * Quan es fa logout es conecte el panel de login
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void activaElPanelPerFerLogin() {
@@ -345,10 +365,9 @@ public class BotoLoginLogout implements ActionListener {
 				.setToolTipText(ExternalizeStrings.getString("HeadPanel.mostrarContrasenyaToltip"));
 	}
 
-	
-
 	/**
 	 * Posa el panel de login en el seu estat per defecte
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void setPanelLoginDefault() {
@@ -361,7 +380,6 @@ public class BotoLoginLogout implements ActionListener {
 		footPanel.getTipuUsuariLabel().setText(ExternalizeStrings.getString("FootPanel.tipusUsuariAnominLabel"));
 	}
 
-	
 	/*-------------------------- Getters and Setters Methods --------------------------*/
 	public void setTipusUsuari(String tipusUsuari) {
 		this.tipusUsuari = tipusUsuari;

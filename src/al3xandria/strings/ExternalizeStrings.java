@@ -3,6 +3,11 @@ package al3xandria.strings;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+/**
+ * Clase que agafa una cadena de text des de un document extern
+ * @author Eclipse
+ *
+ */
 
 public class ExternalizeStrings {
 	private static final String BUNDLE_NAME = "al3xandria.strings.messages"; //$NON-NLS-1$
@@ -15,7 +20,8 @@ public class ExternalizeStrings {
 	/**
 	 * Extreu una cadena de text des de un document
 	 * @param key -> clau de la cadena de text que es vol utilitzar, entre cometes 
-	 * @return String
+	 * @return String --> cadena de text
+	 * @author Eclipse
 	 */
 	public static String getString(String key) {
 		try {

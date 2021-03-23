@@ -1,7 +1,5 @@
 package al3xandria.vista.footPanel;
 
-import java.awt.SystemColor;
-
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -14,16 +12,21 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 
-public class FootPanel extends JPanel{
+/**
+ * clase que crear el panel FootPanel
+ * 
+ * @author SergioHernandez
+ *
+ */
+public class FootPanel extends JPanel {
 
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Icons icons;
-	
+
 	private JLabel emailUsuariLabel;
 	private JLabel idSessioUsuariLabel;
 	private JLabel estasConectatComLabel;
@@ -31,67 +34,73 @@ public class FootPanel extends JPanel{
 	private JLabel emailLabel;
 	private JLabel idSessioLabel;
 	private JLabel estatUsuariIcon;
-	
 
 	public FootPanel() {
 		setBackground(Color.WHITE);
 		setBorder(new LineBorder(Color.decode("#00838f")));
 		setBounds(10, 674, 963, 84);
 		setLayout(null);
-		
+
 		iniciarComponentes();
-		
+
 	}
+
 	
 	private void iniciarComponentes() {
 		icons = new Icons();
-		estasConectatComLabel = new JLabel(ExternalizeStrings.getString("FootPanel.estasConectatComLabelNoConectat")); 
-		estasConectatComLabel.setFont(new Font("Tahoma", Font.PLAIN, 9)); //$NON-NLS-1$
+		estasConectatComLabel = new JLabel(ExternalizeStrings.getString("FootPanel.estasConectatComLabelNoConectat"));
+		estasConectatComLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		estasConectatComLabel.setBounds(10, 15, 114, 17);
 		add(estasConectatComLabel);
-		
-		tipuUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.tipusUsuariAnominLabel")); 
-		tipuUsuariLabel.setFont(new Font("Tahoma", Font.PLAIN, 14)); //$NON-NLS-1$
+
+		tipuUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.tipusUsuariAnominLabel"));
+		tipuUsuariLabel.setFont(new Font("Tahoma", Font.PLAIN, 14)); 
 		tipuUsuariLabel.setBounds(10, 30, 92, 14);
 		add(tipuUsuariLabel);
-		
+
 		emailLabel = new JLabel(ExternalizeStrings.getString("FootPanel.emailUsuariConectat"));
 		emailLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		emailLabel.setBounds(168, 28, 46, 14);
 		add(emailLabel);
-		
-		idSessioLabel = new JLabel(ExternalizeStrings.getString("FootPanel.idSessioUsuariConectat")); 
+
+		idSessioLabel = new JLabel(ExternalizeStrings.getString("FootPanel.idSessioUsuariConectat"));
 		idSessioLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		idSessioLabel.setBounds(140, 56, 74, 14);
 		add(idSessioLabel);
-		
+
 		emailUsuariLabel = new JLabel();
 		emailUsuariLabel.setBounds(224, 25, 136, 20);
 		add(emailUsuariLabel);
 
-		
 		idSessioUsuariLabel = new JLabel();
 		idSessioUsuariLabel.setBounds(224, 53, 136, 20);
 		add(idSessioUsuariLabel);
 
-		
-		estatUsuariIcon = new JLabel(""); 
+		estatUsuariIcon = new JLabel("");
 		setUsuariIconOff();
 		estatUsuariIcon.setBounds(10, 50, 46, 32);
 		add(estatUsuariIcon);
 
-		
 	}
+
 	
+	/**
+	 * Posa l'icone d'usuari actiu en ON
+	 * @author SergioHernandez
+	 */
 	public void setUsuariIconOn() {
 		estatUsuariIcon.setIcon(icons.getUsuariConectatIcon());
 	}
+
 	
+	/**
+	 * Posa l'icone d'usuari actiu en OFF
+	 * @author SergioHernandez
+	 */
 	public void setUsuariIconOff() {
 		estatUsuariIcon.setIcon(icons.getUsuariNoConectatIcon());
 	}
 
-	
 	/*-------------------------- Getters and Setters Methods --------------------------*/
 	public JLabel getEmailUsuariLabel() {
 		return emailUsuariLabel;
@@ -141,9 +150,4 @@ public class FootPanel extends JPanel{
 		this.idSessioLabel = idSessioLabel;
 	}
 
-	
-	
-	
-	
-	
 }

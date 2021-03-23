@@ -5,6 +5,12 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 
+
+/**
+ * clase per crear el panel de consulta de comentaris
+ * @author SergioHernandez
+ *
+ */
 public class ConsultaComentaris extends JPanel {
 
 	/**
@@ -12,9 +18,6 @@ public class ConsultaComentaris extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Create the panel.
-	 */
 	public ConsultaComentaris() {
 		setLayout(new BorderLayout());
 		
