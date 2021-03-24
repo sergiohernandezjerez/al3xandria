@@ -34,6 +34,7 @@ public class ControlDeDades {
 	 * @see https://es.wikipedia.org/wiki/DNI_(Espa%C3%B1a)#:~:text=El%20n%C3%BAmero%20del%20documento%20nacional,dividido%20entre%20el%20n%C3%BAmero%2023.
 	 * @author SergioHernandez
 	 */
+	@SuppressWarnings("unused")
 	private boolean comprovacioValidezaDNI(int partNumerica, char lletraFinal) {
 		char[] lletra = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H',
 				'L', 'C', 'K', 'E' };

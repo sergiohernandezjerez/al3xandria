@@ -5,9 +5,6 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
-import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 

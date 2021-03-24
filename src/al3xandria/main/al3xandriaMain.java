@@ -4,7 +4,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import al3xandria.mockserver.MockSocketsServerMain;
 import al3xandria.vista.principal.PrincipalFrame;
 
 /**

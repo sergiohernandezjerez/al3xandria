@@ -4,12 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.ConnectException;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
-import al3xandria.controlador.login.HeadPanelControlador;
 import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.headPanel.HeadPanel;
 

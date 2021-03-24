@@ -8,8 +8,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import al3xandria.model.ControlDeDades;
-import al3xandria.controlador.login.BotoLoginLogout;
-import al3xandria.mockserver.MockSocketsServerMain;
 import al3xandria.model.ComunicacioClientServidor;
 
 class LoginTest {
