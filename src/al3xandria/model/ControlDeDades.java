@@ -3,6 +3,11 @@ package al3xandria.model;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
+import al3xandria.strings.ExternalizeStrings;
+import al3xandria.vista.headPanel.HeadPanel;
+
 /**
  * Clase per controlar diferents tipus de dades
  * @author SergioHernandez
@@ -13,6 +18,8 @@ public class ControlDeDades {
 	private String numeroDeCarnet;
 	private String dni;
 	private String email;
+	
+	private HeadPanel headPanel;
 
 	public ControlDeDades() {
 
@@ -59,6 +66,50 @@ public class ControlDeDades {
 		}
 
 		return emailCorrecte;
+	}
+	
+	
+	/**
+	 * Comprova si els camps de text JTextField no estan buits
+	 * 
+	 * @param email       -> camp de text que pertany al email
+	 * @param contrasenya -> camp de text que pertany a la contrasenya
+	 * @return true si els dos camps estan omplerts | false si no ho estan
+	 * @author SergioHernandez
+	 */
+	public boolean comprovarCampsOmplerts(String email, String contrasenya) {
+		boolean totOmplert = false;
+		if (email.length() == 0) {
+			errorCampEmailBuit();
+		} else if (contrasenya.length() == 0) {
+			errorCampContrasenyaBuit();
+		} else {
+			totOmplert = true;
+		}
+
+		return totOmplert;
+	}
+	
+	/**
+	 * Missatge que mostra un avís quan el camp email està buit
+	 * 
+	 * @author SergioHernandez
+	 */
+	public void errorCampEmailBuit() {
+		JOptionPane.showMessageDialog(headPanel,
+				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorCampEmailBuit"),
+				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), JOptionPane.ERROR_MESSAGE);
+	}
+
+	/**
+	 * Missatge que mostra un avís quan el camp contrasenya està buit
+	 * 
+	 * @author SergioHernandez
+	 */
+	public void errorCampContrasenyaBuit() {
+		JOptionPane.showMessageDialog(headPanel,
+				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorCampContrasenyaBuit"),
+				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), JOptionPane.ERROR_MESSAGE);
 	}
 
 	

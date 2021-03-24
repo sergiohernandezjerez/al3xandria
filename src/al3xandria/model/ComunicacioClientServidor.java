@@ -24,17 +24,22 @@ public class ComunicacioClientServidor {
 	private String[] dadesDelServidor;
 	private final int PORT = 5556;
 	private HeadPanel headPanel;
+	
 
 	/**
 	 * El constructor s'encarrega de conectar amb el client envia i rep informacio
 	 * 
+	 */
+	public ComunicacioClientServidor() {
+		
+	}
+	
+	/**
+	 * Inicia la comunicació amb el client i envia i rep informació
 	 * @param dades
 	 */
-	public ComunicacioClientServidor(String dades) {
-		System.out.println("--------------------------------------------");
-		System.out.println("----------Client conectat-------------------");
-		System.out.println("----------Port: " + PORT + "------------------------");
-		System.out.println("--------------------------------------------");
+	public void iniciarComunicacio(String dades) {
+		mostraCartellClientConnectat();
 		if (dades != null) {
 			try {
 
@@ -53,12 +58,11 @@ public class ComunicacioClientServidor {
 				socket.close();
 
 			} catch (Exception e) {
-				errorCampEmailBuit();
+				errorConexioServidor();
 				
 				// System.exit(1);
 			}
 		}
-
 	}
 	
 	
@@ -67,10 +71,18 @@ public class ComunicacioClientServidor {
 	 * 
 	 * @author SergioHernandez
 	 */
-	public void errorCampEmailBuit() {
+	public void errorConexioServidor() {
 		JOptionPane.showMessageDialog(headPanel,
 				ExternalizeStrings.getString("HeadPanel.errorConexioServer"),
 				ExternalizeStrings.getString("HeadPanel.titolErrorConexioServer"), JOptionPane.ERROR_MESSAGE);
+	}
+	
+	//creat per fer el video
+	public void mostraCartellClientConnectat() {
+		System.out.println("--------------------------------------------");
+		System.out.println("----------Client connectat-------------------");
+		System.out.println("----------Port: " + PORT + "------------------------");
+		System.out.println("--------------------------------------------");
 	}
 	
 	

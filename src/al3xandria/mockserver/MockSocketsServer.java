@@ -27,6 +27,7 @@ public class MockSocketsServer {
 	//HashMap idSessio, email
 	private Map<String, String> idsSessio = new HashMap<String, String>();
 
+	
 	String missatgePerEnviar;
 	GestioUsuaris gestioUsuaris;
 
@@ -36,10 +37,7 @@ public class MockSocketsServer {
 	 * @param port to be listened
 	 */
 	public void run(int port) {
-		System.out.println("--------------------------------------------");
-		System.out.println("----------Servidor conectat-----------------");
-		System.out.println("----------Port: " + port + "------------------------");
-		System.out.println("--------------------------------------------");
+		mostraCartellServidorConnectat(port);
 		try {
 			ServerSocket serverSocket = new ServerSocket(port);
 
@@ -186,6 +184,14 @@ public class MockSocketsServer {
 		Random rd = new Random();
 		int numeroAleatori = rd.nextInt(100) + 1;
 		return numeroAleatori;
+	}
+	
+	//creat per fer el video
+	public void mostraCartellServidorConnectat(int port) {
+		System.out.println("--------------------------------------------");
+		System.out.println("----------Servidor connectat-----------------");
+		System.out.println("----------Port: " + port + "------------------------");
+		System.out.println("--------------------------------------------");
 	}
 
 	

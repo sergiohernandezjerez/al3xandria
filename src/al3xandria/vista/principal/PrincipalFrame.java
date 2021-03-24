@@ -1,7 +1,5 @@
 package al3xandria.vista.principal;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -33,7 +31,7 @@ public class PrincipalFrame extends JFrame {
 	private CentralPanel centralPanel;
 	private HeadPanel headPanel;
 	private JPanel contentPane;
-	private ComunicacioClientServidor enviarLoginServer;
+	private ComunicacioClientServidor comunicacioClientServidor;
 
 	/**
 	 * Contructor
@@ -60,7 +58,7 @@ public class PrincipalFrame extends JFrame {
 	 * @author SergioHernandez
 	 */
 	private void iniciarComponents() {
-		
+		comunicacioClientServidor = new ComunicacioClientServidor();
 		centralPanel = new CentralPanel();
 		footPanel = new FootPanel();
 		headPanel = new HeadPanel(footPanel, centralPanel);
@@ -84,10 +82,10 @@ public class PrincipalFrame extends JFrame {
 						if (headPanel.getTipusUsuari().equals("Administrador")) {
 							avisTancamentAplicacio();
 						} else {
-							avisImposibleTancarAplicació();
+							avisImposibleTancarAplicacio();
 						}
 					} else {
-						avisImposibleTancarAplicació();
+						avisImposibleTancarAplicacio();
 					}
 				}
 			});
@@ -101,7 +99,7 @@ public class PrincipalFrame extends JFrame {
 	 * 
 	 * @author SergioHernandez
 	 */
-	public void avisImposibleTancarAplicació() {
+	public void avisImposibleTancarAplicacio() {
 		JOptionPane.showMessageDialog(headPanel,
 				ExternalizeStrings.getString("PrincipalFrame.missatgeNoEsPotTancarAplicacio"),
 				ExternalizeStrings.getString("PrincipalFrame.titolMissatgeNoEsPotTancarAplicacio"),
@@ -125,7 +123,7 @@ public class PrincipalFrame extends JFrame {
 					ExternalizeStrings.getString("PrincipalFrame.missatgeAcomiadamentAplicacio"),
 					ExternalizeStrings.getString("PrincipalFrame.titolMissatgeAcomiadamentAplicacio"),
 					JOptionPane.INFORMATION_MESSAGE);
-			enviarLoginServer = new ComunicacioClientServidor("logoutOK," + headPanel.getEmailintroduitPerLusuari().getText());
+			comunicacioClientServidor.iniciarComunicacio("logoutOK," + headPanel.getEmailintroduitPerLusuari().getText());
 			System.exit(0);
 		}
 

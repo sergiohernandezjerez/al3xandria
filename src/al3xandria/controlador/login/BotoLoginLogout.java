@@ -24,7 +24,7 @@ public class BotoLoginLogout implements ActionListener {
 	private HeadPanel headPanel;
 	private FootPanel footPanel;
 	private CentralPanel centralPanel;
-	private ComunicacioClientServidor enviarInformacioAlServidor;
+	private ComunicacioClientServidor comunicacioClientServidor = new ComunicacioClientServidor();
 	private String[] dadesRebudesDelServidor;
 	private String idSessio;
 	private String emailUsuariIntroduit;
@@ -60,7 +60,7 @@ public class BotoLoginLogout implements ActionListener {
 		estatDelBotoLogin = headPanel.getFerLoginButton().getText();
 		contrasenyaUsuariIntroduida = headPanel.getContrasenyaIntroduidaPerLusuariToString();
 
-		if (comprovarCampsOmplerts(emailUsuariIntroduit, contrasenyaUsuariIntroduida)) {
+		if (controlDeDades.comprovarCampsOmplerts(emailUsuariIntroduit, contrasenyaUsuariIntroduida)) {
 			if (estatDelBotoLogin.equals("Login")) {
 				if (controlDeDades.comprovacioEmail(emailUsuariIntroduit)) {
 
@@ -75,26 +75,6 @@ public class BotoLoginLogout implements ActionListener {
 		}
 	}
 
-	/**
-	 * Comprova si els camps de text JTextField no estan buits
-	 * 
-	 * @param email       -> camp de text que pertany al email
-	 * @param contrasenya -> camp de text que pertany a la contrasenya
-	 * @return true si els dos camps estan omplerts | false si no ho estan
-	 * @author SergioHernandez
-	 */
-	private boolean comprovarCampsOmplerts(String email, String contrasenya) {
-		boolean totOmplert = false;
-		if (email.length() == 0) {
-			errorCampEmailBuit();
-		} else if (contrasenya.length() == 0) {
-			errorCampContrasenyaBuit();
-		} else {
-			totOmplert = true;
-		}
-
-		return totOmplert;
-	}
 
 	/**
 	 * Envia tres valors separats per comes (login, email, contrasenya) i rep la
@@ -106,9 +86,9 @@ public class BotoLoginLogout implements ActionListener {
 	 * @author SergioHernandez
 	 */
 	public void enviarDadesPerFerLogin() {
-		enviarInformacioAlServidor = new ComunicacioClientServidor(
+		comunicacioClientServidor.iniciarComunicacio(
 				"login" + "," + emailUsuariIntroduit + "," + contrasenyaUsuariIntroduida);
-		dadesRebudesDelServidor = enviarInformacioAlServidor.getDadesDelServidor();
+		dadesRebudesDelServidor = comunicacioClientServidor.getDadesDelServidor();
 		if (dadesRebudesDelServidor != null) {
 			if (dadesRebudesDelServidor[0].equals("0")) {
 				idSessio = dadesRebudesDelServidor[1];
@@ -131,8 +111,8 @@ public class BotoLoginLogout implements ActionListener {
 	 * @author SergioHernandez
 	 */
 	public void enviarDadesPerFerLogout() {
-		enviarInformacioAlServidor = new ComunicacioClientServidor("logout," + idSessio);
-		dadesRebudesDelServidor = enviarInformacioAlServidor.getDadesDelServidor();
+		comunicacioClientServidor.iniciarComunicacio("logout," + idSessio);
+		dadesRebudesDelServidor = comunicacioClientServidor.getDadesDelServidor();
 		if (dadesRebudesDelServidor[0].equals("0")) {
 			avisDeLogout();
 		} else if (dadesRebudesDelServidor[0].equals("440")) {
@@ -226,7 +206,7 @@ public class BotoLoginLogout implements ActionListener {
 				ExternalizeStrings.getString("BotoLoginLogout.dialogAvisDeLogout"), JOptionPane.YES_NO_OPTION,
 				JOptionPane.WARNING_MESSAGE, null);
 		if (valor == JOptionPane.YES_OPTION) {
-			enviarInformacioAlServidor = new ComunicacioClientServidor("logoutOK," + emailUsuariIntroduit);
+			comunicacioClientServidor.iniciarComunicacio("logoutOK," + emailUsuariIntroduit);
 			permisPerFerLogout();
 		}
 
@@ -258,27 +238,6 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getEmailintroduitPerLusuari().requestFocus();
 	}
 
-	/**
-	 * Missatge que mostra un avís quan el camp email està buit
-	 * 
-	 * @author SergioHernandez
-	 */
-	public void errorCampEmailBuit() {
-		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorCampEmailBuit"),
-				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), JOptionPane.ERROR_MESSAGE);
-	}
-
-	/**
-	 * Missatge que mostra un avís quan el camp contrasenya està buit
-	 * 
-	 * @author SergioHernandez
-	 */
-	public void errorCampContrasenyaBuit() {
-		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorCampContrasenyaBuit"),
-				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), JOptionPane.ERROR_MESSAGE);
-	}
 
 	/**
 	 * Missatge que mostra un avís quan hi ha hagut un error al fer logout
