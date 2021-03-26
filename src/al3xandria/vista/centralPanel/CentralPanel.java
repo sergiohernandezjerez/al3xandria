@@ -37,7 +37,6 @@ public class CentralPanel extends JPanel {
 		setForeground(Color.BLACK);
 		setBackground(Color.WHITE);
 		setBorder(new LineBorder(Color.decode("#00838f")));
-		setBounds(10, 113, 963, 562);
 		setLayout(new BorderLayout(0, 0));
 
 		iniciarComponents();

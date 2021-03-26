@@ -1,5 +1,7 @@
 package al3xandria.vista.principal;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -39,14 +41,17 @@ public class PrincipalFrame extends JFrame {
 	 * @author SergioHernandez
 	 */
 	public PrincipalFrame() {
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setTitle("Al3xandria");
-		setBounds(300, 200, 1000, 800);
+		setMinimumSize(new Dimension(750, 800));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1000, 800);
+		footPanel = new FootPanel();
+		centralPanel = new CentralPanel();
+		headPanel = new HeadPanel(footPanel, centralPanel);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		
 		tancarAplicacio();
 		iniciarComponents();
 
@@ -59,12 +64,11 @@ public class PrincipalFrame extends JFrame {
 	 */
 	private void iniciarComponents() {
 		comunicacioClientServidor = new ComunicacioClientServidor();
-		centralPanel = new CentralPanel();
-		footPanel = new FootPanel();
-		headPanel = new HeadPanel(footPanel, centralPanel);
-		add(centralPanel);
-		add(footPanel);
-		add(headPanel);
+		contentPane.add(headPanel, BorderLayout.NORTH);
+		contentPane.add(centralPanel, BorderLayout.CENTER);
+		contentPane.add(footPanel, BorderLayout.SOUTH);
+
+		
 	}
 
 	/**
