@@ -9,7 +9,7 @@ import al3xandria.vista.icons.Icons;
 import javax.swing.JTabbedPane;
 
 /**
- * Clase que crear el panel central de l'aplicació
+ * Clase que crea el panel central de l'aplicació
  * 
  * @author SergioHernandez
  *
@@ -20,7 +20,7 @@ public class CentralPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	private ConsultaLLibres consultaLLibres;
 	private AdministradorLlibres administradorLlibres;
 	private AdministradorPrestecs administradorPrestecs;
@@ -31,7 +31,7 @@ public class CentralPanel extends JPanel {
 	
 	private JTabbedPane centralTabPanel;
 	private Icons icons;
-
+	
 	
 	public CentralPanel() {
 		setForeground(Color.BLACK);
@@ -53,7 +53,7 @@ public class CentralPanel extends JPanel {
 		administradorPrestecs = new AdministradorPrestecs();
 		administradorUsuaris = new AdministradorUsuaris();
 		centralTabPanel = new JTabbedPane();
-
+		
 		centralTabPanel.addTab("Consulta LLibres ", icons.getConsultaLlbresIcon(), 
 				consultaLLibres, "Consulta els llibres de la biblioteca");
 		add(centralTabPanel);
