@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import al3xandria.controlador.principal.ComportamentTancarAplicacio;
 import al3xandria.model.ComunicacioClientServidor;
 import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.centralPanel.CentralPanel;
@@ -68,7 +69,6 @@ public class PrincipalFrame extends JFrame {
 		contentPane.add(centralPanel, BorderLayout.CENTER);
 		contentPane.add(footPanel, BorderLayout.SOUTH);
 
-		
 	}
 
 	/**
@@ -80,57 +80,10 @@ public class PrincipalFrame extends JFrame {
 	public void tancarAplicacio() {
 		try {
 			this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-			addWindowListener(new WindowAdapter() {
-				public void windowClosing(WindowEvent e) {
-					if (headPanel.getTipusUsuari() != null) {
-						if (headPanel.getTipusUsuari().equals("Administrador")) {
-							avisTancamentAplicacio();
-						} else {
-							avisImposibleTancarAplicacio();
-						}
-					} else {
-						avisImposibleTancarAplicacio();
-					}
-				}
-			});
+			addWindowListener(new ComportamentTancarAplicacio(headPanel));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Missatge que mostra un avís quan un usuari vol tancar l'aplicació
-	 * 
-	 * @author SergioHernandez
-	 */
-	public void avisImposibleTancarAplicacio() {
-		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("PrincipalFrame.missatgeNoEsPotTancarAplicacio"),
-				ExternalizeStrings.getString("PrincipalFrame.titolMissatgeNoEsPotTancarAplicacio"),
-				JOptionPane.INFORMATION_MESSAGE);
-	}
-
-	/**
-	 * Missatge que mostra un avís per tancar l'aplicació i fer logout i demana
-	 * confirmació Quan es confirma, s'envia un missatge per fer logout de l'usuari
-	 * i tanca l'aplicació
-	 * 
-	 * @author SergioHernandez
-	 */
-	public void avisTancamentAplicacio() {
-		int valor = JOptionPane.showConfirmDialog(this,
-				ExternalizeStrings.getString("PrincipalFrame.missatgeAvisTancamentAplicacio"),
-				ExternalizeStrings.getString("PrincipalFrame.titolMissatgeAvisTancamentAplicacio"),
-				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-		if (valor == JOptionPane.YES_OPTION) {
-			JOptionPane.showMessageDialog(this,
-					ExternalizeStrings.getString("PrincipalFrame.missatgeAcomiadamentAplicacio"),
-					ExternalizeStrings.getString("PrincipalFrame.titolMissatgeAcomiadamentAplicacio"),
-					JOptionPane.INFORMATION_MESSAGE);
-			comunicacioClientServidor.iniciarComunicacio("logoutOK," + headPanel.getEmailintroduitPerLusuari().getText());
-			System.exit(0);
-		}
-
 	}
 
 
