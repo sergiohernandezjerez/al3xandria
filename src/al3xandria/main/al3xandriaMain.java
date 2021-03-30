@@ -4,6 +4,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
+import al3xandria.mockserver.MockSocketsServer;
 import al3xandria.vista.principal.PrincipalFrame;
 
 /**
@@ -32,9 +33,16 @@ public class al3xandriaMain {
 		}
 		
 	
+		
+		//client
 		mostraCartellAplicacioIniciada();
 		PrincipalFrame principalFrame = new PrincipalFrame();
 		principalFrame.setVisible(true);
+		
+		//servidor
+		int port = 5556;
+		MockSocketsServer mss = new MockSocketsServer();
+		mss.run(port);
 	}
 	
 	//creat per fer el video
