@@ -37,6 +37,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JTextArea;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
+import java.awt.ComponentOrientation;
 
 public class ConsultaLlibres extends JPanel {
 
@@ -147,8 +148,10 @@ public class ConsultaLlibres extends JPanel {
 				}
 		};
 		llibresTable = new JTable();
+		llibresTable.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		llibresTable.setFillsViewportHeight(true);
-		llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+
 		llibresTable.setBackground(new Color(255, 255, 255));
 		
 		llibresTable.setModel(new DefaultTableModel(
@@ -179,14 +182,16 @@ public class ConsultaLlibres extends JPanel {
 		           
 		        });
 		llibresTable.setFocusable(false);
-		JScrollPane llistatLlibresScrollPane = new JScrollPane();
-		llistatLlibresScrollPane.setAutoscrolls(true);
+		JScrollPane llistatLlibresScrollPane = new JScrollPane(llibresTable);
+		llistatLlibresScrollPane.setPreferredSize(new java.awt.Dimension(0, 100));
+
 		llistatLlibresScrollPane.setBackground(new Color(255, 255, 255));
-		llistatLlibresScrollPane.setViewportView(llibresTable);
-		llistaTablePanel.add(llistatLlibresScrollPane);
+		//llistatLlibresScrollPane.setViewportView(llibresTable);
+		llistaTablePanel.add(llistatLlibresScrollPane, BorderLayout.CENTER);
 		
 		
 		JPanel accionsButtonsPanel = new JPanel();
+		accionsButtonsPanel.setBackground(Color.WHITE);
 		llistaTablePanel.add(accionsButtonsPanel, BorderLayout.EAST);
 		accionsButtonsPanel.setLayout(new GridLayout(8, 0, 0, 0));
 		
