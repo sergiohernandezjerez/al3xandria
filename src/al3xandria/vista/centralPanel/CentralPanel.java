@@ -21,7 +21,7 @@ public class CentralPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private AdministradorLlibres consultaLLibres;
+	private ConsultaLlibres consultaLLibres;
 	private AdministradorLlibres administradorLlibres;
 	private AdministradorPrestecs administradorPrestecs;
 	private AdministradorUsuaris administradorUsuaris;
@@ -46,7 +46,7 @@ public class CentralPanel extends JPanel {
 	private void iniciarComponents() {
 		icons = new Icons();
 		consultaPrestecs = new ConsultaPrestecs();
-		consultaLLibres = new AdministradorLlibres();
+		consultaLLibres = new ConsultaLlibres();
 		consultaComentaris = new ConsultaComentaris();
 		administradorComentaris = new AdministradorComentaris();
 		administradorLlibres = new AdministradorLlibres();

@@ -195,17 +195,33 @@ public class ConsultaLlibres extends JPanel {
 		llistaTablePanel.add(accionsButtonsPanel, BorderLayout.EAST);
 		accionsButtonsPanel.setLayout(new GridLayout(8, 0, 0, 0));
 		
-		JButton altaLlibreButton = new JButton("Alta");
-		altaLlibreButton.setToolTipText("Prem per afegir un llibre");
-		accionsButtonsPanel.add(altaLlibreButton);
+		JButton mostrarLlibreButton = new JButton("Mostrar");
+		mostrarLlibreButton.setToolTipText("Prem per vuere m\u00E9s informaci\u00F3 del llibre seleccionat");
+		accionsButtonsPanel.add(mostrarLlibreButton);
 		
-		JButton baixaLlibreButton = new JButton("Baixa");
-		baixaLlibreButton.setToolTipText("Prem per eliminar el llibre seleccionat");
-		accionsButtonsPanel.add(baixaLlibreButton);
+		JButton prestecsLlibreButton = new JButton("Pr\u00E8stecs");
+		prestecsLlibreButton.setToolTipText("Prem per mostrar els pr\u00E8stecs");
+		accionsButtonsPanel.add(prestecsLlibreButton);
 		
-		JButton editarLlibreButton = new JButton("Editar");
-		editarLlibreButton.setToolTipText("Prem per editar el llibre seleccionat");
-		accionsButtonsPanel.add(editarLlibreButton);
+		JButton llogarLlibreButton = new JButton("Llogar");
+		llogarLlibreButton.setToolTipText("Prem per llogar el llibre seleccionat");
+		accionsButtonsPanel.add(llogarLlibreButton);
+		
+		JLabel lblNewLabel_3 = new JLabel(" ");
+		accionsButtonsPanel.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_2 = new JLabel(" ");
+		accionsButtonsPanel.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_1 = new JLabel(" ");
+		accionsButtonsPanel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel = new JLabel(" ");
+		accionsButtonsPanel.add(lblNewLabel);
+		
+		JButton cancellarButton = new JButton("Cancel.lar");
+		cancellarButton.setToolTipText("Prem per cancel.lar un pr\u00E8stec");
+		accionsButtonsPanel.add(cancellarButton);
 		
 		JPanel dadesLlibrePanel = new JPanel();
 		llibresPanel.add(dadesLlibrePanel, BorderLayout.SOUTH);
