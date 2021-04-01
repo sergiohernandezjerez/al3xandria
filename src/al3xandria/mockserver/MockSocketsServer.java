@@ -12,8 +12,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
-import al3xandria.model.usuaris.GestioUsuaris;
-import al3xandria.model.usuaris.Usuari;
+import al3xandria.model.usuarisDEPRECATED.GestioUsuaris;
+import al3xandria.model.usuarisDEPRECATED.Usuari;
 
 /**
  * Class that implements MockServer with sockets

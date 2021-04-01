@@ -42,9 +42,9 @@ public class PrincipalFrame extends JFrame {
 	 * @author SergioHernandez
 	 */
 	public PrincipalFrame() {
-		setMinimumSize(new Dimension(750, 800));
+		setMinimumSize(new Dimension(834, 850));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 800);
+		setBounds(100, 100, 1000, 850);
 		footPanel = new FootPanel();
 		centralPanel = new CentralPanel();
 		headPanel = new HeadPanel(footPanel, centralPanel);

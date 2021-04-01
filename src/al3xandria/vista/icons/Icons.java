@@ -25,6 +25,7 @@ public class Icons {
 	private Icon usuariNoConectatIcon;
 	private Icon usuariConectatIcon;
 	private Icon mostrarContrasenyaIcon;
+	private Icon lupaIcon;
 
 	public Icons() {
 		consultaLlbresIcon = new ImageIcon(
@@ -68,6 +69,10 @@ public class Icons {
 				.getImage().getScaledInstance(32, 32, Image.SCALE_AREA_AVERAGING));
 
 		logoAlexandria = new ImageIcon("." + File.separator + "resources" + File.separator + "logo.png");
+		
+		lupaIcon = new ImageIcon(
+				new ImageIcon("." + File.separator + "resources" + File.separator + "lupaIcon.png")
+						.getImage());
 	}
 
 	/*-------------------------- Getters and Setters Methods --------------------------*/
@@ -117,6 +122,10 @@ public class Icons {
 
 	public Icon getMostrarContrasenyaIcon() {
 		return mostrarContrasenyaIcon;
+	}
+	
+	public Icon getLupaIcon() {
+		return lupaIcon;
 	}
 
 }

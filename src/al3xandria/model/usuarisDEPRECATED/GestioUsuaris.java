@@ -1,4 +1,4 @@
-package al3xandria.model.usuaris;
+package al3xandria.model.usuarisDEPRECATED;
 
 import java.util.ArrayList;
 import java.util.List;

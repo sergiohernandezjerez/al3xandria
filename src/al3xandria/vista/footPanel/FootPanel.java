@@ -49,18 +49,16 @@ public class FootPanel extends JPanel {
 	private JLabel comentarisLabel;
 	private JLabel prestecsUsuariLabel;
 	private JLabel comentarisUsuariLabel;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_5;
-	private JLabel lblNewLabel_6;
-	private JLabel lblNewLabel_7;
+	private JLabel puntuacioLabel;
+	private JLabel puntuacioUsuariLabel;
+	private JLabel reservesLabel;
+	private JLabel reservesUsuariLabel;
+	private JLabel avisosLabel;
+	private JLabel avisosUsuariLabel;
 	private JPanel panel;
-	private JLabel lblNewLabel_8;
-	private JLabel lblNewLabel_9;
-	private JLabel lblNewLabel_10;
+	private JLabel borderTopLabel;
+	private JLabel borderBottomLabel;
+	private JLabel borderRightLabel;
 
 	public FootPanel() {
 		setBackground(Color.WHITE);
@@ -79,7 +77,7 @@ public class FootPanel extends JPanel {
 		add(connectPanel, BorderLayout.WEST);
 		GridBagLayout gbl_connectPanel = new GridBagLayout();
 		gbl_connectPanel.columnWidths = new int[] {20, 83, 0};
-		gbl_connectPanel.rowHeights = new int[]{29, 29, 29, 0};
+		gbl_connectPanel.rowHeights = new int[]{22, 22, 22, 0};
 		gbl_connectPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gbl_connectPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		connectPanel.setLayout(gbl_connectPanel);
@@ -115,10 +113,10 @@ public class FootPanel extends JPanel {
 		informacioUsuariPanel.setBackground(Color.WHITE);
 		//add(informacioUsuariPanel, BorderLayout.EAST);
 		GridBagLayout gbl_informacioUsuariPanel = new GridBagLayout();
-		gbl_informacioUsuariPanel.columnWidths = new int[] {50, 75, 30, 20, 10, 30};
-		gbl_informacioUsuariPanel.rowHeights = new int[] {14, 14, 14, 14, 0};
-		gbl_informacioUsuariPanel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_informacioUsuariPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0 };
+		gbl_informacioUsuariPanel.columnWidths = new int[] {50, 75, 30, 20, 0, 30, 10, 10};
+		gbl_informacioUsuariPanel.rowHeights = new int[] {14, 14, 14};
+		gbl_informacioUsuariPanel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+		gbl_informacioUsuariPanel.rowWeights = new double[] { 0.0, 0.0, 0.0 };
 		informacioUsuariPanel.setLayout(gbl_informacioUsuariPanel);
 		
 				idSessioLabel = new JLabel(ExternalizeStrings.getString("FootPanel.idSessioUsuariConectat"));
@@ -142,25 +140,41 @@ public class FootPanel extends JPanel {
 				informacioUsuariPanel.add(idSessioUsuariLabel, gbc_idSessioUsuariLabel);
 				idSessioUsuariLabel.setBounds(224, 53, 136, 20);
 								
-								lblNewLabel_2 = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_2.text")); //$NON-NLS-1$
-								GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-								gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
-								gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-								gbc_lblNewLabel_2.gridx = 3;
-								gbc_lblNewLabel_2.gridy = 0;
-								informacioUsuariPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
+								puntuacioLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_2.text")); //$NON-NLS-1$
+								GridBagConstraints gbc_puntuacioLabel = new GridBagConstraints();
+								gbc_puntuacioLabel.anchor = GridBagConstraints.EAST;
+								gbc_puntuacioLabel.insets = new Insets(0, 0, 5, 5);
+								gbc_puntuacioLabel.gridx = 3;
+								gbc_puntuacioLabel.gridy = 0;
+								informacioUsuariPanel.add(puntuacioLabel, gbc_puntuacioLabel);
 								
-								lblNewLabel_3 = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_3.text")); //$NON-NLS-1$
-								GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-								gbc_lblNewLabel_3.anchor = GridBagConstraints.EAST;
-								gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-								gbc_lblNewLabel_3.gridx = 4;
-								gbc_lblNewLabel_3.gridy = 0;
-								informacioUsuariPanel.add(lblNewLabel_3, gbc_lblNewLabel_3);
+								puntuacioUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_3.text")); //$NON-NLS-1$
+								GridBagConstraints gbc_puntuacioUsuariLabel = new GridBagConstraints();
+								gbc_puntuacioUsuariLabel.anchor = GridBagConstraints.WEST;
+								gbc_puntuacioUsuariLabel.insets = new Insets(0, 0, 5, 5);
+								gbc_puntuacioUsuariLabel.gridx = 4;
+								gbc_puntuacioUsuariLabel.gridy = 0;
+								informacioUsuariPanel.add(puntuacioUsuariLabel, gbc_puntuacioUsuariLabel);
+								
+								avisosLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_6.text")); //$NON-NLS-1$
+								GridBagConstraints gbc_avisosLabel = new GridBagConstraints();
+								gbc_avisosLabel.insets = new Insets(0, 0, 5, 5);
+								gbc_avisosLabel.anchor = GridBagConstraints.EAST;
+								gbc_avisosLabel.gridx = 6;
+								gbc_avisosLabel.gridy = 0;
+								informacioUsuariPanel.add(avisosLabel, gbc_avisosLabel);
+								
+								avisosUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_7.text")); //$NON-NLS-1$
+								GridBagConstraints gbc_avisosUsuariLabel = new GridBagConstraints();
+								gbc_avisosUsuariLabel.insets = new Insets(0, 0, 5, 0);
+								gbc_avisosUsuariLabel.anchor = GridBagConstraints.WEST;
+								gbc_avisosUsuariLabel.gridx = 7;
+								gbc_avisosUsuariLabel.gridy = 0;
+								informacioUsuariPanel.add(avisosUsuariLabel, gbc_avisosUsuariLabel);
 						
 								nomLabel = new JLabel(ExternalizeStrings.getString("FootPanel.nomUsuariConectat"));
 								GridBagConstraints gbc_nomLabel = new GridBagConstraints();
-								gbc_nomLabel.anchor = GridBagConstraints.WEST;
+								gbc_nomLabel.anchor = GridBagConstraints.EAST;
 								gbc_nomLabel.fill = GridBagConstraints.VERTICAL;
 								gbc_nomLabel.insets = new Insets(0, 0, 5, 5);
 								gbc_nomLabel.gridx = 0;
@@ -189,17 +203,33 @@ public class FootPanel extends JPanel {
 						
 						prestecsUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.prestecsUsuariLabel.text")); //$NON-NLS-1$
 						GridBagConstraints gbc_prestecsUsuariLabel = new GridBagConstraints();
-						gbc_prestecsUsuariLabel.anchor = GridBagConstraints.EAST;
+						gbc_prestecsUsuariLabel.anchor = GridBagConstraints.WEST;
 						gbc_prestecsUsuariLabel.insets = new Insets(0, 0, 5, 5);
 						gbc_prestecsUsuariLabel.gridx = 4;
 						gbc_prestecsUsuariLabel.gridy = 1;
 						informacioUsuariPanel.add(prestecsUsuariLabel, gbc_prestecsUsuariLabel);
+						
+						reservesLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_4.text")); //$NON-NLS-1$
+						GridBagConstraints gbc_reservesLabel = new GridBagConstraints();
+						gbc_reservesLabel.anchor = GridBagConstraints.EAST;
+						gbc_reservesLabel.insets = new Insets(0, 0, 5, 5);
+						gbc_reservesLabel.gridx = 6;
+						gbc_reservesLabel.gridy = 1;
+						informacioUsuariPanel.add(reservesLabel, gbc_reservesLabel);
+						
+						reservesUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_5.text")); //$NON-NLS-1$
+						GridBagConstraints gbc_reservesUsuariLabel = new GridBagConstraints();
+						gbc_reservesUsuariLabel.anchor = GridBagConstraints.WEST;
+						gbc_reservesUsuariLabel.insets = new Insets(0, 0, 5, 0);
+						gbc_reservesUsuariLabel.gridx = 7;
+						gbc_reservesUsuariLabel.gridy = 1;
+						informacioUsuariPanel.add(reservesUsuariLabel, gbc_reservesUsuariLabel);
 				
 						emailLabel = new JLabel(ExternalizeStrings.getString("FootPanel.emailUsuariConectat"));
 						GridBagConstraints gbc_emailLabel = new GridBagConstraints();
-						gbc_emailLabel.anchor = GridBagConstraints.WEST;
+						gbc_emailLabel.anchor = GridBagConstraints.EAST;
 						gbc_emailLabel.fill = GridBagConstraints.VERTICAL;
-						gbc_emailLabel.insets = new Insets(0, 0, 5, 5);
+						gbc_emailLabel.insets = new Insets(0, 0, 0, 5);
 						gbc_emailLabel.gridx = 0;
 						gbc_emailLabel.gridy = 2;
 						informacioUsuariPanel.add(emailLabel, gbc_emailLabel);
@@ -209,111 +239,62 @@ public class FootPanel extends JPanel {
 						emailUsuariLabel = new JLabel();
 						GridBagConstraints gbc_emailUsuariLabel = new GridBagConstraints();
 						gbc_emailUsuariLabel.anchor = GridBagConstraints.WEST;
-						gbc_emailUsuariLabel.insets = new Insets(0, 0, 5, 5);
+						gbc_emailUsuariLabel.insets = new Insets(0, 0, 0, 5);
 						gbc_emailUsuariLabel.fill = GridBagConstraints.VERTICAL;
 						gbc_emailUsuariLabel.gridx = 1;
 						gbc_emailUsuariLabel.gridy = 2;
 						informacioUsuariPanel.add(emailUsuariLabel, gbc_emailUsuariLabel);
 						emailUsuariLabel.setBounds(224, 25, 136, 20);
+						
+								carnetLabel = new JLabel(ExternalizeStrings.getString("FootPanel.carnetUsuariConectat"));
+								GridBagConstraints gbc_carnetLabel = new GridBagConstraints();
+								gbc_carnetLabel.anchor = GridBagConstraints.EAST;
+								gbc_carnetLabel.insets = new Insets(0, 0, 0, 5);
+								gbc_carnetLabel.fill = GridBagConstraints.VERTICAL;
+								gbc_carnetLabel.gridx = 3;
+								gbc_carnetLabel.gridy = 2;
+								informacioUsuariPanel.add(carnetLabel, gbc_carnetLabel);
+						
+								carnetUsuariLabel = new JLabel("carnet usuari");
+								GridBagConstraints gbc_carnetUsuariLabel = new GridBagConstraints();
+								gbc_carnetUsuariLabel.anchor = GridBagConstraints.WEST;
+								gbc_carnetUsuariLabel.insets = new Insets(0, 0, 0, 5);
+								gbc_carnetUsuariLabel.fill = GridBagConstraints.VERTICAL;
+								gbc_carnetUsuariLabel.gridx = 4;
+								gbc_carnetUsuariLabel.gridy = 2;
+								informacioUsuariPanel.add(carnetUsuariLabel, gbc_carnetUsuariLabel);
+								carnetUsuariLabel.setHorizontalAlignment(SwingConstants.LEFT);
 				
 						comentarisLabel = new JLabel(ExternalizeStrings.getString("FootPanel.comentarisUsuariConectat"));
 						GridBagConstraints gbc_comentarisLabel = new GridBagConstraints();
 						gbc_comentarisLabel.anchor = GridBagConstraints.EAST;
-						gbc_comentarisLabel.insets = new Insets(0, 0, 5, 5);
-						gbc_comentarisLabel.gridx = 3;
+						gbc_comentarisLabel.insets = new Insets(0, 0, 0, 5);
+						gbc_comentarisLabel.gridx = 6;
 						gbc_comentarisLabel.gridy = 2;
 						informacioUsuariPanel.add(comentarisLabel, gbc_comentarisLabel);
 				
 				comentarisUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.comentarisUsuariLabel.text")); //$NON-NLS-1$
 				GridBagConstraints gbc_comentarisUsuariLabel = new GridBagConstraints();
-				gbc_comentarisUsuariLabel.anchor = GridBagConstraints.EAST;
-				gbc_comentarisUsuariLabel.insets = new Insets(0, 0, 5, 5);
-				gbc_comentarisUsuariLabel.gridx = 4;
+				gbc_comentarisUsuariLabel.anchor = GridBagConstraints.WEST;
+				gbc_comentarisUsuariLabel.gridx = 7;
 				gbc_comentarisUsuariLabel.gridy = 2;
 				informacioUsuariPanel.add(comentarisUsuariLabel, gbc_comentarisUsuariLabel);
-		
-				carnetLabel = new JLabel(ExternalizeStrings.getString("FootPanel.carnetUsuariConectat"));
-				GridBagConstraints gbc_carnetLabel = new GridBagConstraints();
-				gbc_carnetLabel.anchor = GridBagConstraints.WEST;
-				gbc_carnetLabel.insets = new Insets(0, 0, 5, 5);
-				gbc_carnetLabel.fill = GridBagConstraints.VERTICAL;
-				gbc_carnetLabel.gridx = 0;
-				gbc_carnetLabel.gridy = 3;
-				informacioUsuariPanel.add(carnetLabel, gbc_carnetLabel);
-		
-				carnetUsuariLabel = new JLabel("carnet usuari");
-				GridBagConstraints gbc_carnetUsuariLabel = new GridBagConstraints();
-				gbc_carnetUsuariLabel.anchor = GridBagConstraints.WEST;
-				gbc_carnetUsuariLabel.insets = new Insets(0, 0, 5, 5);
-				gbc_carnetUsuariLabel.fill = GridBagConstraints.VERTICAL;
-				gbc_carnetUsuariLabel.gridx = 1;
-				gbc_carnetUsuariLabel.gridy = 3;
-				informacioUsuariPanel.add(carnetUsuariLabel, gbc_carnetUsuariLabel);
-				carnetUsuariLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		
-		lblNewLabel_4 = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_4.text")); //$NON-NLS-1$
-		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-		gbc_lblNewLabel_4.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_4.gridx = 3;
-		gbc_lblNewLabel_4.gridy = 3;
-		informacioUsuariPanel.add(lblNewLabel_4, gbc_lblNewLabel_4);
-		
-		lblNewLabel_5 = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_5.text")); //$NON-NLS-1$
-		GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
-		gbc_lblNewLabel_5.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_5.gridx = 4;
-		gbc_lblNewLabel_5.gridy = 3;
-		informacioUsuariPanel.add(lblNewLabel_5, gbc_lblNewLabel_5);
-		
-		lblNewLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel.text")); //$NON-NLS-1$
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 4;
-		informacioUsuariPanel.add(lblNewLabel, gbc_lblNewLabel);
-		
-		lblNewLabel_1 = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_1.text")); //$NON-NLS-1$
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_1.gridx = 1;
-		gbc_lblNewLabel_1.gridy = 4;
-		informacioUsuariPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
-		lblNewLabel_6 = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_6.text")); //$NON-NLS-1$
-		GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
-		gbc_lblNewLabel_6.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_6.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_6.gridx = 3;
-		gbc_lblNewLabel_6.gridy = 4;
-		informacioUsuariPanel.add(lblNewLabel_6, gbc_lblNewLabel_6);
-		
-		lblNewLabel_7 = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_7.text")); //$NON-NLS-1$
-		GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
-		gbc_lblNewLabel_7.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_7.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_7.gridx = 4;
-		gbc_lblNewLabel_7.gridy = 4;
-		informacioUsuariPanel.add(lblNewLabel_7, gbc_lblNewLabel_7);
 		
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		add(panel, BorderLayout.EAST);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		lblNewLabel_8 = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_8.text")); //$NON-NLS-1$
-		lblNewLabel_8.setBackground(Color.WHITE);
-		panel.add(lblNewLabel_8, BorderLayout.NORTH);
+		borderTopLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_8.text")); //$NON-NLS-1$
+		borderTopLabel.setBackground(Color.WHITE);
+		panel.add(borderTopLabel, BorderLayout.NORTH);
 		
-		lblNewLabel_9 = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_9.text")); //$NON-NLS-1$
-		lblNewLabel_9.setBackground(Color.WHITE);
-		panel.add(lblNewLabel_9, BorderLayout.SOUTH);
+		borderBottomLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_9.text")); //$NON-NLS-1$
+		borderBottomLabel.setBackground(Color.WHITE);
+		panel.add(borderBottomLabel, BorderLayout.SOUTH);
 		
-		lblNewLabel_10 = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_10.text")); //$NON-NLS-1$
-		panel.add(lblNewLabel_10, BorderLayout.EAST);
+		borderRightLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_10.text")); //$NON-NLS-1$
+		panel.add(borderRightLabel, BorderLayout.EAST);
 		
 		panel.add(informacioUsuariPanel, BorderLayout.CENTER);
 		setUsuariIconOff();

@@ -5,5 +5,6 @@
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="F:/ProjecteDesenvolupamentAplicacionsMultiplataforma/recursos/libs/gson-2.8.1.jar"/>
+	<classpathentry kind="lib" path="F:/ProjecteDesenvolupamentAplicacionsMultiplataforma/recursos/libs/postgresql-42.2.19.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

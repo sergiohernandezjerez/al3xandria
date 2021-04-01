@@ -1,4 +1,4 @@
-package al3xandria.model.usuaris;
+package al3xandria.model.usuarisDEPRECATED;
 
 /**
  * Clase main per probar la gestió d'usuaris. 
