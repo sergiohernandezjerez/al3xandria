@@ -28,6 +28,7 @@ public class CentralPanel extends JPanel {
 	private AdministradorComentaris administradorComentaris;
 	private ConsultaComentaris consultaComentaris;
 	private ConsultaPrestecs consultaPrestecs;
+	private ConsultaLlibresNoRegistrat consultaLlibresNoRegistrat;
 	
 	private JTabbedPane centralTabPanel;
 	private Icons icons;
@@ -47,6 +48,7 @@ public class CentralPanel extends JPanel {
 		icons = new Icons();
 		consultaPrestecs = new ConsultaPrestecs();
 		consultaLLibres = new ConsultaLlibres();
+		consultaLlibresNoRegistrat = new ConsultaLlibresNoRegistrat();
 		consultaComentaris = new ConsultaComentaris();
 		administradorComentaris = new AdministradorComentaris();
 		administradorLlibres = new AdministradorLlibres();
@@ -55,7 +57,7 @@ public class CentralPanel extends JPanel {
 		centralTabPanel = new JTabbedPane();
 		
 		centralTabPanel.addTab("Consulta LLibres ", icons.getConsultaLlbresIcon(), 
-				consultaLLibres, "Consulta els llibres de la biblioteca");
+				consultaLlibresNoRegistrat, "Consulta els llibres de la biblioteca com a usuari no registrat");
 		add(centralTabPanel);
 
 	}
@@ -66,6 +68,9 @@ public class CentralPanel extends JPanel {
 	 * @author SergioHernandez
 	 */
 	public void setUsuariPanel() {
+		centralTabPanel.remove(consultaLlibresNoRegistrat);
+		centralTabPanel.addTab("Consulta LLibres ", icons.getConsultaLlbresIcon(), 
+				consultaLLibres, "Consulta els llibres de la biblioteca");
 		centralTabPanel.addTab("Prestecs ", icons.getconsultaPrestecsIcon(),
 				consultaPrestecs, "Consulta els teus prestecs");
 		centralTabPanel.addTab("Comentaris ", icons.getConsultaComentarisIcon(), 
@@ -78,7 +83,7 @@ public class CentralPanel extends JPanel {
 	 * @author SergioHernandez
 	 */
 	public void setAdministradorPanel() {
-		centralTabPanel.remove(consultaLLibres);
+		centralTabPanel.remove(consultaLlibresNoRegistrat);
 		centralTabPanel.addTab("Admin Llibres ", icons.getAdministrarLibresIcon(),
 				administradorLlibres, "Administra els llibres de la biblioteca");
 		centralTabPanel.addTab("Admin Prestecs ", icons.getAdministrarPrestecsIcon(), 
@@ -99,7 +104,7 @@ public class CentralPanel extends JPanel {
 		centralTabPanel.remove(administradorUsuaris);
 		centralTabPanel.remove(administradorComentaris);
 		centralTabPanel.addTab("Consulta Llibres ", icons.getConsultaLlbresIcon(), 
-				consultaLLibres, "Consulta els llibres de la biblioteca");
+				consultaLlibresNoRegistrat, "Consulta els llibres de la biblioteca com usuari no registrat");
 	}
 
 	

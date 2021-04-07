@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -91,7 +90,6 @@ public class FootPanel extends JPanel {
 				connectPanel.add(estasConectatComLabel, gbc_estasConectatComLabel);
 				estasConectatComLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		
-		
 				tipuUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.tipusUsuariAnominLabel"));
 				tipuUsuariLabel.setVerticalAlignment(SwingConstants.TOP);
 				GridBagConstraints gbc_tipuUsuariLabel = new GridBagConstraints();
@@ -101,7 +99,7 @@ public class FootPanel extends JPanel {
 				gbc_tipuUsuariLabel.gridy = 1;
 				connectPanel.add(tipuUsuariLabel, gbc_tipuUsuariLabel);
 				tipuUsuariLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		estatUsuariIcon = new JLabel(ExternalizeStrings.getString("FootPanel.estatUsuariIcon.text")); //$NON-NLS-1$
+		estatUsuariIcon = new JLabel("");
 		GridBagConstraints gbc_estatUsuariIcon = new GridBagConstraints();
 		gbc_estatUsuariIcon.fill = GridBagConstraints.BOTH;
 		gbc_estatUsuariIcon.gridx = 1;

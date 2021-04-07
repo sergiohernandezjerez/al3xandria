@@ -38,6 +38,9 @@ import javax.swing.JTextArea;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
 import java.awt.ComponentOrientation;
+import javax.swing.ButtonGroup;
+
+
 
 public class ConsultaLlibres extends JPanel {
 
@@ -56,6 +59,7 @@ public class ConsultaLlibres extends JPanel {
 	private JTextField dataPublicacioField;
 	
 	private Icons icons;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Create the panel.
@@ -85,18 +89,23 @@ public class ConsultaLlibres extends JPanel {
 		filtreButtonPanel.add(filtrePerLabel);
 		
 		JRadioButton titolRadioButton = new JRadioButton("T\u00EDtol");
+		titolRadioButton.setSelected(true);
+		buttonGroup.add(titolRadioButton);
 		titolRadioButton.setToolTipText("Filtrar per t\u00EDtol");
 		filtreButtonPanel.add(titolRadioButton);
 		
 		JRadioButton autorRadioButton = new JRadioButton("Autor");
+		buttonGroup.add(autorRadioButton);
 		autorRadioButton.setToolTipText("Filtra per autor");
 		filtreButtonPanel.add(autorRadioButton);
 		
 		JRadioButton genereRadioButton = new JRadioButton("G\u00E8nere");
+		buttonGroup.add(genereRadioButton);
 		genereRadioButton.setToolTipText("Filtre per g\u00E8nere");
 		filtreButtonPanel.add(genereRadioButton);
 		
 		JRadioButton editorialRadioButton = new JRadioButton("Editorial");
+		buttonGroup.add(editorialRadioButton);
 		editorialRadioButton.setToolTipText("Filtra per editorial");
 		filtreButtonPanel.add(editorialRadioButton);
 		

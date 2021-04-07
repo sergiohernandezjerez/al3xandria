@@ -7,40 +7,28 @@ import java.awt.FlowLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-
 import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
 import al3xandria.vista.icons.Icons;
 
 import javax.swing.border.EtchedBorder;
 import javax.swing.JTextArea;
-import javax.swing.ImageIcon;
-import java.awt.Dimension;
 import java.awt.ComponentOrientation;
 import javax.swing.ButtonGroup;
 
-public class AdministradorLlibres extends JPanel {
+
+
+public class ConsultaLlibresNoRegistrat extends JPanel {
 
 	/**
 	 * 
@@ -62,7 +50,7 @@ public class AdministradorLlibres extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdministradorLlibres() {
+	public ConsultaLlibresNoRegistrat() {
 		icons = new Icons();
 		setBounds(new Rectangle(0, 0, 750, 850));
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -152,6 +140,30 @@ public class AdministradorLlibres extends JPanel {
 				},
 				{
 					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+				},
+				{
+					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+				},
+				{
+					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+				},
+				{
+					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+				},
+				{
+					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+				},
+				{
+					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+				},
+				{
+					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+				},
+				{
+					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+				},
+				{
+					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
 				}
 		};
 		llibresTable = new JTable();
@@ -164,6 +176,39 @@ public class AdministradorLlibres extends JPanel {
 		llibresTable.setModel(new DefaultTableModel(
 		            new Object [][] {
 		            	{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
+							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
+						},
+						{
 							"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
 						},
 						{
@@ -202,17 +247,21 @@ public class AdministradorLlibres extends JPanel {
 		llistaTablePanel.add(accionsButtonsPanel, BorderLayout.EAST);
 		accionsButtonsPanel.setLayout(new GridLayout(8, 0, 0, 0));
 		
-		JButton altaLlibreButton = new JButton("Alta");
-		altaLlibreButton.setToolTipText("Prem per afegir un llibre");
-		accionsButtonsPanel.add(altaLlibreButton);
+		JButton mostrarLlibreButton = new JButton("Mostrar");
+		mostrarLlibreButton.setToolTipText("Prem per vuere m\u00E9s informaci\u00F3 del llibre seleccionat");
+		accionsButtonsPanel.add(mostrarLlibreButton);
 		
-		JButton baixaLlibreButton = new JButton("Baixa");
-		baixaLlibreButton.setToolTipText("Prem per eliminar el llibre seleccionat");
-		accionsButtonsPanel.add(baixaLlibreButton);
+		JLabel lblNewLabel_3 = new JLabel(" ");
+		accionsButtonsPanel.add(lblNewLabel_3);
 		
-		JButton editarLlibreButton = new JButton("Editar");
-		editarLlibreButton.setToolTipText("Prem per editar el llibre seleccionat");
-		accionsButtonsPanel.add(editarLlibreButton);
+		JLabel lblNewLabel_2 = new JLabel(" ");
+		accionsButtonsPanel.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_1 = new JLabel(" ");
+		accionsButtonsPanel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel = new JLabel(" ");
+		accionsButtonsPanel.add(lblNewLabel);
 		
 		JPanel dadesLlibrePanel = new JPanel();
 		llibresPanel.add(dadesLlibrePanel, BorderLayout.SOUTH);
@@ -296,10 +345,10 @@ public class AdministradorLlibres extends JPanel {
 		autorsPanel.add(autorLabel);
 		autorLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JComboBox autorsComboBox = new JComboBox();
-		autorsComboBox.setToolTipText("Selecciona un autor");
-		autorsPanel.add(autorsComboBox);
-		autorsComboBox.addItem("Autors     ");
+		JTextField autorsField = new JTextField();
+		autorsField.setColumns(12);
+		autorsField.setToolTipText("Autor del llibre");
+		autorsPanel.add(autorsField);
 		
 		JPanel generesPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(generesPanel);
@@ -308,10 +357,10 @@ public class AdministradorLlibres extends JPanel {
 		generesPanel.add(generesLabel);
 		generesLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JComboBox generesComboBox = new JComboBox();
-		generesComboBox.setToolTipText("Selecciona un g\u00E8nere");
-		generesPanel.add(generesComboBox);
-		generesComboBox.addItem("Gèneres     ");
+		JTextField genereField = new JTextField();
+		genereField.setColumns(12);
+		genereField.setToolTipText("Gènere del llibre");
+		generesPanel.add(genereField);
 		
 		JPanel editorialsPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(editorialsPanel);
@@ -320,10 +369,10 @@ public class AdministradorLlibres extends JPanel {
 		editorialsPanel.add(editorialsLabel);
 		editorialsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JComboBox editorialsComboBox = new JComboBox();
-		editorialsComboBox.setToolTipText("Selecciona una editorial");
-		editorialsPanel.add(editorialsComboBox);
-		editorialsComboBox.addItem("Editorials     ");
+		JTextField editorialField = new JTextField();
+		editorialField.setColumns(12);
+		editorialField.setToolTipText("Editorial del llibre");
+		editorialsPanel.add(editorialField);
 		
 		JPanel puntuacioPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(puntuacioPanel);

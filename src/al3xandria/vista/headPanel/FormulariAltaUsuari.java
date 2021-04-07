@@ -18,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.JFormattedTextField;
 
 
 /**
@@ -62,6 +63,8 @@ public class FormulariAltaUsuari extends JFrame {
 	private JLabel poblacioLabel;
 	private JLabel codiPostalLabel;
 	private JComboBox<String> dniNieComboBox;
+	private JLabel lblNewLabel_1;
+	private JFormattedTextField formattedTextField_1;
 
 	/**
 	 * Launch the application.
@@ -86,7 +89,7 @@ public class FormulariAltaUsuari extends JFrame {
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		icones = new Icons();
 		setTitle(ExternalizeStrings.getString("FormulariAltaUsuari.titol"));
-		setBounds(100, 100, 582, 456);
+		setBounds(100, 100, 582, 496);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -104,7 +107,7 @@ public class FormulariAltaUsuari extends JFrame {
 		dniNieComboBox = new JComboBox();
 		dniNieComboBox.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.comboBox.toolTipText")); //$NON-NLS-1$
 		dniNieComboBox.setModel(new DefaultComboBoxModel(new String[] {"Identificador", "DNI", "NIE"}));
-		dniNieComboBox.setBounds(40, 296, 100, 22);
+		dniNieComboBox.setBounds(40, 336, 100, 22);
 		dniNieComboBox.addItemListener(new FormulariAltaControlador(this));
 		contentPane.add(dniNieComboBox);
 		
@@ -137,7 +140,7 @@ public class FormulariAltaUsuari extends JFrame {
 		contentPane.add(telefonLabel);
 		
 		tipusUsuariLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.tipusUsuariLabel")); //$NON-NLS-1$
-		tipusUsuariLabel.setBounds(40, 334, 74, 14);
+		tipusUsuariLabel.setBounds(40, 374, 74, 14);
 		contentPane.add(tipusUsuariLabel);
 		
 		titolLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.titolLabel")); //$NON-NLS-1$
@@ -163,7 +166,7 @@ public class FormulariAltaUsuari extends JFrame {
 		dniNieField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		dniNieField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.dniNieFieldToltipDefault"));
 		dniNieField.setColumns(10);
-		dniNieField.setBounds(150, 295, 140, 24);
+		dniNieField.setBounds(150, 335, 140, 24);
 		contentPane.add(dniNieField);
 		
 		emailField = new JTextField();
@@ -219,7 +222,7 @@ public class FormulariAltaUsuari extends JFrame {
 		esborrarButton.setForeground(Color.WHITE);
 		esborrarButton.setBackground(Color.decode("#6a1b9a"));
 		esborrarButton.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.esborrarButtonToltip")); //$NON-NLS-1$
-		esborrarButton.setBounds(431, 326, 91, 30);
+		esborrarButton.setBounds(431, 366, 91, 30);
 		esborrarButton.addMouseListener(new FormulariAltaControlador(this));
 		contentPane.add(esborrarButton);
 		
@@ -227,7 +230,7 @@ public class FormulariAltaUsuari extends JFrame {
 		enviarButton.setForeground(Color.WHITE);
 		enviarButton.setBackground(Color.decode("#00838f"));
 		enviarButton.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.enviarButtonToltip")); //$NON-NLS-1$
-		enviarButton.setBounds(324, 367, 91, 30);
+		enviarButton.setBounds(324, 407, 91, 30);
 		enviarButton.addMouseListener(new FormulariAltaControlador(this));
 		contentPane.add(enviarButton);
 		
@@ -236,7 +239,7 @@ public class FormulariAltaUsuari extends JFrame {
 		cancellarButton.setBackground(new Color(165, 42, 42));
 		cancellarButton.setForeground(Color.WHITE);
 		cancellarButton.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.cancellarButtonToltip")); //$NON-NLS-1$
-		cancellarButton.setBounds(431, 367, 91, 30);
+		cancellarButton.setBounds(431, 407, 91, 30);
 		cancellarButton.addMouseListener(new FormulariAltaControlador(this));
 		contentPane.add(cancellarButton);
 		
@@ -244,13 +247,13 @@ public class FormulariAltaUsuari extends JFrame {
 		tipusUsuariComboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecciona....", "Estudiant", "Professor"}));
 		
 		tipusUsuariComboBox.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.tipusUsuariComboBoxToltip")); //$NON-NLS-1$
-		tipusUsuariComboBox.setBounds(150, 330, 140, 22);
+		tipusUsuariComboBox.setBounds(150, 370, 140, 22);
 		contentPane.add(tipusUsuariComboBox);
 		
 		informacioLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.informacioLabel")); //$NON-NLS-1$
 		informacioLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		informacioLabel.setForeground(Color.RED);
-		informacioLabel.setBounds(40, 392, 347, 14);
+		informacioLabel.setBounds(40, 432, 347, 14);
 		contentPane.add(informacioLabel);
 		
 		logoDeLaplicacio = new JLabel(""); //$NON-NLS-1$
@@ -259,6 +262,24 @@ public class FormulariAltaUsuari extends JFrame {
 		logoDeLaplicacio.setToolTipText(ExternalizeStrings.getString(ExternalizeStrings.getString("FormulariAltaUsuari.47"))); //$NON-NLS-1$
 		logoDeLaplicacio.setBounds(0, 11, 614, 71);
 		contentPane.add(logoDeLaplicacio);
+		
+		JLabel lblNewLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.lblNewLabel.text")); //$NON-NLS-1$
+		lblNewLabel.setBounds(40, 296, 64, 14);
+		contentPane.add(lblNewLabel);
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setText(""); //$NON-NLS-1$
+		formattedTextField.setBounds(117, 291, 140, 24);
+		contentPane.add(formattedTextField);
+		
+		lblNewLabel_1 = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.lblNewLabel_1.text")); //$NON-NLS-1$
+		lblNewLabel_1.setBounds(267, 296, 105, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		formattedTextField_1 = new JFormattedTextField();
+		formattedTextField_1.setText(""); //$NON-NLS-1$
+		formattedTextField_1.setBounds(382, 293, 140, 20);
+		contentPane.add(formattedTextField_1);
 		
 		
 	}
