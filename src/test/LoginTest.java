@@ -90,14 +90,14 @@ class LoginTest {
 	@Test
 	void testCampEmailBuit() {
 		controlDeDades = new ControlDeDades();
-		assertFalse(controlDeDades.comprovarCampsOmplerts("", "contraseenya"));
+		assertFalse(controlDeDades.comprovarCampsOmplertsLogin("", "contraseenya"));
 	}
 	
 	//comprova si el camp contrasenya està buit
 	@Test
 	void testCampContrasenyaBuit() {
 		controlDeDades = new ControlDeDades();
-		assertFalse(controlDeDades.comprovarCampsOmplerts("email@email.com", ""));
+		assertFalse(controlDeDades.comprovarCampsOmplertsLogin("email@email.com", ""));
 	}
 	
 	//comprova que el format de l'email introduït sigui correcte
