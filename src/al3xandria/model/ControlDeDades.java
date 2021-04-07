@@ -1,5 +1,6 @@
 package al3xandria.model;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,23 +29,82 @@ public class ControlDeDades {
 	
 	/**
 	 * comprova si el format del DNI es correcte
-	 * @param partNumerica
-	 * @param lletraFinal
+	 * @param dni --> el dni en format String
 	 * @return boolean  --> true si és correcta | false si és incorrecte
-	 * @see https://es.wikipedia.org/wiki/DNI_(Espa%C3%B1a)#:~:text=El%20n%C3%BAmero%20del%20documento%20nacional,dividido%20entre%20el%20n%C3%BAmero%2023.
+	 * @see http://www.interior.gob.es/web/servicios-al-ciudadano/dni/calculo-del-digito-de-control-del-nif-nie
 	 * @author SergioHernandez
 	 */
-	@SuppressWarnings("unused")
-	private boolean comprovacioValidezaDNI(int partNumerica, char lletraFinal) {
+	public boolean comprovacioValidezaDNI(String dni) {
+		int partNumerica = 0;
+		char lletraFinal = 0;
 		char[] lletra = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H',
 				'L', 'C', 'K', 'E' };
 		boolean dniCorrecta = false;
+		if(dni.length() == 9) {
+			partNumerica = Integer.parseInt(dni.substring(0, 8));
+			lletraFinal = dni.charAt(8);
+		}
 		int resta = partNumerica % 23;
-		System.out.println(resta);
+
 		if (lletra[resta] == lletraFinal) {
 			dniCorrecta = true;
 		}
 		return dniCorrecta;
+	}
+	
+	/**
+	 * comprova si el format del NIE es correcte
+	 * @param nie --> el nie en format String
+	 * @return boolean  --> true si és correcta | false si és incorrecte
+	 * @see http://www.interior.gob.es/web/servicios-al-ciudadano/dni/calculo-del-digito-de-control-del-nif-nie
+	 * @author SergioHernandez
+	 */
+	public boolean comprovacioValidezaNIE(String nie) {
+		boolean nieCorrecta = false;
+		char lletraInicial = 0;
+		String partNumericaILletra = "";
+		String formatDNI = "";
+		if(nie.length() == 9) {
+			partNumericaILletra = nie.substring(1, 9);
+			System.out.println(partNumericaILletra);
+			lletraInicial = nie.charAt(0);
+			System.out.println(lletraInicial);
+			if(lletraInicial == 'X') {
+				formatDNI = "0" + partNumericaILletra;
+			}
+			if(lletraInicial == 'Y') {
+				formatDNI = "1" + partNumericaILletra;
+			}
+			if(lletraInicial == 'Z') {
+				formatDNI = "2" + partNumericaILletra;
+			}
+			System.out.println(formatDNI);
+		}
+		
+		if(comprovacioValidezaDNI(formatDNI)) {
+			nieCorrecta = true;
+		}
+		
+		return nieCorrecta;
+	}
+	
+	
+	/**
+	 * Comprova que el telèfon tingui un format correcte
+	 * 9 xifres i que sigui un número
+	 * @param telefon
+	 * @return --> true: si és correcte | false: si no és correcte
+	 * @author SergioHernandez
+	 */
+	public boolean comprovacioFormatTelefon(String telefon) {
+		boolean telefonCorrecte = false;
+		if(telefon.length() == 9 && esUnNumero(telefon)) {
+			
+				telefonCorrecte = true;
+			
+		}
+		
+		return telefonCorrecte;
 	}
 
 
@@ -78,13 +138,18 @@ public class ControlDeDades {
 	 * @return true si els dos camps estan omplerts | false si no ho estan
 	 * @author SergioHernandez
 	 */
-	public boolean comprovarCampsOmplerts(String email, String contrasenya) {
+	public boolean comprovarCampsOmplertsLogin(String email, String contrasenya) {
+		ArrayList<String> campsBuits = new ArrayList<String>();
 		boolean totOmplert = false;
 		if (email.length() == 0) {
-			errorCampEmailBuit();
-		} else if (contrasenya.length() == 0) {
-			errorCampContrasenyaBuit();
-		} else {
+			campsBuits.add("Email");
+		} 
+		if (contrasenya.length() == 0) {
+			campsBuits.add("Contrasenya");
+		} 
+		if(campsBuits.size()>0){
+			errorCampBuit(campsBuits.toString());
+		}else {
 			totOmplert = true;
 		}
 
@@ -92,27 +157,145 @@ public class ControlDeDades {
 	}
 	
 	/**
-	 * Missatge que mostra un avís quan el camp email està buit
+	 * Comprova si els camps de text JTextField no estan buits
 	 * 
+	 * @param email       -> camp de text que pertany al email
+	 * @param contrasenya -> camp de text que pertany a la contrasenya
+	 * @return true si els dos camps estan omplerts | false si no ho estan
 	 * @author SergioHernandez
 	 */
-	public void errorCampEmailBuit() {
-		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorCampEmailBuit"),
-				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), JOptionPane.ERROR_MESSAGE);
-	}
+	public boolean comprovarCampsOmplertsFormulariAltaUsuari(String nom, String cognoms, String adreca, String email, 
+			String poblacio, String codiPostal, String pais, String provincia, String telefon, String identificador, 
+			int tipusIdentificador, int tipusUsuari) {
+		ArrayList<String> campsBuits = new ArrayList<String>();
+		boolean totOmplert = false;
+		if (nom.length() == 0) {
+			campsBuits.add("Nom");
+		} 
+		if (cognoms.length() == 0) {
+			campsBuits.add("Cognoms");
+		}
+		if (adreca.length() == 0) {
+			campsBuits.add("Adreça");
+		}
+		if (email.length() == 0) {
+			campsBuits.add("Email");
+		}
+		if (poblacio.length() == 0) {
+			campsBuits.add("Població");
+		}
+		if (codiPostal.length() == 0) {
+			campsBuits.add("Codi Postal");
+		}
+		if (pais.length() == 0) {
+			campsBuits.add("Pais");
+		}
+		if (provincia.length() == 0) {
+			campsBuits.add("Provincia");
+		}
+		if (telefon.length() == 0) {
+			campsBuits.add("Telèfon");
+		}
+		if (identificador.length() == 0) {
+			campsBuits.add("Numero Identificador");
+		}
+		if (tipusIdentificador == 0) {
+			campsBuits.add("Tipus Identificador");
+		}
+		if (tipusUsuari == 0) {
+			campsBuits.add("Tipus Usuari");
+		}
+		if(campsBuits.size()>0){
+			errorCampBuit(campsBuits.toString());
+		}else {
+			totOmplert = true;
+		}
 
+		return totOmplert;
+	}
+	
+	
 	/**
-	 * Missatge que mostra un avís quan el camp contrasenya està buit
+	 * Mètode per comprobar que la dada introduïda 
+	 * és un número.
+	 * @param numero
+	 * @return --> true: si és un número | false: si no és un número
+	 * @author http://lineadecodigo.com/java/validar-si-un-dato-es-numerico-en-java
+	 */
+	public boolean esUnNumero(String numero) {
+		try {
+			Integer.parseInt(numero);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * Missatge que mostra un avís quan el camp telèfon és incorrecte
+	 * Mida diferent a 9
 	 * 
 	 * @author SergioHernandez
 	 */
-	public void errorCampContrasenyaBuit() {
+	public void errorFormatTelefon() {
 		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorCampContrasenyaBuit"),
+				ExternalizeStrings.getString("FormulariAltaUsuari.errorFormatTelefon"),
+				ExternalizeStrings.getString("FormulariAltaUsuari.titolErrorFormatTelefon"), JOptionPane.ERROR_MESSAGE);
+	}
+	
+	/**
+	 * Missatge que mostra un avís quan un camp està buit
+	 * Mostra els camps buits
+	 * 
+	 * @author SergioHernandez
+	 */
+	public void errorCampBuit(String campsBuits) {
+		JOptionPane.showMessageDialog(headPanel,
+				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorCampBuit") + campsBuits,
 				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), JOptionPane.ERROR_MESSAGE);
 	}
+	
+	/**
+	 * Missatge que mostra un avís quan el format de l'email no és correcte
+	 * 
+	 * @author SergioHernandez
+	 */
+	public void errorEnElFormatDelEmailIntroduit() {
 
+		JOptionPane.showMessageDialog(headPanel,
+				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorEnElFormatDelEmailIntroduit"),
+				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorEnElFormatDelEmailIntroduit"),
+				JOptionPane.ERROR_MESSAGE);
+	}
+	
+	/**
+	 * Missatge que mostra un avís quan el format del document no és correcte
+	 * 
+	 * @author SergioHernandez
+	 */
+	public void errorEnElFormatDelDocumentIntroduit(String document) {
+
+		switch (document) {
+		case "DNI":
+			JOptionPane.showMessageDialog(headPanel,
+					ExternalizeStrings.getString("FormulariAltaUsuari.errorFormatDni"),
+					ExternalizeStrings.getString("FormulariAltaUsuari.titolErrorFormatDocument"),
+					JOptionPane.ERROR_MESSAGE);
+			break;
+		case "NIE":
+			JOptionPane.showMessageDialog(headPanel,
+					ExternalizeStrings.getString("FormulariAltaUsuari.errorFormatNie"),
+					ExternalizeStrings.getString("FormulariAltaUsuari.titolErrorFormatDocument"),
+					JOptionPane.ERROR_MESSAGE);
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+	
 	
 
 	/*-------------------------- Getters and Setters Methods --------------------------*/

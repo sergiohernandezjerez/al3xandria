@@ -305,10 +305,10 @@ public class ConsultaLlibres extends JPanel {
 		autorsPanel.add(autorLabel);
 		autorLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JComboBox autorsComboBox = new JComboBox();
-		autorsComboBox.setToolTipText("Selecciona un autor");
-		autorsPanel.add(autorsComboBox);
-		autorsComboBox.addItem("Autors     ");
+		JTextField autorsField = new JTextField();
+		autorsField.setColumns(12);
+		autorsField.setToolTipText("Autor del llibre");
+		autorsPanel.add(autorsField);
 		
 		JPanel generesPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(generesPanel);
@@ -317,10 +317,10 @@ public class ConsultaLlibres extends JPanel {
 		generesPanel.add(generesLabel);
 		generesLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JComboBox generesComboBox = new JComboBox();
-		generesComboBox.setToolTipText("Selecciona un g\u00E8nere");
-		generesPanel.add(generesComboBox);
-		generesComboBox.addItem("Gèneres     ");
+		JTextField genereField = new JTextField();
+		genereField.setColumns(12);
+		genereField.setToolTipText("Gènere del llibre");
+		generesPanel.add(genereField);
 		
 		JPanel editorialsPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(editorialsPanel);
@@ -329,10 +329,10 @@ public class ConsultaLlibres extends JPanel {
 		editorialsPanel.add(editorialsLabel);
 		editorialsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JComboBox editorialsComboBox = new JComboBox();
-		editorialsComboBox.setToolTipText("Selecciona una editorial");
-		editorialsPanel.add(editorialsComboBox);
-		editorialsComboBox.addItem("Editorials     ");
+		JTextField editorialField = new JTextField();
+		editorialField.setColumns(12);
+		editorialField.setToolTipText("Editorial del llibre");
+		editorialsPanel.add(editorialField);
 		
 		JPanel puntuacioPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(puntuacioPanel);

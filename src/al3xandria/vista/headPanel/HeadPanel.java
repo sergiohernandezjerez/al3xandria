@@ -47,6 +47,12 @@ public class HeadPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel mostrarContrasenya;
+	private JPanel panelLoginExterior;
+	private JLabel borderSuperiorPanelLogin;
+	private JLabel borderInferiorPanelLogin;
+	private JLabel borderDretPanelLogin;
+	private JPanel panelLoginInterior;
+	private JPanel contrasenyaLabelPanel;
 
 	public HeadPanel(FootPanel footPanel, CentralPanel centralPanel) {
 		setTipusUsuari(null);
@@ -61,21 +67,21 @@ public class HeadPanel extends JPanel {
 		logoDeLaplicacio.setToolTipText(ExternalizeStrings.getString("HeadPanel.logoAl3xandriaToltip"));
 		add(logoDeLaplicacio);
 
-		JPanel panelLoginExterior = new JPanel();
+		panelLoginExterior = new JPanel();
 		panelLoginExterior.setBackground(Color.WHITE);
 		add(panelLoginExterior, BorderLayout.EAST);
 		panelLoginExterior.setLayout(new BorderLayout(0, 0));
 		
-		JLabel borderSuperiorPanelLogin = new JLabel(" ");
+		borderSuperiorPanelLogin = new JLabel(" ");
 		panelLoginExterior.add(borderSuperiorPanelLogin, BorderLayout.NORTH);
 
-		JLabel borderInferiorPanelLogin = new JLabel(" ");
+		borderInferiorPanelLogin = new JLabel(" ");
 		panelLoginExterior.add(borderInferiorPanelLogin, BorderLayout.SOUTH);
 
-		JLabel borderDretPanelLogin = new JLabel("      ");
+		borderDretPanelLogin = new JLabel("      ");
 		panelLoginExterior.add(borderDretPanelLogin, BorderLayout.EAST);
 		
-		JPanel panelLoginInterior = new JPanel();
+		panelLoginInterior = new JPanel();
 		panelLoginInterior.setBackground(Color.WHITE);
 		panelLoginExterior.add(panelLoginInterior, BorderLayout.CENTER);
 		GridBagLayout gbl_panelLoginInterior = new GridBagLayout();
@@ -95,7 +101,7 @@ public class HeadPanel extends JPanel {
 		gbc_emailLoginLabel.gridy = 0;
 		panelLoginInterior.add(emailLoginLabel, gbc_emailLoginLabel);
 		
-		JPanel contrasenyaLabelPanel = new JPanel();
+		contrasenyaLabelPanel = new JPanel();
 		contrasenyaLabelPanel.setBackground(Color.WHITE);
 		GridBagConstraints gbc_contrasenyaLabelPanel = new GridBagConstraints();
 		gbc_contrasenyaLabelPanel.fill = GridBagConstraints.BOTH;
@@ -111,7 +117,7 @@ public class HeadPanel extends JPanel {
 		contrasenyaLoginLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		contrasenyaLabelPanel.add(contrasenyaLoginLabel);
 		
-//----
+
 		emailintroduitPerLusuari = new JTextField();
 		emailintroduitPerLusuari.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		emailintroduitPerLusuari.setToolTipText(ExternalizeStrings.getString("HeadPanel.emailIntroduitPerLusuariToltip"));
@@ -165,6 +171,7 @@ public class HeadPanel extends JPanel {
 		gbc_nouUsuariButton.insets = new Insets(0, 0, 5, 0);
 		gbc_nouUsuariButton.gridx = 2;
 		gbc_nouUsuariButton.gridy = 1;
+		nouUsuariButton.addMouseListener(new HeadPanelControlador(this));
 		panelLoginInterior.add(nouUsuariButton, gbc_nouUsuariButton);
 
 		esborrarDadesLoginLabel = new JLabel(
@@ -323,6 +330,7 @@ public class HeadPanel extends JPanel {
 	public String getTipusUsuari() {
 		return tipusUsuari;
 	}
+	
 	
 	
 }

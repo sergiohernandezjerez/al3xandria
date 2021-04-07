@@ -2,17 +2,12 @@ package al3xandria.vista.principal;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import al3xandria.controlador.principal.ComportamentTancarAplicacio;
 import al3xandria.model.ComunicacioClientServidor;
-import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.headPanel.HeadPanel;
@@ -34,8 +29,6 @@ public class PrincipalFrame extends JFrame {
 	private CentralPanel centralPanel;
 	private HeadPanel headPanel;
 	private JPanel contentPane;
-	private ComunicacioClientServidor comunicacioClientServidor;
-
 	/**
 	 * Contructor
 	 * 
@@ -64,7 +57,7 @@ public class PrincipalFrame extends JFrame {
 	 * @author SergioHernandez
 	 */
 	private void iniciarComponents() {
-		comunicacioClientServidor = new ComunicacioClientServidor();
+		new ComunicacioClientServidor();
 		contentPane.add(headPanel, BorderLayout.NORTH);
 		contentPane.add(centralPanel, BorderLayout.CENTER);
 		contentPane.add(footPanel, BorderLayout.SOUTH);

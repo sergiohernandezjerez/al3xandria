@@ -60,13 +60,13 @@ public class BotoLoginLogout implements ActionListener {
 		estatDelBotoLogin = headPanel.getFerLoginButton().getText();
 		contrasenyaUsuariIntroduida = headPanel.getContrasenyaIntroduidaPerLusuariToString();
 
-		if (controlDeDades.comprovarCampsOmplerts(emailUsuariIntroduit, contrasenyaUsuariIntroduida)) {
+		if (controlDeDades.comprovarCampsOmplertsLogin(emailUsuariIntroduit, contrasenyaUsuariIntroduida)) {
 			if (estatDelBotoLogin.equals("Login")) {
 				if (controlDeDades.comprovacioEmail(emailUsuariIntroduit)) {
 
 					enviarDadesPerFerLogin();
 				} else {
-					errorEnElFormatDelEmailIntroduit();
+					controlDeDades.errorEnElFormatDelEmailIntroduit();
 				}
 
 			} else if (estatDelBotoLogin.equals("Logout")) {
@@ -264,17 +264,6 @@ public class BotoLoginLogout implements ActionListener {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	/**
-	 * Missatge que mostra un avís quan el format de l'email no és correcte
-	 * 
-	 * @author SergioHernandez
-	 */
-	public void errorEnElFormatDelEmailIntroduit() {
-		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorEnElFormatDelEmailIntroduit"),
-				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorEnElFormatDelEmailIntroduit"),
-				JOptionPane.ERROR_MESSAGE);
-	}
 
 	/**
 	 * Quan es fa login desconecte el panel de login

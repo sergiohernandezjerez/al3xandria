@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import al3xandria.vista.headPanel.FormulariAltaUsuari;
 import al3xandria.vista.headPanel.HeadPanel;
 
 /**
@@ -16,6 +17,7 @@ import al3xandria.vista.headPanel.HeadPanel;
 public class HeadPanelControlador implements ActionListener, MouseListener {
 
 	private HeadPanel headPanel;
+	private FormulariAltaUsuari formulariAltaUsuari;
 
 	/**
 	 * Constructor
@@ -33,6 +35,11 @@ public class HeadPanelControlador implements ActionListener, MouseListener {
 			headPanel.getEmailintroduitPerLusuari().setText("");
 			headPanel.getContrasenyaIntroduidaPerLusuari().setText("");
 			headPanel.getEmailintroduitPerLusuari().requestFocus();
+		}
+		
+		if(headPanel.getNouUsuariButton() == e.getSource()) {
+			formulariAltaUsuari = new FormulariAltaUsuari();
+			formulariAltaUsuari.setVisible(true);
 		}
 
 	}
