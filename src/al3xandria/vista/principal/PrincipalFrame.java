@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import al3xandria.controlador.principal.ComportamentTancarAplicacio;
-import al3xandria.model.ComunicacioClientServidor;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.headPanel.HeadPanel;
@@ -57,7 +56,6 @@ public class PrincipalFrame extends JFrame {
 	 * @author SergioHernandez
 	 */
 	private void iniciarComponents() {
-		new ComunicacioClientServidor();
 		contentPane.add(headPanel, BorderLayout.NORTH);
 		contentPane.add(centralPanel, BorderLayout.CENTER);
 		contentPane.add(footPanel, BorderLayout.SOUTH);

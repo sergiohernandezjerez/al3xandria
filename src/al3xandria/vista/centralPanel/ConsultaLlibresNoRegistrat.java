@@ -2,7 +2,12 @@ package al3xandria.vista.centralPanel;
 
 import javax.swing.JPanel;
 import java.awt.Rectangle;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.FlowLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -55,10 +60,17 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		setBounds(new Rectangle(0, 0, 750, 850));
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		
+		iniciarComponents();
+		//TODO ConsultesLlibresNoRegistrat mostrar llistat dels llibres
+		System.out.println("select * from llibres");
+		
+
+	}
+
+	private void iniciarComponents() {
 		JPanel llibresPanel = new JPanel();
 		add(llibresPanel);
 		llibresPanel.setLayout(new BorderLayout(0, 10));
-		
 		
 		JPanel filtresPanel = new JPanel();
 		llibresPanel.add(filtresPanel, BorderLayout.NORTH);
@@ -420,7 +432,6 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		
 		sinopsisPanel.add(sinopsisScrollPane);
 		
-		
-
 	}
+
 }

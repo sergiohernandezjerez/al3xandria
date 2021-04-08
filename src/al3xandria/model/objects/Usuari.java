@@ -17,8 +17,10 @@ public class Usuari {
 	private String tipusUsuari;
 	private int puntuacioUsuari;
 	
+	private String idSessio;
+	
 	public Usuari() {
-		
+		this.idSessio = "0000000000000";
 	}
 	
 	
@@ -52,6 +54,13 @@ public class Usuari {
 	
 /*-------------------------- Getters and Setters Methods --------------------------*/
 	
+	public String getIdSessio() {
+		return idSessio;
+	}
+	
+	public void setIdSessio(String idSessio) {
+		this.idSessio = idSessio;
+	}
 	
 
 	public int getIdUsuari() {

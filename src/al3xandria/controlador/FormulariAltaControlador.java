@@ -307,6 +307,10 @@ ItemListener, WindowListener {
 		
 	}
 
+	/**
+	 * Mostra un avís quan es vol tancar el formulari
+	 * @author SergioHernandez
+	 */
 	@Override
 	public void windowClosing(WindowEvent e) {
 		avisTancamentFormulari();

@@ -31,6 +31,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import al3xandria.controlador.AdministradorLlibresControlador;
 import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.icons.Icons;
 
@@ -120,8 +121,8 @@ public class AdministradorLlibres extends JPanel {
 	private JTextArea sinopsisTextArea;
 	private JScrollPane sinopsisScrollPane;
 	private JLabel afegirAutorLabel;
-	private JLabel nouGenereLabel;
-	private JLabel nouEditorialLabel;
+	private JLabel afegirGenereLabel;
+	private JLabel afegirEditorialLabel;
 
 	/**
 	 * Create the panel.
@@ -358,6 +359,7 @@ public class AdministradorLlibres extends JPanel {
 		afegirAutorLabel.setIcon(icones.getAddIcon());
 		afegirAutorLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		afegirAutorLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		afegirAutorLabel.addMouseListener(new AdministradorLlibresControlador(this));
 		autorsPanel.add(afegirAutorLabel);
 		
 		generesPanel = new JPanel();
@@ -372,13 +374,14 @@ public class AdministradorLlibres extends JPanel {
 		generesPanel.add(generesComboBox);
 		generesComboBox.addItem("Gèneres     "); 
 		
-		nouGenereLabel = new JLabel(); //$NON-NLS-1$
-		nouGenereLabel.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.nouGenereLabel.toolTipText"));  //$NON-NLS-1$
-		nouGenereLabel.setIcon(icones.getAddIcon());
-		nouGenereLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-		nouGenereLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		afegirGenereLabel = new JLabel(); //$NON-NLS-1$
+		afegirGenereLabel.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.nouGenereLabel.toolTipText"));  //$NON-NLS-1$
+		afegirGenereLabel.setIcon(icones.getAddIcon());
+		afegirGenereLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+		afegirGenereLabel.addMouseListener(new AdministradorLlibresControlador(this));
+		afegirGenereLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
-		generesPanel.add(nouGenereLabel);
+		generesPanel.add(afegirGenereLabel);
 		
 		editorialsPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(editorialsPanel);
@@ -392,12 +395,13 @@ public class AdministradorLlibres extends JPanel {
 		editorialsPanel.add(editorialsComboBox);
 		editorialsComboBox.addItem("Editorials     "); 
 		
-		nouEditorialLabel = new JLabel(); //$NON-NLS-1$
-		nouEditorialLabel.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.nouEditorialLabel.toolTipText"));  //$NON-NLS-1$
-		nouEditorialLabel.setIcon(icones.getAddIcon());
-		nouEditorialLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-		nouEditorialLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		editorialsPanel.add(nouEditorialLabel);
+		afegirEditorialLabel = new JLabel(); //$NON-NLS-1$
+		afegirEditorialLabel.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.nouEditorialLabel.toolTipText"));  //$NON-NLS-1$
+		afegirEditorialLabel.setIcon(icones.getAddIcon());
+		afegirEditorialLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+		afegirEditorialLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		afegirEditorialLabel.addMouseListener(new AdministradorLlibresControlador(this));
+		editorialsPanel.add(afegirEditorialLabel);
 		
 		puntuacioPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(puntuacioPanel);
@@ -497,7 +501,17 @@ public class AdministradorLlibres extends JPanel {
 		
 		sinopsisPanel.add(sinopsisScrollPane);
 		
-		
-
+	}
+	
+	public JLabel getAfegirAutorLabel() {
+		return afegirAutorLabel;
+	}
+	
+	public JLabel getAfegirEditorialLabel() {
+		return afegirEditorialLabel;
+	}
+	
+	public JLabel getAfegirGenereLabel() {
+		return afegirGenereLabel;
 	}
 }
