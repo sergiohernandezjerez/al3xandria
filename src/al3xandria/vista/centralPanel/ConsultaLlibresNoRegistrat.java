@@ -113,9 +113,11 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		JLabel separacioLabel = new JLabel("   ");
 		filtreTextPanel.add(separacioLabel);
 		
-		JButton mostrarButton = new JButton("Mostrar");
-		mostrarButton.setToolTipText("Prem per mostrar la consulta");
-		filtreTextPanel.add(mostrarButton);
+		JButton cercarButton = new JButton("Cercar");
+		cercarButton.setForeground(new Color(255, 255, 255));
+		cercarButton.setBackground(new Color(173, 216, 230));
+		cercarButton.setToolTipText("Prem per mostrar la consulta");
+		filtreTextPanel.add(cercarButton);
 		
 		JPanel llistaTablePanel = new JPanel();
 		llistaTablePanel.setBackground(new Color(255, 255, 255));
@@ -248,20 +250,10 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		accionsButtonsPanel.setLayout(new GridLayout(8, 0, 0, 0));
 		
 		JButton mostrarLlibreButton = new JButton("Mostrar");
+		mostrarLlibreButton.setForeground(Color.WHITE);
+		mostrarLlibreButton.setBackground(Color.decode("#00838f"));
 		mostrarLlibreButton.setToolTipText("Prem per vuere m\u00E9s informaci\u00F3 del llibre seleccionat");
 		accionsButtonsPanel.add(mostrarLlibreButton);
-		
-		JLabel lblNewLabel_3 = new JLabel(" ");
-		accionsButtonsPanel.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_2 = new JLabel(" ");
-		accionsButtonsPanel.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_1 = new JLabel(" ");
-		accionsButtonsPanel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel = new JLabel(" ");
-		accionsButtonsPanel.add(lblNewLabel);
 		
 		JPanel dadesLlibrePanel = new JPanel();
 		llibresPanel.add(dadesLlibrePanel, BorderLayout.SOUTH);

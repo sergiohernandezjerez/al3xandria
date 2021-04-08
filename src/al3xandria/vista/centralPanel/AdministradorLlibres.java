@@ -125,9 +125,11 @@ public class AdministradorLlibres extends JPanel {
 		JLabel separacioLabel = new JLabel("   ");
 		filtreTextPanel.add(separacioLabel);
 		
-		JButton mostrarButton = new JButton("Mostrar");
-		mostrarButton.setToolTipText("Prem per mostrar la consulta");
-		filtreTextPanel.add(mostrarButton);
+		JButton cercarButton = new JButton("Cercar");
+		cercarButton.setForeground(new Color(255, 255, 255));
+		cercarButton.setBackground(new Color(173, 216, 230));
+		cercarButton.setToolTipText("Prem per mostrar la consulta");
+		filtreTextPanel.add(cercarButton);
 		
 		JPanel llistaTablePanel = new JPanel();
 		llistaTablePanel.setBackground(new Color(255, 255, 255));
@@ -203,14 +205,20 @@ public class AdministradorLlibres extends JPanel {
 		accionsButtonsPanel.setLayout(new GridLayout(8, 0, 0, 0));
 		
 		JButton altaLlibreButton = new JButton("Alta");
+		altaLlibreButton.setForeground(Color.WHITE);
+		altaLlibreButton.setBackground(Color.decode("#00838f"));
 		altaLlibreButton.setToolTipText("Prem per afegir un llibre");
 		accionsButtonsPanel.add(altaLlibreButton);
 		
 		JButton baixaLlibreButton = new JButton("Baixa");
+		baixaLlibreButton.setBackground(new Color(165, 42, 42));
+		baixaLlibreButton.setForeground(Color.WHITE);
 		baixaLlibreButton.setToolTipText("Prem per eliminar el llibre seleccionat");
 		accionsButtonsPanel.add(baixaLlibreButton);
 		
 		JButton editarLlibreButton = new JButton("Editar");
+		editarLlibreButton.setForeground(Color.WHITE);
+		editarLlibreButton.setBackground(Color.decode("#6a1b9a"));
 		editarLlibreButton.setToolTipText("Prem per editar el llibre seleccionat");
 		accionsButtonsPanel.add(editarLlibreButton);
 		

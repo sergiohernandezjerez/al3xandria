@@ -127,9 +127,11 @@ public class ConsultaLlibres extends JPanel {
 		JLabel separacioLabel = new JLabel("   ");
 		filtreTextPanel.add(separacioLabel);
 		
-		JButton mostrarButton = new JButton("Mostrar");
-		mostrarButton.setToolTipText("Prem per mostrar la consulta");
-		filtreTextPanel.add(mostrarButton);
+		JButton cercarButton = new JButton("Cercar");
+		cercarButton.setForeground(new Color(255, 255, 255));
+		cercarButton.setBackground(new Color(173, 216, 230));
+		cercarButton.setToolTipText("Prem per mostrar la consulta");
+		filtreTextPanel.add(cercarButton);
 		
 		JPanel llistaTablePanel = new JPanel();
 		llistaTablePanel.setBackground(new Color(255, 255, 255));
@@ -205,14 +207,20 @@ public class ConsultaLlibres extends JPanel {
 		accionsButtonsPanel.setLayout(new GridLayout(8, 0, 0, 0));
 		
 		JButton mostrarLlibreButton = new JButton("Mostrar");
+		mostrarLlibreButton.setForeground(Color.WHITE);
+		mostrarLlibreButton.setBackground(Color.decode("#00838f"));
 		mostrarLlibreButton.setToolTipText("Prem per vuere m\u00E9s informaci\u00F3 del llibre seleccionat");
 		accionsButtonsPanel.add(mostrarLlibreButton);
 		
 		JButton prestecsLlibreButton = new JButton("Pr\u00E8stecs");
+		prestecsLlibreButton.setForeground(Color.WHITE);
+		prestecsLlibreButton.setBackground(Color.decode("#6a1b9a"));
 		prestecsLlibreButton.setToolTipText("Prem per mostrar els pr\u00E8stecs");
 		accionsButtonsPanel.add(prestecsLlibreButton);
 		
 		JButton llogarLlibreButton = new JButton("Llogar");
+		llogarLlibreButton.setForeground(new Color(255, 255, 255));
+		llogarLlibreButton.setBackground(new Color(222, 184, 135));
 		llogarLlibreButton.setToolTipText("Prem per llogar el llibre seleccionat");
 		accionsButtonsPanel.add(llogarLlibreButton);
 		
@@ -229,6 +237,8 @@ public class ConsultaLlibres extends JPanel {
 		accionsButtonsPanel.add(lblNewLabel);
 		
 		JButton cancellarButton = new JButton("Cancel.lar");
+		cancellarButton.setBackground(new Color(165, 42, 42));
+		cancellarButton.setForeground(Color.WHITE);
 		cancellarButton.setToolTipText("Prem per cancel.lar un pr\u00E8stec");
 		accionsButtonsPanel.add(cancellarButton);
 		

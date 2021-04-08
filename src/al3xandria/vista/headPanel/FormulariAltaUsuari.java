@@ -8,6 +8,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import al3xandria.controlador.FormulariAltaControlador;
+import al3xandria.controlador.principal.ComportamentTancarAplicacio;
 import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.icons.Icons;
 
@@ -77,18 +78,22 @@ public class FormulariAltaUsuari extends JFrame {
 				try {					
 					FormulariAltaUsuari frame = new FormulariAltaUsuari();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+	
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public FormulariAltaUsuari() {
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		addWindowListener(new FormulariAltaControlador(this));
 		icones = new Icons();
 		setTitle(ExternalizeStrings.getString("FormulariAltaUsuari.titol"));
 		setBounds(100, 100, 600, 500);

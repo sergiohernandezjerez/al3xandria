@@ -6,6 +6,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JOptionPane;
 
@@ -19,7 +21,8 @@ import al3xandria.vista.headPanel.FormulariAltaUsuari;
  * @author SergioHernandez
  *
  */
-public class FormulariAltaControlador implements ActionListener, MouseListener, ItemListener {
+public class FormulariAltaControlador implements ActionListener, MouseListener, 
+ItemListener, WindowListener {
 
 	private FormulariAltaUsuari formulariAltaUsuari;
 	private ControlDeDades controlDeDades;
@@ -289,6 +292,48 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 			}
 		}
 
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		avisTancamentFormulari();
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
