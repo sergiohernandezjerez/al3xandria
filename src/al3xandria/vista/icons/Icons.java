@@ -26,6 +26,7 @@ public class Icons {
 	private Icon usuariConectatIcon;
 	private Icon mostrarContrasenyaIcon;
 	private Icon lupaIcon;
+	private Icon addIcon;
 
 	public Icons() {
 		consultaLlbresIcon = new ImageIcon(
@@ -73,6 +74,10 @@ public class Icons {
 		lupaIcon = new ImageIcon(
 				new ImageIcon("." + File.separator + "resources" + File.separator + "lupaIcon.png")
 						.getImage());
+		
+		addIcon = new ImageIcon(
+				new ImageIcon("." + File.separator + "resources" + File.separator + "addIcon.png")
+				.getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT));
 	}
 
 	/*-------------------------- Getters and Setters Methods --------------------------*/
@@ -126,6 +131,10 @@ public class Icons {
 	
 	public Icon getLupaIcon() {
 		return lupaIcon;
+	}
+	
+	public Icon getAddIcon() {
+		return addIcon;
 	}
 
 }

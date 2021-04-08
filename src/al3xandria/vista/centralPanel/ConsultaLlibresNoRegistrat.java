@@ -69,30 +69,30 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		fl_filtreButtonPanel.setAlignment(FlowLayout.LEFT);
 		filtresPanel.add(filtreButtonPanel, BorderLayout.WEST);
 		
-		JLabel filtrePerLabel = new JLabel("Filtrar per:");
-		filtrePerLabel.setToolTipText("Escull el filtre que vols utilitzar");
+		JLabel filtrePerLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.filtrePerLabel.text")); //$NON-NLS-1$
+		filtrePerLabel.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.filtrePerLabel.toolTipText")); //$NON-NLS-1$
 		filtrePerLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		filtreButtonPanel.add(filtrePerLabel);
 		
-		JRadioButton titolRadioButton = new JRadioButton("T\u00EDtol");
+		JRadioButton titolRadioButton = new JRadioButton(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.titolRadioButton.text")); //$NON-NLS-1$
 		titolRadioButton.setSelected(true);
 		buttonGroup.add(titolRadioButton);
-		titolRadioButton.setToolTipText("Filtrar per t\u00EDtol");
+		titolRadioButton.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.titolRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(titolRadioButton);
 		
-		JRadioButton autorRadioButton = new JRadioButton("Autor");
+		JRadioButton autorRadioButton = new JRadioButton(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.autorRadioButton.text")); //$NON-NLS-1$
 		buttonGroup.add(autorRadioButton);
-		autorRadioButton.setToolTipText("Filtra per autor");
+		autorRadioButton.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.autorRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(autorRadioButton);
 		
-		JRadioButton genereRadioButton = new JRadioButton("G\u00E8nere");
+		JRadioButton genereRadioButton = new JRadioButton(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.genereRadioButton.text")); //$NON-NLS-1$
 		buttonGroup.add(genereRadioButton);
-		genereRadioButton.setToolTipText("Filtre per g\u00E8nere");
+		genereRadioButton.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.genereRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(genereRadioButton);
 		
-		JRadioButton editorialRadioButton = new JRadioButton("Editorial");
+		JRadioButton editorialRadioButton = new JRadioButton(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.editorialRadioButton.text")); //$NON-NLS-1$
 		buttonGroup.add(editorialRadioButton);
-		editorialRadioButton.setToolTipText("Filtra per editorial");
+		editorialRadioButton.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.editorialRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(editorialRadioButton);
 		
 		JPanel filtreTextPanel = new JPanel();
@@ -106,17 +106,17 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		filtreTextPanel.add(lupaLabel);
 		
 		cercaField = new JTextField();
-		cercaField.setToolTipText("Introduiex la teva cerca");
+		cercaField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercaField.toolTipText")); //$NON-NLS-1$
 		filtreTextPanel.add(cercaField);
 		cercaField.setColumns(20);
 		
 		JLabel separacioLabel = new JLabel("   ");
 		filtreTextPanel.add(separacioLabel);
 		
-		JButton cercarButton = new JButton("Cercar");
-		cercarButton.setForeground(new Color(255, 255, 255));
+		JButton cercarButton = new JButton(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercarButton.text")); //$NON-NLS-1$
+		cercarButton.setForeground(Color.BLACK);
 		cercarButton.setBackground(new Color(173, 216, 230));
-		cercarButton.setToolTipText("Prem per mostrar la consulta");
+		cercarButton.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercarButton.toolTipText")); //$NON-NLS-1$
 		filtreTextPanel.add(cercarButton);
 		
 		JPanel llistaTablePanel = new JPanel();
@@ -124,50 +124,6 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		llibresPanel.add(llistaTablePanel, BorderLayout.CENTER);
 		llistaTablePanel.setLayout(new BorderLayout(10, 0));
 		
-		
-		
-		String[] columns = {"id", "Titol", "Autor", "isbn", "Genere", "Editorial", "Data"};
-		String[][] data = {
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				}
-		};
 		llibresTable = new JTable();
 		llibresTable.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -249,10 +205,10 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		llistaTablePanel.add(accionsButtonsPanel, BorderLayout.EAST);
 		accionsButtonsPanel.setLayout(new GridLayout(8, 0, 0, 0));
 		
-		JButton mostrarLlibreButton = new JButton("Mostrar");
+		JButton mostrarLlibreButton = new JButton(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.mostrarLlibreButton.text")); //$NON-NLS-1$
 		mostrarLlibreButton.setForeground(Color.WHITE);
 		mostrarLlibreButton.setBackground(Color.decode("#00838f"));
-		mostrarLlibreButton.setToolTipText("Prem per vuere m\u00E9s informaci\u00F3 del llibre seleccionat");
+		mostrarLlibreButton.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.mostrarLlibreButton.toolTipText")); //$NON-NLS-1$
 		accionsButtonsPanel.add(mostrarLlibreButton);
 		
 		JPanel dadesLlibrePanel = new JPanel();
@@ -292,30 +248,30 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		JPanel idPanel = new JPanel();
 		idTitolDisponiblePanel.add(idPanel);
 		
-		JLabel idLabel = new JLabel("ID");
+		JLabel idLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.idLabel.text")); //$NON-NLS-1$
 		idPanel.add(idLabel);
 		
 		idLlibreField = new JTextField();
-		idLlibreField.setToolTipText("id del llibre");
+		idLlibreField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.idLlibreField.toolTipText")); //$NON-NLS-1$
 		idPanel.add(idLlibreField);
 		idLlibreField.setColumns(3);
 		
 		JPanel titolPanel = new JPanel();
 		idTitolDisponiblePanel.add(titolPanel);
 		
-		JLabel titolLabel = new JLabel("T\u00EDtol");
+		JLabel titolLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.titolLabel.text")); //$NON-NLS-1$
 		titolPanel.add(titolLabel);
 		
 		titolField = new JTextField();
-		titolField.setToolTipText("T\u00EDtol del llibre");
+		titolField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.titolField.toolTipText")); //$NON-NLS-1$
 		titolPanel.add(titolField);
 		titolField.setColumns(40);
 		
 		JPanel disponiblePanel = new JPanel();
 		idTitolDisponiblePanel.add(disponiblePanel);
 		
-		JLabel reservatLabel = new JLabel("Reservat?");
-		reservatLabel.setToolTipText("Informa si el llibre est\u00E0 reservat");
+		JLabel reservatLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.reservatLabel.text")); //$NON-NLS-1$
+		reservatLabel.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.reservatLabel.toolTipText")); //$NON-NLS-1$
 		disponiblePanel.add(reservatLabel);
 		
 		JCheckBox reservatCheckBox = new JCheckBox("");
@@ -333,47 +289,47 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		JPanel autorsPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(autorsPanel);
 		
-		JLabel autorLabel = new JLabel("Autor");
+		JLabel autorLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.autorLabel.text")); //$NON-NLS-1$
 		autorsPanel.add(autorLabel);
 		autorLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JTextField autorsField = new JTextField();
 		autorsField.setColumns(12);
-		autorsField.setToolTipText("Autor del llibre");
+		autorsField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.autorsField.toolTipText")); //$NON-NLS-1$
 		autorsPanel.add(autorsField);
 		
 		JPanel generesPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(generesPanel);
 		
-		JLabel generesLabel = new JLabel("G\u00E8nere");
+		JLabel generesLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.generesLabel.text")); //$NON-NLS-1$
 		generesPanel.add(generesLabel);
 		generesLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JTextField genereField = new JTextField();
 		genereField.setColumns(12);
-		genereField.setToolTipText("Gènere del llibre");
+		genereField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.genereField.toolTipText")); //$NON-NLS-1$
 		generesPanel.add(genereField);
 		
 		JPanel editorialsPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(editorialsPanel);
 		
-		JLabel editorialsLabel = new JLabel("Editorial");
+		JLabel editorialsLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.editorialsLabel.text")); //$NON-NLS-1$
 		editorialsPanel.add(editorialsLabel);
 		editorialsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JTextField editorialField = new JTextField();
 		editorialField.setColumns(12);
-		editorialField.setToolTipText("Editorial del llibre");
+		editorialField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.editorialField.toolTipText")); //$NON-NLS-1$
 		editorialsPanel.add(editorialField);
 		
 		JPanel puntuacioPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(puntuacioPanel);
 		
-		JLabel puntuacioLabel = new JLabel("Puntuaci\u00F3");
+		JLabel puntuacioLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.puntuacioLabel.text")); //$NON-NLS-1$
 		puntuacioPanel.add(puntuacioLabel);
 		
 		puntuacioField = new JTextField();
-		puntuacioField.setToolTipText("Puntuaci\u00F3 del llibre segons els lectors");
+		puntuacioField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.puntuacioField.toolTipText")); //$NON-NLS-1$
 		puntuacioPanel.add(puntuacioField);
 		puntuacioField.setColumns(4);
 		
@@ -394,44 +350,44 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		JPanel isbnPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(isbnPanel);
 		
-		JLabel isbnLabel = new JLabel("Isbn");
+		JLabel isbnLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.isbnLabel.text")); //$NON-NLS-1$
 		isbnPanel.add(isbnLabel);
 		
 		isbnField = new JTextField();
-		isbnField.setToolTipText("Isbn del llibre");
+		isbnField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.isbnField.toolTipText")); //$NON-NLS-1$
 		isbnPanel.add(isbnField);
 		isbnField.setColumns(10);
 		
 		JPanel dataPublicacioPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(dataPublicacioPanel);
 		
-		JLabel dataPublicacioLabel = new JLabel("Data publicaci\u00F3");
+		JLabel dataPublicacioLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.dataPublicacioLabel.text")); //$NON-NLS-1$
 		dataPublicacioPanel.add(dataPublicacioLabel);
 		
 		dataPublicacioField = new JTextField();
-		dataPublicacioField.setToolTipText("Data de publicaci\u00F3 del llibre");
+		dataPublicacioField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.dataPublicacioField.toolTipText")); //$NON-NLS-1$
 		dataPublicacioPanel.add(dataPublicacioField);
 		dataPublicacioField.setColumns(10);
 		
 		JPanel numeroPaginesPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(numeroPaginesPanel);
 		
-		JLabel numeroPaginesLabel = new JLabel("N\u00FAm. p\u00E0gines");
+		JLabel numeroPaginesLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.numeroPaginesLabel.text")); //$NON-NLS-1$
 		numeroPaginesPanel.add(numeroPaginesLabel);
 		
 		numeroPaginesField = new JTextField();
-		numeroPaginesField.setToolTipText("N\u00FAmero de p\u00E0gines del llibre");
+		numeroPaginesField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.numeroPaginesField.toolTipText")); //$NON-NLS-1$
 		numeroPaginesPanel.add(numeroPaginesField);
 		numeroPaginesField.setColumns(4);
 		
 		JPanel numeroReservesPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(numeroReservesPanel);
 		
-		JLabel numeroReservesLabel = new JLabel("N\u00FAm. reserves");
+		JLabel numeroReservesLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.numeroReservesLabel.text")); //$NON-NLS-1$
 		numeroReservesPanel.add(numeroReservesLabel);
 		
 		numeroReservesField = new JTextField();
-		numeroReservesField.setToolTipText("N\u00FAmero de vegades que s'ha reservat el llibre");
+		numeroReservesField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.numeroReservesField.toolTipText")); //$NON-NLS-1$
 		numeroReservesPanel.add(numeroReservesField);
 		numeroReservesField.setColumns(4);
 		
@@ -447,12 +403,12 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		gbc_sinopsisPanel.gridy = 4;
 		dadesLlibreGridPanel.add(sinopsisPanel, gbc_sinopsisPanel);
 		
-		JLabel sinopsisLabel = new JLabel("Sinopsis");
+		JLabel sinopsisLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.sinopsisLabel.text")); //$NON-NLS-1$
 		sinopsisLabel.setVerticalAlignment(SwingConstants.TOP);
 		sinopsisPanel.add(sinopsisLabel);
 		
 		JTextArea sinopsisTextArea = new JTextArea();
-		sinopsisTextArea.setToolTipText("Sinopsis del llibre");
+		sinopsisTextArea.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.sinopsisTextArea.toolTipText")); //$NON-NLS-1$
 		
 		sinopsisTextArea.setColumns(60);
 		sinopsisTextArea.setLineWrap(true);

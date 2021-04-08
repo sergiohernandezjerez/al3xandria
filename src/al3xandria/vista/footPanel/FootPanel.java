@@ -3,7 +3,6 @@ package al3xandria.vista.footPanel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.icons.Icons;
 
 import javax.swing.JLabel;
@@ -80,7 +79,7 @@ public class FootPanel extends JPanel {
 		gbl_connectPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gbl_connectPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		connectPanel.setLayout(gbl_connectPanel);
-				estasConectatComLabel = new JLabel(ExternalizeStrings.getString("FootPanel.estasConectatComLabelNoConectat"));
+				estasConectatComLabel = new JLabel(FootPanelMessages.getString("FootPanel.usuariNoConnectat.text")); //$NON-NLS-1$
 				estasConectatComLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 				GridBagConstraints gbc_estasConectatComLabel = new GridBagConstraints();
 				gbc_estasConectatComLabel.fill = GridBagConstraints.BOTH;
@@ -88,9 +87,9 @@ public class FootPanel extends JPanel {
 				gbc_estasConectatComLabel.gridx = 1;
 				gbc_estasConectatComLabel.gridy = 0;
 				connectPanel.add(estasConectatComLabel, gbc_estasConectatComLabel);
-				estasConectatComLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
+				estasConectatComLabel.setFont(new Font("Tahoma", Font.PLAIN, 9)); 
 		
-				tipuUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.tipusUsuariAnominLabel"));
+				tipuUsuariLabel = new JLabel(FootPanelMessages.getString("FootPanel.tipusUsuariAnominLabel"));
 				tipuUsuariLabel.setVerticalAlignment(SwingConstants.TOP);
 				GridBagConstraints gbc_tipuUsuariLabel = new GridBagConstraints();
 				gbc_tipuUsuariLabel.fill = GridBagConstraints.BOTH;
@@ -99,7 +98,7 @@ public class FootPanel extends JPanel {
 				gbc_tipuUsuariLabel.gridy = 1;
 				connectPanel.add(tipuUsuariLabel, gbc_tipuUsuariLabel);
 				tipuUsuariLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		estatUsuariIcon = new JLabel("");
+		estatUsuariIcon = new JLabel(""); 
 		GridBagConstraints gbc_estatUsuariIcon = new GridBagConstraints();
 		gbc_estatUsuariIcon.fill = GridBagConstraints.BOTH;
 		gbc_estatUsuariIcon.gridx = 1;
@@ -109,7 +108,6 @@ public class FootPanel extends JPanel {
 
 		informacioUsuariPanel = new JPanel();
 		informacioUsuariPanel.setBackground(Color.WHITE);
-		//add(informacioUsuariPanel, BorderLayout.EAST);
 		GridBagLayout gbl_informacioUsuariPanel = new GridBagLayout();
 		gbl_informacioUsuariPanel.columnWidths = new int[] {50, 75, 30, 20, 0, 30, 10, 10};
 		gbl_informacioUsuariPanel.rowHeights = new int[] {14, 14, 14};
@@ -117,9 +115,9 @@ public class FootPanel extends JPanel {
 		gbl_informacioUsuariPanel.rowWeights = new double[] { 0.0, 0.0, 0.0 };
 		informacioUsuariPanel.setLayout(gbl_informacioUsuariPanel);
 		
-				idSessioLabel = new JLabel(ExternalizeStrings.getString("FootPanel.idSessioUsuariConectat"));
+				idSessioLabel = new JLabel(FootPanelMessages.getString("FootPanel.idSessioLabel.text")); //$NON-NLS-1$
 				GridBagConstraints gbc_idSessioLabel = new GridBagConstraints();
-				gbc_idSessioLabel.anchor = GridBagConstraints.WEST;
+				gbc_idSessioLabel.anchor = GridBagConstraints.EAST;
 				gbc_idSessioLabel.fill = GridBagConstraints.VERTICAL;
 				gbc_idSessioLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_idSessioLabel.gridx = 0;
@@ -138,7 +136,7 @@ public class FootPanel extends JPanel {
 				informacioUsuariPanel.add(idSessioUsuariLabel, gbc_idSessioUsuariLabel);
 				idSessioUsuariLabel.setBounds(224, 53, 136, 20);
 								
-								puntuacioLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_2.text")); //$NON-NLS-1$
+								puntuacioLabel = new JLabel(FootPanelMessages.getString("FootPanel.puntuacioLabel.text"));  //$NON-NLS-1$
 								GridBagConstraints gbc_puntuacioLabel = new GridBagConstraints();
 								gbc_puntuacioLabel.anchor = GridBagConstraints.EAST;
 								gbc_puntuacioLabel.insets = new Insets(0, 0, 5, 5);
@@ -146,7 +144,7 @@ public class FootPanel extends JPanel {
 								gbc_puntuacioLabel.gridy = 0;
 								informacioUsuariPanel.add(puntuacioLabel, gbc_puntuacioLabel);
 								
-								puntuacioUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_3.text")); //$NON-NLS-1$
+								puntuacioUsuariLabel = new JLabel(""); 
 								GridBagConstraints gbc_puntuacioUsuariLabel = new GridBagConstraints();
 								gbc_puntuacioUsuariLabel.anchor = GridBagConstraints.WEST;
 								gbc_puntuacioUsuariLabel.insets = new Insets(0, 0, 5, 5);
@@ -154,7 +152,7 @@ public class FootPanel extends JPanel {
 								gbc_puntuacioUsuariLabel.gridy = 0;
 								informacioUsuariPanel.add(puntuacioUsuariLabel, gbc_puntuacioUsuariLabel);
 								
-								avisosLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_6.text")); //$NON-NLS-1$
+								avisosLabel = new JLabel(FootPanelMessages.getString("FootPanel.avisosLabel.text"));  //$NON-NLS-1$
 								GridBagConstraints gbc_avisosLabel = new GridBagConstraints();
 								gbc_avisosLabel.insets = new Insets(0, 0, 5, 5);
 								gbc_avisosLabel.anchor = GridBagConstraints.EAST;
@@ -162,7 +160,7 @@ public class FootPanel extends JPanel {
 								gbc_avisosLabel.gridy = 0;
 								informacioUsuariPanel.add(avisosLabel, gbc_avisosLabel);
 								
-								avisosUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_7.text")); //$NON-NLS-1$
+								avisosUsuariLabel = new JLabel(""); 
 								GridBagConstraints gbc_avisosUsuariLabel = new GridBagConstraints();
 								gbc_avisosUsuariLabel.insets = new Insets(0, 0, 5, 0);
 								gbc_avisosUsuariLabel.anchor = GridBagConstraints.WEST;
@@ -170,7 +168,7 @@ public class FootPanel extends JPanel {
 								gbc_avisosUsuariLabel.gridy = 0;
 								informacioUsuariPanel.add(avisosUsuariLabel, gbc_avisosUsuariLabel);
 						
-								nomLabel = new JLabel(ExternalizeStrings.getString("FootPanel.nomUsuariConectat"));
+								nomLabel = new JLabel(FootPanelMessages.getString("FootPanel.nomLabel.text")); //$NON-NLS-1$
 								GridBagConstraints gbc_nomLabel = new GridBagConstraints();
 								gbc_nomLabel.anchor = GridBagConstraints.EAST;
 								gbc_nomLabel.fill = GridBagConstraints.VERTICAL;
@@ -180,7 +178,7 @@ public class FootPanel extends JPanel {
 								informacioUsuariPanel.add(nomLabel, gbc_nomLabel);
 								nomLabel.setHorizontalAlignment(SwingConstants.LEFT);
 								
-										nomUsuariLabel = new JLabel("nom usuari");
+										nomUsuariLabel = new JLabel(""); 
 										GridBagConstraints gbc_nomUsuariLabel = new GridBagConstraints();
 										gbc_nomUsuariLabel.anchor = GridBagConstraints.WEST;
 										gbc_nomUsuariLabel.fill = GridBagConstraints.VERTICAL;
@@ -190,7 +188,7 @@ public class FootPanel extends JPanel {
 										informacioUsuariPanel.add(nomUsuariLabel, gbc_nomUsuariLabel);
 										nomUsuariLabel.setHorizontalAlignment(SwingConstants.LEFT);
 						
-								prestecsLabel = new JLabel(ExternalizeStrings.getString("FootPanel.prestecUsuariConectat"));
+								prestecsLabel = new JLabel(FootPanelMessages.getString("FootPanel.prestecsLabel.text")); //$NON-NLS-1$
 								prestecsLabel.setHorizontalAlignment(SwingConstants.LEFT);
 								GridBagConstraints gbc_prestecsLabel = new GridBagConstraints();
 								gbc_prestecsLabel.anchor = GridBagConstraints.EAST;
@@ -199,7 +197,7 @@ public class FootPanel extends JPanel {
 								gbc_prestecsLabel.gridy = 1;
 								informacioUsuariPanel.add(prestecsLabel, gbc_prestecsLabel);
 						
-						prestecsUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.prestecsUsuariLabel.text")); //$NON-NLS-1$
+						prestecsUsuariLabel = new JLabel(""); 
 						GridBagConstraints gbc_prestecsUsuariLabel = new GridBagConstraints();
 						gbc_prestecsUsuariLabel.anchor = GridBagConstraints.WEST;
 						gbc_prestecsUsuariLabel.insets = new Insets(0, 0, 5, 5);
@@ -207,7 +205,7 @@ public class FootPanel extends JPanel {
 						gbc_prestecsUsuariLabel.gridy = 1;
 						informacioUsuariPanel.add(prestecsUsuariLabel, gbc_prestecsUsuariLabel);
 						
-						reservesLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_4.text")); //$NON-NLS-1$
+						reservesLabel = new JLabel(FootPanelMessages.getString("FootPanel.reservesLabel.text"));  //$NON-NLS-1$
 						GridBagConstraints gbc_reservesLabel = new GridBagConstraints();
 						gbc_reservesLabel.anchor = GridBagConstraints.EAST;
 						gbc_reservesLabel.insets = new Insets(0, 0, 5, 5);
@@ -215,7 +213,7 @@ public class FootPanel extends JPanel {
 						gbc_reservesLabel.gridy = 1;
 						informacioUsuariPanel.add(reservesLabel, gbc_reservesLabel);
 						
-						reservesUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_5.text")); //$NON-NLS-1$
+						reservesUsuariLabel = new JLabel(""); 
 						GridBagConstraints gbc_reservesUsuariLabel = new GridBagConstraints();
 						gbc_reservesUsuariLabel.anchor = GridBagConstraints.WEST;
 						gbc_reservesUsuariLabel.insets = new Insets(0, 0, 5, 0);
@@ -223,7 +221,7 @@ public class FootPanel extends JPanel {
 						gbc_reservesUsuariLabel.gridy = 1;
 						informacioUsuariPanel.add(reservesUsuariLabel, gbc_reservesUsuariLabel);
 				
-						emailLabel = new JLabel(ExternalizeStrings.getString("FootPanel.emailUsuariConectat"));
+						emailLabel = new JLabel(FootPanelMessages.getString("FootPanel.emailLabel.text")); //$NON-NLS-1$
 						GridBagConstraints gbc_emailLabel = new GridBagConstraints();
 						gbc_emailLabel.anchor = GridBagConstraints.EAST;
 						gbc_emailLabel.fill = GridBagConstraints.VERTICAL;
@@ -244,7 +242,7 @@ public class FootPanel extends JPanel {
 						informacioUsuariPanel.add(emailUsuariLabel, gbc_emailUsuariLabel);
 						emailUsuariLabel.setBounds(224, 25, 136, 20);
 						
-								carnetLabel = new JLabel(ExternalizeStrings.getString("FootPanel.carnetUsuariConectat"));
+								carnetLabel = new JLabel(FootPanelMessages.getString("FootPanel.carnetLabel.text")); //$NON-NLS-1$
 								GridBagConstraints gbc_carnetLabel = new GridBagConstraints();
 								gbc_carnetLabel.anchor = GridBagConstraints.EAST;
 								gbc_carnetLabel.insets = new Insets(0, 0, 0, 5);
@@ -253,7 +251,7 @@ public class FootPanel extends JPanel {
 								gbc_carnetLabel.gridy = 2;
 								informacioUsuariPanel.add(carnetLabel, gbc_carnetLabel);
 						
-								carnetUsuariLabel = new JLabel("carnet usuari");
+								carnetUsuariLabel = new JLabel(""); 
 								GridBagConstraints gbc_carnetUsuariLabel = new GridBagConstraints();
 								gbc_carnetUsuariLabel.anchor = GridBagConstraints.WEST;
 								gbc_carnetUsuariLabel.insets = new Insets(0, 0, 0, 5);
@@ -263,7 +261,7 @@ public class FootPanel extends JPanel {
 								informacioUsuariPanel.add(carnetUsuariLabel, gbc_carnetUsuariLabel);
 								carnetUsuariLabel.setHorizontalAlignment(SwingConstants.LEFT);
 				
-						comentarisLabel = new JLabel(ExternalizeStrings.getString("FootPanel.comentarisUsuariConectat"));
+						comentarisLabel = new JLabel(FootPanelMessages.getString("FootPanel.comentarisLabel.text")); //$NON-NLS-1$
 						GridBagConstraints gbc_comentarisLabel = new GridBagConstraints();
 						gbc_comentarisLabel.anchor = GridBagConstraints.EAST;
 						gbc_comentarisLabel.insets = new Insets(0, 0, 0, 5);
@@ -271,7 +269,7 @@ public class FootPanel extends JPanel {
 						gbc_comentarisLabel.gridy = 2;
 						informacioUsuariPanel.add(comentarisLabel, gbc_comentarisLabel);
 				
-				comentarisUsuariLabel = new JLabel(ExternalizeStrings.getString("FootPanel.comentarisUsuariLabel.text")); //$NON-NLS-1$
+				comentarisUsuariLabel = new JLabel(""); 
 				GridBagConstraints gbc_comentarisUsuariLabel = new GridBagConstraints();
 				gbc_comentarisUsuariLabel.anchor = GridBagConstraints.WEST;
 				gbc_comentarisUsuariLabel.gridx = 7;
@@ -283,15 +281,15 @@ public class FootPanel extends JPanel {
 		add(panel, BorderLayout.EAST);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		borderTopLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_8.text")); //$NON-NLS-1$
+		borderTopLabel = new JLabel("    "); 
 		borderTopLabel.setBackground(Color.WHITE);
 		panel.add(borderTopLabel, BorderLayout.NORTH);
 		
-		borderBottomLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_9.text")); //$NON-NLS-1$
+		borderBottomLabel = new JLabel("    "); 
 		borderBottomLabel.setBackground(Color.WHITE);
 		panel.add(borderBottomLabel, BorderLayout.SOUTH);
 		
-		borderRightLabel = new JLabel(ExternalizeStrings.getString("FootPanel.lblNewLabel_10.text")); //$NON-NLS-1$
+		borderRightLabel = new JLabel("          "); 
 		panel.add(borderRightLabel, BorderLayout.EAST);
 		
 		panel.add(informacioUsuariPanel, BorderLayout.CENTER);

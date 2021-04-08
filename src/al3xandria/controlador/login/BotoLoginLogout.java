@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import al3xandria.model.ControlDeDades;
 import al3xandria.model.ComunicacioClientServidor;
 import al3xandria.strings.ExternalizeStrings;
+import al3xandria.vista.headPanel.HeadPanelMessages;
+import al3xandria.vista.footPanel.FootPanelMessages;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.headPanel.HeadPanel;
@@ -145,10 +147,10 @@ public class BotoLoginLogout implements ActionListener {
 	 * @author SergioHernandez
 	 */
 	public void usuariAFetLogin() {
-		headPanel.getFerLoginButton().setText("Logout");
-		headPanel.getFerLoginButton().setToolTipText(ExternalizeStrings.getString("HeadPanel.logoutButtonTolTip"));
+		headPanel.getFerLoginButton().setText(HeadPanelMessages.getString("HeadPanel.ferLogoutButton.text"));
+		headPanel.getFerLoginButton().setToolTipText(HeadPanelMessages.getString("HeadPanel.ferLogoutButtonTolTip"));
 		footPanel.getEstasConectatComLabel()
-				.setText(ExternalizeStrings.getString("FootPanel.estasConectatComLabelConectat"));
+				.setText(FootPanelMessages.getString("FootPanel.estasConectatComLabel.text"));
 		footPanel.getTipuUsuariLabel().setText(tipusUsuari);
 		footPanel.getEmailUsuariLabel().setText(emailUsuariIntroduit);
 		footPanel.getIdSessioUsuariLabel().setText(dadesRebudesDelServidor[1]);
@@ -301,16 +303,16 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getMostrarContrasenya().setEnabled(true);
 
 		headPanel.getEmailintroduitPerLusuari()
-				.setToolTipText(ExternalizeStrings.getString("HeadPanel.emailIntroduitPerLusuariToltip"));
+				.setToolTipText(HeadPanelMessages.getString("HeadPanel.emailintroduitPerLusuari.toolTipText"));
 		headPanel.getContrasenyaIntroduidaPerLusuari()
-				.setToolTipText(ExternalizeStrings.getString("HeadPanel.contrasenyaIntroduidaPerLusuariToltip"));
-		headPanel.getNouUsuariButton().setToolTipText(ExternalizeStrings.getString("HeadPanel.nouUsuariButtonToltip"));
+				.setToolTipText(HeadPanelMessages.getString("HeadPanel.contrasenyaIntroduidaPerLusuari.toolTipText"));
+		headPanel.getNouUsuariButton().setToolTipText(HeadPanelMessages.getString("HeadPanel.nouUsuariButton.toolTipText"));
 		headPanel.getEsborrarDadesLoginLabel()
-				.setToolTipText(ExternalizeStrings.getString("HeadPanel.cancelLabelToltip"));
+				.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.cancellarButton.toolTipText"));
 		headPanel.getHasOblidatLaContrasenyaLabel()
-				.setToolTipText(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaToltip"));
+				.setToolTipText(HeadPanelMessages.getString("HeadPanel.hasOblidatLaContrasenyaLabel.toolTipText"));
 		headPanel.getMostrarContrasenya()
-				.setToolTipText(ExternalizeStrings.getString("HeadPanel.mostrarContrasenyaToltip"));
+				.setToolTipText(HeadPanelMessages.getString("HeadPanel.mostrarContrasenya.toolTipText"));
 	}
 
 	/**
@@ -320,12 +322,12 @@ public class BotoLoginLogout implements ActionListener {
 	 */
 	public void setPanelLoginDefault() {
 		headPanel.getFerLoginButton().setText("Login");
-		headPanel.getFerLoginButton().setToolTipText(ExternalizeStrings.getString("HeadPanel.loginButtonToltip"));
+		headPanel.getFerLoginButton().setToolTipText(HeadPanelMessages.getString("HeadPanel.ferLoginButton.toolTipText"));
 		headPanel.getEmailintroduitPerLusuari().setText("");
 		headPanel.getContrasenyaIntroduidaPerLusuari().setText("");
 		footPanel.getEstasConectatComLabel()
-				.setText(ExternalizeStrings.getString("FootPanel.estasConectatComLabelNoConectat"));
-		footPanel.getTipuUsuariLabel().setText(ExternalizeStrings.getString("FootPanel.tipusUsuariAnominLabel"));
+				.setText(FootPanelMessages.getString("FootPanel.usuariNoConnectat.text"));
+		footPanel.getTipuUsuariLabel().setText(FootPanelMessages.getString("FootPanel.tipusUsuariAnominLabel"));
 	}
 
 	/*-------------------------- Getters and Setters Methods --------------------------*/

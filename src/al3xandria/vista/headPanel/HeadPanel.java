@@ -62,9 +62,9 @@ public class HeadPanel extends JPanel {
 		setBorder(new LineBorder(SystemColor.activeCaption));
 		setLayout(new BorderLayout(0, 0));
 
-		logoDeLaplicacio = new JLabel("");
+		logoDeLaplicacio = new JLabel("");  
 		logoDeLaplicacio.setIcon(icones.getLogoAlexandria());
-		logoDeLaplicacio.setToolTipText(ExternalizeStrings.getString("HeadPanel.logoAl3xandriaToltip"));
+		logoDeLaplicacio.setToolTipText(HeadPanelMessages.getString("HeadPanel.logoDeLaplicacio.toolTipText")); //$NON-NLS-1$
 		add(logoDeLaplicacio);
 
 		panelLoginExterior = new JPanel();
@@ -72,7 +72,7 @@ public class HeadPanel extends JPanel {
 		add(panelLoginExterior, BorderLayout.EAST);
 		panelLoginExterior.setLayout(new BorderLayout(0, 0));
 		
-		borderSuperiorPanelLogin = new JLabel(" ");
+		borderSuperiorPanelLogin = new JLabel(" "); 
 		panelLoginExterior.add(borderSuperiorPanelLogin, BorderLayout.NORTH);
 
 		borderInferiorPanelLogin = new JLabel(" ");
@@ -92,7 +92,7 @@ public class HeadPanel extends JPanel {
 		panelLoginInterior.setLayout(gbl_panelLoginInterior);
 		
 		
-		emailLoginLabel = new JLabel(ExternalizeStrings.getString("HeadPanel.emailLabel"));
+		emailLoginLabel = new JLabel(HeadPanelMessages.getString("HeadPanel.emailLoginLabel.text")); //$NON-NLS-1$
 		emailLoginLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_emailLoginLabel = new GridBagConstraints();
 		gbc_emailLoginLabel.fill = GridBagConstraints.BOTH;
@@ -112,7 +112,7 @@ public class HeadPanel extends JPanel {
 		contrasenyaLabelPanel.setLayout(new BorderLayout(0, 0));
 
 		
-		contrasenyaLoginLabel = new JLabel(ExternalizeStrings.getString("HeadPanel.contrasenyaLabel"));
+		contrasenyaLoginLabel = new JLabel(HeadPanelMessages.getString("HeadPanel.contrasenyaLoginLabel.text")); //$NON-NLS-1$
 		contrasenyaLoginLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		contrasenyaLoginLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		contrasenyaLabelPanel.add(contrasenyaLoginLabel);
@@ -120,7 +120,7 @@ public class HeadPanel extends JPanel {
 
 		emailintroduitPerLusuari = new JTextField();
 		emailintroduitPerLusuari.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		emailintroduitPerLusuari.setToolTipText(ExternalizeStrings.getString("HeadPanel.emailIntroduitPerLusuariToltip"));
+		emailintroduitPerLusuari.setToolTipText(HeadPanelMessages.getString("HeadPanel.emailintroduitPerLusuari.toolTipText")); //$NON-NLS-1$
 		GridBagConstraints gbc_emailintroduitPerLusuari = new GridBagConstraints();
 		gbc_emailintroduitPerLusuari.fill = GridBagConstraints.BOTH;
 		gbc_emailintroduitPerLusuari.insets = new Insets(0, 0, 5, 5);
@@ -132,8 +132,7 @@ public class HeadPanel extends JPanel {
 
 		
 		contrasenyaIntroduidaPerLusuari = new JPasswordField();
-		contrasenyaIntroduidaPerLusuari.setToolTipText(
-				ExternalizeStrings.getString("HeadPanel.contrasenyaIntroduidaPerLusuariToltip"));
+		contrasenyaIntroduidaPerLusuari.setToolTipText(HeadPanelMessages.getString("HeadPanel.contrasenyaIntroduidaPerLusuari.toolTipText")); //$NON-NLS-1$
 		contrasenyaIntroduidaPerLusuari.setEchoChar('*');
 		GridBagConstraints gbc_contrasenyaIntroduidaPerLusuari = new GridBagConstraints();
 		gbc_contrasenyaIntroduidaPerLusuari.fill = GridBagConstraints.BOTH;
@@ -144,14 +143,14 @@ public class HeadPanel extends JPanel {
 		contrasenyaIntroduidaPerLusuari.setColumns(10);
 		
 
-		hasOblidatLaContrasenyaLabel = new JLabel(
-				ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaLabel"));
+		hasOblidatLaContrasenyaLabel = new JLabel(HeadPanelMessages.getString("HeadPanel.hasOblidatLaContrasenyaLabel.text")); //$NON-NLS-1$
 		hasOblidatLaContrasenyaLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		hasOblidatLaContrasenyaLabel.setForeground(Color.decode("#00838f"));
-		hasOblidatLaContrasenyaLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		hasOblidatLaContrasenyaLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.hasOblidatContrasenyaToltip"));
+		hasOblidatLaContrasenyaLabel.setForeground(Color.decode("#00838f")); 
+		hasOblidatLaContrasenyaLabel.setFont(new Font("Tahoma", Font.PLAIN, 9)); 
+		hasOblidatLaContrasenyaLabel.setToolTipText(HeadPanelMessages.getString("HeadPanel.hasOblidatLaContrasenyaLabel.toolTipText")); //$NON-NLS-1$
 		hasOblidatLaContrasenyaLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		hasOblidatLaContrasenyaLabel.setVerticalAlignment(SwingConstants.TOP);
+		hasOblidatLaContrasenyaLabel.addMouseListener(new HeadPanelControlador(this));
 		GridBagConstraints gbc_hasOblidatLaContrasenyaLabel = new GridBagConstraints();
 		gbc_hasOblidatLaContrasenyaLabel.fill = GridBagConstraints.BOTH;
 		gbc_hasOblidatLaContrasenyaLabel.insets = new Insets(0, 0, 0, 5);
@@ -161,11 +160,10 @@ public class HeadPanel extends JPanel {
 		
 		
 		
-		nouUsuariButton = new JButton(
-				ExternalizeStrings.getString("HeadPanel.nouUsuariButton"));
+		nouUsuariButton = new JButton(HeadPanelMessages.getString("HeadPanel.nouUsuariButton.text")); //$NON-NLS-1$
 		nouUsuariButton.setForeground(Color.WHITE);
-		nouUsuariButton.setBackground(Color.decode("#00838f"));
-		nouUsuariButton.setToolTipText(ExternalizeStrings.getString("HeadPanel.nouUsuariButtonToltip"));
+		nouUsuariButton.setBackground(Color.decode("#00838f")); 
+		nouUsuariButton.setToolTipText(HeadPanelMessages.getString("HeadPanel.nouUsuariButton.toolTipText")); //$NON-NLS-1$
 		GridBagConstraints gbc_nouUsuariButton = new GridBagConstraints();
 		gbc_nouUsuariButton.fill = GridBagConstraints.BOTH;
 		gbc_nouUsuariButton.insets = new Insets(0, 0, 5, 0);
@@ -174,12 +172,11 @@ public class HeadPanel extends JPanel {
 		nouUsuariButton.addMouseListener(new HeadPanelControlador(this));
 		panelLoginInterior.add(nouUsuariButton, gbc_nouUsuariButton);
 
-		esborrarDadesLoginLabel = new JLabel(
-				ExternalizeStrings.getString("HeadPanel.cancelLabel"));
-		esborrarDadesLoginLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		esborrarDadesLoginLabel = new JLabel(HeadPanelMessages.getString("HeadPanel.esborrarDadesLoginLabel.text")); //$NON-NLS-1$
+		esborrarDadesLoginLabel.setFont(new Font("Tahoma", Font.PLAIN, 9)); 
 		esborrarDadesLoginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		esborrarDadesLoginLabel.setForeground(Color.decode("#38006b"));
-		esborrarDadesLoginLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.cancelLabelToltip"));
+		esborrarDadesLoginLabel.setToolTipText(HeadPanelMessages.getString("HeadPanel.esborrarDadesLoginLabel.toolTipText")); //$NON-NLS-1$
 		esborrarDadesLoginLabel.addMouseListener(new HeadPanelControlador(this));
 		esborrarDadesLoginLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		esborrarDadesLoginLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -190,11 +187,10 @@ public class HeadPanel extends JPanel {
 		gbc_esborrarDadesLoginLabel.gridy = 2;
 		panelLoginInterior.add(esborrarDadesLoginLabel, gbc_esborrarDadesLoginLabel);
 		
-		ferLoginButton = new JButton(
-				ExternalizeStrings.getString("HeadPanel.loginButton"));
+		ferLoginButton = new JButton(HeadPanelMessages.getString("HeadPanel.ferLoginButton.text")); //$NON-NLS-1$
 		ferLoginButton.setForeground(Color.WHITE);
-		ferLoginButton.setBackground(Color.decode("#6a1b9a"));
-		ferLoginButton.setToolTipText(ExternalizeStrings.getString("HeadPanel.loginButtonToltip"));
+		ferLoginButton.setBackground(Color.decode("#6a1b9a")); 
+		ferLoginButton.setToolTipText(HeadPanelMessages.getString("HeadPanel.ferLoginButton.toolTipText")); //$NON-NLS-1$
 		ferLoginButton.addActionListener(new BotoLoginLogout(this, footPanel, centralPanel));
 		GridBagConstraints gbc_ferLoginButton = new GridBagConstraints();
 		gbc_ferLoginButton.fill = GridBagConstraints.BOTH;
@@ -203,11 +199,11 @@ public class HeadPanel extends JPanel {
 		gbc_ferLoginButton.gridy = 0;
 		panelLoginInterior.add(ferLoginButton, gbc_ferLoginButton);
 
-		mostrarContrasenya = new JLabel("");
+		mostrarContrasenya = new JLabel(""); 
 		mostrarContrasenya.setIcon(icones.getMostrarContrasenyaIcon());
 		mostrarContrasenya.setVerticalAlignment(SwingConstants.BOTTOM);
 		mostrarContrasenya.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		mostrarContrasenya.setToolTipText(ExternalizeStrings.getString("HeadPanel.mostrarContrasenyaToltip"));
+		mostrarContrasenya.setToolTipText(HeadPanelMessages.getString("HeadPanel.mostrarContrasenya.toolTipText")); //$NON-NLS-1$
 		mostrarContrasenya.addMouseListener(new HeadPanelControlador(this));
 		mostrarContrasenya.setHorizontalAlignment(SwingConstants.LEFT);
 		contrasenyaLabelPanel.add(mostrarContrasenya, BorderLayout.EAST);
@@ -228,7 +224,7 @@ public class HeadPanel extends JPanel {
 	}
 	
 	public void esborraEmailContrasenyaIntroduits() {
-		emailintroduitPerLusuari.setText("");
+		emailintroduitPerLusuari.setText(""); 
 		contrasenyaIntroduidaPerLusuari.setText("");
 	}
 	

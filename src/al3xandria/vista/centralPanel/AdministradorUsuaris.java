@@ -93,25 +93,25 @@ public class AdministradorUsuaris extends JPanel {
 		fl_filtreButtonPanel.setAlignment(FlowLayout.LEFT);
 		filtresPanel.add(filtreButtonPanel, BorderLayout.WEST);
 		
-		JLabel filtrePerLabel = new JLabel("Filtrar per:");
-		filtrePerLabel.setToolTipText("Escull el filtre que vols utilitzar");
+		JLabel filtrePerLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.filtrePerLabel.text")); //$NON-NLS-1$
+		filtrePerLabel.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.filtrePerLabel.toolTipText")); //$NON-NLS-1$
 		filtrePerLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		filtreButtonPanel.add(filtrePerLabel);
 		
-		JRadioButton nomRadioButton = new JRadioButton("Nom");
+		JRadioButton nomRadioButton = new JRadioButton(CentralPanelMessages.getString("AdministradorUsuaris.nomRadioButton.text")); //$NON-NLS-1$
 		nomRadioButton.setSelected(true);
 		buttonGroup.add(nomRadioButton);
-		nomRadioButton.setToolTipText("Filtrar per nom");
+		nomRadioButton.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.nomRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(nomRadioButton);
 		
-		JRadioButton carnetRadioButton = new JRadioButton("Carnet");
+		JRadioButton carnetRadioButton = new JRadioButton(CentralPanelMessages.getString("AdministradorUsuaris.carnetRadioButton.text")); //$NON-NLS-1$
 		buttonGroup.add(carnetRadioButton);
-		carnetRadioButton.setToolTipText("Filtra per carnet");
+		carnetRadioButton.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.carnetRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(carnetRadioButton);
 		
-		JRadioButton inactiusRadioButton = new JRadioButton("Inactius");
+		JRadioButton inactiusRadioButton = new JRadioButton(CentralPanelMessages.getString("AdministradorUsuaris.inactiusRadioButton.text")); //$NON-NLS-1$
 		buttonGroup.add(inactiusRadioButton);
-		inactiusRadioButton.setToolTipText("Filtre per usuaris inactius");
+		inactiusRadioButton.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.inactiusRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(inactiusRadioButton);
 		
 		JComboBox comboBox = new JComboBox();
@@ -129,16 +129,18 @@ public class AdministradorUsuaris extends JPanel {
 		filtreTextPanel.add(lupaLabel);
 		
 		cercaField = new JTextField();
-		cercaField.setToolTipText("Introduiex la teva cerca");
+		cercaField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.cercaField.toolTipText")); //$NON-NLS-1$
 		filtreTextPanel.add(cercaField);
 		cercaField.setColumns(20);
 		
 		JLabel separacioLabel = new JLabel("   ");
 		filtreTextPanel.add(separacioLabel);
 		
-		JButton mostrarButton = new JButton("Mostrar");
-		mostrarButton.setToolTipText("Prem per mostrar la consulta");
-		filtreTextPanel.add(mostrarButton);
+		JButton cercarButton = new JButton(CentralPanelMessages.getString("AdministradorUsuaris.cercarButton.text"));  //$NON-NLS-1$
+		cercarButton.setForeground(new Color(0, 0, 0));
+		cercarButton.setBackground(new Color(173, 216, 230));
+		cercarButton.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.cercarButton.toolTipText")); //$NON-NLS-1$
+		filtreTextPanel.add(cercarButton);
 		
 		JPanel llistaTablePanel = new JPanel();
 		llistaTablePanel.setBackground(new Color(255, 255, 255));
@@ -196,7 +198,6 @@ public class AdministradorUsuaris extends JPanel {
 		llistatLlibresScrollPane.setPreferredSize(new java.awt.Dimension(0, 100));
 
 		llistatLlibresScrollPane.setBackground(new Color(255, 255, 255));
-		//llistatLlibresScrollPane.setViewportView(llibresTable);
 		llistaTablePanel.add(llistatLlibresScrollPane, BorderLayout.CENTER);
 		
 		
@@ -205,17 +206,25 @@ public class AdministradorUsuaris extends JPanel {
 		llistaTablePanel.add(accionsButtonsPanel, BorderLayout.EAST);
 		accionsButtonsPanel.setLayout(new GridLayout(8, 0, 0, 0));
 		
-		JButton altaUsuariButton = new JButton("Alta");
-		altaUsuariButton.setToolTipText("Prem per afegir un usuari");
+		JButton altaUsuariButton = new JButton(CentralPanelMessages.getString("AdministradorUsuaris.altaUsuariButton.text")); //$NON-NLS-1$
+		altaUsuariButton.setForeground(Color.WHITE);
+		altaUsuariButton.setBackground(Color.decode("#00838f"));
+		altaUsuariButton.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.altaUsuariButton.toolTipText")); //$NON-NLS-1$
 		accionsButtonsPanel.add(altaUsuariButton);
 		
-		JButton baixaUsuariButton = new JButton("Baixa");
-		baixaUsuariButton.setToolTipText("Prem per eliminar l'usuari seleccionat");
+		JButton editarUsuariButton = new JButton(CentralPanelMessages.getString("AdministradorUsuaris.editarUsuariButton.text")); //$NON-NLS-1$
+		editarUsuariButton.setForeground(Color.WHITE);
+		editarUsuariButton.setBackground(Color.decode("#6a1b9a"));
+		editarUsuariButton.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.editarUsuariButton.toolTipText")); //$NON-NLS-1$
+		accionsButtonsPanel.add(editarUsuariButton);
+		
+		JButton baixaUsuariButton = new JButton(CentralPanelMessages.getString("AdministradorUsuaris.baixaUsuariButton.text")); //$NON-NLS-1$
+		baixaUsuariButton.setBackground(new Color(165, 42, 42));
+		baixaUsuariButton.setForeground(Color.WHITE);
+		baixaUsuariButton.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.baixaUsuariButton.toolTipText")); //$NON-NLS-1$
 		accionsButtonsPanel.add(baixaUsuariButton);
 		
-		JButton editarUsuariButton = new JButton("Editar");
-		editarUsuariButton.setToolTipText("Prem per editar l'usuari seleccionat");
-		accionsButtonsPanel.add(editarUsuariButton);
+		
 		
 		JPanel dadesLlibrePanel = new JPanel();
 		llibresPanel.add(dadesLlibrePanel, BorderLayout.SOUTH);
@@ -254,33 +263,33 @@ public class AdministradorUsuaris extends JPanel {
 		JPanel idPanel = new JPanel();
 		idNomCognomsActiuPanel.add(idPanel);
 		
-		JLabel idLabel = new JLabel("ID");
+		JLabel idLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.idLabel.text")); //$NON-NLS-1$
 		idPanel.add(idLabel);
 		
 		idUsuariField = new JTextField();
-		idUsuariField.setToolTipText("id de l'usuari");
+		idUsuariField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.idUsuariField.toolTipText")); //$NON-NLS-1$
 		idPanel.add(idUsuariField);
 		idUsuariField.setColumns(3);
 		
 		JPanel nomCognomsPanel = new JPanel();
 		idNomCognomsActiuPanel.add(nomCognomsPanel);
 		
-		JLabel nomLabel = new JLabel("Nom");
+		JLabel nomLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.nomLabel.text")); //$NON-NLS-1$
 		nomCognomsPanel.add(nomLabel);
 		
 		nomField = new JTextField();
-		nomField.setToolTipText("Nom de l'usuari");
+		nomField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.nomField.toolTipText")); //$NON-NLS-1$
 		nomCognomsPanel.add(nomField);
 		nomField.setColumns(10);
 		
 		JLabel separacioNomCognomsLabel = new JLabel("  ");
 		nomCognomsPanel.add(separacioNomCognomsLabel);
 		
-		JLabel cognomsLabel = new JLabel("Cognoms");
+		JLabel cognomsLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.cognomsLabel.text")); //$NON-NLS-1$
 		nomCognomsPanel.add(cognomsLabel);
 		
 		cognomsField = new JTextField();
-		cognomsField.setToolTipText("Cognoms de l'usuari");
+		cognomsField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.cognomsField.toolTipText")); //$NON-NLS-1$
 		nomCognomsPanel.add(cognomsField);
 		cognomsField.setColumns(30);
 		
@@ -296,36 +305,36 @@ public class AdministradorUsuaris extends JPanel {
 		JPanel dniNiePanel = new JPanel();
 		dniEmailContrasenyaCarnetPanel.add(dniNiePanel);
 		
-		JLabel dniNieLabel = new JLabel("Dni/Nie");
+		JLabel dniNieLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.dniNieLabel.text")); //$NON-NLS-1$
 		dniNiePanel.add(dniNieLabel);
 		dniNieLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		dniNieField = new JTextField();
-		dniNieField.setToolTipText("Dni/Nie de l'usuari");
+		dniNieField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.dniNieField.toolTipText")); //$NON-NLS-1$
 		dniNiePanel.add(dniNieField);
 		dniNieField.setColumns(8);
 		
 		JPanel emailPanel = new JPanel();
 		dniEmailContrasenyaCarnetPanel.add(emailPanel);
 		
-		JLabel emailLabel = new JLabel("Email");
+		JLabel emailLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.emailLabel.text")); //$NON-NLS-1$
 		emailPanel.add(emailLabel);
 		emailLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		emailField = new JTextField();
-		emailField.setToolTipText("Email de l'usuari");
+		emailField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.emailField.toolTipText")); //$NON-NLS-1$
 		emailPanel.add(emailField);
 		emailField.setColumns(15);
 		
 		JPanel contrasenyaPanel = new JPanel();
 		dniEmailContrasenyaCarnetPanel.add(contrasenyaPanel);
 		
-		JLabel contrasenyaLabel = new JLabel("Contrasenya");
+		JLabel contrasenyaLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.contrasenyaLabel.text")); //$NON-NLS-1$
 		contrasenyaPanel.add(contrasenyaLabel);
 		contrasenyaLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		contrasenyaField = new JPasswordField();
-		contrasenyaField.setToolTipText("Contrasenya de l'usuari");
+		contrasenyaField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.contrasenyaField.toolTipText")); //$NON-NLS-1$
 		contrasenyaField.setEchoChar('*');
 		contrasenyaField.setColumns(10);
 		contrasenyaPanel.add(contrasenyaField);
@@ -334,17 +343,17 @@ public class AdministradorUsuaris extends JPanel {
 		mostrarContrasenyaLabel.setIcon(icones.getMostrarContrasenyaIcon());
 		mostrarContrasenyaLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		mostrarContrasenyaLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		mostrarContrasenyaLabel.setToolTipText(ExternalizeStrings.getString("HeadPanel.mostrarContrasenyaToltip"));
+		mostrarContrasenyaLabel.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.mostrarContrasenyaLabel.toolTipText")); //$NON-NLS-1$
 		contrasenyaPanel.add(mostrarContrasenyaLabel);
 		
 		JPanel carnetPanel = new JPanel();
 		dniEmailContrasenyaCarnetPanel.add(carnetPanel);
 		
-		JLabel carnetLabel = new JLabel("Carnet");
+		JLabel carnetLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.carnetLabel.text")); //$NON-NLS-1$
 		carnetPanel.add(carnetLabel);
 		
 		carnetField = new JTextField();
-		carnetField.setToolTipText("N\u00FAmero del carnet");
+		carnetField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.carnetField.toolTipText")); //$NON-NLS-1$
 		carnetPanel.add(carnetField);
 		carnetField.setColumns(6);
 		
@@ -364,33 +373,33 @@ public class AdministradorUsuaris extends JPanel {
 		JPanel adrecaPanel = new JPanel();
 		adrecaCodiPostalPoblacioPaisPanel.add(adrecaPanel);
 		
-		JLabel adrecaLabel = new JLabel(ExternalizeStrings.getString("AdministradorUsuaris.adrecaLabel.text")); //$NON-NLS-1$
+		JLabel adrecaLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.adrecaLabel.text")); //$NON-NLS-1$
 		adrecaPanel.add(adrecaLabel);
 		
 		adrecaField = new JTextField();
-		adrecaField.setToolTipText(ExternalizeStrings.getString("AdministradorUsuaris.adrecaField.toolTipText")); //$NON-NLS-1$
+		adrecaField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.adrecaField.toolTipText")); //$NON-NLS-1$
 		adrecaPanel.add(adrecaField);
 		adrecaField.setColumns(16);
 		
 		JPanel codiPostalPanel = new JPanel();
 		adrecaCodiPostalPoblacioPaisPanel.add(codiPostalPanel);
 		
-		JLabel codiPostalLabel = new JLabel(ExternalizeStrings.getString("AdministradorUsuaris.codiPostalLabel.text")); //$NON-NLS-1$
+		JLabel codiPostalLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.codiPostalLabel.text"));  //$NON-NLS-1$
 		codiPostalPanel.add(codiPostalLabel);
 		
 		codiPostalField = new JTextField();
-		codiPostalField.setToolTipText(ExternalizeStrings.getString("AdministradorUsuaris.codiPostalField.toolTipText")); //$NON-NLS-1$
+		codiPostalField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.codiPostalField.toolTipText"));  //$NON-NLS-1$
 		codiPostalPanel.add(codiPostalField);
 		codiPostalField.setColumns(5);
 		
 		JPanel poblacioPanel = new JPanel();
 		adrecaCodiPostalPoblacioPaisPanel.add(poblacioPanel);
 		
-		JLabel poblacioLabel = new JLabel(ExternalizeStrings.getString("AdministradorUsuaris.poblacioLabel.text")); //$NON-NLS-1$
+		JLabel poblacioLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.poblacioLabel.text"));  //$NON-NLS-1$
 		poblacioPanel.add(poblacioLabel);
 		
 		poblacioField = new JTextField();
-		poblacioField.setToolTipText(ExternalizeStrings.getString("AdministradorUsuaris.poblacioField.toolTipText")); //$NON-NLS-1$
+		poblacioField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.poblacioField.toolTipText"));  //$NON-NLS-1$
 		poblacioPanel.add(poblacioField);
 		poblacioField.setColumns(16);
 		
@@ -398,7 +407,7 @@ public class AdministradorUsuaris extends JPanel {
 		adrecaCodiPostalPoblacioPaisPanel.add(provinciaPanel);
 		
 		JComboBox provinciaComboBox = new JComboBox();
-		provinciaComboBox.setToolTipText(ExternalizeStrings.getString("AdministradorUsuaris.provinciaComboBox.toolTipText")); //$NON-NLS-1$
+		provinciaComboBox.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.provinciaComboBox.toolTipText"));  //$NON-NLS-1$
 		provinciaComboBox.setModel(new DefaultComboBoxModel(new String[] {"Provincia...", "Barcelona", "Girona", "Lleida", "Tarragona"}));
 		provinciaPanel.add(provinciaComboBox);
 		
@@ -417,22 +426,22 @@ public class AdministradorUsuaris extends JPanel {
 		JPanel paisPanel = new JPanel();
 		telefonTipusPuntuacioActiuPanel.add(paisPanel);
 		
-		JLabel paisLabel = new JLabel(ExternalizeStrings.getString("AdministradorUsuaris.paisLabel.text")); //$NON-NLS-1$
+		JLabel paisLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.paisLabel.text"));  //$NON-NLS-1$
 		paisPanel.add(paisLabel);
 		
 		paisField = new JTextField();
-		paisField.setToolTipText(ExternalizeStrings.getString("AdministradorUsuaris.paisField.toolTipText")); //$NON-NLS-1$
+		paisField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.paisField.toolTipText"));  //$NON-NLS-1$
 		paisPanel.add(paisField);
 		paisField.setColumns(8);
 		
 		JPanel telefonPanel = new JPanel();
 		telefonTipusPuntuacioActiuPanel.add(telefonPanel);
 		
-		JLabel telefonLabel = new JLabel("Telèfon");
+		JLabel telefonLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.telefonLabel.text")); //$NON-NLS-1$
 		telefonPanel.add(telefonLabel);
 		
 		telefonField = new JTextField();
-		telefonField.setToolTipText("Telèfon de l'usuari");
+		telefonField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.telefonField.toolTipText")); //$NON-NLS-1$
 		telefonField.setText("");
 		telefonPanel.add(telefonField);
 		telefonField.setColumns(10);
@@ -441,18 +450,18 @@ public class AdministradorUsuaris extends JPanel {
 		telefonTipusPuntuacioActiuPanel.add(tipusUsuariPanel);
 		
 		JComboBox tipusUsuariComboBox = new JComboBox();
-		tipusUsuariComboBox.setToolTipText(ExternalizeStrings.getString("AdministradorUsuaris.tipusUsuariComboBox.toolTipText")); //$NON-NLS-1$
+		tipusUsuariComboBox.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.tipusUsuariComboBox.toolTipText")); //$NON-NLS-1$
 		tipusUsuariComboBox.setModel(new DefaultComboBoxModel(new String[] {"Tipus usuari...", "Estudiant", "Professor", "Administrador"}));
 		tipusUsuariPanel.add(tipusUsuariComboBox);
 		
 		JPanel puntuacioPanel = new JPanel();
 		telefonTipusPuntuacioActiuPanel.add(puntuacioPanel);
 		
-		JLabel puntuacioLabel = new JLabel(ExternalizeStrings.getString("AdministradorUsuaris.lblNewLabel_2.text")); //$NON-NLS-1$
+		JLabel puntuacioLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.puntuacioLabel.text"));  //$NON-NLS-1$
 		puntuacioPanel.add(puntuacioLabel);
 		
 		puntuacioField = new JTextField();
-		puntuacioField.setToolTipText("Puntuació de l'usuari");
+		puntuacioField.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.puntuacioField.toolTipText")); //$NON-NLS-1$
 		puntuacioField.setText("");
 		puntuacioPanel.add(puntuacioField);
 		puntuacioField.setColumns(5);
@@ -460,9 +469,9 @@ public class AdministradorUsuaris extends JPanel {
 		JPanel actiuPanel = new JPanel();
 		telefonTipusPuntuacioActiuPanel.add(actiuPanel);
 		
-		JLabel actiuLabel = new JLabel("Actiu?");
+		JLabel actiuLabel = new JLabel(CentralPanelMessages.getString("AdministradorUsuaris.actiuLabel.text")); //$NON-NLS-1$
 		actiuPanel.add(actiuLabel);
-		actiuLabel.setToolTipText("Informa si l'usuari est\u00E0 activat o no");
+		actiuLabel.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.actiuLabel.toolTipText")); //$NON-NLS-1$
 		
 		JCheckBox actiuCheckBox = new JCheckBox("");
 		actiuPanel.add(actiuCheckBox);

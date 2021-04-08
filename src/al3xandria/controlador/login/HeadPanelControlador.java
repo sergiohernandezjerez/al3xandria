@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JOptionPane;
+
+import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.headPanel.FormulariAltaUsuari;
 import al3xandria.vista.headPanel.HeadPanel;
 
@@ -41,8 +44,25 @@ public class HeadPanelControlador implements ActionListener, MouseListener {
 			formulariAltaUsuari = new FormulariAltaUsuari();
 			formulariAltaUsuari.setVisible(true);
 		}
+		
+		if(headPanel.getHasOblidatLaContrasenyaLabel() == e.getSource()) {
+			mostrarInformacioRecuperacioContrasenya();
+		}
 
 	}
+
+	/**
+	 * Missatge per informar com recuperar la contrasenya
+	 * 
+	 * @author SergioHernandez
+	 */
+	public void mostrarInformacioRecuperacioContrasenya() {
+		JOptionPane.showMessageDialog(formulariAltaUsuari,
+				ExternalizeStrings.getString("HeadPanel.missatgeRecuperarContrasenya"),
+				ExternalizeStrings.getString("HeadPanel.titolMissatgeRecuperarContrasenya"),
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
 
 	@Override
 	public void mouseEntered(MouseEvent e) {

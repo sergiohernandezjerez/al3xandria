@@ -95,7 +95,7 @@ public class FormulariAltaUsuari extends JFrame {
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new FormulariAltaControlador(this));
 		icones = new Icons();
-		setTitle(ExternalizeStrings.getString("FormulariAltaUsuari.titol"));
+		setTitle("Formulari alta usuari"); 
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -103,191 +103,192 @@ public class FormulariAltaUsuari extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		nomLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.nomLabel")); //$NON-NLS-1$
+		nomLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.nomLabel.text"));  //$NON-NLS-1$
 		nomLabel.setBounds(40, 142, 46, 14);
 		contentPane.add(nomLabel);
 		
-		cognomsLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.cognomsLabel")); //$NON-NLS-1$
+		cognomsLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.cognomsLabel.text"));   //$NON-NLS-1$
 		cognomsLabel.setBounds(320, 142, 64, 14);
 		contentPane.add(cognomsLabel);
 		
 		dniNieComboBox = new JComboBox();
-		dniNieComboBox.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.comboBox.toolTipText")); //$NON-NLS-1$
-		dniNieComboBox.setModel(new DefaultComboBoxModel(new String[] {"Dni/Nie", "DNI", "NIE"}));
-		dniNieComboBox.setBounds(40, 286, 72, 22);
+		dniNieComboBox.setFont(new Font("Dialog", Font.BOLD, 10));
+		dniNieComboBox.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.dniNieComboBox.toolTipText"));   //$NON-NLS-1$
+		dniNieComboBox.setModel(new DefaultComboBoxModel(new String[] {"Dni/Nie", "DNI", "NIE"}));   //$NON-NLS-3$
+		dniNieComboBox.setBounds(38, 286, 74, 22);
 		dniNieComboBox.addItemListener(new FormulariAltaControlador(this));
 		contentPane.add(dniNieComboBox);
 		
-		emailLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.emailLabel")); //$NON-NLS-1$
+		emailLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.emailLabel.text"));   //$NON-NLS-1$
 		emailLabel.setBounds(40, 172, 46, 14);
 		contentPane.add(emailLabel);
 		
-		adrecaLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.adrecaLabel")); //$NON-NLS-1$
+		adrecaLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.adrecaLabel.text"));   //$NON-NLS-1$
 		adrecaLabel.setBounds(40, 200, 64, 14);
 		contentPane.add(adrecaLabel);
 		
-		codiPostalLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.codiPostalLabel")); //$NON-NLS-1$
+		codiPostalLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.codiPostalLabel.text"));   //$NON-NLS-1$
 		codiPostalLabel.setBounds(40, 230, 64, 14);
 		contentPane.add(codiPostalLabel);
 		
-		poblacioLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.poblacioLabel")); //$NON-NLS-1$
+		poblacioLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.poblacioLabel.text"));   //$NON-NLS-1$
 		poblacioLabel.setBounds(320, 200, 64, 14);
 		contentPane.add(poblacioLabel);
 		
-		provinciaLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.provinciaLabel")); //$NON-NLS-1$
+		provinciaLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.provinciaLabel.text"));   //$NON-NLS-1$
 		provinciaLabel.setBounds(40, 260, 64, 14);
 		contentPane.add(provinciaLabel);
 		
-		paisLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.paisLabel")); //$NON-NLS-1$
+		paisLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.paisLabel.text"));   //$NON-NLS-1$
 		paisLabel.setBounds(320, 230, 46, 14);
 		contentPane.add(paisLabel);
 		
-		telefonLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.telefonLabel")); //$NON-NLS-1$
+		telefonLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.telefonLabel.text"));   //$NON-NLS-1$
 		telefonLabel.setBounds(320, 172, 64, 14);
 		contentPane.add(telefonLabel);
 		
-		tipusUsuariLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.tipusUsuariLabel")); //$NON-NLS-1$
+		tipusUsuariLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.tipusUsuariLabel.text"));   //$NON-NLS-1$
 		tipusUsuariLabel.setBounds(40, 320, 74, 14);
 		contentPane.add(tipusUsuariLabel);
 		
-		titolLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.titolLabel")); //$NON-NLS-1$
-		titolLabel.setFont(new Font("Tahoma", Font.PLAIN, 26)); 
+		titolLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.titolLabel.text"));   //$NON-NLS-1$
+		titolLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));  
 		titolLabel.setBounds(166, 93, 249, 32);
 		contentPane.add(titolLabel);
 		
 		nomField = new JTextField();
-		nomField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		nomField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.nomFieldToltip")); //$NON-NLS-1$
+		nomField.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+		nomField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.nomField.toolTipText"));   //$NON-NLS-1$
 		nomField.setBounds(117, 136, 140, 24);
 		contentPane.add(nomField);
 		nomField.setColumns(10);
 		
 		cognomsField = new JTextField();
-		cognomsField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		cognomsField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.cognomsFieldToltip")); //$NON-NLS-1$
+		cognomsField.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+		cognomsField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.cognomsField.toolTipText"));   //$NON-NLS-1$
 		cognomsField.setColumns(10);
 		cognomsField.setBounds(394, 136, 140, 24);
 		contentPane.add(cognomsField);
 		
 		dniNieField = new JTextField();
-		dniNieField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		dniNieField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.dniNieFieldToltipDefault"));
+		dniNieField.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+		dniNieField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.dniNieField.toolTipText"));  //$NON-NLS-1$
 		dniNieField.setColumns(10);
 		dniNieField.setBounds(117, 286, 140, 24);
 		contentPane.add(dniNieField);
 		
 		emailField = new JTextField();
-		emailField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		emailField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.emailFieldToltip")); //$NON-NLS-1$
+		emailField.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+		emailField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.emailField.toolTipText"));   //$NON-NLS-1$
 		emailField.setColumns(10);
 		emailField.setBounds(117, 166, 140, 24);
 		contentPane.add(emailField);
 		
 		adrecaField = new JTextField();
-		adrecaField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		adrecaField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.adrecaFieldToltip")); //$NON-NLS-1$
+		adrecaField.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+		adrecaField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.adrecaField.toolTipText"));   //$NON-NLS-1$
 		adrecaField.setColumns(10);
 		adrecaField.setBounds(117, 196, 140, 24);
 		contentPane.add(adrecaField);
 		
 		codiPostalField = new JTextField();
-		codiPostalField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		codiPostalField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.codiPostalFieldToltip")); //$NON-NLS-1$
+		codiPostalField.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+		codiPostalField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.codiPostalField.toolTipText"));   //$NON-NLS-1$
 		codiPostalField.setColumns(10);
 		codiPostalField.setBounds(117, 226, 140, 24);
 		contentPane.add(codiPostalField);
 		
 		poblacioField = new JTextField();
-		poblacioField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		poblacioField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.poblacioFieldToltip")); //$NON-NLS-1$
+		poblacioField.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+		poblacioField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.poblacioField.toolTipText"));   //$NON-NLS-1$
 		poblacioField.setColumns(10);
 		poblacioField.setBounds(394, 196, 140, 24);
 		contentPane.add(poblacioField);
 		
 		paisField = new JTextField();
-		paisField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		paisField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.paisFieldToltip")); //$NON-NLS-1$
+		paisField.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+		paisField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.paisField.toolTipText"));   //$NON-NLS-1$
 		paisField.setColumns(10);
 		paisField.setBounds(394, 226, 140, 24);
 		contentPane.add(paisField);
 		
 		telefonField = new JTextField();
-		telefonField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		telefonField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.telefonFieldToltip")); //$NON-NLS-1$
+		telefonField.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+		telefonField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.telefonField.toolTipText"));   //$NON-NLS-1$
 		telefonField.setColumns(10);
 		telefonField.setBounds(394, 166, 140, 24);
 		contentPane.add(telefonField);
 		
-		esborrarButton = new JButton(ExternalizeStrings.getString("FormulariAltaUsuari.esborrarButton")); //$NON-NLS-1$
+		esborrarButton = new JButton(HeadPanelMessages.getString("FormulariAltaUsuari.esborrarButton.text"));   //$NON-NLS-1$
 		esborrarButton.setForeground(Color.WHITE);
-		esborrarButton.setBackground(Color.decode("#6a1b9a"));
-		esborrarButton.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.esborrarButtonToltip")); //$NON-NLS-1$
+		esborrarButton.setBackground(Color.decode("#6a1b9a")); 
+		esborrarButton.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.esborrarButton.toolTipText"));   //$NON-NLS-1$
 		esborrarButton.setBounds(431, 366, 91, 30);
 		esborrarButton.addMouseListener(new FormulariAltaControlador(this));
 		contentPane.add(esborrarButton);
 		
-		enviarButton = new JButton(ExternalizeStrings.getString("FormulariAltaUsuari.enviarButton")); //$NON-NLS-1$
+		enviarButton = new JButton(HeadPanelMessages.getString("FormulariAltaUsuari.enviarButton.text"));   //$NON-NLS-1$
 		enviarButton.setForeground(Color.WHITE);
-		enviarButton.setBackground(Color.decode("#00838f"));
-		enviarButton.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.enviarButtonToltip")); //$NON-NLS-1$
+		enviarButton.setBackground(Color.decode("#00838f")); 
+		enviarButton.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.enviarButton.toolTipText"));   //$NON-NLS-1$
 		enviarButton.setBounds(324, 407, 91, 30);
 		enviarButton.addMouseListener(new FormulariAltaControlador(this));
 		contentPane.add(enviarButton);
 		
-		cancellarButton = new JButton(ExternalizeStrings.getString("FormulariAltaUsuari.cancellarButton")); //$NON-NLS-1$
+		cancellarButton = new JButton(HeadPanelMessages.getString("FormulariAltaUsuari.cancellarButton.text"));   //$NON-NLS-1$
 		cancellarButton.setHorizontalAlignment(SwingConstants.LEFT);
 		cancellarButton.setBackground(new Color(165, 42, 42));
 		cancellarButton.setForeground(Color.WHITE);
-		cancellarButton.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.cancellarButtonToltip")); //$NON-NLS-1$
+		cancellarButton.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.cancellarButton.toolTipText"));   //$NON-NLS-1$
 		cancellarButton.setBounds(431, 407, 91, 30);
 		cancellarButton.addMouseListener(new FormulariAltaControlador(this));
 		contentPane.add(cancellarButton);
 		
 		tipusUsuariComboBox = new JComboBox<String>();
-		tipusUsuariComboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecciona....", "Estudiant", "Professor"}));
+		tipusUsuariComboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecciona....", "Estudiant", "Professor"}));   //$NON-NLS-3$
 		
-		tipusUsuariComboBox.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.tipusUsuariComboBoxToltip")); //$NON-NLS-1$
+		tipusUsuariComboBox.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.tipusUsuariComboBox.toolTipText"));   //$NON-NLS-1$
 		tipusUsuariComboBox.setBounds(117, 316, 140, 22);
 		contentPane.add(tipusUsuariComboBox);
 		
-		informacioLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.informacioLabel")); //$NON-NLS-1$
-		informacioLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		informacioLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.informacioLabel.text"));   //$NON-NLS-1$
+		informacioLabel.setFont(new Font("Tahoma", Font.PLAIN, 10)); 
 		informacioLabel.setForeground(Color.RED);
 		informacioLabel.setBounds(40, 436, 347, 14);
 		contentPane.add(informacioLabel);
 		
-		logoDeLaplicacio = new JLabel(""); //$NON-NLS-1$
+		logoDeLaplicacio = new JLabel(""); 
 		logoDeLaplicacio.setHorizontalAlignment(SwingConstants.CENTER);
 		logoDeLaplicacio.setIcon(icones.getLogoAlexandria());
-		logoDeLaplicacio.setToolTipText(ExternalizeStrings.getString(ExternalizeStrings.getString("FormulariAltaUsuari.47"))); //$NON-NLS-1$
+		logoDeLaplicacio.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.logoDeLaplicacio.toolTipText"));  //$NON-NLS-1$
 		logoDeLaplicacio.setBounds(0, 11, 614, 71);
 		contentPane.add(logoDeLaplicacio);
 		
-		JLabel contrasenyaLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.lblNewLabel.text")); //$NON-NLS-1$
+		JLabel contrasenyaLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.contrasenyaLabel.text"));   //$NON-NLS-1$
 		contrasenyaLabel.setBounds(311, 290, 75, 14);
 		contentPane.add(contrasenyaLabel);
 		
 		contrasenyaField = new JPasswordField();
 		contrasenyaField.setEchoChar('*');
-		contrasenyaField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.contrasenyaField.toolTipText")); //$NON-NLS-1$
-		contrasenyaField.setText(""); //$NON-NLS-1$
+		contrasenyaField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.contrasenyaField.toolTipText"));   //$NON-NLS-1$
+		contrasenyaField.setText(""); 
 		contrasenyaField.setBounds(394, 286, 140, 24);
 		contentPane.add(contrasenyaField);
 		
-		repetirContrasenyaLabel = new JLabel(ExternalizeStrings.getString("FormulariAltaUsuari.lblNewLabel_1.text")); //$NON-NLS-1$
+		repetirContrasenyaLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.repetirContrasenyaLabel.text"));   //$NON-NLS-1$
 		repetirContrasenyaLabel.setBounds(270, 320, 115, 14);
 		contentPane.add(repetirContrasenyaLabel);
 		
 		repetirContrasenyaField = new JPasswordField();
 		repetirContrasenyaField.setEchoChar('*');
-		repetirContrasenyaField.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.repetirContrasenyaField.toolTipText")); //$NON-NLS-1$
-		repetirContrasenyaField.setText(""); //$NON-NLS-1$
+		repetirContrasenyaField.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.repetirContrasenyaField.toolTipText"));   //$NON-NLS-1$
+		repetirContrasenyaField.setText(""); 
 		repetirContrasenyaField.setBounds(394, 316, 140, 24);
 		contentPane.add(repetirContrasenyaField);
 		
 		provinciaComboBox = new JComboBox();
-		provinciaComboBox.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.provinciaComboBox.toolTipText")); //$NON-NLS-1$
-		provinciaComboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecciona...", "Barcelona", "Girona", "Lleida", "Tarragona"}));
+		provinciaComboBox.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.provinciaComboBox.toolTipText"));   //$NON-NLS-1$
+		provinciaComboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecciona...", "Barcelona", "Girona", "Lleida", "Tarragona"}));     
 		provinciaComboBox.setBounds(117, 256, 140, 22);
 		contentPane.add(provinciaComboBox);
 		

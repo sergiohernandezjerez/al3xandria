@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import al3xandria.model.ControlDeDades;
 import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.headPanel.FormulariAltaUsuari;
+import al3xandria.vista.headPanel.HeadPanelMessages;
 
 /**
  * Clase controladora del formulari d'alta d'usuari
@@ -154,7 +155,7 @@ ItemListener, WindowListener {
 
 	/**
 	 * Esborra tots els camps del formulari i deixa la selecció del combobox al
-	 * indez 0
+	 * index 0
 	 * 
 	 * @author SergioHernandez
 	 */
@@ -282,13 +283,13 @@ ItemListener, WindowListener {
 			Object item = e.getItem();
 			if (item.equals("DNI")) {
 				formulariAltaUsuari.getDniNieField()
-						.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.dniNieFieldToltipDni"));
+						.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.dniNieFieldToltipDni"));
 			} else if (item.equals("NIE")) {
 				formulariAltaUsuari.getDniNieField()
-						.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.dniNieFieldToltipNie"));
+						.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.dniNieFieldToltipNie"));
 			} else {
 				formulariAltaUsuari.getDniNieField()
-						.setToolTipText(ExternalizeStrings.getString("FormulariAltaUsuari.dniNieFieldToltipDefault")); //$NON-NLS-1$
+						.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.dniNieFieldToltipDefault")); //$NON-NLS-1$
 			}
 		}
 
