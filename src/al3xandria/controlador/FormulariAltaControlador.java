@@ -51,14 +51,20 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 		// comportament botó enviar dades per fer l'alta d'usuari. Si tot correcte envia
 		// la consulta al servidor
 		if (formulariAltaUsuari.getEnviarButton() == e.getSource()) {
-			if (controlDeDades.comprovarCampsOmplertsFormulariAltaUsuari(formulariAltaUsuari.getNomField().getText(),
-					formulariAltaUsuari.getCognomsField().getText(), formulariAltaUsuari.getAdrecaField().getText(),
-					formulariAltaUsuari.getEmailField().getText(), formulariAltaUsuari.getPoblacioField().getText(),
-					formulariAltaUsuari.getCodiPostalField().getText(), formulariAltaUsuari.getPaisField().getText(),
-					formulariAltaUsuari.getProvinciaField().getText(), formulariAltaUsuari.getTelefonField().getText(),
+			if (controlDeDades.comprovarCampsOmplertsFormulariAltaUsuari(
+					formulariAltaUsuari.getNomField().getText(),
+					formulariAltaUsuari.getCognomsField().getText(), 
+					formulariAltaUsuari.getAdrecaField().getText(),
+					formulariAltaUsuari.getEmailField().getText(), 
+					formulariAltaUsuari.getPoblacioField().getText(),
+					formulariAltaUsuari.getCodiPostalField().getText(), 
+					formulariAltaUsuari.getPaisField().getText(),
+					formulariAltaUsuari.getProvinciaComboBox().getSelectedIndex(), 
+					formulariAltaUsuari.getTelefonField().getText(),
 					formulariAltaUsuari.getDniNieField().getText(),
 					formulariAltaUsuari.getDniNieComboBox().getSelectedIndex(),
-					formulariAltaUsuari.getTipusUsuariComboBox().getSelectedIndex())) {
+					formulariAltaUsuari.getTipusUsuariComboBox().getSelectedIndex(),
+					formulariAltaUsuari.getContrasenyaFieldToString())) {
 
 				if (comprovarDadesFormulari()) {
 					confirmacioEnviamentDadesAltaUsuari();
@@ -82,18 +88,10 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 	 */
 	private boolean comprovarDadesFormulari() {
 		boolean formatDadesCorrecta = false;
-		if (controlDeDades.comprovacioEmail(formulariAltaUsuari.getEmailField().getText())) {
-			if (controlDeDades.comprovacioFormatTelefon(formulariAltaUsuari.getTelefonField().getText())) {
-				if (formulariAltaUsuari.getDniNieComboBox().getSelectedIndex() == 1) {
-					if (!controlDeDades.comprovacioValidezaDNI(formulariAltaUsuari.getDniNieField().getText())) {
-						controlDeDades.errorEnElFormatDelDocumentIntroduit("DNI");
-					} else {
-						formatDadesCorrecta = true;
-					}
-				} else if (formulariAltaUsuari.getDniNieComboBox().getSelectedIndex() == 2) {
-					if (!controlDeDades.comprovacioValidezaNIE(formulariAltaUsuari.getDniNieField().getText())) {
-						controlDeDades.errorEnElFormatDelDocumentIntroduit("NIE");
-					} else {
+		if (comprovacioEmail()) {
+			if (comprovacioTelefon()) {
+				if(comprovacioContrasenya()) {
+					if(comprovacioDniNie()) {
 						formatDadesCorrecta = true;
 					}
 				}
@@ -106,6 +104,49 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 		}
 
 		return formatDadesCorrecta;
+	}
+	
+	/*
+	 * comprova el format del email
+	 */
+	public boolean comprovacioEmail() {
+		return controlDeDades.comprovacioEmail(formulariAltaUsuari.getEmailField().getText());	
+	}
+	
+	/*
+	 * Comprova el format del telèfon
+	 */
+	public boolean comprovacioTelefon() {
+		return controlDeDades.comprovacioFormatTelefon(formulariAltaUsuari.getTelefonField().getText());
+	}
+	
+	/*
+	 * Comprova el format del identificador DNI o NIE
+	 */
+	public boolean comprovacioDniNie() {
+		boolean formatDniNie = false;
+		if (formulariAltaUsuari.getDniNieComboBox().getSelectedIndex() == 1) {
+			if (!controlDeDades.comprovacioValidezaDNI(formulariAltaUsuari.getDniNieField().getText())) {
+				controlDeDades.errorEnElFormatDelDocumentIntroduit("DNI");
+			} else {
+				formatDniNie = true;
+			}
+		} else if (formulariAltaUsuari.getDniNieComboBox().getSelectedIndex() == 2) {
+			if (!controlDeDades.comprovacioValidezaNIE(formulariAltaUsuari.getDniNieField().getText())) {
+				controlDeDades.errorEnElFormatDelDocumentIntroduit("NIE");
+			} else {
+				formatDniNie = true;
+			}
+		}
+		return formatDniNie;
+	}
+	
+	/*
+	 * Comprova la contrasenya
+	 */
+	public boolean comprovacioContrasenya() {
+		return controlDeDades.comprovarContrasenyaFormulariAltaUsuari(formulariAltaUsuari.getContrasenyaFieldToString(), 
+				formulariAltaUsuari.getRepetirContrasenyaFieldToString());
 	}
 
 	/**
@@ -122,9 +163,11 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 		formulariAltaUsuari.getAdrecaField().setText("");
 		formulariAltaUsuari.getCodiPostalField().setText("");
 		formulariAltaUsuari.getPoblacioField().setText("");
-		formulariAltaUsuari.getProvinciaField().setText("");
+		formulariAltaUsuari.getProvinciaComboBox().setSelectedIndex(0);
 		formulariAltaUsuari.getPaisField().setText("");
 		formulariAltaUsuari.getTelefonField().setText("");
+		formulariAltaUsuari.getContrasenyaField().setText("");
+		formulariAltaUsuari.getRepetirContrasenyaField().setText("");
 		formulariAltaUsuari.getTipusUsuariComboBox().setSelectedIndex(0);
 		formulariAltaUsuari.getDniNieComboBox().setSelectedIndex(0);
 	}
@@ -213,7 +256,7 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 			"Email: " + formulariAltaUsuari.getEmailField().getText() + "\n" +
 			"Població: " + formulariAltaUsuari.getPoblacioField().getText() + "\n" +
 			"Codi Postal: " + formulariAltaUsuari.getCodiPostalField().getText() + "\n" +
-			"Provincia: " + formulariAltaUsuari.getProvinciaField().getText() + "\n" +
+			"Provincia: " + String.valueOf(formulariAltaUsuari.getProvinciaComboBox().getSelectedItem()) + "\n" +
 			"Pais: " + formulariAltaUsuari.getPaisField().getText() + "\n" +
 			"Mòbil: " + formulariAltaUsuari.getTelefonField().getText() + "\n" +
 			"Identificador " + String.valueOf(formulariAltaUsuari.getDniNieComboBox().getSelectedItem()) + 

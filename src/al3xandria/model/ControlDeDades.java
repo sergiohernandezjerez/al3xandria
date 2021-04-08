@@ -99,11 +99,8 @@ public class ControlDeDades {
 	public boolean comprovacioFormatTelefon(String telefon) {
 		boolean telefonCorrecte = false;
 		if(telefon.length() == 9 && esUnNumero(telefon)) {
-			
-				telefonCorrecte = true;
-			
+			telefonCorrecte = true;
 		}
-		
 		return telefonCorrecte;
 	}
 
@@ -157,6 +154,38 @@ public class ControlDeDades {
 	}
 	
 	/**
+	 * Comprova la mida de la contrasenya i que la contrasenya
+	 *  repetida sigui igual a la contrasenya
+	 * @param contrasenya --> contrasenya escullida per l'usuari
+	 * @param contrasenyaRepetida --> repetició de la contrasenya com a mètode de seguretat
+	 * @return boolean --> true: si tot és correcte | false: si tot no és correcte
+	 */
+	public boolean comprovarContrasenyaFormulariAltaUsuari(String contrasenya, String contrasenyaRepetida) {
+		boolean contrasenyaCorrecta = false;
+		if(contrasenya.length() > 7 && contrasenya.equals(contrasenyaRepetida)) {
+			
+				contrasenyaCorrecta = true;
+			}else {
+				missatgeErrorContrasenyaNoCoincideix();
+			
+		}		
+		return contrasenyaCorrecta;
+	}
+	
+	/**
+	 * Missatge que mostra un avís quan els camps de les contrasenyes 
+	 * no coincideixen
+	 * 
+	 * @author SergioHernandez
+	 */
+	public void missatgeErrorContrasenyaNoCoincideix() {
+		JOptionPane.showMessageDialog(headPanel,
+				ExternalizeStrings.getString("FormulariAltausuari.errorContrasenyaNoCoincideix"),
+				ExternalizeStrings.getString("FormulariAltausuari.titolErrorContrasenyaNoCoincideix"), JOptionPane.ERROR_MESSAGE);
+	}
+
+
+	/**
 	 * Comprova si els camps de text JTextField no estan buits
 	 * 
 	 * @param email       -> camp de text que pertany al email
@@ -165,8 +194,8 @@ public class ControlDeDades {
 	 * @author SergioHernandez
 	 */
 	public boolean comprovarCampsOmplertsFormulariAltaUsuari(String nom, String cognoms, String adreca, String email, 
-			String poblacio, String codiPostal, String pais, String provincia, String telefon, String identificador, 
-			int tipusIdentificador, int tipusUsuari) {
+			String poblacio, String codiPostal, String pais, int provincia, String telefon, String identificador, 
+			int tipusIdentificador, int tipusUsuari, String contrasenya) {
 		ArrayList<String> campsBuits = new ArrayList<String>();
 		boolean totOmplert = false;
 		if (nom.length() == 0) {
@@ -190,11 +219,14 @@ public class ControlDeDades {
 		if (pais.length() == 0) {
 			campsBuits.add("Pais");
 		}
-		if (provincia.length() == 0) {
+		if (provincia == 0) {
 			campsBuits.add("Provincia");
 		}
 		if (telefon.length() == 0) {
 			campsBuits.add("Telèfon");
+		}
+		if(contrasenya.length() == 0) {
+			campsBuits.add("Contrasenya");
 		}
 		if (identificador.length() == 0) {
 			campsBuits.add("Numero Identificador");

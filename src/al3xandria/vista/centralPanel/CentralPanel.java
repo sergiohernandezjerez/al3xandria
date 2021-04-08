@@ -46,13 +46,13 @@ public class CentralPanel extends JPanel {
 
 	private void iniciarComponents() {
 		icons = new Icons();
-		consultaPrestecs = new ConsultaPrestecs();
+		//consultaPrestecs = new ConsultaPrestecs();
 		consultaLLibres = new ConsultaLlibres();
 		consultaLlibresNoRegistrat = new ConsultaLlibresNoRegistrat();
-		consultaComentaris = new ConsultaComentaris();
-		administradorComentaris = new AdministradorComentaris();
+		//consultaComentaris = new ConsultaComentaris();
+		//administradorComentaris = new AdministradorComentaris();
 		administradorLlibres = new AdministradorLlibres();
-		administradorPrestecs = new AdministradorPrestecs();
+		//administradorPrestecs = new AdministradorPrestecs();
 		administradorUsuaris = new AdministradorUsuaris();
 		centralTabPanel = new JTabbedPane();
 		
@@ -71,10 +71,10 @@ public class CentralPanel extends JPanel {
 		centralTabPanel.remove(consultaLlibresNoRegistrat);
 		centralTabPanel.addTab("Consulta LLibres ", icons.getConsultaLlbresIcon(), 
 				consultaLLibres, "Consulta els llibres de la biblioteca");
-		centralTabPanel.addTab("Prestecs ", icons.getconsultaPrestecsIcon(),
-				consultaPrestecs, "Consulta els teus prestecs");
-		centralTabPanel.addTab("Comentaris ", icons.getConsultaComentarisIcon(), 
-				consultaComentaris,	"Consultar els teus comentaris");
+		//centralTabPanel.addTab("Prestecs ", icons.getconsultaPrestecsIcon(),
+				//consultaPrestecs, "Consulta els teus prestecs");
+		//centralTabPanel.addTab("Comentaris ", icons.getConsultaComentarisIcon(), 
+				//consultaComentaris,	"Consultar els teus comentaris");
 	}
 
 	
@@ -86,12 +86,12 @@ public class CentralPanel extends JPanel {
 		centralTabPanel.remove(consultaLlibresNoRegistrat);
 		centralTabPanel.addTab("Admin Llibres ", icons.getAdministrarLibresIcon(),
 				administradorLlibres, "Administra els llibres de la biblioteca");
-		centralTabPanel.addTab("Admin Prestecs ", icons.getAdministrarPrestecsIcon(), 
-				administradorPrestecs, "Administra els prestecs de la biblioteca");
+		//centralTabPanel.addTab("Admin Prestecs ", icons.getAdministrarPrestecsIcon(), 
+				//administradorPrestecs, "Administra els prestecs de la biblioteca");
 		centralTabPanel.addTab("Admin Usuaris ", icons.getAdministrarUsuarisIcon(), 
 				administradorUsuaris, "Administra els usuaris de la biblioteca");
-		centralTabPanel.addTab("Admin Comentaris ", icons.getAdministrarComentarisIcon(), 
-				administradorComentaris, "Administra els comentaris del usuaris");
+		//centralTabPanel.addTab("Admin Comentaris ", icons.getAdministrarComentarisIcon(), 
+				//administradorComentaris, "Administra els comentaris del usuaris");
 	}
 
 	/**
@@ -100,9 +100,9 @@ public class CentralPanel extends JPanel {
 	 */
 	public void removeAdministradorPanelToDefautl() {
 		centralTabPanel.remove(administradorLlibres);
-		centralTabPanel.remove(administradorPrestecs);
+		//centralTabPanel.remove(administradorPrestecs);
 		centralTabPanel.remove(administradorUsuaris);
-		centralTabPanel.remove(administradorComentaris);
+		//centralTabPanel.remove(administradorComentaris);
 		centralTabPanel.addTab("Consulta Llibres ", icons.getConsultaLlbresIcon(), 
 				consultaLlibresNoRegistrat, "Consulta els llibres de la biblioteca com usuari no registrat");
 	}
@@ -113,8 +113,11 @@ public class CentralPanel extends JPanel {
 	 * @author SergioHernandez
 	 */
 	public void removeUsuariPanelToDefault() {
-		centralTabPanel.remove(consultaComentaris);
-		centralTabPanel.remove(consultaPrestecs);
+		centralTabPanel.remove(consultaLLibres);
+		centralTabPanel.addTab("Consulta LLibres ", icons.getConsultaLlbresIcon(), 
+				consultaLlibresNoRegistrat, "Consulta els llibres de la biblioteca com a usuari no registrat");
+		//centralTabPanel.remove(consultaComentaris);
+		//centralTabPanel.remove(consultaPrestecs);
 	}
 
 }
