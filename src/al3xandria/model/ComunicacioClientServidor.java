@@ -8,7 +8,7 @@ import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
-import al3xandria.strings.ExternalizeStrings;
+import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.HeadPanel;
 
 /**
@@ -71,8 +71,8 @@ public class ComunicacioClientServidor {
 	 */
 	public void errorConexioServidor() {
 		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("HeadPanel.errorConexioServer"),
-				ExternalizeStrings.getString("HeadPanel.titolErrorConexioServer"), JOptionPane.ERROR_MESSAGE);
+				WarningStrings.getString("HeadPanel.errorConexioServer"),
+				WarningStrings.getString("HeadPanel.titolErrorConexioServer"), JOptionPane.ERROR_MESSAGE);
 	}
 	
 	//creat per fer el video

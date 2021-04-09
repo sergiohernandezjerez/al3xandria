@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
-import al3xandria.strings.ExternalizeStrings;
+import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.HeadPanel;
 
 /**
@@ -180,8 +180,8 @@ public class ControlDeDades {
 	 */
 	public void missatgeErrorContrasenyaNoCoincideix() {
 		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("FormulariAltausuari.errorContrasenyaNoCoincideix"),
-				ExternalizeStrings.getString("FormulariAltausuari.titolErrorContrasenyaNoCoincideix"), JOptionPane.ERROR_MESSAGE);
+				WarningStrings.getString("FormulariAltausuari.errorContrasenyaNoCoincideix"),
+				WarningStrings.getString("FormulariAltausuari.titolErrorContrasenyaNoCoincideix"), JOptionPane.ERROR_MESSAGE);
 	}
 
 
@@ -272,8 +272,8 @@ public class ControlDeDades {
 	 */
 	public void errorFormatTelefon() {
 		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("FormulariAltaUsuari.errorFormatTelefon"),
-				ExternalizeStrings.getString("FormulariAltaUsuari.titolErrorFormatTelefon"), JOptionPane.ERROR_MESSAGE);
+				WarningStrings.getString("FormulariAltaUsuari.errorFormatTelefon"),
+				WarningStrings.getString("FormulariAltaUsuari.titolErrorFormatTelefon"), JOptionPane.ERROR_MESSAGE);
 	}
 	
 	/**
@@ -284,8 +284,8 @@ public class ControlDeDades {
 	 */
 	public void errorCampBuit(String campsBuits) {
 		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorCampBuit") + campsBuits,
-				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), JOptionPane.ERROR_MESSAGE);
+				WarningStrings.getString("BotoLoginLogout.missatgeErrorCampBuit") + campsBuits,
+				WarningStrings.getString("BotoLoginLogout.titolMissatgeErrorCampBuit"), JOptionPane.ERROR_MESSAGE);
 	}
 	
 	/**
@@ -296,8 +296,8 @@ public class ControlDeDades {
 	public void errorEnElFormatDelEmailIntroduit() {
 
 		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorEnElFormatDelEmailIntroduit"),
-				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorEnElFormatDelEmailIntroduit"),
+				WarningStrings.getString("BotoLoginLogout.missatgeErrorEnElFormatDelEmailIntroduit"),
+				WarningStrings.getString("BotoLoginLogout.titolMissatgeErrorEnElFormatDelEmailIntroduit"),
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
@@ -311,14 +311,14 @@ public class ControlDeDades {
 		switch (document) {
 		case "DNI":
 			JOptionPane.showMessageDialog(headPanel,
-					ExternalizeStrings.getString("FormulariAltaUsuari.errorFormatDni"),
-					ExternalizeStrings.getString("FormulariAltaUsuari.titolErrorFormatDocument"),
+					WarningStrings.getString("FormulariAltaUsuari.errorFormatDni"),
+					WarningStrings.getString("FormulariAltaUsuari.titolErrorFormatDocument"),
 					JOptionPane.ERROR_MESSAGE);
 			break;
 		case "NIE":
 			JOptionPane.showMessageDialog(headPanel,
-					ExternalizeStrings.getString("FormulariAltaUsuari.errorFormatNie"),
-					ExternalizeStrings.getString("FormulariAltaUsuari.titolErrorFormatDocument"),
+					WarningStrings.getString("FormulariAltaUsuari.errorFormatNie"),
+					WarningStrings.getString("FormulariAltaUsuari.titolErrorFormatDocument"),
 					JOptionPane.ERROR_MESSAGE);
 			break;
 

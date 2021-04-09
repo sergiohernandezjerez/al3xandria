@@ -1,4 +1,4 @@
-package al3xandria.controlador.login;
+package al3xandria.controlador.head;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import al3xandria.model.ControlDeDades;
 import al3xandria.model.objects.Usuari;
 import al3xandria.model.ComunicacioClientServidor;
-import al3xandria.strings.ExternalizeStrings;
+import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.HeadPanelMessages;
 import al3xandria.vista.footPanel.FootPanelMessages;
 import al3xandria.vista.centralPanel.CentralPanel;
@@ -170,6 +170,7 @@ public class BotoLoginLogout implements ActionListener {
 			break;
 		}
 		headPanel.setTipusUsuari(tipusUsuari);
+		usuariConectat.setTipusUsuari(tipusUsuari);
 	}
 
 	/**
@@ -196,6 +197,7 @@ public class BotoLoginLogout implements ActionListener {
 			break;
 		}
 		headPanel.setTipusUsuari(null);
+		usuariConectat.setTipusUsuari(null);
 	}
 
 	/**
@@ -206,8 +208,8 @@ public class BotoLoginLogout implements ActionListener {
 	public void avisDeLogout() {
 
 		int valor = JOptionPane.showConfirmDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.optionPaneAvisDeLogout"),
-				ExternalizeStrings.getString("BotoLoginLogout.dialogAvisDeLogout"), JOptionPane.YES_NO_OPTION,
+				WarningStrings.getString("BotoLoginLogout.optionPaneAvisDeLogout"),
+				WarningStrings.getString("BotoLoginLogout.dialogAvisDeLogout"), JOptionPane.YES_NO_OPTION,
 				JOptionPane.WARNING_MESSAGE, null);
 		if (valor == JOptionPane.YES_OPTION) {
 			comunicacioClientServidor.iniciarComunicacio("logoutOK," + emailUsuariIntroduit);
@@ -236,8 +238,8 @@ public class BotoLoginLogout implements ActionListener {
 	 */
 	public void errorDadesPerFerLogin() {
 		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorDadesPerFerLogin"),
-				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorDadesPerFerLogin"),
+				WarningStrings.getString("BotoLoginLogout.missatgeErrorDadesPerFerLogin"),
+				WarningStrings.getString("BotoLoginLogout.titolMissatgeErrorDadesPerFerLogin"),
 				JOptionPane.ERROR_MESSAGE);
 		headPanel.getEmailintroduitPerLusuari().requestFocus();
 	}
@@ -250,8 +252,8 @@ public class BotoLoginLogout implements ActionListener {
 	 */
 	public void errorPeticioDeLogout() {
 		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorPeticioDeLogout"),
-				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorPeticioDeLogout"),
+				WarningStrings.getString("BotoLoginLogout.missatgeErrorPeticioDeLogout"),
+				WarningStrings.getString("BotoLoginLogout.titolMissatgeErrorPeticioDeLogout"),
 				JOptionPane.ERROR_MESSAGE);
 	}
 
@@ -263,8 +265,8 @@ public class BotoLoginLogout implements ActionListener {
 	 */
 	public void errorUsuariJaHaFetLogin() {
 		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("BotoLoginLogout.missatgeErrorUsuariJaHaFetLogin"),
-				ExternalizeStrings.getString("BotoLoginLogout.titolMissatgeErrorUsuariJaHaFetLogin"),
+				WarningStrings.getString("BotoLoginLogout.missatgeErrorUsuariJaHaFetLogin"),
+				WarningStrings.getString("BotoLoginLogout.titolMissatgeErrorUsuariJaHaFetLogin"),
 				JOptionPane.ERROR_MESSAGE);
 	}
 
@@ -332,12 +334,5 @@ public class BotoLoginLogout implements ActionListener {
 		footPanel.getTipuUsuariLabel().setText(FootPanelMessages.getString("FootPanel.tipusUsuariAnominLabel"));
 	}
 
-	/*-------------------------- Getters and Setters Methods --------------------------*/
-	public void setTipusUsuari(String tipusUsuari) {
-		this.tipusUsuari = tipusUsuari;
-	}
-
-	public String getTipusUsuari() {
-		return tipusUsuari;
-	}
+	
 }

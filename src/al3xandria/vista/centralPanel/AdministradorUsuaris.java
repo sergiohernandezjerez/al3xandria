@@ -7,11 +7,7 @@ import java.awt.FlowLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-
 import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,24 +17,12 @@ import javax.swing.JComboBox;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
-import al3xandria.controlador.login.HeadPanelControlador;
-import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.icons.Icons;
 
 import javax.swing.border.EtchedBorder;
-import javax.swing.JTextArea;
-import javax.swing.ImageIcon;
-import java.awt.Dimension;
 import java.awt.ComponentOrientation;
 import java.awt.Cursor;
 
@@ -82,7 +66,6 @@ public class AdministradorUsuaris extends JPanel {
 		JPanel llibresPanel = new JPanel();
 		add(llibresPanel);
 		llibresPanel.setLayout(new BorderLayout(0, 10));
-		
 		
 		JPanel filtresPanel = new JPanel();
 		llibresPanel.add(filtresPanel, BorderLayout.NORTH);
@@ -147,9 +130,6 @@ public class AdministradorUsuaris extends JPanel {
 		llibresPanel.add(llistaTablePanel, BorderLayout.CENTER);
 		llistaTablePanel.setLayout(new BorderLayout(10, 0));
 		
-		
-		
-		
 		llibresTable = new JTable();
 		llibresTable.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -200,7 +180,6 @@ public class AdministradorUsuaris extends JPanel {
 		llistatLlibresScrollPane.setBackground(new Color(255, 255, 255));
 		llistaTablePanel.add(llistatLlibresScrollPane, BorderLayout.CENTER);
 		
-		
 		JPanel accionsButtonsPanel = new JPanel();
 		accionsButtonsPanel.setBackground(Color.WHITE);
 		llistaTablePanel.add(accionsButtonsPanel, BorderLayout.EAST);
@@ -223,8 +202,6 @@ public class AdministradorUsuaris extends JPanel {
 		baixaUsuariButton.setForeground(Color.WHITE);
 		baixaUsuariButton.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.baixaUsuariButton.toolTipText")); //$NON-NLS-1$
 		accionsButtonsPanel.add(baixaUsuariButton);
-		
-		
 		
 		JPanel dadesLlibrePanel = new JPanel();
 		llibresPanel.add(dadesLlibrePanel, BorderLayout.SOUTH);
@@ -357,8 +334,6 @@ public class AdministradorUsuaris extends JPanel {
 		carnetPanel.add(carnetField);
 		carnetField.setColumns(6);
 		
-		
-		
 		JPanel adrecaCodiPostalPoblacioPaisPanel = new JPanel();
 		FlowLayout fl_adrecaCodiPostalPoblacioPaisPanel = (FlowLayout) adrecaCodiPostalPoblacioPaisPanel.getLayout();
 		fl_adrecaCodiPostalPoblacioPaisPanel.setVgap(2);
@@ -476,7 +451,5 @@ public class AdministradorUsuaris extends JPanel {
 		JCheckBox actiuCheckBox = new JCheckBox("");
 		actiuPanel.add(actiuCheckBox);
 		
-		
-
 	}
 }

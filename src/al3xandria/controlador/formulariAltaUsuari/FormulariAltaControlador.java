@@ -1,4 +1,4 @@
-package al3xandria.controlador;
+package al3xandria.controlador.formulariAltaUsuari;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +12,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 
 import al3xandria.model.ControlDeDades;
-import al3xandria.strings.ExternalizeStrings;
+import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.FormulariAltaUsuari;
 import al3xandria.vista.headPanel.HeadPanelMessages;
 
@@ -207,8 +207,8 @@ ItemListener, WindowListener {
 	 */
 	public void avisTancamentFormulari() {
 		int valor = JOptionPane.showConfirmDialog(formulariAltaUsuari,
-				ExternalizeStrings.getString("ForumulariAltausuari.missatgeAvisTancamentFormulari"),
-				ExternalizeStrings.getString("ForumulariAltausuari.titolMissatgeAvisTancamentFormulari"),
+				WarningStrings.getString("ForumulariAltausuari.missatgeAvisTancamentFormulari"),
+				WarningStrings.getString("ForumulariAltausuari.titolMissatgeAvisTancamentFormulari"),
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		if (valor == JOptionPane.YES_OPTION) {
 			formulariAltaUsuari.setVisible(false);
@@ -224,7 +224,7 @@ ItemListener, WindowListener {
 	 */
 	public void confirmacioEnviamentDadesAltaUsuari() {
 		int valor = JOptionPane.showConfirmDialog(formulariAltaUsuari,dadesUsuariFormulari(),
-				ExternalizeStrings.getString("FormulariAltaUsuari.titolConfirmarEnviarDadesAltaUsuari"),
+				WarningStrings.getString("FormulariAltaUsuari.titolConfirmarEnviarDadesAltaUsuari"),
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		if (valor == JOptionPane.YES_OPTION) {
 			avisDadesAltaUsuariEnviades();
@@ -240,8 +240,8 @@ ItemListener, WindowListener {
 	 */
 	public void avisDadesAltaUsuariEnviades() {
 		JOptionPane.showMessageDialog(formulariAltaUsuari,
-				ExternalizeStrings.getString("FormulariAltaUsuari.avisDadesAltaUsuariEnviades"),
-				ExternalizeStrings.getString("FormulariAltaUsuari.titolAvisDadesAltaUsuariEnviades"),
+				WarningStrings.getString("FormulariAltaUsuari.avisDadesAltaUsuariEnviades"),
+				WarningStrings.getString("FormulariAltaUsuari.titolAvisDadesAltaUsuariEnviades"),
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 

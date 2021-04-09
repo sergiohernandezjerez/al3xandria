@@ -6,7 +6,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 
 import al3xandria.model.ComunicacioClientServidor;
-import al3xandria.strings.ExternalizeStrings;
+import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.HeadPanel;
 
 public class ComportamentTancarAplicacio implements WindowListener{
@@ -77,8 +77,8 @@ public class ComportamentTancarAplicacio implements WindowListener{
 	 */
 	public void avisImposibleTancarAplicacio() {
 		JOptionPane.showMessageDialog(headPanel,
-				ExternalizeStrings.getString("PrincipalFrame.missatgeNoEsPotTancarAplicacio"),
-				ExternalizeStrings.getString("PrincipalFrame.titolMissatgeNoEsPotTancarAplicacio"),
+				WarningStrings.getString("PrincipalFrame.missatgeNoEsPotTancarAplicacio"),
+				WarningStrings.getString("PrincipalFrame.titolMissatgeNoEsPotTancarAplicacio"),
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 
@@ -91,13 +91,13 @@ public class ComportamentTancarAplicacio implements WindowListener{
 	 */
 	public void avisTancamentAplicacio() {
 		int valor = JOptionPane.showConfirmDialog(headPanel,
-				ExternalizeStrings.getString("PrincipalFrame.missatgeAvisTancamentAplicacio"),
-				ExternalizeStrings.getString("PrincipalFrame.titolMissatgeAvisTancamentAplicacio"),
+				WarningStrings.getString("PrincipalFrame.missatgeAvisTancamentAplicacio"),
+				WarningStrings.getString("PrincipalFrame.titolMissatgeAvisTancamentAplicacio"),
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		if (valor == JOptionPane.YES_OPTION) {
 			JOptionPane.showMessageDialog(headPanel,
-					ExternalizeStrings.getString("PrincipalFrame.missatgeAcomiadamentAplicacio"),
-					ExternalizeStrings.getString("PrincipalFrame.titolMissatgeAcomiadamentAplicacio"),
+					WarningStrings.getString("PrincipalFrame.missatgeAcomiadamentAplicacio"),
+					WarningStrings.getString("PrincipalFrame.titolMissatgeAcomiadamentAplicacio"),
 					JOptionPane.INFORMATION_MESSAGE);
 			comunicacioClientServidor.iniciarComunicacio("logoutOK," + headPanel.getEmailintroduitPerLusuari().getText());
 			System.exit(0);

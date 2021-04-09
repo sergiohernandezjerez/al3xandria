@@ -73,7 +73,6 @@ public class ConsultaLlibres extends JPanel {
 		add(llibresPanel);
 		llibresPanel.setLayout(new BorderLayout(0, 10));
 		
-		
 		JPanel filtresPanel = new JPanel();
 		llibresPanel.add(filtresPanel, BorderLayout.NORTH);
 		filtresPanel.setLayout(new BorderLayout(0, 0));
@@ -138,26 +137,6 @@ public class ConsultaLlibres extends JPanel {
 		llibresPanel.add(llistaTablePanel, BorderLayout.CENTER);
 		llistaTablePanel.setLayout(new BorderLayout(10, 0));
 		
-		
-		
-		String[] columns = {"id", "Titol", "Autor", "isbn", "Genere", "Editorial", "Data"};
-		String[][] data = {
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				},
-				{
-					"002", "20000 Leguas", "Perez Reverte", "9879879879879", "Aventura", "Anagrama", "12/05/1789"
-				}
-		};
 		llibresTable = new JTable();
 		llibresTable.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -199,7 +178,6 @@ public class ConsultaLlibres extends JPanel {
 		llistatLlibresScrollPane.setBackground(new Color(255, 255, 255));
 		//llistatLlibresScrollPane.setViewportView(llibresTable);
 		llistaTablePanel.add(llistatLlibresScrollPane, BorderLayout.CENTER);
-		
 		
 		JPanel accionsButtonsPanel = new JPanel();
 		accionsButtonsPanel.setBackground(Color.WHITE);
@@ -363,8 +341,6 @@ public class ConsultaLlibres extends JPanel {
 		puntuacioField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibres.puntuacioField.toolTipText")); //$NON-NLS-1$
 		puntuacioPanel.add(puntuacioField);
 		puntuacioField.setColumns(4);
-		
-		
 		
 		JPanel isbnDataPaginesReservesPanel = new JPanel();
 		FlowLayout fl_isbnDataPaginesReservesPanel = (FlowLayout) isbnDataPaginesReservesPanel.getLayout();

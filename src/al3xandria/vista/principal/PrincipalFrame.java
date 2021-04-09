@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import al3xandria.controlador.principal.ComportamentTancarAplicacio;
+import al3xandria.model.objects.Usuari;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.headPanel.HeadPanel;
@@ -28,6 +29,7 @@ public class PrincipalFrame extends JFrame {
 	private CentralPanel centralPanel;
 	private HeadPanel headPanel;
 	private JPanel contentPane;
+	private Usuari usuariConectat;
 	/**
 	 * Contructor
 	 * 
@@ -37,15 +39,9 @@ public class PrincipalFrame extends JFrame {
 		setMinimumSize(new Dimension(834, 850));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 850);
-		footPanel = new FootPanel();
-		centralPanel = new CentralPanel();
-		headPanel = new HeadPanel(footPanel, centralPanel);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
 		
-		tancarAplicacio();
+		
+		
 		iniciarComponents();
 
 	}
@@ -56,10 +52,19 @@ public class PrincipalFrame extends JFrame {
 	 * @author SergioHernandez
 	 */
 	private void iniciarComponents() {
+		usuariConectat = new Usuari();
+		footPanel = new FootPanel(usuariConectat);
+		centralPanel = new CentralPanel(usuariConectat);
+		headPanel = new HeadPanel(footPanel, centralPanel, usuariConectat);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
 		contentPane.add(headPanel, BorderLayout.NORTH);
 		contentPane.add(centralPanel, BorderLayout.CENTER);
 		contentPane.add(footPanel, BorderLayout.SOUTH);
-
+		tancarAplicacio();
 	}
 
 	/**

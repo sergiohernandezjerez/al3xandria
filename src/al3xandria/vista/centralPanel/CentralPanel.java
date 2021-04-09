@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import al3xandria.model.objects.Usuari;
 import al3xandria.vista.icons.Icons;
 
 import javax.swing.JTabbedPane;
@@ -20,6 +22,8 @@ public class CentralPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Usuari usuariConectat;
+	private Icons icons;
 	
 	private ConsultaLlibres consultaLLibres;
 	private AdministradorLlibres administradorLlibres;
@@ -31,10 +35,9 @@ public class CentralPanel extends JPanel {
 	private ConsultaLlibresNoRegistrat consultaLlibresNoRegistrat;
 	
 	private JTabbedPane centralTabPanel;
-	private Icons icons;
-	
-	
-	public CentralPanel() {
+
+	public CentralPanel(Usuari usuariConectat) {
+		this.usuariConectat = usuariConectat;
 		setForeground(Color.BLACK);
 		setBackground(Color.WHITE);
 		setBorder(new LineBorder(Color.decode("#00838f")));

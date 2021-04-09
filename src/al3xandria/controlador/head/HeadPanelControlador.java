@@ -1,4 +1,4 @@
-package al3xandria.controlador.login;
+package al3xandria.controlador.head;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
-import al3xandria.strings.ExternalizeStrings;
+import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.FormulariAltaUsuari;
 import al3xandria.vista.headPanel.HeadPanel;
 
@@ -58,8 +58,8 @@ public class HeadPanelControlador implements ActionListener, MouseListener {
 	 */
 	public void mostrarInformacioRecuperacioContrasenya() {
 		JOptionPane.showMessageDialog(formulariAltaUsuari,
-				ExternalizeStrings.getString("HeadPanel.missatgeRecuperarContrasenya"),
-				ExternalizeStrings.getString("HeadPanel.titolMissatgeRecuperarContrasenya"),
+				WarningStrings.getString("HeadPanel.missatgeRecuperarContrasenya"),
+				WarningStrings.getString("HeadPanel.titolMissatgeRecuperarContrasenya"),
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 

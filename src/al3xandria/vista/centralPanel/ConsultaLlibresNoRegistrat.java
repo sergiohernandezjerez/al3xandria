@@ -64,7 +64,6 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		//TODO ConsultesLlibresNoRegistrat mostrar llistat dels llibres
 		System.out.println("select * from llibres");
 		
-
 	}
 
 	private void iniciarComponents() {
@@ -344,8 +343,6 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		puntuacioField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.puntuacioField.toolTipText")); //$NON-NLS-1$
 		puntuacioPanel.add(puntuacioField);
 		puntuacioField.setColumns(4);
-		
-		
 		
 		JPanel isbnDataPaginesReservesPanel = new JPanel();
 		FlowLayout fl_isbnDataPaginesReservesPanel = (FlowLayout) isbnDataPaginesReservesPanel.getLayout();

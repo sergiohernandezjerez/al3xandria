@@ -1,11 +1,10 @@
-package al3xandria.controlador;
+package al3xandria.controlador.administradorLlibres;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
-import al3xandria.strings.ExternalizeStrings;
 import al3xandria.vista.centralPanel.AdministradorLlibres;
 import al3xandria.vista.centralPanel.CentralPanelMessages;
 
@@ -55,10 +54,10 @@ public class AdministradorLlibresControlador implements MouseListener {
 			System.out.println();
 			break;
 		case "Genere":
-			System.out.println("Enviar Gènere: " + nouElement);
+			System.out.println("Enviar Gènere: " + nouRegistre);
 			break;
 		case "Editorial":
-			System.out.println("Enviar Editorial: " + nouElement);
+			System.out.println("Enviar Editorial: " + nouRegistre);
 			break;
 		default:
 			break;

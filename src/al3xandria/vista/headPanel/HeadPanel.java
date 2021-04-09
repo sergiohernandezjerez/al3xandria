@@ -15,9 +15,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-import al3xandria.controlador.login.BotoLoginLogout;
-import al3xandria.controlador.login.HeadPanelControlador;
-import al3xandria.strings.ExternalizeStrings;
+
+import al3xandria.controlador.head.BotoLoginLogout;
+import al3xandria.controlador.head.HeadPanelControlador;
+import al3xandria.model.objects.Usuari;
+import al3xandria.strings.WarningStrings;
 import al3xandria.vista.centralPanel.CentralPanel;
 import al3xandria.vista.footPanel.FootPanel;
 import al3xandria.vista.icons.Icons;
@@ -29,6 +31,8 @@ import al3xandria.vista.icons.Icons;
  *
  */
 public class HeadPanel extends JPanel {
+	
+	private Usuari usuariConectat;
 
 	private JTextField emailintroduitPerLusuari;
 	private JPasswordField contrasenyaIntroduidaPerLusuari;
@@ -54,8 +58,9 @@ public class HeadPanel extends JPanel {
 	private JPanel panelLoginInterior;
 	private JPanel contrasenyaLabelPanel;
 
-	public HeadPanel(FootPanel footPanel, CentralPanel centralPanel) {
-		setTipusUsuari(null);
+	public HeadPanel(FootPanel footPanel, CentralPanel centralPanel, Usuari usuariConectat) {
+		this.usuariConectat = usuariConectat;
+		usuariConectat.setTipusUsuari(null);
 		setBackground(Color.WHITE);
 		icones = new Icons();
 
@@ -91,7 +96,6 @@ public class HeadPanel extends JPanel {
 		gbl_panelLoginInterior.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelLoginInterior.setLayout(gbl_panelLoginInterior);
 		
-		
 		emailLoginLabel = new JLabel(HeadPanelMessages.getString("HeadPanel.emailLoginLabel.text")); //$NON-NLS-1$
 		emailLoginLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_emailLoginLabel = new GridBagConstraints();
@@ -111,13 +115,11 @@ public class HeadPanel extends JPanel {
 		panelLoginInterior.add(contrasenyaLabelPanel, gbc_contrasenyaLabelPanel);
 		contrasenyaLabelPanel.setLayout(new BorderLayout(0, 0));
 
-		
 		contrasenyaLoginLabel = new JLabel(HeadPanelMessages.getString("HeadPanel.contrasenyaLoginLabel.text")); //$NON-NLS-1$
 		contrasenyaLoginLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		contrasenyaLoginLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		contrasenyaLabelPanel.add(contrasenyaLoginLabel);
 		
-
 		emailintroduitPerLusuari = new JTextField();
 		emailintroduitPerLusuari.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		emailintroduitPerLusuari.setToolTipText(HeadPanelMessages.getString("HeadPanel.emailintroduitPerLusuari.toolTipText")); //$NON-NLS-1$
@@ -129,8 +131,6 @@ public class HeadPanel extends JPanel {
 		panelLoginInterior.add(emailintroduitPerLusuari, gbc_emailintroduitPerLusuari);
 		emailintroduitPerLusuari.setColumns(17);
 
-
-		
 		contrasenyaIntroduidaPerLusuari = new JPasswordField();
 		contrasenyaIntroduidaPerLusuari.setToolTipText(HeadPanelMessages.getString("HeadPanel.contrasenyaIntroduidaPerLusuari.toolTipText")); //$NON-NLS-1$
 		contrasenyaIntroduidaPerLusuari.setEchoChar('*');
@@ -141,8 +141,7 @@ public class HeadPanel extends JPanel {
 		gbc_contrasenyaIntroduidaPerLusuari.gridy = 1;
 		panelLoginInterior.add(contrasenyaIntroduidaPerLusuari, gbc_contrasenyaIntroduidaPerLusuari);
 		contrasenyaIntroduidaPerLusuari.setColumns(10);
-		
-
+	
 		hasOblidatLaContrasenyaLabel = new JLabel(HeadPanelMessages.getString("HeadPanel.hasOblidatLaContrasenyaLabel.text")); //$NON-NLS-1$
 		hasOblidatLaContrasenyaLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		hasOblidatLaContrasenyaLabel.setForeground(Color.decode("#00838f")); 
@@ -157,8 +156,6 @@ public class HeadPanel extends JPanel {
 		gbc_hasOblidatLaContrasenyaLabel.gridx = 1;
 		gbc_hasOblidatLaContrasenyaLabel.gridy = 2;
 		panelLoginInterior.add(hasOblidatLaContrasenyaLabel, gbc_hasOblidatLaContrasenyaLabel);
-		
-		
 		
 		nouUsuariButton = new JButton(HeadPanelMessages.getString("HeadPanel.nouUsuariButton.text")); //$NON-NLS-1$
 		nouUsuariButton.setForeground(Color.WHITE);
@@ -208,8 +205,6 @@ public class HeadPanel extends JPanel {
 		mostrarContrasenya.setHorizontalAlignment(SwingConstants.LEFT);
 		contrasenyaLabelPanel.add(mostrarContrasenya, BorderLayout.EAST);
 
-		
-		
 	}
 	
 	
@@ -242,7 +237,6 @@ public class HeadPanel extends JPanel {
 		return contrasenyaIntroduidaPerLusuari;
 	}
 
-	
 	public void setContrasenyaIntroduidaPerLusuari(JPasswordField contrasenyaIntroduidaPerLusuari) {
 		this.contrasenyaIntroduidaPerLusuari = contrasenyaIntroduidaPerLusuari;
 	}
@@ -319,6 +313,10 @@ public class HeadPanel extends JPanel {
 		return mostrarContrasenya;
 	}
 
+	public Usuari getUsuariConectat() {
+		return usuariConectat;
+	}
+	
 	public void setTipusUsuari(String tipusUsuari) {
 		this.tipusUsuari = tipusUsuari;
 	}
@@ -326,7 +324,5 @@ public class HeadPanel extends JPanel {
 	public String getTipusUsuari() {
 		return tipusUsuari;
 	}
-	
-	
 	
 }

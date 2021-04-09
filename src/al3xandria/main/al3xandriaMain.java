@@ -32,8 +32,6 @@ public class al3xandriaMain {
 			e.printStackTrace();
 		}
 		
-	
-		
 		//client
 		mostraCartellAplicacioIniciada();
 		PrincipalFrame principalFrame = new PrincipalFrame();

@@ -7,9 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
-import al3xandria.controlador.FormulariAltaControlador;
+import al3xandria.controlador.formulariAltaUsuari.FormulariAltaControlador;
 import al3xandria.controlador.principal.ComportamentTancarAplicacio;
-import al3xandria.strings.ExternalizeStrings;
+import al3xandria.strings.WarningStrings;
 import al3xandria.vista.icons.Icons;
 
 import javax.swing.JLabel;
@@ -292,9 +292,10 @@ public class FormulariAltaUsuari extends JFrame {
 		provinciaComboBox.setBounds(117, 256, 140, 22);
 		contentPane.add(provinciaComboBox);
 		
-		
 	}
 
+	
+	/*-------------------------- Getters and Setters Methods --------------------------*/
 	public JTextField getNomField() {
 		return nomField;
 	}
