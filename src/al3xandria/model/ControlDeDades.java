@@ -66,9 +66,7 @@ public class ControlDeDades {
 		String formatDNI = "";
 		if(nie.length() == 9) {
 			partNumericaILletra = nie.substring(1, 9);
-			System.out.println(partNumericaILletra);
 			lletraInicial = nie.charAt(0);
-			System.out.println(lletraInicial);
 			if(lletraInicial == 'X') {
 				formatDNI = "0" + partNumericaILletra;
 			}
@@ -78,7 +76,6 @@ public class ControlDeDades {
 			if(lletraInicial == 'Z') {
 				formatDNI = "2" + partNumericaILletra;
 			}
-			System.out.println(formatDNI);
 		}
 		
 		if(comprovacioValidezaDNI(formatDNI)) {
