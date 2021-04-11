@@ -27,6 +27,7 @@ public class Icons {
 	private Icon mostrarContrasenyaIcon;
 	private Icon lupaIcon;
 	private Icon addIcon;
+	private Icon cancelIcon;
 
 	public Icons() {
 		consultaLlbresIcon = new ImageIcon(
@@ -77,6 +78,10 @@ public class Icons {
 		
 		addIcon = new ImageIcon(
 				new ImageIcon("." + File.separator + "resources" + File.separator + "addIcon.png")
+				.getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT));
+		
+		cancelIcon = new ImageIcon(
+				new ImageIcon("." + File.separator + "resources" + File.separator + "cancelIcon.png")
 				.getImage().getScaledInstance(8, 8, Image.SCALE_DEFAULT));
 	}
 
@@ -135,6 +140,10 @@ public class Icons {
 	
 	public Icon getAddIcon() {
 		return addIcon;
+	}
+	
+	public Icon getCancelIcon() {
+		return cancelIcon;
 	}
 
 }

@@ -21,17 +21,7 @@ public class ConnexioDB {
 		try {
 			//1. Crear la conexion
 			connexio = DriverManager.getConnection(URL, USER, PASS);
-			//2. crear objecto Statement
-			Statement miStatement = connexio.createStatement();
 			
-			//3. ejecuta sql y crerar Resulset
-			String query = "select * from llibres";
-			ResultSet resultSet = miStatement.executeQuery(query);
-
-			//4. Recorrer el resulset
-			while(resultSet.next()) {
-				System.out.println(resultSet.getString("titol"));
-			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());

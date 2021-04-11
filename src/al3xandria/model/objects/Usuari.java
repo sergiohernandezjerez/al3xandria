@@ -14,8 +14,10 @@ public class Usuari {
 	private String provincia;
 	private String pais;
 	private String telefon;
+	private String carnet;
 	private String tipusUsuari;
 	private int puntuacioUsuari;
+	private boolean actiu;
 	
 	private String idSessio;
 	
@@ -26,7 +28,7 @@ public class Usuari {
 	
 	public Usuari(String nomUsuari, String cognomsUsuari, String dniNie, String email, String contrasenya,
 			String adreca, String codiPostal, String poblacio, String provincia, String pais, String telefon,
-			String tipusUsuari, int puntuacioUsuari) {
+			String carnet, String tipusUsuari, int puntuacioUsuari, boolean actiu) {
 		this.nomUsuari = nomUsuari;
 		this.cognomsUsuari = cognomsUsuari;
 		this.dniNie = dniNie;
@@ -38,21 +40,27 @@ public class Usuari {
 		this.provincia = provincia;
 		this.pais = pais;
 		this.telefon = telefon;
+		this.carnet = carnet;
 		this.tipusUsuari = tipusUsuari;
 		this.puntuacioUsuari = puntuacioUsuari;
+		this.actiu = actiu;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuari [idUsuari=" + idUsuari + ", nomUsuari=" + nomUsuari + ", cognomsUsuari=" + cognomsUsuari + ", dniNie=" + dniNie + ", email="
-				+ email + ", contrasenya=" + contrasenya + ", adreca=" + adreca + ", codiPostal=" + codiPostal
-				+ ", poblacio=" + poblacio + ", provincia=" + provincia + ", pais=" + pais + ", telefon=" + telefon
-				+ ", tipusUsuari=" + tipusUsuari + ", puntuacioUsuari=" + puntuacioUsuari + "]";
+		return "Usuari [idUsuari=" + idUsuari + ", nomUsuari=" + nomUsuari + ", cognomsUsuari=" + cognomsUsuari
+				+ ", dniNie=" + dniNie + ", email=" + email + ", contrasenya=" + contrasenya + ", adreca=" + adreca
+				+ ", codiPostal=" + codiPostal + ", poblacio=" + poblacio + ", provincia=" + provincia + ", pais="
+				+ pais + ", telefon=" + telefon + ", carnet=" + carnet + ", tipusUsuari=" + tipusUsuari
+				+ ", puntuacioUsuari=" + puntuacioUsuari + ", actiu=" + actiu + ", idSessio=" + idSessio + "]";
 	}
-
+	
+	
+	
 	
 	
 /*-------------------------- Getters and Setters Methods --------------------------*/
+	
 	
 	public String getIdSessio() {
 		return idSessio;
@@ -174,20 +182,39 @@ public class Usuari {
 	public void setPuntuacioUsuari(int puntuacioUsuari) {
 		this.puntuacioUsuari = puntuacioUsuari;
 	}
-
 	
+	public String getCarnet() {
+		return carnet;
+	}
+	
+	public void setCarnet(String carnet) {
+		this.carnet = carnet;
+	}
+	
+	public boolean getActiu() {
+		return actiu;
+	}
+	
+	public void setActiu(boolean actiu) {
+		this.actiu = actiu;
+	}
+
+
 	
 	/*-------------------------- equals and hashcode Methods --------------------------*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (actiu ? 1231 : 1237);
 		result = prime * result + ((adreca == null) ? 0 : adreca.hashCode());
+		result = prime * result + ((carnet == null) ? 0 : carnet.hashCode());
 		result = prime * result + ((codiPostal == null) ? 0 : codiPostal.hashCode());
 		result = prime * result + ((cognomsUsuari == null) ? 0 : cognomsUsuari.hashCode());
 		result = prime * result + ((contrasenya == null) ? 0 : contrasenya.hashCode());
 		result = prime * result + ((dniNie == null) ? 0 : dniNie.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((idSessio == null) ? 0 : idSessio.hashCode());
 		result = prime * result + idUsuari;
 		result = prime * result + ((nomUsuari == null) ? 0 : nomUsuari.hashCode());
 		result = prime * result + ((pais == null) ? 0 : pais.hashCode());
@@ -199,6 +226,7 @@ public class Usuari {
 		return result;
 	}
 
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -208,10 +236,17 @@ public class Usuari {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuari other = (Usuari) obj;
+		if (actiu != other.actiu)
+			return false;
 		if (adreca == null) {
 			if (other.adreca != null)
 				return false;
 		} else if (!adreca.equals(other.adreca))
+			return false;
+		if (carnet == null) {
+			if (other.carnet != null)
+				return false;
+		} else if (!carnet.equals(other.carnet))
 			return false;
 		if (codiPostal == null) {
 			if (other.codiPostal != null)
@@ -237,6 +272,11 @@ public class Usuari {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
+			return false;
+		if (idSessio == null) {
+			if (other.idSessio != null)
+				return false;
+		} else if (!idSessio.equals(other.idSessio))
 			return false;
 		if (idUsuari != other.idUsuari)
 			return false;
@@ -274,6 +314,11 @@ public class Usuari {
 			return false;
 		return true;
 	}
+
+	
+	
+
+	
 	
 	
 	
