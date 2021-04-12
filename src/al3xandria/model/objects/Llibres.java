@@ -3,6 +3,8 @@ package al3xandria.model.objects;
 import java.sql.Date;
 import java.util.Arrays;
 
+import org.junit.internal.matchers.StacktracePrintingMatcher;
+
 public class Llibres {
 
 	private int idLlibre;
@@ -17,6 +19,7 @@ public class Llibres {
 	private String[] autor;
 	private String editorial;
 	private String genere;
+	private boolean estaReservat;
 	
 	
 	public Llibres() {
@@ -25,7 +28,7 @@ public class Llibres {
 	
 	
 	public Llibres(int idLlibre, String isbn, String titol, Date dataPublicacio, String edicio, int puntuacio,
-			int numeroDeReserves, String sinopsi, int numeroDePagines, String[] autor, String editorial, String genere) {
+			int numeroDeReserves, String sinopsi, int numeroDePagines, String[] autor, String editorial, String genere, boolean estaReservat) {
 		this.idLlibre = idLlibre;
 		this.isbn = isbn;
 		this.titol = titol;
@@ -38,6 +41,7 @@ public class Llibres {
 		this.autor = autor;
 		this.editorial = editorial;
 		this.genere = genere;
+		this.estaReservat = estaReservat;
 	}
 	
 	
@@ -46,7 +50,7 @@ public class Llibres {
 		return "Llibres [idLlibre=" + idLlibre + ", isbn=" + isbn + ", titol=" + titol + ", dataPublicacio="
 				+ dataPublicacio + ", edicio=" + edicio + ", puntuacio=" + puntuacio + ", numeroDeReserves="
 				+ numeroDeReserves + ", sinopsi=" + sinopsi + ", numeroDePagines=" + numeroDePagines + ", autor="
-				+ Arrays.toString(autor) + ", editorial=" + editorial + ", genere=" + genere + "]";
+				+ Arrays.toString(autor) + ", editorial=" + editorial + ", genere=" + genere + ", reservat=" + estaReservat + "]";
 	}
 
 
@@ -106,12 +110,22 @@ public class Llibres {
 		this.numeroDePagines = numeroDePagines;
 	}
 	
-	public String[] getAutor() {
-		return autor;
+	public String getAutor() {
+		String autors = "";
+		if(autor.length == 1) {
+			autors = autor[0];
+		}else {
+			for(int i = 0; i < autor.length; i++) {
+				autors = autors + autor[i] + ", ";
+			}
+		}
+		
+		return autors;
 	}
 
-	public void setAutor(String[] autor) {
-		this.autor = autor;
+	public void setAutor(String autor) {
+		String[] autors = autor.split(",");
+		this.autor = autors;
 	}
 
 	public String getEditorial() {
@@ -129,8 +143,17 @@ public class Llibres {
 	public void setGenere(String genere) {
 		this.genere = genere;
 	}
+	
+	public void setEstaReservat(boolean estaReservat) {
+		this.estaReservat = estaReservat;
+	}
+	
+	public boolean getEstaReservat() {
+		return estaReservat;
+	}
 
 
+	
 	/*-------------------------- equals and hashcode Methods --------------------------*/
 	@Override
 	public int hashCode() {
@@ -140,6 +163,7 @@ public class Llibres {
 		result = prime * result + ((dataPublicacio == null) ? 0 : dataPublicacio.hashCode());
 		result = prime * result + ((edicio == null) ? 0 : edicio.hashCode());
 		result = prime * result + ((editorial == null) ? 0 : editorial.hashCode());
+		result = prime * result + (estaReservat ? 1231 : 1237);
 		result = prime * result + ((genere == null) ? 0 : genere.hashCode());
 		result = prime * result + idLlibre;
 		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
@@ -178,6 +202,8 @@ public class Llibres {
 				return false;
 		} else if (!editorial.equals(other.editorial))
 			return false;
+		if (estaReservat != other.estaReservat)
+			return false;
 		if (genere == null) {
 			if (other.genere != null)
 				return false;
@@ -208,6 +234,10 @@ public class Llibres {
 			return false;
 		return true;
 	}
+
+
+
+	
 	
 	
 	

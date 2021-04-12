@@ -28,6 +28,8 @@ public class Icons {
 	private Icon lupaIcon;
 	private Icon addIcon;
 	private Icon cancelIcon;
+	private Icon seguentIcon;
+	private Icon anteriorIcon;
 
 	public Icons() {
 		consultaLlbresIcon = new ImageIcon(
@@ -74,6 +76,14 @@ public class Icons {
 		
 		lupaIcon = new ImageIcon(
 				new ImageIcon("." + File.separator + "resources" + File.separator + "lupaIcon.png")
+						.getImage());
+		
+		seguentIcon = new ImageIcon(
+				new ImageIcon("." + File.separator + "resources" + File.separator + "seguentIcon.png")
+						.getImage());
+		
+		anteriorIcon = new ImageIcon(
+				new ImageIcon("." + File.separator + "resources" + File.separator + "anteriorIcon.png")
 						.getImage());
 		
 		addIcon = new ImageIcon(
@@ -144,6 +154,14 @@ public class Icons {
 	
 	public Icon getCancelIcon() {
 		return cancelIcon;
+	}
+	
+	public Icon getAnteriorIcon() {
+		return anteriorIcon;
+	}
+	
+	public Icon getSeguentIcon() {
+		return seguentIcon;
 	}
 
 }

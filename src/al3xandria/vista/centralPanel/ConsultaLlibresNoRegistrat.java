@@ -33,6 +33,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JTextArea;
 import java.awt.ComponentOrientation;
 import javax.swing.ButtonGroup;
+import javax.swing.ListSelectionModel;
+import java.awt.Cursor;
 
 
 
@@ -42,6 +44,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int rowActiu = 0;
 	private JTextField cercaField;
 	private JTable llibresTable;
 	private JTextField idLlibreField;
@@ -74,9 +77,9 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 	private JButton mostrarLlibreButton;
 	private JPanel dadesLlibrePanel;
 	private JPanel dadesLlibreGridPanel;
-	private JPanel borderTopPanel;
+	private JPanel paginadorPanel;
 	private JPanel idTitolDisponiblePanel;
-	private FlowLayout fl_borderTopPanel;
+	private FlowLayout fl_paginadorPanel;
 	private JPanel idPanel;
 	private JLabel idLabel;
 	private JPanel titolPanel;
@@ -114,6 +117,16 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 	
 	private LlibresModel llibresModel;
 	private JLabel esborrarLabel;
+	private JPanel edicioPanel;
+	private JLabel edicioLabel;
+	private JTextField edicioField;
+	private JLabel anteriorLabel;
+	private JLabel seguentLabel;
+	private JLabel anteriorIconLabel;
+	private JLabel seguentIconLabel;
+	private JLabel ofLabel;
+	private JTextField rowActualField;
+	private JTextField rowTotalsField;
 
 	/**
 	 * Create the panel.
@@ -211,9 +224,10 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		llistaTablePanel.setLayout(new BorderLayout(10, 0));
 		
 		llibresTable = new JTable();
-		llibresTable.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		llibresTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		llibresTable.setFillsViewportHeight(true);
+		llibresTable.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
 		llibresTable.setBackground(new Color(255, 255, 255));
 		
@@ -252,16 +266,53 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		gbl_dadesLlibreGridPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		dadesLlibreGridPanel.setLayout(gbl_dadesLlibreGridPanel);
 		
-		borderTopPanel = new JPanel();
-		fl_borderTopPanel = (FlowLayout) borderTopPanel.getLayout();
-		fl_borderTopPanel.setVgap(0);
-		fl_borderTopPanel.setHgap(0);
-		GridBagConstraints gbc_borderTopPanel = new GridBagConstraints();
-		gbc_borderTopPanel.fill = GridBagConstraints.BOTH;
-		gbc_borderTopPanel.insets = new Insets(0, 0, 5, 0);
-		gbc_borderTopPanel.gridx = 0;
-		gbc_borderTopPanel.gridy = 0;
-		dadesLlibreGridPanel.add(borderTopPanel, gbc_borderTopPanel);
+		paginadorPanel = new JPanel();
+		fl_paginadorPanel = (FlowLayout) paginadorPanel.getLayout();
+		fl_paginadorPanel.setVgap(0);
+		GridBagConstraints gbc_paginadorPanel = new GridBagConstraints();
+		gbc_paginadorPanel.fill = GridBagConstraints.BOTH;
+		gbc_paginadorPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_paginadorPanel.gridx = 0;
+		gbc_paginadorPanel.gridy = 0;
+		paginadorPanel.setVisible(false);
+		dadesLlibreGridPanel.add(paginadorPanel, gbc_paginadorPanel);
+		
+		anteriorLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.lblNewLabel.text")); //$NON-NLS-1$
+		paginadorPanel.add(anteriorLabel);
+		
+		anteriorIconLabel = new JLabel("");
+		anteriorIconLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		anteriorIconLabel.setIcon(icons.getAnteriorIcon());
+		anteriorIconLabel.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.anteriorLabel.toolTipText")); //$NON-NLS-1$
+		anteriorIconLabel.addMouseListener(new ConsultaLlibresNoRegistratControlador(this));
+		paginadorPanel.add(anteriorIconLabel);
+		
+		rowActualField = new JTextField();
+		rowActualField.setEditable(false);
+		rowActualField.setText("");
+		paginadorPanel.add(rowActualField);
+		rowActualField.setColumns(2);
+		
+		ofLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.ofLabel.text")); //$NON-NLS-1$
+		paginadorPanel.add(ofLabel);
+		
+		seguentIconLabel = new JLabel("");
+		seguentIconLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		seguentIconLabel.setIcon(icons.getSeguentIcon());
+		seguentIconLabel.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.seguentLabel.toolTipText")); //$NON-NLS-1$
+		seguentIconLabel.addMouseListener(new ConsultaLlibresNoRegistratControlador(this));
+		
+		rowTotalsField = new JTextField();
+		rowTotalsField.setEditable(false);
+		rowTotalsField.setText("");
+		paginadorPanel.add(rowTotalsField);
+		rowTotalsField.setColumns(2);
+		paginadorPanel.add(seguentIconLabel);
+		
+		seguentLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.lblNewLabel_1.text")); //$NON-NLS-1$
+		paginadorPanel.add(seguentLabel);
+		
+		
 		
 		idTitolDisponiblePanel = new JPanel();
 		GridBagConstraints gbc_idTitolDisponiblePanel = new GridBagConstraints();
@@ -279,6 +330,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		idPanel.add(idLabel);
 		
 		idLlibreField = new JTextField();
+		idLlibreField.setEditable(false);
 		idLlibreField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.idLlibreField.toolTipText")); //$NON-NLS-1$
 		idPanel.add(idLlibreField);
 		idLlibreField.setColumns(3);
@@ -290,6 +342,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		titolPanel.add(titolLabel);
 		
 		titolField = new JTextField();
+		titolField.setEditable(false);
 		titolField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.titolField.toolTipText")); //$NON-NLS-1$
 		titolPanel.add(titolField);
 		titolField.setColumns(40);
@@ -302,6 +355,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		disponiblePanel.add(reservatLabel);
 		
 		reservatCheckBox = new JCheckBox("");
+		reservatCheckBox.setEnabled(false);
 		disponiblePanel.add(reservatCheckBox);
 		
 		autorGenereEditorialPuntuacioPanel = new JPanel();
@@ -321,6 +375,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		autorLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		autorsField = new JTextField();
+		autorsField.setEditable(false);
 		autorsField.setColumns(12);
 		autorsField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.autorsField.toolTipText")); //$NON-NLS-1$
 		autorsPanel.add(autorsField);
@@ -333,6 +388,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		generesLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		genereField = new JTextField();
+		genereField.setEditable(false);
 		genereField.setColumns(12);
 		genereField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.genereField.toolTipText")); //$NON-NLS-1$
 		generesPanel.add(genereField);
@@ -345,6 +401,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		editorialsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		editorialField = new JTextField();
+		editorialField.setEditable(false);
 		editorialField.setColumns(12);
 		editorialField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.editorialField.toolTipText")); //$NON-NLS-1$
 		editorialsPanel.add(editorialField);
@@ -356,6 +413,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		puntuacioPanel.add(puntuacioLabel);
 		
 		puntuacioField = new JTextField();
+		puntuacioField.setEditable(false);
 		puntuacioField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.puntuacioField.toolTipText")); //$NON-NLS-1$
 		puntuacioPanel.add(puntuacioField);
 		puntuacioField.setColumns(4);
@@ -379,9 +437,10 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		isbnPanel.add(isbnLabel);
 		
 		isbnField = new JTextField();
+		isbnField.setEditable(false);
 		isbnField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.isbnField.toolTipText")); //$NON-NLS-1$
 		isbnPanel.add(isbnField);
-		isbnField.setColumns(10);
+		isbnField.setColumns(8);
 		
 		dataPublicacioPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(dataPublicacioPanel);
@@ -390,9 +449,23 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		dataPublicacioPanel.add(dataPublicacioLabel);
 		
 		dataPublicacioField = new JTextField();
+		dataPublicacioField.setEditable(false);
 		dataPublicacioField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.dataPublicacioField.toolTipText")); //$NON-NLS-1$
 		dataPublicacioPanel.add(dataPublicacioField);
-		dataPublicacioField.setColumns(10);
+		dataPublicacioField.setColumns(6);
+		
+		edicioPanel = new JPanel();
+		isbnDataPaginesReservesPanel.add(edicioPanel);
+		
+		edicioLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.lblNewLabel.text"));
+		edicioPanel.add(edicioLabel);
+		
+		edicioField = new JTextField();
+		edicioField.setEditable(false);
+		edicioField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.textField.toolTipText")); //$NON-NLS-1$
+		edicioField.setText(""); 
+		edicioPanel.add(edicioField);
+		edicioField.setColumns(6);
 		
 		numeroPaginesPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(numeroPaginesPanel);
@@ -401,9 +474,10 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		numeroPaginesPanel.add(numeroPaginesLabel);
 		
 		numeroPaginesField = new JTextField();
+		numeroPaginesField.setEditable(false);
 		numeroPaginesField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.numeroPaginesField.toolTipText")); //$NON-NLS-1$
 		numeroPaginesPanel.add(numeroPaginesField);
-		numeroPaginesField.setColumns(4);
+		numeroPaginesField.setColumns(3);
 		
 		numeroReservesPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(numeroReservesPanel);
@@ -412,9 +486,10 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		numeroReservesPanel.add(numeroReservesLabel);
 		
 		numeroReservesField = new JTextField();
+		numeroReservesField.setEditable(false);
 		numeroReservesField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.numeroReservesField.toolTipText")); //$NON-NLS-1$
 		numeroReservesPanel.add(numeroReservesField);
-		numeroReservesField.setColumns(4);
+		numeroReservesField.setColumns(2);
 		
 		sinopsisPanel = new JPanel();
 		fl_sinopsisPanel = (FlowLayout) sinopsisPanel.getLayout();
@@ -433,12 +508,13 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		sinopsisPanel.add(sinopsisLabel);
 		
 		sinopsisTextArea = new JTextArea();
+		sinopsisTextArea.setEditable(false);
 		sinopsisTextArea.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.sinopsisTextArea.toolTipText")); //$NON-NLS-1$
 		
 		sinopsisTextArea.setColumns(60);
 		sinopsisTextArea.setLineWrap(true);
 		sinopsisTextArea.setWrapStyleWord(true);
-		sinopsisTextArea.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit orci enim, in convallis arcu scelerisque vel. Praesent efficitur scelerisque urna at condimentum. Nullam tincidunt finibus dolor, vel semper mi vehicula quis. Duis molestie id risus a vulputate. Fusce laoreet diam et dictum ullamcorper. Fusce sed posuere tellus, ac feugiat risus. Nunc malesuada eu felis pellentesque egestas. Aenean lobortis feugiat varius. Curabitur dapibus aliquam neque sit amet sagittis. Fusce sed venenatis erat.");
+		sinopsisTextArea.setText("");
 		sinopsisTextArea.setRows(4);
 		
 		sinopsisScrollPane = new JScrollPane(sinopsisTextArea);
@@ -498,6 +574,178 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 	
 	public JRadioButton getAutorRadioButton() {
 		return autorRadioButton;
+	}
+	
+	public JTable getLlibresTable() {
+		return llibresTable;
+	}
+
+
+	public JTextField getIdLlibreField() {
+		return idLlibreField;
+	}
+
+
+	public void setIdLlibreField(JTextField idLlibreField) {
+		this.idLlibreField = idLlibreField;
+	}
+
+
+	public JTextField getTitolField() {
+		return titolField;
+	}
+
+
+	public void setTitolField(JTextField titolField) {
+		this.titolField = titolField;
+	}
+
+
+	public JTextField getNumeroPaginesField() {
+		return numeroPaginesField;
+	}
+
+
+	public void setNumeroPaginesField(JTextField numeroPaginesField) {
+		this.numeroPaginesField = numeroPaginesField;
+	}
+
+
+	public JTextField getNumeroReservesField() {
+		return numeroReservesField;
+	}
+
+
+	public void setNumeroReservesField(JTextField numeroReservesField) {
+		this.numeroReservesField = numeroReservesField;
+	}
+
+
+	public JTextField getPuntuacioField() {
+		return puntuacioField;
+	}
+
+
+	public void setPuntuacioField(JTextField puntuacioField) {
+		this.puntuacioField = puntuacioField;
+	}
+
+
+	public JTextField getIsbnField() {
+		return isbnField;
+	}
+
+
+	public void setIsbnField(JTextField isbnField) {
+		this.isbnField = isbnField;
+	}
+
+
+	public JTextField getDataPublicacioField() {
+		return dataPublicacioField;
+	}
+
+
+	public void setDataPublicacioField(JTextField dataPublicacioField) {
+		this.dataPublicacioField = dataPublicacioField;
+	}
+
+
+	public JCheckBox getReservatCheckBox() {
+		return reservatCheckBox;
+	}
+
+
+	public void setReservatCheckBox(JCheckBox reservatCheckBox) {
+		this.reservatCheckBox = reservatCheckBox;
+	}
+
+
+	public JTextField getAutorsField() {
+		return autorsField;
+	}
+
+
+	public void setAutorsField(JTextField autorsField) {
+		this.autorsField = autorsField;
+	}
+
+
+	public JTextField getGenereField() {
+		return genereField;
+	}
+
+
+	public void setGenereField(JTextField genereField) {
+		this.genereField = genereField;
+	}
+
+
+	public JTextField getEditorialField() {
+		return editorialField;
+	}
+
+
+	public void setEditorialField(JTextField editorialField) {
+		this.editorialField = editorialField;
+	}
+
+
+	public JTextArea getSinopsisTextArea() {
+		return sinopsisTextArea;
+	}
+
+
+	public void setSinopsisTextArea(JTextArea sinopsisTextArea) {
+		this.sinopsisTextArea = sinopsisTextArea;
+	}
+	
+	public JTextField getEdicioField() {
+		return edicioField;
+	}
+	
+	public JLabel getAnteriorIconLabel() {
+		return anteriorIconLabel;
+	}
+	
+	public JLabel getSeguentIconLabel() {
+		return seguentIconLabel;
+	}
+	
+	public JPanel getPaginadorPanel() {
+		return paginadorPanel;
+	}
+	
+	public void setRowActiu(int row) {
+		this.rowActiu = row;
+	}
+	
+	public void seguentRowActiu(int add, int rowsTotals) {
+		if(rowActiu == rowsTotals) {
+			rowActiu = rowsTotals;
+		}else {
+			setRowActiu(rowActiu + add);
+		}
+	}
+	
+	public void anteriorRowActiu(int add, int rowaTotals) {
+		if(rowActiu == 0) {
+			setRowActiu(0);
+		}else {
+			setRowActiu(rowActiu - add);
+		}
+	}
+	
+	public int getRowActiu() {
+		return rowActiu;
+	}
+	
+	public JTextField getRowActualField() {
+		return rowActualField;
+	}
+	
+	public JTextField getRowTotalsField() {
+		return rowTotalsField;
 	}
 
 }
