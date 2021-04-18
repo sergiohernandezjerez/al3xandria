@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.lang.model.element.NestingKind;
 import javax.swing.JOptionPane;
+import javax.xml.transform.Source;
 
 import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.HeadPanel;
@@ -98,7 +100,27 @@ public class ControlDeDades {
 		if(telefon.length() == 9 && esUnNumero(telefon)) {
 			telefonCorrecte = true;
 		}
+		
 		return telefonCorrecte;
+	}
+	
+	/**
+	 * Comprova que el isbn tingui un format correcte
+	 * entre 10 i 13 xifres
+	 * @param isbn
+	 * @return --> true: si és correcte | false: si no és correcte
+	 * @author SergioHernandez
+	 */
+	public boolean comprovacioFormatIsbn(String isbn) {
+
+		boolean isbnCorrecte = false;
+		if(esUnNumero(isbn)) {
+			if((isbn.length() == 13) || isbn.length() == 10) {
+				isbnCorrecte = true;
+			}
+		}
+		
+		return isbnCorrecte;
 	}
 
 
@@ -183,11 +205,21 @@ public class ControlDeDades {
 
 
 	/**
-	 * Comprova si els camps de text JTextField no estan buits
-	 * 
-	 * @param email       -> camp de text que pertany al email
-	 * @param contrasenya -> camp de text que pertany a la contrasenya
-	 * @return true si els dos camps estan omplerts | false si no ho estan
+	 * Comprova que els camps no estiguin buits al formulari d'alta d'usuari
+	 * @param nom
+	 * @param cognoms
+	 * @param adreca
+	 * @param email
+	 * @param poblacio
+	 * @param codiPostal
+	 * @param pais
+	 * @param provincia
+	 * @param telefon
+	 * @param identificador
+	 * @param tipusIdentificador
+	 * @param tipusUsuari
+	 * @param contrasenya
+	 * @return true si tots els camps estan omplerts, false si algun camp no está omplert
 	 * @author SergioHernandez
 	 */
 	public boolean comprovarCampsOmplertsFormulariAltaUsuari(String nom, String cognoms, String adreca, String email, 
@@ -243,6 +275,117 @@ public class ControlDeDades {
 		return totOmplert;
 	}
 	
+	/**
+	 * Comprova que els camps no estiguin buits al administrador d'usuaris
+	 * @param nom
+	 * @param cognoms
+	 * @param adreca
+	 * @param email
+	 * @param poblacio
+	 * @param codiPostal
+	 * @param pais
+	 * @param provincia
+	 * @param telefon
+	 * @param identificador
+	 * @param tipusIdentificador
+	 * @param tipusUsuari
+	 * @param contrasenya
+	 * @return true si tots els camps estan omplerts, false si algun camp no está omplert
+	 * @author SergioHernandez
+	 */
+	public boolean comprovarCampsOmplertsAltaUsuari(String nom, String cognoms, String adreca, String email, 
+			String poblacio, String codiPostal, String pais, int provincia, String telefon, 
+			String contrasenya, String identificador, 
+			String carnet, int tipusUsuari) {
+		ArrayList<String> campsBuits = new ArrayList<String>();
+		boolean totOmplert = false;
+		if (nom.length() == 0) {
+			campsBuits.add("Nom");
+		} 
+		if (cognoms.length() == 0) {
+			campsBuits.add("Cognoms");
+		}
+		if (adreca.length() == 0) {
+			campsBuits.add("Adreça");
+		}
+		if (email.length() == 0) {
+			campsBuits.add("Email");
+		}
+		if (poblacio.length() == 0) {
+			campsBuits.add("Població");
+		}
+		if (codiPostal.length() == 0) {
+			campsBuits.add("Codi Postal");
+		}
+		if (pais.length() == 0) {
+			campsBuits.add("Pais");
+		}
+		if (provincia == 0) {
+			campsBuits.add("Provincia");
+		}
+		if (telefon.length() == 0) {
+			campsBuits.add("Telèfon");
+		}
+		if(contrasenya.length() == 0) {
+			campsBuits.add("Contrasenya");
+		}
+		if (identificador.length() == 0) {
+			campsBuits.add("Numero Identificador");
+		}
+		if (carnet.length() == 0) {
+			campsBuits.add("Carnet");
+		}
+		if (tipusUsuari == 0) {
+			campsBuits.add("Tipus Usuari");
+		}
+		if(campsBuits.size()>0){
+			errorCampBuit(campsBuits.toString());
+		}else {
+			totOmplert = true;
+		}
+
+		return totOmplert;
+	}
+	
+	public boolean comprovarCampsOmplertsAltaLlibre(String titol, int autor, 
+			int genere, int editorial,
+			String isbn, String edicio, String dataPublicacio, String numPagines) {
+		ArrayList<String> campsBuits = new ArrayList<String>();
+		boolean totOmplert = false;
+		if (titol.length() == 0) {
+			campsBuits.add("Títol");
+		} 
+		if (autor == 0) {
+			campsBuits.add("Autor");
+		}
+		if (genere == 0) {
+			campsBuits.add("Genere");
+		}
+		if (editorial == 0) {
+			campsBuits.add("Editorial");
+		}
+		if (isbn.length() == 0) {
+			campsBuits.add("Isbn");
+		}
+		if (edicio.length() == 0) {
+			campsBuits.add("Edició");
+		}
+		if (dataPublicacio.length() == 0) {
+			campsBuits.add("Data publicació");
+		}
+		if (numPagines.length() == 0) {
+			campsBuits.add("Núm. pàgines");
+		}
+		
+		if(campsBuits.size()>0){
+			errorCampBuit(campsBuits.toString());
+		}else {
+			totOmplert = true;
+		}
+
+		return totOmplert;
+	}
+	
 	
 	/**
 	 * Mètode per comprobar que la dada introduïda 
@@ -253,7 +396,7 @@ public class ControlDeDades {
 	 */
 	public boolean esUnNumero(String numero) {
 		try {
-			Integer.parseInt(numero);
+			Long.parseLong(numero);
 			return true;
 		} catch (NumberFormatException e) {
 			return false;
@@ -271,6 +414,17 @@ public class ControlDeDades {
 		JOptionPane.showMessageDialog(headPanel,
 				WarningStrings.getString("FormulariAltaUsuari.errorFormatTelefon"),
 				WarningStrings.getString("FormulariAltaUsuari.titolErrorFormatTelefon"), JOptionPane.ERROR_MESSAGE);
+	}
+	
+	/**
+	 * Missatge que mostra un avís quan el camp isbn és incorrecte
+	 * La mida ha de ser de 10 o 13 xifres
+	 * 
+	 * @author SergioHernandez
+	 */
+	public void errorFormatIsbn() {
+		JOptionPane.showMessageDialog(headPanel,"Format del Isbn incorrecte.\n Ha de ser un numero de 10 o 13 xifres",
+				"Error format Isbn", JOptionPane.ERROR_MESSAGE);
 	}
 	
 	/**

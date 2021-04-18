@@ -367,5 +367,19 @@ public class FootPanel extends JPanel {
 	public void setIdSessioLabel(JLabel idSessioLabel) {
 		this.idSessioLabel = idSessioLabel;
 	}
+	
+	public JLabel getNomUsuariLabel() {
+		return nomUsuariLabel;
+	}
+	
+	public JLabel getPuntuacioUsuariLabel() {
+		return puntuacioUsuariLabel;
+	}
+	
+	public JLabel getCarnetUsuariLabel() {
+		return carnetUsuariLabel;
+	}
+	
+	
 
 }

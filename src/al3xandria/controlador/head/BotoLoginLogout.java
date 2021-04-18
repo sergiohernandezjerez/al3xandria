@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 import al3xandria.model.ControlDeDades;
+import al3xandria.model.objects.CreateUsuaris;
 import al3xandria.model.objects.Usuari;
 import al3xandria.model.ComunicacioClientServidor;
 import al3xandria.strings.WarningStrings;
@@ -22,7 +23,8 @@ import al3xandria.vista.headPanel.HeadPanel;
  */
 public class BotoLoginLogout implements ActionListener {
 
-	private Usuari usuariConectat;
+	private CreateUsuaris createUsuaris;
+	private Usuari usuariConnectat;
 	private String tipusUsuari;
 	ControlDeDades controlDeDades;
 	private HeadPanel headPanel;
@@ -78,7 +80,8 @@ public class BotoLoginLogout implements ActionListener {
 		}
 	}
 
-
+//	idSessio, tipus,idUsuari + "," + nomUsuari + "," +cognomsUsuari + "," +dniNie + "," +email + "," +contrasenya + "," +adreca + "," +codiPostal + "," +
+//	poblacio + "," +provincia + "," +pais + "," +telefon+ "," +carnet+ "," +puntuacioUsuari+ "," +actiu;
 	/**
 	 * Envia tres valors separats per comes (login, email, contrasenya) i rep la
 	 * resposta del servidor:<br>
@@ -89,13 +92,17 @@ public class BotoLoginLogout implements ActionListener {
 	 * @author SergioHernandez
 	 */
 	public void enviarDadesPerFerLogin() {
-		usuariConectat = new Usuari();
+		
+		createUsuaris = new CreateUsuaris();
 		comunicacioClientServidor.iniciarComunicacio(
 				"login" + "," + emailUsuariIntroduit + "," + contrasenyaUsuariIntroduida);
 		dadesRebudesDelServidor = comunicacioClientServidor.getDadesDelServidor();
 		if (dadesRebudesDelServidor != null) {
 			if (dadesRebudesDelServidor[0].equals("0")) {
-				usuariConectat.setIdSessio(dadesRebudesDelServidor[1]);
+				//es crea un usuari amb les dades de l'usuari que s'ha connectat amb exit
+				usuariConnectat = createUsuaris.buscarUsuari(emailUsuariIntroduit, contrasenyaUsuariIntroduida);
+				//s'emmagatzema la id de sessió
+				usuariConnectat.setIdSessio(dadesRebudesDelServidor[1]);
 				permisPerFerLogin();
 			} else if (dadesRebudesDelServidor[0].equals("550")) {
 				errorUsuariJaHaFetLogin();
@@ -106,6 +113,7 @@ public class BotoLoginLogout implements ActionListener {
 
 	}
 
+
 	/**
 	 * Envia dos valors separats per comes (logout, idSessio) i rep la resposta del
 	 * servidor<br>
@@ -115,7 +123,7 @@ public class BotoLoginLogout implements ActionListener {
 	 * @author SergioHernandez
 	 */
 	public void enviarDadesPerFerLogout() {
-		comunicacioClientServidor.iniciarComunicacio("logout," + usuariConectat.getIdSessio());
+		comunicacioClientServidor.iniciarComunicacio("logout," + usuariConnectat.getIdSessio());
 		dadesRebudesDelServidor = comunicacioClientServidor.getDadesDelServidor();
 		if (dadesRebudesDelServidor[0].equals("0")) {
 			avisDeLogout();
@@ -148,29 +156,32 @@ public class BotoLoginLogout implements ActionListener {
 	 * 
 	 * @author SergioHernandez
 	 */
-	public void usuariAFetLogin() {
+	public void usuariAFetLogin() {		
 		headPanel.getFerLoginButton().setText(HeadPanelMessages.getString("HeadPanel.ferLogoutButton.text"));
 		headPanel.getFerLoginButton().setToolTipText(HeadPanelMessages.getString("HeadPanel.ferLogoutButtonTolTip"));
 		footPanel.getEstasConectatComLabel()
 				.setText(FootPanelMessages.getString("FootPanel.estasConectatComLabel.text"));
-		footPanel.getTipuUsuariLabel().setText(tipusUsuari);
-		footPanel.getEmailUsuariLabel().setText(emailUsuariIntroduit);
-		footPanel.getIdSessioUsuariLabel().setText(usuariConectat.getIdSessio());
+		footPanel.getTipuUsuariLabel().setText(usuariConnectat.getTipusUsuari());
+		footPanel.getEmailUsuariLabel().setText(usuariConnectat.getEmail());
+		footPanel.getIdSessioUsuariLabel().setText(usuariConnectat.getIdSessio());
+		footPanel.getCarnetUsuariLabel().setText(usuariConnectat.getCarnet());
+		footPanel.getPuntuacioUsuariLabel().setText(String.valueOf(usuariConnectat.getPuntuacioUsuari()));
+		footPanel.getNomUsuariLabel().setText(usuariConnectat.getNomUsuari());
+		
 
 		switch (tipusUsuari) {
 		case "Usuari":
-			centralPanel.setUsuariPanel();
+			centralPanel.setUsuariPanel(usuariConnectat);
 			break;
 
 		case "Administrador":
-			centralPanel.setAdministradorPanel();
+			centralPanel.setAdministradorPanel(usuariConnectat);
 			break;
 
 		default:
 			break;
 		}
 		headPanel.setTipusUsuari(tipusUsuari);
-		usuariConectat.setTipusUsuari(tipusUsuari);
 	}
 
 	/**
@@ -180,11 +191,14 @@ public class BotoLoginLogout implements ActionListener {
 	 * @author SergioHernandez
 	 */
 	public void usuariAFetLogout() {
+		usuariConnectat.setIdSessio("0000000000000");
 		setPanelLoginDefault();
 		footPanel.getEmailUsuariLabel().setText("");
 		footPanel.getIdSessioUsuariLabel().setText("");
 
 		switch (tipusUsuari) {
+		case "Estudiant":
+		case "Professor":
 		case "Usuari":
 			centralPanel.removeUsuariPanelToDefault();
 			break;
@@ -197,7 +211,7 @@ public class BotoLoginLogout implements ActionListener {
 			break;
 		}
 		headPanel.setTipusUsuari(null);
-		usuariConectat.setTipusUsuari(null);
+		
 	}
 
 	/**
@@ -332,6 +346,12 @@ public class BotoLoginLogout implements ActionListener {
 		footPanel.getEstasConectatComLabel()
 				.setText(FootPanelMessages.getString("FootPanel.usuariNoConnectat.text"));
 		footPanel.getTipuUsuariLabel().setText(FootPanelMessages.getString("FootPanel.tipusUsuariAnominLabel"));
+
+		footPanel.getEmailUsuariLabel().setText("");
+		footPanel.getIdSessioUsuariLabel().setText("");
+		footPanel.getCarnetUsuariLabel().setText("");
+		footPanel.getPuntuacioUsuariLabel().setText("");
+		footPanel.getNomUsuariLabel().setText("");
 	}
 
 	

@@ -12,8 +12,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
-import al3xandria.model.usuarisDEPRECATED.GestioUsuaris;
-import al3xandria.model.usuarisDEPRECATED.Usuari;
+import al3xandria.model.objects.CreateUsuaris;
+import al3xandria.model.objects.Usuari;
 
 /**
  * Class that implements MockServer with sockets
@@ -27,7 +27,7 @@ public class MockSocketsServer {
 
 	
 	String missatgePerEnviar;
-	GestioUsuaris gestioUsuaris;
+	CreateUsuaris gestioUsuaris;
 
 	/**
 	 * Launches server
@@ -146,13 +146,13 @@ public class MockSocketsServer {
 	 */
 	public String consultaLogin(String email, String contrasenya) {
 		String resultatConsulta = "";
-		gestioUsuaris = new GestioUsuaris();
+		gestioUsuaris = new CreateUsuaris();
 		Usuari usuari = new Usuari();
 		usuari = gestioUsuaris.buscarUsuari(email, contrasenya);
 		if (usuari != null) {
 			usuari.setIdSessio(generaIdSessio(usuari.getContrasenya()));
 			idsSessio.put(usuari.getIdSessio(), usuari.getEmail());
-			resultatConsulta = "0" + "," + usuari.getIdSessio() + "," + usuari.getTipus();
+			resultatConsulta = "0" + "," + usuari.getIdSessio() + "," + usuari.getTipusUsuari();
 		} else {
 			resultatConsulta = "440";
 		}

@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import al3xandria.controlador.consultaLlibres.ConsultaLlibresControlador;
 import al3xandria.model.objects.Usuari;
 import al3xandria.vista.icons.Icons;
 
@@ -22,22 +23,17 @@ public class CentralPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Usuari usuariConectat;
+	private Usuari usuariConnectat;
 	private Icons icons;
 	
 	private ConsultaLlibres consultaLLibres;
 	private AdministradorLlibres administradorLlibres;
-	private AdministradorPrestecs administradorPrestecs;
 	private AdministradorUsuaris administradorUsuaris;
-	private AdministradorComentaris administradorComentaris;
-	private ConsultaComentaris consultaComentaris;
-	private ConsultaPrestecs consultaPrestecs;
 	private ConsultaLlibresNoRegistrat consultaLlibresNoRegistrat;
-	
 	private JTabbedPane centralTabPanel;
 
-	public CentralPanel(Usuari usuariConectat) {
-		this.usuariConectat = usuariConectat;
+	public CentralPanel(Usuari usuariConnectat) {
+		this.usuariConnectat = usuariConnectat;
 		setForeground(Color.BLACK);
 		setBackground(Color.WHITE);
 		setBorder(new LineBorder(Color.decode("#00838f")));
@@ -48,15 +44,16 @@ public class CentralPanel extends JPanel {
 	}
 
 	private void iniciarComponents() {
+		
 		icons = new Icons();
 		//consultaPrestecs = new ConsultaPrestecs();
-		consultaLLibres = new ConsultaLlibres();
-		consultaLlibresNoRegistrat = new ConsultaLlibresNoRegistrat();
+		//consultaLLibres = new ConsultaLlibres(usuariConnectat);
+		consultaLlibresNoRegistrat = new ConsultaLlibresNoRegistrat(usuariConnectat);
 		//consultaComentaris = new ConsultaComentaris();
 		//administradorComentaris = new AdministradorComentaris();
-		administradorLlibres = new AdministradorLlibres();
+		//administradorLlibres = new AdministradorLlibres(usuariConnectat);
 		//administradorPrestecs = new AdministradorPrestecs();
-		administradorUsuaris = new AdministradorUsuaris();
+	    //administradorUsuaris = new AdministradorUsuaris(usuariConnectat);
 		centralTabPanel = new JTabbedPane();
 		
 		centralTabPanel.addTab("Consulta LLibres ", icons.getConsultaLlbresIcon(), 
@@ -70,7 +67,8 @@ public class CentralPanel extends JPanel {
 	 * crear el panel central especific per l'usuari
 	 * @author SergioHernandez
 	 */
-	public void setUsuariPanel() {
+	public void setUsuariPanel(Usuari usuariConnectat) {
+		consultaLLibres = new ConsultaLlibres(usuariConnectat);
 		centralTabPanel.remove(consultaLlibresNoRegistrat);
 		centralTabPanel.addTab("Consulta LLibres ", icons.getConsultaLlbresIcon(), 
 				consultaLLibres, "Consulta els llibres de la biblioteca");
@@ -85,7 +83,9 @@ public class CentralPanel extends JPanel {
 	 * crear el panel central especific per l'administrador
 	 * @author SergioHernandez
 	 */
-	public void setAdministradorPanel() {
+	public void setAdministradorPanel(Usuari usuariConnectat) {
+		administradorLlibres = new AdministradorLlibres(usuariConnectat);
+		administradorUsuaris = new AdministradorUsuaris(usuariConnectat);
 		centralTabPanel.remove(consultaLlibresNoRegistrat);
 		centralTabPanel.addTab("Admin Llibres ", icons.getAdministrarLibresIcon(),
 				administradorLlibres, "Administra els llibres de la biblioteca");
@@ -116,11 +116,22 @@ public class CentralPanel extends JPanel {
 	 * @author SergioHernandez
 	 */
 	public void removeUsuariPanelToDefault() {
+		
 		centralTabPanel.remove(consultaLLibres);
+		
 		centralTabPanel.addTab("Consulta LLibres ", icons.getConsultaLlbresIcon(), 
 				consultaLlibresNoRegistrat, "Consulta els llibres de la biblioteca com a usuari no registrat");
 		//centralTabPanel.remove(consultaComentaris);
 		//centralTabPanel.remove(consultaPrestecs);
 	}
+	
+	public void setUsuariConectat(Usuari usuariConnectat) {
+		this.usuariConnectat = usuariConnectat;
+	}
+	
+	public Usuari getUsuariConnectat() {
+		return usuariConnectat;
+	}
+	
 
 }

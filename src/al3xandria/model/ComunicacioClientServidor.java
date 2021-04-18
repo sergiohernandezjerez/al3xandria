@@ -2,12 +2,14 @@ package al3xandria.model;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
+import al3xandria.model.objects.Usuari;
 import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.HeadPanel;
 
@@ -52,6 +54,7 @@ public class ComunicacioClientServidor {
 				String data = input.readLine();
 				dadesDelServidor = data.split(",");
 				System.out.println("Dades rebudes del server: " + data);
+								
 
 				socket.close();
 
@@ -89,5 +92,6 @@ public class ComunicacioClientServidor {
 	public String[] getDadesDelServidor() {
 		return dadesDelServidor;
 	}
+	
 
 }

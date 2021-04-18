@@ -1,7 +1,13 @@
 package al3xandria.model.objects;
 
-public class Usuari {
+import java.io.Serializable;
 
+public class Usuari implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idUsuari;
 	private String nomUsuari;
 	private String cognomsUsuari;
@@ -26,9 +32,10 @@ public class Usuari {
 	}
 	
 	
-	public Usuari(String nomUsuari, String cognomsUsuari, String dniNie, String email, String contrasenya,
+	public Usuari(int idUsuari, String nomUsuari, String cognomsUsuari, String dniNie, String email, String contrasenya,
 			String adreca, String codiPostal, String poblacio, String provincia, String pais, String telefon,
 			String carnet, String tipusUsuari, int puntuacioUsuari, boolean actiu) {
+		this.idUsuari = idUsuari;
 		this.nomUsuari = nomUsuari;
 		this.cognomsUsuari = cognomsUsuari;
 		this.dniNie = dniNie;

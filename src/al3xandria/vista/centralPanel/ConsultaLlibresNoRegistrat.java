@@ -2,12 +2,7 @@ package al3xandria.vista.centralPanel;
 
 import javax.swing.JPanel;
 import java.awt.Rectangle;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.FlowLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -23,10 +18,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 
-import al3xandria.controlador.consultaLlibresNoResistrat.ConsultaLlibresNoRegistratControlador;
+import al3xandria.controlador.consultaLlibres.ConsultaLlibresNoRegistratControlador;
 import al3xandria.model.llibres.LlibresModel;
+import al3xandria.model.objects.Usuari;
 import al3xandria.vista.icons.Icons;
 
 import javax.swing.border.EtchedBorder;
@@ -45,6 +40,8 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int rowActiu = 0;
+	private Usuari usuariConnectat;
+	
 	private JTextField cercaField;
 	private JTable llibresTable;
 	private JTextField idLlibreField;
@@ -131,14 +128,14 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ConsultaLlibresNoRegistrat() {
+	public ConsultaLlibresNoRegistrat(Usuari usuariConnectat) {
+		this.usuariConnectat = usuariConnectat;
 		icons = new Icons();
 		setBounds(new Rectangle(0, 0, 750, 850));
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		
 		iniciarComponents();
-		//TODO ConsultesLlibresNoRegistrat mostrar llistat dels llibres
-		System.out.println("select * from llibres");
+
 		llistarLlibres();
 		
 	}
@@ -190,10 +187,11 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		filtresPanel.add(filtreTextPanel, BorderLayout.CENTER);
 		
 		lupaLabel = new JLabel("");
+		lupaLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lupaLabel.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.lupaLabel.toolTipText")); //$NON-NLS-1$
 		lupaLabel.setIcon(icons.getLupaIcon());
 		lupaLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lupaLabel.addMouseListener(new ConsultaLlibresNoRegistratControlador(this));
+		lupaLabel.addMouseListener(new ConsultaLlibresNoRegistratControlador(this, usuariConnectat));
 		filtreTextPanel.add(lupaLabel);
 		
 		cercaField = new JTextField();
@@ -205,17 +203,18 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		esborrarLabel.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.esborrarLabel.toolTipText")); //$NON-NLS-1$
 		esborrarLabel.setIcon(icons.getCancelIcon());
 		esborrarLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		esborrarLabel.addMouseListener(new ConsultaLlibresNoRegistratControlador(this));
+		esborrarLabel.addMouseListener(new ConsultaLlibresNoRegistratControlador(this, usuariConnectat));
 		filtreTextPanel.add(esborrarLabel);
 		
 		separacioLabel = new JLabel("   ");
 		filtreTextPanel.add(separacioLabel);
 		
 		cercarButton = new JButton(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercarButton.text"));
+		cercarButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cercarButton.setForeground(Color.BLACK);
 		cercarButton.setBackground(new Color(173, 216, 230));
 		cercarButton.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercarButton.toolTipText")); //$NON-NLS-1$
-		cercarButton.addMouseListener(new ConsultaLlibresNoRegistratControlador(this));
+		cercarButton.addMouseListener(new ConsultaLlibresNoRegistratControlador(this, usuariConnectat));
 		filtreTextPanel.add(cercarButton);
 		
 		llistaTablePanel = new JPanel();
@@ -249,7 +248,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		mostrarLlibreButton.setForeground(Color.WHITE);
 		mostrarLlibreButton.setBackground(Color.decode("#00838f"));
 		mostrarLlibreButton.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.mostrarLlibreButton.toolTipText")); //$NON-NLS-1$
-		mostrarLlibreButton.addMouseListener(new ConsultaLlibresNoRegistratControlador(this));
+		mostrarLlibreButton.addMouseListener(new ConsultaLlibresNoRegistratControlador(this,usuariConnectat));
 		accionsButtonsPanel.add(mostrarLlibreButton);
 		
 		dadesLlibrePanel = new JPanel();
@@ -277,14 +276,14 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		paginadorPanel.setVisible(false);
 		dadesLlibreGridPanel.add(paginadorPanel, gbc_paginadorPanel);
 		
-		anteriorLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.lblNewLabel.text")); //$NON-NLS-1$
+		anteriorLabel = new JLabel("anterior"); //$NON-NLS-1$
 		paginadorPanel.add(anteriorLabel);
 		
 		anteriorIconLabel = new JLabel("");
 		anteriorIconLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		anteriorIconLabel.setIcon(icons.getAnteriorIcon());
 		anteriorIconLabel.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.anteriorLabel.toolTipText")); //$NON-NLS-1$
-		anteriorIconLabel.addMouseListener(new ConsultaLlibresNoRegistratControlador(this));
+		anteriorIconLabel.addMouseListener(new ConsultaLlibresNoRegistratControlador(this, usuariConnectat));
 		paginadorPanel.add(anteriorIconLabel);
 		
 		rowActualField = new JTextField();
@@ -300,7 +299,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		seguentIconLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		seguentIconLabel.setIcon(icons.getSeguentIcon());
 		seguentIconLabel.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.seguentLabel.toolTipText")); //$NON-NLS-1$
-		seguentIconLabel.addMouseListener(new ConsultaLlibresNoRegistratControlador(this));
+		seguentIconLabel.addMouseListener(new ConsultaLlibresNoRegistratControlador(this, usuariConnectat));
 		
 		rowTotalsField = new JTextField();
 		rowTotalsField.setEditable(false);
@@ -728,7 +727,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		}
 	}
 	
-	public void anteriorRowActiu(int add, int rowaTotals) {
+	public void anteriorRowActiu(int add) {
 		if(rowActiu == 0) {
 			setRowActiu(0);
 		}else {
@@ -746,6 +745,14 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 	
 	public JTextField getRowTotalsField() {
 		return rowTotalsField;
+	}
+	
+	public Usuari getUsuariConnectat() {
+		return usuariConnectat;
+	}
+	
+	public void setUsuariConnectat(Usuari usuariConnectat) {
+		this.usuariConnectat = usuariConnectat;
 	}
 
 }
