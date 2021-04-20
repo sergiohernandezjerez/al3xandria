@@ -15,6 +15,11 @@ import al3xandria.model.objects.CreateUsuaris;
 import al3xandria.model.objects.Llibres;
 import al3xandria.model.objects.Usuari;
 
+/**
+ * Classe per omplir la table d'usuaris i sumular la bd
+ * @author SergioHernandez
+ *
+ */
 public class UsuarisModel {
 
 	private DefaultTableModel tableModel;
@@ -60,6 +65,11 @@ public class UsuarisModel {
 	}
 	
 
+	/**
+	 * Passa un array a columnes per omplir la table
+	 * @return DefaultTableModel
+	 * @author SergioHernandez
+	 */
 	private DefaultTableModel arrayToColumnes() {
 		DefaultTableModel tableModel = new DefaultTableModel(null, titols);
 		for(Usuari usuari : llistatDUsuaris) {
@@ -89,6 +99,12 @@ public class UsuarisModel {
 	}
 	
 	
+	/**
+	 * Passa un resultset a un ArrayList
+	 * @param resultSet
+	 * @return ArrayList de llibres
+	 * @author SergioHernandez
+	 */
 	public ArrayList<Usuari> resultSetToArrayList(ResultSet resultSet) {
 		Usuari usuari = new Usuari();
 		ArrayList<Usuari> usuaris = new ArrayList<Usuari>();
@@ -115,7 +131,7 @@ public class UsuarisModel {
 				usuaris.add(usuari);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -127,20 +143,7 @@ public class UsuarisModel {
 		
 	}
 	
-//	private String getConsultaPerFiltre(String filtre) {
-//		String consultaString = "";
-//		String[] filtres = filtre.split(",");
-//		switch (filtres[0]) {
-//		case "autor":
-//			consultaString = consultaTotsElsLlibresPerAutor;
-//			break;
-//
-//		default:
-//			consultaString = consultaTotsElsLlibres;
-//			break;
-//		}
-//		return null;
-//	}
+
 	
 
 	

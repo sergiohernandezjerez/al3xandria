@@ -106,7 +106,7 @@ public class ControlDeDades {
 	
 	/**
 	 * Comprova que el isbn tingui un format correcte
-	 * entre 10 i 13 xifres
+	 * Ha de ser un número de 10 o 13 xifres
 	 * @param isbn
 	 * @return --> true: si és correcte | false: si no és correcte
 	 * @author SergioHernandez
@@ -347,6 +347,20 @@ public class ControlDeDades {
 		return totOmplert;
 	}
 	
+	
+	/**
+	 * Comprova que els camps no estan buits per fer un alta d'un llibre
+	 * @param titol
+	 * @param autor
+	 * @param genere
+	 * @param editorial
+	 * @param isbn
+	 * @param edicio
+	 * @param dataPublicacio
+	 * @param numPagines
+	 * @return true si tots els camps estan omplerts, false si algun camp no está omplert
+	 * @author SergioHernandez
+	 */
 	public boolean comprovarCampsOmplertsAltaLlibre(String titol, int autor, 
 			int genere, int editorial,
 			String isbn, String edicio, String dataPublicacio, String numPagines) {

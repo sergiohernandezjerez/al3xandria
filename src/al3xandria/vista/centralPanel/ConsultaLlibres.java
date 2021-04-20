@@ -33,7 +33,10 @@ import javax.swing.ButtonGroup;
 public class ConsultaLlibres extends JPanel {
 
 	/**
+	 * Classe que crea el Jpanel per consultar els llibres per els usuaris
+	 * registrats
 	 * 
+	 * @author SergioHernandez
 	 */
 	private static final long serialVersionUID = 1L;
 	private int rowActiu;
@@ -392,7 +395,7 @@ public class ConsultaLlibres extends JPanel {
 		paginadorPanel.setVisible(false);
 		dadesLlibreGridPanel.add(paginadorPanel, gbc_paginadorPanel1);
 
-		anteriorLabel = new JLabel("anterior"); //$NON-NLS-1$
+		anteriorLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibres.anteriorLabel")); //$NON-NLS-1$
 		paginadorPanel.add(anteriorLabel);
 
 		anteriorIconLabel = new JLabel("");
@@ -811,6 +814,12 @@ public class ConsultaLlibres extends JPanel {
 		this.rowActiu = row;
 	}
 
+	/**
+	 * controla el row(fila) que està activa
+	 * 
+	 * @param add        numero de rows que es moure cap endavant
+	 * @param rowsTotals totals de rows de la taula
+	 */
 	public void seguentRowActiu(int add, int rowsTotals) {
 		if (rowActiu == rowsTotals) {
 			rowActiu = rowsTotals;
@@ -819,6 +828,12 @@ public class ConsultaLlibres extends JPanel {
 		}
 	}
 
+	/**
+	 * controla el row(fila) que està activa
+	 * 
+	 * @param add        numero de rows que es moure cap enrrere
+	 * @param rowsTotals totals de rows de la taula
+	 */
 	public void anteriorRowActiu(int add) {
 		if (rowActiu == 0) {
 			setRowActiu(0);
@@ -838,11 +853,11 @@ public class ConsultaLlibres extends JPanel {
 	public JTextField getRowTotalsField() {
 		return rowTotalsField;
 	}
-	
+
 	public Usuari getUsuariConnectat() {
 		return usuariConnectat;
 	}
-	
+
 	public void setUsuariConnectat(Usuari usuariConnectat) {
 		this.usuariConnectat = usuariConnectat;
 	}

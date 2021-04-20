@@ -9,11 +9,11 @@ import al3xandria.model.ComunicacioClientServidor;
 import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.HeadPanel;
 
-public class ComportamentTancarAplicacio implements WindowListener{
-	
+public class ComportamentTancarAplicacio implements WindowListener {
+
 	private HeadPanel headPanel;
 	private ComunicacioClientServidor comunicacioClientServidor;
-	
+
 	public ComportamentTancarAplicacio(HeadPanel headPanel) {
 		this.headPanel = headPanel;
 		comunicacioClientServidor = new ComunicacioClientServidor();
@@ -22,13 +22,13 @@ public class ComportamentTancarAplicacio implements WindowListener{
 	@Override
 	public void windowActivated(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -42,34 +42,33 @@ public class ComportamentTancarAplicacio implements WindowListener{
 		} else {
 			avisImposibleTancarAplicacio();
 		}
-		
+
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowOpened(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	
+
 	/**
 	 * Missatge que mostra un avís quan un usuari vol tancar l'aplicació
 	 * 
@@ -99,7 +98,8 @@ public class ComportamentTancarAplicacio implements WindowListener{
 					WarningStrings.getString("PrincipalFrame.missatgeAcomiadamentAplicacio"),
 					WarningStrings.getString("PrincipalFrame.titolMissatgeAcomiadamentAplicacio"),
 					JOptionPane.INFORMATION_MESSAGE);
-			comunicacioClientServidor.iniciarComunicacio("logoutOK," + headPanel.getEmailintroduitPerLusuari().getText());
+			comunicacioClientServidor
+					.iniciarComunicacio("logoutOK," + headPanel.getEmailintroduitPerLusuari().getText());
 			System.exit(0);
 		}
 

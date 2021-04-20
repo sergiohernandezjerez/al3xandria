@@ -22,8 +22,7 @@ import al3xandria.vista.headPanel.HeadPanelMessages;
  * @author SergioHernandez
  *
  */
-public class FormulariAltaControlador implements ActionListener, MouseListener, 
-ItemListener, WindowListener {
+public class FormulariAltaControlador implements ActionListener, MouseListener, ItemListener, WindowListener {
 
 	private FormulariAltaUsuari formulariAltaUsuari;
 	private ControlDeDades controlDeDades;
@@ -55,17 +54,12 @@ ItemListener, WindowListener {
 		// comportament botó enviar dades per fer l'alta d'usuari. Si tot correcte envia
 		// la consulta al servidor
 		if (formulariAltaUsuari.getEnviarButton() == e.getSource()) {
-			if (controlDeDades.comprovarCampsOmplertsFormulariAltaUsuari(
-					formulariAltaUsuari.getNomField().getText(),
-					formulariAltaUsuari.getCognomsField().getText(), 
-					formulariAltaUsuari.getAdrecaField().getText(),
-					formulariAltaUsuari.getEmailField().getText(), 
-					formulariAltaUsuari.getPoblacioField().getText(),
-					formulariAltaUsuari.getCodiPostalField().getText(), 
-					formulariAltaUsuari.getPaisField().getText(),
-					formulariAltaUsuari.getProvinciaComboBox().getSelectedIndex(), 
-					formulariAltaUsuari.getTelefonField().getText(),
-					formulariAltaUsuari.getDniNieField().getText(),
+			if (controlDeDades.comprovarCampsOmplertsFormulariAltaUsuari(formulariAltaUsuari.getNomField().getText(),
+					formulariAltaUsuari.getCognomsField().getText(), formulariAltaUsuari.getAdrecaField().getText(),
+					formulariAltaUsuari.getEmailField().getText(), formulariAltaUsuari.getPoblacioField().getText(),
+					formulariAltaUsuari.getCodiPostalField().getText(), formulariAltaUsuari.getPaisField().getText(),
+					formulariAltaUsuari.getProvinciaComboBox().getSelectedIndex(),
+					formulariAltaUsuari.getTelefonField().getText(), formulariAltaUsuari.getDniNieField().getText(),
 					formulariAltaUsuari.getDniNieComboBox().getSelectedIndex(),
 					formulariAltaUsuari.getTipusUsuariComboBox().getSelectedIndex(),
 					formulariAltaUsuari.getContrasenyaFieldToString())) {
@@ -94,8 +88,8 @@ ItemListener, WindowListener {
 		boolean formatDadesCorrecta = false;
 		if (comprovacioEmail()) {
 			if (comprovacioTelefon()) {
-				if(comprovacioContrasenya()) {
-					if(comprovacioDniNie()) {
+				if (comprovacioContrasenya()) {
+					if (comprovacioDniNie()) {
 						formatDadesCorrecta = true;
 					}
 				}
@@ -109,21 +103,21 @@ ItemListener, WindowListener {
 
 		return formatDadesCorrecta;
 	}
-	
+
 	/*
 	 * comprova el format del email
 	 */
 	public boolean comprovacioEmail() {
-		return controlDeDades.comprovacioEmail(formulariAltaUsuari.getEmailField().getText());	
+		return controlDeDades.comprovacioEmail(formulariAltaUsuari.getEmailField().getText());
 	}
-	
+
 	/*
 	 * Comprova el format del telèfon
 	 */
 	public boolean comprovacioTelefon() {
 		return controlDeDades.comprovacioFormatTelefon(formulariAltaUsuari.getTelefonField().getText());
 	}
-	
+
 	/*
 	 * Comprova el format del identificador DNI o NIE
 	 */
@@ -144,12 +138,12 @@ ItemListener, WindowListener {
 		}
 		return formatDniNie;
 	}
-	
+
 	/*
 	 * Comprova la contrasenya
 	 */
 	public boolean comprovacioContrasenya() {
-		return controlDeDades.comprovarContrasenyaFormulariAltaUsuari(formulariAltaUsuari.getContrasenyaFieldToString(), 
+		return controlDeDades.comprovarContrasenyaFormulariAltaUsuari(formulariAltaUsuari.getContrasenyaFieldToString(),
 				formulariAltaUsuari.getRepetirContrasenyaFieldToString());
 	}
 
@@ -216,14 +210,13 @@ ItemListener, WindowListener {
 		}
 
 	}
-	
-	
+
 	/**
-	 * Missatge que mostra les dades introduïdes per l'usuari al formulari 
-	 * i demana si són correctes abans d'enviar-les al servidor
+	 * Missatge que mostra les dades introduïdes per l'usuari al formulari i demana
+	 * si són correctes abans d'enviar-les al servidor
 	 */
 	public void confirmacioEnviamentDadesAltaUsuari() {
-		int valor = JOptionPane.showConfirmDialog(formulariAltaUsuari,dadesUsuariFormulari(),
+		int valor = JOptionPane.showConfirmDialog(formulariAltaUsuari, dadesUsuariFormulari(),
 				WarningStrings.getString("FormulariAltaUsuari.titolConfirmarEnviarDadesAltaUsuari"),
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		if (valor == JOptionPane.YES_OPTION) {
@@ -232,7 +225,7 @@ ItemListener, WindowListener {
 			formulariAltaUsuari.dispose();
 		}
 	}
-	
+
 	/**
 	 * Missatge per informar que les dades d'alta d'usuari han estat enviades
 	 * 
@@ -245,29 +238,27 @@ ItemListener, WindowListener {
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	
 	/**
-	 * Mostra les dades introduïdes per l'usuari al formulari
-	 * abans d'enviar-les al servidor
+	 * Mostra les dades introduïdes per l'usuari al formulari abans d'enviar-les al
+	 * servidor
+	 * 
 	 * @return String --> dades introduïdes per l'usuari al formulari
 	 * @author SergioHernandez
 	 */
 	private String dadesUsuariFormulari() {
-		String dades = 
-			"Nom: " + formulariAltaUsuari.getNomField().getText() + "\n" +
-			"Cognoms: " + formulariAltaUsuari.getCognomsField().getText() + "\n" +
-			"Adreça: " + formulariAltaUsuari.getAdrecaField().getText() + "\n" +
-			"Email: " + formulariAltaUsuari.getEmailField().getText() + "\n" +
-			"Població: " + formulariAltaUsuari.getPoblacioField().getText() + "\n" +
-			"Codi Postal: " + formulariAltaUsuari.getCodiPostalField().getText() + "\n" +
-			"Provincia: " + String.valueOf(formulariAltaUsuari.getProvinciaComboBox().getSelectedItem()) + "\n" +
-			"Pais: " + formulariAltaUsuari.getPaisField().getText() + "\n" +
-			"Mòbil: " + formulariAltaUsuari.getTelefonField().getText() + "\n" +
-			"Identificador " + String.valueOf(formulariAltaUsuari.getDniNieComboBox().getSelectedItem()) + 
-			": " + formulariAltaUsuari.getDniNieField().getText() + "\n" +
-			"Tipus Usuari: " + String.valueOf(formulariAltaUsuari.getTipusUsuariComboBox().getSelectedItem()) + "\n\n" +
-			"Són correctes les dades introduïdes?"
-				;
+		String dades = "Nom: " + formulariAltaUsuari.getNomField().getText() + "\n" + "Cognoms: "
+				+ formulariAltaUsuari.getCognomsField().getText() + "\n" + "Adreça: "
+				+ formulariAltaUsuari.getAdrecaField().getText() + "\n" + "Email: "
+				+ formulariAltaUsuari.getEmailField().getText() + "\n" + "Població: "
+				+ formulariAltaUsuari.getPoblacioField().getText() + "\n" + "Codi Postal: "
+				+ formulariAltaUsuari.getCodiPostalField().getText() + "\n" + "Provincia: "
+				+ String.valueOf(formulariAltaUsuari.getProvinciaComboBox().getSelectedItem()) + "\n" + "Pais: "
+				+ formulariAltaUsuari.getPaisField().getText() + "\n" + "Mòbil: "
+				+ formulariAltaUsuari.getTelefonField().getText() + "\n" + "Identificador "
+				+ String.valueOf(formulariAltaUsuari.getDniNieComboBox().getSelectedItem()) + ": "
+				+ formulariAltaUsuari.getDniNieField().getText() + "\n" + "Tipus Usuari: "
+				+ String.valueOf(formulariAltaUsuari.getTipusUsuariComboBox().getSelectedItem()) + "\n\n"
+				+ "Són correctes les dades introduïdes?";
 		return dades;
 	}
 
@@ -289,7 +280,7 @@ ItemListener, WindowListener {
 						.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.dniNieFieldToltipNie"));
 			} else {
 				formulariAltaUsuari.getDniNieField()
-						.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.dniNieFieldToltipDefault")); //$NON-NLS-1$
+						.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.dniNieFieldToltipDefault"));
 			}
 		}
 
@@ -298,47 +289,48 @@ ItemListener, WindowListener {
 	@Override
 	public void windowActivated(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
 	 * Mostra un avís quan es vol tancar el formulari
+	 * 
 	 * @author SergioHernandez
 	 */
 	@Override
 	public void windowClosing(WindowEvent e) {
 		avisTancamentFormulari();
-		
+
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowOpened(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

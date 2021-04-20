@@ -35,7 +35,9 @@ import javax.swing.ButtonGroup;
 public class AdministradorLlibres extends JPanel {
 
 	/**
+	 * Classe que crea el jpanl per administrar els llibres
 	 * 
+	 * @author SergioHernandez
 	 */
 	private static final long serialVersionUID = 1L;
 	private Icons icones;
@@ -132,8 +134,6 @@ public class AdministradorLlibres extends JPanel {
 	private JButton cancellarButton;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
-	
-	
 
 	/**
 	 * Create the panel.
@@ -146,15 +146,13 @@ public class AdministradorLlibres extends JPanel {
 
 		iniciarComponents();
 		llistarLlibres();
-		
-	}
-	
-		
 
-		private void iniciarComponents() {
-			rowActiu = 0;
-			accio = "default";
-			
+	}
+
+	private void iniciarComponents() {
+		rowActiu = 0;
+		accio = "default";
+
 		llibresPanel = new JPanel();
 		add(llibresPanel);
 		llibresPanel.setLayout(new BorderLayout(0, 10));
@@ -227,7 +225,7 @@ public class AdministradorLlibres extends JPanel {
 				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.esborrarLabel.toolTipText")); //$NON-NLS-1$
 		esborrarLabel.setIcon(icones.getCancelIcon());
 		esborrarLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		esborrarLabel.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		esborrarLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		filtreTextPanel.add(esborrarLabel);
 
 		separacioLabel = new JLabel("   ");
@@ -238,7 +236,7 @@ public class AdministradorLlibres extends JPanel {
 		cercarButton.setBackground(new Color(173, 216, 230));
 		cercarButton
 				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercarButton.toolTipText")); //$NON-NLS-1$
-		cercarButton.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		cercarButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		filtreTextPanel.add(cercarButton);
 
 		llistaTablePanel = new JPanel();
@@ -253,7 +251,6 @@ public class AdministradorLlibres extends JPanel {
 
 		llibresTable.setBackground(new Color(255, 255, 255));
 
-	
 		llibresTable.setFocusable(false);
 		llistatLlibresScrollPane = new JScrollPane(llibresTable);
 		llistatLlibresScrollPane.setPreferredSize(new java.awt.Dimension(0, 100));
@@ -272,13 +269,13 @@ public class AdministradorLlibres extends JPanel {
 		mostrarLlibreButton.setBackground(Color.decode("#00838f"));
 		mostrarLlibreButton.setToolTipText(
 				CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.mostrarLlibreButton.toolTipText")); //$NON-NLS-1$
-		mostrarLlibreButton.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		mostrarLlibreButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		accionsButtonsPanel.add(mostrarLlibreButton);
-		
+
 		altaLlibreButton = new JButton(CentralPanelMessages.getString("AdministradorLlibres.altaLlibreButton.text")); //$NON-NLS-1$
 		altaLlibreButton.setForeground(Color.WHITE);
-		altaLlibreButton.setBackground(new Color(70, 130, 180)); //$NON-NLS-1$
-		altaLlibreButton.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		altaLlibreButton.setBackground(new Color(70, 130, 180)); // $NON-NLS-1$
+		altaLlibreButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		altaLlibreButton
 				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.altaLlibreButton.toolTipText")); //$NON-NLS-1$
 		accionsButtonsPanel.add(altaLlibreButton);
@@ -286,7 +283,7 @@ public class AdministradorLlibres extends JPanel {
 		baixaLlibreButton = new JButton(CentralPanelMessages.getString("AdministradorLlibres.baixaLlibreButton.text")); //$NON-NLS-1$
 		baixaLlibreButton.setBackground(new Color(165, 42, 42));
 		baixaLlibreButton.setForeground(Color.WHITE);
-		baixaLlibreButton.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		baixaLlibreButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		baixaLlibreButton
 				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.baixaLlibreButton.toolTipText")); //$NON-NLS-1$
 		accionsButtonsPanel.add(baixaLlibreButton);
@@ -295,30 +292,32 @@ public class AdministradorLlibres extends JPanel {
 				CentralPanelMessages.getString("AdministradorLlibres.editarLlibreButton.text")); //$NON-NLS-1$
 		editarLlibreButton.setForeground(Color.WHITE);
 		editarLlibreButton.setBackground(Color.decode("#6a1b9a")); //$NON-NLS-1$
-		editarLlibreButton.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		editarLlibreButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		editarLlibreButton
 				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.editarLlibreButton.toolTipText")); //$NON-NLS-1$
 		accionsButtonsPanel.add(editarLlibreButton);
-		
-		confirmarButton = new JButton("Confirmar");
+
+		confirmarButton = new JButton(CentralPanelMessages.getString("AdministradorLlibres.confirmarButton"));
 		confirmarButton.setForeground(Color.WHITE);
 		confirmarButton.setBackground(new Color(255, 204, 51));
-		confirmarButton.setToolTipText("Confirmar l'acció"); //$NON-NLS-1$
-		confirmarButton.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		confirmarButton
+				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.confirmarButton.setToolTipText")); //$NON-NLS-1$
+		confirmarButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		confirmarButton.setVisible(false);
-		
+
 		lblNewLabel = new JLabel("");
 		accionsButtonsPanel.add(lblNewLabel);
-		
+
 		lblNewLabel_1 = new JLabel("");
 		accionsButtonsPanel.add(lblNewLabel_1);
 		accionsButtonsPanel.add(confirmarButton);
-		
-		cancellarButton = new JButton("Cancel.lar"); //$NON-NLS-1$
+
+		cancellarButton = new JButton(CentralPanelMessages.getString("AdministradorLlibres.cancellarButton")); //$NON-NLS-1$
 		cancellarButton.setForeground(Color.WHITE);
 		cancellarButton.setBackground(new Color(255, 0, 0));
-		cancellarButton.setToolTipText("Cancel.lar l'acció"); //$NON-NLS-1$
-		cancellarButton.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		cancellarButton
+				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.cancellarButton.setToolTipText")); //$NON-NLS-1$
+		cancellarButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		cancellarButton.setVisible(false);
 		accionsButtonsPanel.add(cancellarButton);
 
@@ -349,7 +348,7 @@ public class AdministradorLlibres extends JPanel {
 		paginadorPanel.setVisible(false);
 		dadesLlibreGridPanel.add(paginadorPanel, gbc_paginadorPanel1);
 
-		anteriorLabel = new JLabel("anterior"); //$NON-NLS-1$
+		anteriorLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.anteriorLabel")); //$NON-NLS-1$
 		paginadorPanel.add(anteriorLabel);
 
 		anteriorIconLabel = new JLabel("");
@@ -357,7 +356,7 @@ public class AdministradorLlibres extends JPanel {
 		anteriorIconLabel.setIcon(icones.getAnteriorIcon());
 		anteriorIconLabel
 				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.anteriorLabel.toolTipText")); //$NON-NLS-1$
-		anteriorIconLabel.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		anteriorIconLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		paginadorPanel.add(anteriorIconLabel);
 
 		rowActualField = new JTextField();
@@ -374,7 +373,7 @@ public class AdministradorLlibres extends JPanel {
 		seguentIconLabel.setIcon(icones.getSeguentIcon());
 		seguentIconLabel
 				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.seguentLabel.toolTipText")); //$NON-NLS-1$
-		seguentIconLabel.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		seguentIconLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 
 		rowTotalsField = new JTextField();
 		rowTotalsField.setEditable(false);
@@ -460,7 +459,7 @@ public class AdministradorLlibres extends JPanel {
 		afegirAutorLabel.setIcon(icones.getAddIcon());
 		afegirAutorLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		afegirAutorLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		afegirAutorLabel.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		afegirAutorLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		autorsPanel.add(afegirAutorLabel);
 
 		generesPanel = new JPanel();
@@ -483,7 +482,7 @@ public class AdministradorLlibres extends JPanel {
 				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.nouGenereLabel.toolTipText")); //$NON-NLS-1$
 		afegirGenereLabel.setIcon(icones.getAddIcon());
 		afegirGenereLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-		afegirGenereLabel.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		afegirGenereLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		afegirGenereLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		generesPanel.add(afegirGenereLabel);
@@ -509,7 +508,7 @@ public class AdministradorLlibres extends JPanel {
 		afegirEditorialLabel.setIcon(icones.getAddIcon());
 		afegirEditorialLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		afegirEditorialLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		afegirEditorialLabel.addMouseListener(new AdministradorLlibresControlador(this,usuariConnectat));
+		afegirEditorialLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		editorialsPanel.add(afegirEditorialLabel);
 
 		puntuacioPanel = new JPanel();
@@ -561,7 +560,7 @@ public class AdministradorLlibres extends JPanel {
 		edicioField.setText("");
 		edicioPanel.add(edicioField);
 		edicioField.setColumns(6);
-		
+
 		dataPublicacioPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(dataPublicacioPanel);
 
@@ -635,9 +634,10 @@ public class AdministradorLlibres extends JPanel {
 		sinopsisPanel.add(sinopsisScrollPane);
 
 	}
-	
+
 	/**
 	 * Mètode que assigna un model a table i l'omple amb els llibres
+	 * 
 	 * @author SergioHernandez
 	 */
 	private void llistarLlibres() {
@@ -649,13 +649,14 @@ public class AdministradorLlibres extends JPanel {
 		}
 
 	}
-	
+
 	/**
 	 * Mètode que omple els combobox de autors, gènere i editorials
+	 * 
 	 * @author SergioHernandez
 	 */
 	public void omplirComboBox() {
-		//Per fer proves omplia els combobox desde un resultset
+		// Per fer proves omplia els combobox desde un resultset
 //		for(String genere:llibresModel.consultarTotsElsGeneres()) {
 //			generesComboBox.addItem(genere);
 //		}
@@ -667,27 +668,25 @@ public class AdministradorLlibres extends JPanel {
 //		for(String editorial:llibresModel.consultarTotesLesEditorials()) {
 //			editorialsComboBox.addItem(editorial);
 //		}
-		
-		//Per entregar el TEA3 els omplo amb addItem i CreateLlibres()
+
+		// Per entregar el TEA3 els omplo amb addItem i CreateLlibres()
 		createLlibres = new CreateLlibres();
-		if(generesComboBox.getItemCount() == 1) {
-			for(String genere : createLlibres.getGeneres()) {
+		if (generesComboBox.getItemCount() == 1) {
+			for (String genere : createLlibres.getGeneres()) {
 				generesComboBox.addItem(genere);
 			}
-			
-			for(String autor : createLlibres.getAutors()) {
+
+			for (String autor : createLlibres.getAutors()) {
 				autorsComboBox.addItem(autor);
 			}
-			
-			for(String editorial : createLlibres.getEditorials()) {
+
+			for (String editorial : createLlibres.getEditorials()) {
 				editorialsComboBox.addItem(editorial);
 			}
 		}
-	
+
 	}
-	
-		
-	
+
 	/*-------------------------- Getters and Setters Methods --------------------------*/
 	public JLabel getLupaLabel() {
 		return lupaLabel;
@@ -740,15 +739,15 @@ public class AdministradorLlibres extends JPanel {
 	public void setIdLlibreField(JTextField idLlibreField) {
 		this.idLlibreField = idLlibreField;
 	}
-	
+
 	public JComboBox getAutorsComboBox() {
 		return autorsComboBox;
 	}
-	
+
 	public JComboBox getEditorialsComboBox() {
 		return editorialsComboBox;
 	}
-	
+
 	public JComboBox getGeneresComboBox() {
 		return generesComboBox;
 	}
@@ -809,7 +808,6 @@ public class AdministradorLlibres extends JPanel {
 		this.reservatCheckBox = reservatCheckBox;
 	}
 
-	
 	public JTextArea getSinopsisTextArea() {
 		return sinopsisTextArea;
 	}
@@ -835,9 +833,15 @@ public class AdministradorLlibres extends JPanel {
 	}
 
 	public void setRowActiu(int row) {
-		this.rowActiu  = row;
+		this.rowActiu = row;
 	}
 
+	/**
+	 * controla el row(fila) que està activa
+	 * 
+	 * @param add        numero de rows que es moure cap endavant
+	 * @param rowsTotals totals de rows de la taula
+	 */
 	public void seguentRowActiu(int add, int rowsTotals) {
 		if (rowActiu == rowsTotals) {
 			rowActiu = rowsTotals;
@@ -846,6 +850,12 @@ public class AdministradorLlibres extends JPanel {
 		}
 	}
 
+	/**
+	 * controla el row(fila) que està activa
+	 * 
+	 * @param add        numero de rows que es moure cap enrrere
+	 * @param rowsTotals totals de rows de la taula
+	 */
 	public void anteriorRowActiu(int add) {
 		if (rowActiu == 0) {
 			setRowActiu(0);
@@ -865,51 +875,51 @@ public class AdministradorLlibres extends JPanel {
 	public JTextField getRowTotalsField() {
 		return rowTotalsField;
 	}
-	
+
 	public JButton getAltaLlibreButton() {
 		return altaLlibreButton;
 	}
-	
+
 	public JButton getBaixaLlibreButton() {
 		return baixaLlibreButton;
 	}
-	
+
 	public JButton getEditarLlibreButton() {
 		return editarLlibreButton;
 	}
-	
+
 	public JLabel getAfegirAutorLabel() {
 		return afegirAutorLabel;
 	}
-	
+
 	public JLabel getAfegirEditorialLabel() {
 		return afegirEditorialLabel;
 	}
-	
+
 	public JLabel getAfegirGenereLabel() {
 		return afegirGenereLabel;
 	}
-	
+
 	public JButton getConfirmarButton() {
 		return confirmarButton;
 	}
-	
+
 	public JButton getCancellarButton() {
 		return cancellarButton;
 	}
-	
+
 	public String getAccio() {
 		return accio;
 	}
-	
+
 	public void setAccio(String accio) {
 		this.accio = accio;
 	}
-	
+
 	public Usuari getUsuariConnectat() {
 		return usuariConnectat;
 	}
-	
+
 	public void setUsuariConnectat(Usuari usuariConnectat) {
 		this.usuariConnectat = usuariConnectat;
 	}

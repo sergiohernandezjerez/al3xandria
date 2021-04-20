@@ -5,7 +5,6 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import al3xandria.controlador.consultaLlibres.ConsultaLlibresControlador;
 import al3xandria.model.objects.Usuari;
 import al3xandria.vista.icons.Icons;
 
@@ -72,10 +71,10 @@ public class CentralPanel extends JPanel {
 		centralTabPanel.remove(consultaLlibresNoRegistrat);
 		centralTabPanel.addTab("Consulta LLibres ", icons.getConsultaLlbresIcon(), 
 				consultaLLibres, "Consulta els llibres de la biblioteca");
-		//centralTabPanel.addTab("Prestecs ", icons.getconsultaPrestecsIcon(),
-				//consultaPrestecs, "Consulta els teus prestecs");
-		//centralTabPanel.addTab("Comentaris ", icons.getConsultaComentarisIcon(), 
-				//consultaComentaris,	"Consultar els teus comentaris");
+		// centralTabPanel.addTab("Prestecs ", icons.getconsultaPrestecsIcon(),
+		// consultaPrestecs, "Consulta els teus prestecs");
+		// centralTabPanel.addTab("Comentaris ", icons.getConsultaComentarisIcon(),
+		// consultaComentaris, "Consultar els teus comentaris");
 	}
 
 	

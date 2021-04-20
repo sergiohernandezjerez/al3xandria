@@ -24,13 +24,13 @@ public class HeadPanelControlador implements ActionListener, MouseListener {
 
 	/**
 	 * Constructor
-	 * @param headPanel  --> el JPanel que controlarà
+	 * 
+	 * @param headPanel --> el JPanel que controlarà
 	 */
 	public HeadPanelControlador(HeadPanel headPanel) {
 		this.headPanel = headPanel;
 	}
 
-	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// es prem el boto d'esborrar les dades introduïdes
@@ -39,13 +39,13 @@ public class HeadPanelControlador implements ActionListener, MouseListener {
 			headPanel.getContrasenyaIntroduidaPerLusuari().setText("");
 			headPanel.getEmailintroduitPerLusuari().requestFocus();
 		}
-		
-		if(headPanel.getNouUsuariButton() == e.getSource()) {
+
+		if (headPanel.getNouUsuariButton() == e.getSource()) {
 			formulariAltaUsuari = new FormulariAltaUsuari();
 			formulariAltaUsuari.setVisible(true);
 		}
-		
-		if(headPanel.getHasOblidatLaContrasenyaLabel() == e.getSource()) {
+
+		if (headPanel.getHasOblidatLaContrasenyaLabel() == e.getSource()) {
 			mostrarInformacioRecuperacioContrasenya();
 		}
 
@@ -63,7 +63,6 @@ public class HeadPanelControlador implements ActionListener, MouseListener {
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 
-
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -78,7 +77,7 @@ public class HeadPanelControlador implements ActionListener, MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		//es prem el boto de mostrar la contrasenya i la mostra
+		// es prem el boto de mostrar la contrasenya i la mostra
 		if (headPanel.getMostrarContrasenya() == e.getSource()) {
 			headPanel.getContrasenyaIntroduidaPerLusuari().setEchoChar((char) 0);
 		}
@@ -87,7 +86,7 @@ public class HeadPanelControlador implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		//es deixa de premer el boto de mostrar la contrasenya i l'oculta
+		// es deixa de premer el boto de mostrar la contrasenya i l'oculta
 		if (headPanel.getMostrarContrasenya() == e.getSource()) {
 			headPanel.getContrasenyaIntroduidaPerLusuari().setEchoChar('*');
 		}

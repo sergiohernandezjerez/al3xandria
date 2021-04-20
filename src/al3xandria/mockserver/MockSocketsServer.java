@@ -86,6 +86,14 @@ public class MockSocketsServer {
 		} else if (separateData[0].equals("logoutOK")) {
 			setMissatgePerEnviar("0, Email: " + separateData[1] + ", ha tancat la sessió");
 			eliminaIdSessio(separateData[1]);
+	    //per simular una consulta al servidor
+		}else if(separateData[1].equals("consulta_llibre_titol")) {
+			if(separateData[2].equals("ok")){
+				setMissatgePerEnviar("0, llibreTrobat");
+			}else {
+				setMissatgePerEnviar("440, llibre no trobat");
+			}
+			
 		}
 	}
 
