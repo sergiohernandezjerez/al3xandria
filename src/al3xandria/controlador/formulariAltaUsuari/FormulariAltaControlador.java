@@ -48,7 +48,12 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 	public void mouseClicked(MouseEvent e) {
 		// comportament botó esborrar dades formulari
 		if (formulariAltaUsuari.getEsborrarButton() == e.getSource()) {
-			esborrarCampsAltaUsuari();
+			if(formulariAltaUsuari.getTipusAccio().equals("alta")) {
+				esborrarCampsAltaUsuari();
+			}else {
+				esborrarCampsModificarUsuari();
+			}
+			
 		}
 
 		// comportament botó enviar dades per fer l'alta d'usuari. Si tot correcte envia
@@ -75,6 +80,7 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 		if (formulariAltaUsuari.getCancellarButton() == e.getSource()) {
 			avisTancamentFormulari();
 		}
+		
 
 	}
 
@@ -169,6 +175,25 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 		formulariAltaUsuari.getTipusUsuariComboBox().setSelectedIndex(0);
 		formulariAltaUsuari.getDniNieComboBox().setSelectedIndex(0);
 	}
+	
+	/**
+	 * Esborra tots els camps del formulari i deixa la selecció del combobox al
+	 * index 0
+	 * 
+	 * @author SergioHernandez
+	 */
+	private void esborrarCampsModificarUsuari() {
+		formulariAltaUsuari.getEmailField().setText("");
+		formulariAltaUsuari.getAdrecaField().setText("");
+		formulariAltaUsuari.getCodiPostalField().setText("");
+		formulariAltaUsuari.getPoblacioField().setText("");
+		formulariAltaUsuari.getProvinciaComboBox().setSelectedIndex(0);
+		formulariAltaUsuari.getPaisField().setText("");
+		formulariAltaUsuari.getTelefonField().setText("");
+		formulariAltaUsuari.getContrasenyaField().setText("");
+		formulariAltaUsuari.getRepetirContrasenyaField().setText("");
+
+	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
@@ -184,13 +209,21 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// es prem el boto de mostrar la contrasenya i la mostra
+				if (formulariAltaUsuari.getMostrarContrasenyaIcon() == e.getSource()) {
+					formulariAltaUsuari.getContrasenyaField().setEchoChar((char) 0);
+					formulariAltaUsuari.getRepetirContrasenyaField().setEchoChar((char) 0);
+				}
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// es deixa de premer el botó de mostrar la contrasenya i l'oculto
+		if (formulariAltaUsuari.getMostrarContrasenyaIcon() == e.getSource()) {
+			formulariAltaUsuari.getContrasenyaField().setEchoChar('*');
+			formulariAltaUsuari.getRepetirContrasenyaField().setEchoChar('*');
+		}
 
 	}
 
@@ -332,5 +365,6 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 		// TODO Auto-generated method stub
 
 	}
+	
 
 }

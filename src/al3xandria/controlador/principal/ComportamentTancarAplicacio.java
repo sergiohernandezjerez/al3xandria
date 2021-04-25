@@ -34,7 +34,7 @@ public class ComportamentTancarAplicacio implements WindowListener {
 	@Override
 	public void windowClosing(WindowEvent e) {
 		if (headPanel.getTipusUsuari() != null) {
-			if (headPanel.getTipusUsuari().equals("Administrador")) {
+			if (headPanel.getTipusUsuari().equals("administrador")) {
 				avisTancamentAplicacio();
 			} else {
 				avisImposibleTancarAplicacio();

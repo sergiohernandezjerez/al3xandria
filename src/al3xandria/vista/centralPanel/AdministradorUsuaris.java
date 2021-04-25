@@ -25,7 +25,6 @@ import al3xandria.model.objects.Usuari;
 import al3xandria.model.usuaris.UsuarisModel;
 import al3xandria.vista.icons.Icons;
 
-import javax.swing.border.EtchedBorder;
 import java.awt.ComponentOrientation;
 import java.awt.Cursor;
 
@@ -328,9 +327,7 @@ public class AdministradorUsuaris extends JPanel {
 		dadesLlibrePanel.setLayout(new BorderLayout(0, 0));
 
 		dadesLlibreGridPanel = new JPanel();
-		dadesLlibreGridPanel.setBorder(new TitledBorder(
-				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Dades de l'usuari", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		dadesLlibreGridPanel.setBorder(new TitledBorder(null, "Dades usuari", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		dadesLlibrePanel.add(dadesLlibreGridPanel, BorderLayout.NORTH);
 		GridBagLayout gbl_dadesLlibreGridPanel = new GridBagLayout();
 		gbl_dadesLlibreGridPanel.columnWidths = new int[] { 619, 0 };

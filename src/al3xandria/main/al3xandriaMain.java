@@ -38,9 +38,9 @@ public class al3xandriaMain {
 		principalFrame.setVisible(true);
 		
 		//servidor
-		int port = 5556;
-		MockSocketsServer mss = new MockSocketsServer();
-		mss.run(port);
+//		int port = 5556;
+//		MockSocketsServer mss = new MockSocketsServer();
+//		mss.run(port);
 	}
 	
 	//creat per fer el video

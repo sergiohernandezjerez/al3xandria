@@ -23,7 +23,6 @@ import al3xandria.model.llibres.LlibresModel;
 import al3xandria.model.objects.Usuari;
 import al3xandria.vista.icons.Icons;
 
-import javax.swing.border.EtchedBorder;
 import javax.swing.JTextArea;
 import java.awt.ComponentOrientation;
 import java.awt.Cursor;
@@ -274,9 +273,6 @@ public class ConsultaLlibres extends JPanel {
 		dadesLlibrePanel.setLayout(new BorderLayout(0, 0));
 
 		dadesLlibreGridPanel = new JPanel();
-		dadesLlibreGridPanel.setBorder(new TitledBorder(
-				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Dades del llibre", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		dadesLlibrePanel.add(dadesLlibreGridPanel, BorderLayout.NORTH);
 		GridBagLayout gbl_dadesLlibreGridPanel = new GridBagLayout();
 		gbl_dadesLlibreGridPanel.columnWidths = new int[] { 619, 0 };
@@ -373,9 +369,7 @@ public class ConsultaLlibres extends JPanel {
 		dadesLlibrePanel.setLayout(new BorderLayout(0, 0));
 
 		dadesLlibreGridPanel = new JPanel();
-		dadesLlibreGridPanel.setBorder(new TitledBorder(
-				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Dades del llibre", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		dadesLlibreGridPanel.setBorder(new TitledBorder(null, "Dades llibre", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		dadesLlibrePanel.add(dadesLlibreGridPanel, BorderLayout.NORTH);
 		GridBagLayout gbl_dadesLlibreGridPanel1 = new GridBagLayout();
 		gbl_dadesLlibreGridPanel1.columnWidths = new int[] { 619, 0 };

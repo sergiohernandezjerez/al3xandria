@@ -46,6 +46,7 @@ public class FormulariAltaUsuari extends JFrame {
 	private JTextField telefonField;
 	
 	private Icons icones;
+	private String tipusAccio;
 	private JLabel nomLabel;
 	private JLabel cognomsLabel;
 	private JLabel emailLabel;
@@ -68,6 +69,8 @@ public class FormulariAltaUsuari extends JFrame {
 	private JPasswordField repetirContrasenyaField;
 	private JPasswordField contrasenyaField;
 	private JComboBox<String> provinciaComboBox;
+	private JLabel contrasenyaLabel;
+	private JLabel mostrarContrasenyaIcon;
 
 	/**
 	 * Launch the application.
@@ -92,6 +95,7 @@ public class FormulariAltaUsuari extends JFrame {
 	 * Create the frame.
 	 */
 	public FormulariAltaUsuari() {
+		setTipusAccio("alta");
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new FormulariAltaControlador(this));
 		icones = new Icons();
@@ -264,8 +268,8 @@ public class FormulariAltaUsuari extends JFrame {
 		logoDeLaplicacio.setBounds(0, 11, 614, 71);
 		contentPane.add(logoDeLaplicacio);
 		
-		JLabel contrasenyaLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.contrasenyaLabel.text"));   //$NON-NLS-1$
-		contrasenyaLabel.setBounds(311, 290, 75, 14);
+		contrasenyaLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.contrasenyaLabel.text"));   //$NON-NLS-1$
+		contrasenyaLabel.setBounds(270, 289, 114, 14);
 		contentPane.add(contrasenyaLabel);
 		
 		contrasenyaField = new JPasswordField();
@@ -274,6 +278,13 @@ public class FormulariAltaUsuari extends JFrame {
 		contrasenyaField.setText(""); 
 		contrasenyaField.setBounds(394, 286, 140, 24);
 		contentPane.add(contrasenyaField);
+		
+		mostrarContrasenyaIcon = new JLabel("");
+		mostrarContrasenyaIcon.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.mostrarContrasenyaIcon.toolTipText")); //$NON-NLS-1$
+		mostrarContrasenyaIcon.setBounds(539, 288, 33, 16);
+		mostrarContrasenyaIcon.setIcon(icones.getMostrarContrasenyaIcon());
+		mostrarContrasenyaIcon.addMouseListener(new FormulariAltaControlador(this));
+		contentPane.add(mostrarContrasenyaIcon);
 		
 		repetirContrasenyaLabel = new JLabel(HeadPanelMessages.getString("FormulariAltaUsuari.repetirContrasenyaLabel.text"));   //$NON-NLS-1$
 		repetirContrasenyaLabel.setBounds(270, 320, 115, 14);
@@ -437,5 +448,25 @@ public class FormulariAltaUsuari extends JFrame {
 	public String getRepetirContrasenyaFieldToString() {
 		String contrasenya = new String(repetirContrasenyaField.getPassword());
 		return contrasenya;
+	}
+	
+	public JLabel getContrasenyaLabel() {
+		return contrasenyaLabel;
+	}
+	
+	public JLabel getTitolLabel() {
+		return titolLabel;
+	}
+	
+	public JLabel getMostrarContrasenyaIcon() {
+		return mostrarContrasenyaIcon;
+	}
+	
+	public String getTipusAccio() {
+		return tipusAccio;
+	}
+	
+	public void setTipusAccio(String tipusAccio) {
+		this.tipusAccio = tipusAccio;
 	}
 }

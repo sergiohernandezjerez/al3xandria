@@ -88,6 +88,7 @@ public class MockSocketsServer {
 			eliminaIdSessio(separateData[1]);
 	    //per simular una consulta al servidor
 		}else if(separateData[1].equals("consulta_llibre_titol")) {
+			
 			if(separateData[2].equals("ok")){
 				setMissatgePerEnviar("0, llibreTrobat");
 			}else {

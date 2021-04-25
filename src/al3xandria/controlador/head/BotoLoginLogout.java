@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import al3xandria.model.ControlDeDades;
 import al3xandria.model.objects.CreateUsuaris;
 import al3xandria.model.objects.Usuari;
+import al3xandria.controlador.food.FootPanelControlador;
 import al3xandria.model.ComunicacioClientServidor;
 import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.HeadPanelMessages;
@@ -29,12 +30,14 @@ public class BotoLoginLogout implements ActionListener {
 	ControlDeDades controlDeDades;
 	private HeadPanel headPanel;
 	private FootPanel footPanel;
+	private FootPanelControlador footPanelControlador;
 	private CentralPanel centralPanel;
 	private ComunicacioClientServidor comunicacioClientServidor = new ComunicacioClientServidor();
 	private String[] dadesRebudesDelServidor;
 	private String emailUsuariIntroduit;
 	private String estatDelBotoLogin;
 	private String contrasenyaUsuariIntroduida;
+
 
 	/**
 	 * Constructor
@@ -47,7 +50,7 @@ public class BotoLoginLogout implements ActionListener {
 		this.headPanel = headPanel;
 		this.footPanel = footPanel;
 		this.centralPanel = centralPanel;
-
+		
 		controlDeDades = new ControlDeDades();
 	}
 
@@ -136,13 +139,14 @@ public class BotoLoginLogout implements ActionListener {
 	 * @author SergioHernandez
 	 */
 	public void permisPerFerLogin() {
+		footPanel.setUsuariConectat(usuariConnectat);
 		footPanel.setUsuariIconOn();
 		desactivaElPanelPerFerLogin();
-		if (dadesRebudesDelServidor[2].equals("Administrador")) {
-			tipusUsuari = "Administrador";
+		if (dadesRebudesDelServidor[2].equals("administrador")) {
+			tipusUsuari = "administrador";
 
 		} else {
-			tipusUsuari = "Usuari";
+			tipusUsuari = "usuari";
 		}
 
 		usuariAFetLogin();
@@ -165,13 +169,15 @@ public class BotoLoginLogout implements ActionListener {
 		footPanel.getCarnetUsuariLabel().setText(usuariConnectat.getCarnet());
 		footPanel.getPuntuacioUsuariLabel().setText(String.valueOf(usuariConnectat.getPuntuacioUsuari()));
 		footPanel.getNomUsuariLabel().setText(usuariConnectat.getNomUsuari());
+		footPanel.getModificarDadesIcon().setVisible(true);
+		footPanel.getModificarDadesLabel().setVisible(true);
 
 		switch (tipusUsuari) {
-		case "Usuari":
+		case "usuari":
 			centralPanel.setUsuariPanel(usuariConnectat);
 			break;
 
-		case "Administrador":
+		case "administrador":
 			centralPanel.setAdministradorPanel(usuariConnectat);
 			break;
 
@@ -196,11 +202,11 @@ public class BotoLoginLogout implements ActionListener {
 		switch (tipusUsuari) {
 		case "Estudiant":
 		case "Professor":
-		case "Usuari":
+		case "usuari":
 			centralPanel.removeUsuariPanelToDefault();
 			break;
 
-		case "Administrador":
+		case "administrador":
 			centralPanel.removeAdministradorPanelToDefautl();
 			break;
 
@@ -292,7 +298,8 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getEsborrarDadesLoginLabel().setEnabled(false);
 		headPanel.getHasOblidatLaContrasenyaLabel().setEnabled(false);
 		headPanel.getMostrarContrasenya().setEnabled(false);
-
+		headPanel.getNouUsuariButton().setEnabled(false);
+		headPanel.getNouUsuariButton().setToolTipText("");
 		headPanel.getEmailintroduitPerLusuari().setToolTipText(null);
 		headPanel.getContrasenyaIntroduidaPerLusuari().setToolTipText(null);
 		headPanel.getNouUsuariButton().setToolTipText(null);
@@ -314,7 +321,8 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getContrasenyaIntroduidaPerLusuari().setEnabled(true);
 		headPanel.getHasOblidatLaContrasenyaLabel().setEnabled(true);
 		headPanel.getMostrarContrasenya().setEnabled(true);
-
+		headPanel.getNouUsuariButton().setEnabled(true);
+		headPanel.getNouUsuariButton().setToolTipText(HeadPanelMessages.getString("HeadPanel.nouUsuariButton.toolTipText"));
 		headPanel.getEmailintroduitPerLusuari()
 				.setToolTipText(HeadPanelMessages.getString("HeadPanel.emailintroduitPerLusuari.toolTipText"));
 		headPanel.getContrasenyaIntroduidaPerLusuari()
@@ -340,6 +348,7 @@ public class BotoLoginLogout implements ActionListener {
 				.setToolTipText(HeadPanelMessages.getString("HeadPanel.ferLoginButton.toolTipText"));
 		headPanel.getEmailintroduitPerLusuari().setText("");
 		headPanel.getContrasenyaIntroduidaPerLusuari().setText("");
+		headPanel.getNouUsuariButton().setEnabled(true);
 		footPanel.getEstasConectatComLabel().setText(FootPanelMessages.getString("FootPanel.usuariNoConnectat.text"));
 		footPanel.getTipuUsuariLabel().setText(FootPanelMessages.getString("FootPanel.tipusUsuariAnominLabel"));
 
@@ -348,6 +357,9 @@ public class BotoLoginLogout implements ActionListener {
 		footPanel.getCarnetUsuariLabel().setText("");
 		footPanel.getPuntuacioUsuariLabel().setText("");
 		footPanel.getNomUsuariLabel().setText("");
+		footPanel.getModificarDadesIcon().setVisible(false);
+		footPanel.getModificarDadesLabel().setVisible(false);
 	}
+	
 
 }

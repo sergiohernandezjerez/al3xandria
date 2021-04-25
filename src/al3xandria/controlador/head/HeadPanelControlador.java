@@ -40,7 +40,7 @@ public class HeadPanelControlador implements ActionListener, MouseListener {
 			headPanel.getEmailintroduitPerLusuari().requestFocus();
 		}
 
-		if (headPanel.getNouUsuariButton() == e.getSource()) {
+		if (headPanel.getNouUsuariButton() == e.getSource() && headPanel.getNouUsuariButton().isEnabled()) {
 			formulariAltaUsuari = new FormulariAltaUsuari();
 			formulariAltaUsuari.setVisible(true);
 		}

@@ -3,6 +3,7 @@ package al3xandria.vista.footPanel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import al3xandria.controlador.food.FootPanelControlador;
 import al3xandria.model.objects.Usuari;
 import al3xandria.vista.icons.Icons;
 
@@ -15,6 +16,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.BorderLayout;
+import javax.swing.JButton;
+import java.awt.Cursor;
 
 /**
  * clase que crear el panel FootPanel
@@ -59,6 +62,8 @@ public class FootPanel extends JPanel {
 	private JLabel borderTopLabel;
 	private JLabel borderBottomLabel;
 	private JLabel borderRightLabel;
+	private JLabel modificarDadesLabel;
+	private JLabel modificarDadesIcon;
 
 	public FootPanel(Usuari usuariConectat) {
 		this.usuariConectat = usuariConectat;
@@ -78,9 +83,9 @@ public class FootPanel extends JPanel {
 		add(connectPanel, BorderLayout.WEST);
 		GridBagLayout gbl_connectPanel = new GridBagLayout();
 		gbl_connectPanel.columnWidths = new int[] { 20, 83, 0 };
-		gbl_connectPanel.rowHeights = new int[] { 22, 22, 22, 0 };
+		gbl_connectPanel.rowHeights = new int[] { 22, 22, 0, 22, 0 };
 		gbl_connectPanel.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
-		gbl_connectPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_connectPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		connectPanel.setLayout(gbl_connectPanel);
 		
 		estasConectatComLabel = new JLabel(FootPanelMessages.getString("FootPanel.usuariNoConnectat.text")); //$NON-NLS-1$
@@ -105,10 +110,34 @@ public class FootPanel extends JPanel {
 		tipuUsuariLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		estatUsuariIcon = new JLabel("");
 		GridBagConstraints gbc_estatUsuariIcon = new GridBagConstraints();
+		gbc_estatUsuariIcon.insets = new Insets(0, 0, 5, 0);
 		gbc_estatUsuariIcon.fill = GridBagConstraints.BOTH;
 		gbc_estatUsuariIcon.gridx = 1;
 		gbc_estatUsuariIcon.gridy = 2;
 		connectPanel.add(estatUsuariIcon, gbc_estatUsuariIcon);
+		
+		modificarDadesIcon = new JLabel("");
+		GridBagConstraints gbc_modificarDadesIcon = new GridBagConstraints();
+		modificarDadesIcon.setIcon(icons.getModificarDadesIcon());
+		gbc_modificarDadesIcon.anchor = GridBagConstraints.EAST;
+		gbc_modificarDadesIcon.insets = new Insets(0, 0, 0, 5);
+		gbc_modificarDadesIcon.gridx = 0;
+		gbc_modificarDadesIcon.gridy = 3;
+		modificarDadesIcon.setVisible(false);
+		connectPanel.add(modificarDadesIcon, gbc_modificarDadesIcon);
+		
+		modificarDadesLabel = new JLabel(FootPanelMessages.getString("FootPanel.lblNewLabel.text")); //$NON-NLS-1$
+		modificarDadesLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		modificarDadesLabel.setToolTipText(FootPanelMessages.getString("FootPanel.modificarDadesLabel.toolTipText")); //$NON-NLS-1$
+		modificarDadesLabel.setForeground(new Color(0, 102, 0));
+		modificarDadesLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		GridBagConstraints gbc_modificarDadesLabel = new GridBagConstraints();
+		gbc_modificarDadesLabel.anchor = GridBagConstraints.WEST;
+		gbc_modificarDadesLabel.gridx = 1;
+		gbc_modificarDadesLabel.gridy = 3;
+		modificarDadesLabel.setVisible(false);
+		modificarDadesLabel.addMouseListener(new FootPanelControlador(this));
+		connectPanel.add(modificarDadesLabel, gbc_modificarDadesLabel);
 
 		informacioUsuariPanel = new JPanel();
 		informacioUsuariPanel.setBackground(Color.WHITE);
@@ -380,6 +409,20 @@ public class FootPanel extends JPanel {
 		return carnetUsuariLabel;
 	}
 	
+	public JLabel getModificarDadesIcon() {
+		return modificarDadesIcon;
+	}
 	
+	public JLabel getModificarDadesLabel() {
+		return modificarDadesLabel;
+	}
+	
+	public void setUsuariConectat(Usuari usuariConectat) {
+		this.usuariConectat = usuariConectat;
+	}
+	
+	public Usuari getUsuariConectat() {
+		return usuariConectat;
+	}
 
 }

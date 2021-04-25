@@ -22,7 +22,7 @@ private Usuari usuariConnectat;
 	public void creaUsuaris() {
 		llistatUsuaris = new ArrayList<Usuari>();
 		Usuari usuari1 = new Usuari(1, "Pepe", "Garcia", "52177001", "pepe@pepe.com", "pepe", "Carrer 4", "08521", "Reus", "Tarragona", "Espanya", "123456789", "C123", "Estudiant", 0, true);
-		Usuari usuari2 = new Usuari(2, "Maria", "Jimenex", "52177001", "maria@maria.com", "maria", "Carrer 5", "08451", "Montcada", "Barcelona", "Espanya", "456789123", "C124", "Estudiant", 0, true);
+		Usuari usuari2 = new Usuari(2, "Maria", "Jimenex", "52177001", "maria@maria.com", "maria", "Carrer 5", "08451", "Montcada", "Barcelona", "Espanya", "456789123", "C124", "Administrador", 0, true);
 		Usuari usuari3 = new Usuari(3, "Josep", "Perez", "52177001", "josep@josep.com", "josep", "Carrer 8", "09564", "Mollet", "Girona", "Espanya", "789456123", "C125", "Professor", 0, true);
 		Usuari usuari4 = new Usuari(4, "Arnau", "Jerez", "52177001", "arnau@arnau.com", "arnau", "Carrer 12", "08080", "Vic", "Lleida", "Espanya", "456123789", "C126", "Administrador", 0, true);
 		Usuari usuari5 = new Usuari(5, "Anna", "Hernandez", "52177001", "anna@anna.com", "anna", "Carrer 54", "06895", "Camprodon", "Barcelona", "Espanya", "456456123", "C127", "Estudiant", 0, true);
