@@ -331,7 +331,6 @@ public class ConsultaLlibres extends JPanel {
 		paginadorPanel.add(seguentLabel);
 
 		prestecsLlibreButton = new JButton(CentralPanelMessages.getString("ConsultaLlibres.prestecsLlibreButton.text"));
-		prestecsLlibreButton.setEnabled(false);
 		prestecsLlibreButton.setForeground(Color.WHITE);
 		prestecsLlibreButton.setBackground(Color.decode("#6a1b9a"));
 		prestecsLlibreButton
@@ -340,7 +339,6 @@ public class ConsultaLlibres extends JPanel {
 		accionsButtonsPanel.add(prestecsLlibreButton);
 
 		llogarLlibreButton = new JButton(CentralPanelMessages.getString("ConsultaLlibres.llogarLlibreButton.text"));
-		llogarLlibreButton.setEnabled(false);
 		llogarLlibreButton.setForeground(new Color(255, 255, 255));
 		llogarLlibreButton.setBackground(new Color(222, 184, 135));
 		llogarLlibreButton
@@ -348,8 +346,7 @@ public class ConsultaLlibres extends JPanel {
 		llogarLlibreButton.addMouseListener(new ConsultaLlibresControlador(this, usuariConnectat));
 		accionsButtonsPanel.add(llogarLlibreButton);
 		
-		reservarButton = new JButton(CentralPanelMessages.getString("ConsultaLlibres.btnNewButton.text")); //$NON-NLS-1$
-		reservarButton.setEnabled(false);
+		reservarButton = new JButton(CentralPanelMessages.getString("ConsultaLlibres.btnNewButton.text"));
 		reservarButton.setForeground(new Color(255, 255, 255));
 		reservarButton.setBackground(new Color(0, 100, 0));
 		reservarButton.addMouseListener(new ConsultaLlibresControlador(this, usuariConnectat));
@@ -365,10 +362,12 @@ public class ConsultaLlibres extends JPanel {
 		accionsButtonsPanel.add(lblNewLabel);
 
 		cancellarButton = new JButton(CentralPanelMessages.getString("ConsultaLlibres.cancellarButton.text"));
+		cancellarButton.setVisible(false);
+		cancellarButton.setEnabled(false);
 		cancellarButton.setBackground(new Color(165, 42, 42));
 		cancellarButton.setForeground(Color.WHITE);
-		cancellarButton.setToolTipText(CentralPanelMessages.getString("ConsultaLlibres.cancellarButton.toolTipText")); //$NON-NLS-1$
-		cancellarButton.setVisible(false);
+		cancellarButton.setToolTipText(CentralPanelMessages.getString("ConsultaLlibres.cancellarButton.toolTipText"));
+		cancellarButton.addMouseListener(new ConsultaLlibresControlador(this, usuariConnectat));
 		accionsButtonsPanel.add(cancellarButton);
 
 		dadesLlibrePanel = new JPanel();
@@ -874,5 +873,9 @@ public class ConsultaLlibres extends JPanel {
 	
 	public JButton getPrestecsLlibreButton() {
 		return prestecsLlibreButton;
+	}
+	
+	public JButton getCancellarButton() {
+		return cancellarButton;
 	}
 }

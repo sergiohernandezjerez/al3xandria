@@ -95,6 +95,11 @@ public class AdministradorLlibresControlador implements MouseListener {
 			}
 
 		}
+		
+		// mostra els prèstecs
+		if(administradorLlibres.getPrestecsButton() == e.getSource()){
+			mostrarPrestecs();
+		}
 
 		// Accions del butó confirmar
 		if (administradorLlibres.getConfirmarButton() == e.getSource()) {
@@ -122,7 +127,21 @@ public class AdministradorLlibresControlador implements MouseListener {
 		if (administradorLlibres.getAfegirEditorialLabel() == e.getSource()) {
 			formulariAfegirNouElement("Editorial");
 		}
+		
 
+	}
+
+	/**
+	 * Mostra tots els prèstecs que hi ha actualment
+	 * @author SergioHernandez
+	 */
+	private void mostrarPrestecs() {
+
+			JOptionPane.showMessageDialog(administradorLlibres, "Falta implementar la consulta dels prèstecs\nde la biblioteca",
+					WarningStrings.getString("Consultar prèstecs"), JOptionPane.ERROR_MESSAGE);
+			
+		
+		
 	}
 
 	/**

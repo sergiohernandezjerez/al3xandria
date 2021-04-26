@@ -55,7 +55,54 @@ public class ConsultaLlibresControlador implements MouseListener {
 		if (consultaLlibres.getAnteriorIconLabel() == e.getSource()) {
 			pasarLlibreAnterior();
 		}
+		
+		if(consultaLlibres.getPrestecsLlibreButton() == e.getSource()) {
+			mostrarPrestecs();
+		}
+		
+		if(consultaLlibres.getReservarButton() == e.getSource()) {
+			missatgeLlibreReservat();
+		}
+		
+		if(consultaLlibres.getLlogarLlibreButton() == e.getSource()) {
+			missatgeLlibreLlogat();
+		}
+		
+		if(consultaLlibres.getCancellarButton() == e.getSource()) {
+			
+		}
 
+	}
+
+	private void missatgeLlibreLlogat() {
+		int rowAMostrar = consultaLlibres.getLlibresTable().getSelectedRow();
+		if (rowAMostrar > -1) {
+			JOptionPane.showMessageDialog(consultaLlibres, "Falta implementar el lloger de llibres",
+					WarningStrings.getString("Llogar llibre"), JOptionPane.ERROR_MESSAGE);
+		} else {
+			errorLlibreNoSeleccionat();
+		}
+		
+	}
+
+	private void missatgeLlibreReservat() {
+		int rowAMostrar = consultaLlibres.getLlibresTable().getSelectedRow();
+		if (rowAMostrar > -1) {
+			JOptionPane.showMessageDialog(consultaLlibres, "Falta implementar la reserva de llibres",
+					WarningStrings.getString("Reservar llibre"), JOptionPane.ERROR_MESSAGE);
+		} else {
+			errorLlibreNoSeleccionat();
+		}
+		
+	}
+
+	private void mostrarPrestecs() {
+		//Es mostrarà quan estigui implementat el prèstec de llibres
+		//consultaLlibres.getCancellarButton().setVisible(true);
+		//consultaLlibres.getCancellarButton().setEnabled(true);
+		JOptionPane.showMessageDialog(consultaLlibres, "Falta implementar la consulta dels prèstecs\nde l'usuari",
+				WarningStrings.getString("Consultar prèstecs"), JOptionPane.ERROR_MESSAGE);
+		
 	}
 
 	/**
