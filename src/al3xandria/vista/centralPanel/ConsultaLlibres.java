@@ -139,6 +139,7 @@ public class ConsultaLlibres extends JPanel {
 	private JLabel edicioLabel;
 
 	private JTextField edicioField;
+	private JButton reservarButton;
 
 	/**
 	 * Create the panel.
@@ -335,6 +336,7 @@ public class ConsultaLlibres extends JPanel {
 		prestecsLlibreButton.setBackground(Color.decode("#6a1b9a"));
 		prestecsLlibreButton
 				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibres.prestecsLlibreButton.toolTipText")); //$NON-NLS-1$
+		prestecsLlibreButton.addMouseListener(new ConsultaLlibresControlador(this, usuariConnectat));
 		accionsButtonsPanel.add(prestecsLlibreButton);
 
 		llogarLlibreButton = new JButton(CentralPanelMessages.getString("ConsultaLlibres.llogarLlibreButton.text"));
@@ -343,10 +345,15 @@ public class ConsultaLlibres extends JPanel {
 		llogarLlibreButton.setBackground(new Color(222, 184, 135));
 		llogarLlibreButton
 				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibres.llogarLlibreButton.toolTipText")); //$NON-NLS-1$
+		llogarLlibreButton.addMouseListener(new ConsultaLlibresControlador(this, usuariConnectat));
 		accionsButtonsPanel.add(llogarLlibreButton);
-
-		JLabel lblNewLabel_3 = new JLabel(" ");
-		accionsButtonsPanel.add(lblNewLabel_3);
+		
+		reservarButton = new JButton(CentralPanelMessages.getString("ConsultaLlibres.btnNewButton.text")); //$NON-NLS-1$
+		reservarButton.setEnabled(false);
+		reservarButton.setForeground(new Color(255, 255, 255));
+		reservarButton.setBackground(new Color(0, 100, 0));
+		reservarButton.addMouseListener(new ConsultaLlibresControlador(this, usuariConnectat));
+		accionsButtonsPanel.add(reservarButton);
 
 		JLabel lblNewLabel_2 = new JLabel(" ");
 		accionsButtonsPanel.add(lblNewLabel_2);
@@ -467,6 +474,7 @@ public class ConsultaLlibres extends JPanel {
 		disponiblePanel.add(reservatLabel);
 
 		reservatCheckBox = new JCheckBox("");
+		reservatCheckBox.setEnabled(false);
 		disponiblePanel.add(reservatCheckBox);
 
 		autorGenereEditorialPuntuacioPanel = new JPanel();
@@ -854,5 +862,17 @@ public class ConsultaLlibres extends JPanel {
 
 	public void setUsuariConnectat(Usuari usuariConnectat) {
 		this.usuariConnectat = usuariConnectat;
+	}
+	
+	public JButton getReservarButton() {
+		return reservarButton;
+	}
+	
+	public JButton getLlogarLlibreButton() {
+		return llogarLlibreButton;
+	}
+	
+	public JButton getPrestecsLlibreButton() {
+		return prestecsLlibreButton;
 	}
 }

@@ -131,8 +131,8 @@ public class AdministradorLlibres extends JPanel {
 	private JButton mostrarLlibreButton;
 	private JButton confirmarButton;
 	private JButton cancellarButton;
-	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
+	private JButton prestecsButton;
 
 	/**
 	 * Create the panel.
@@ -303,9 +303,12 @@ public class AdministradorLlibres extends JPanel {
 				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.confirmarButton.setToolTipText")); //$NON-NLS-1$
 		confirmarButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
 		confirmarButton.setVisible(false);
-
-		lblNewLabel = new JLabel("");
-		accionsButtonsPanel.add(lblNewLabel);
+		
+		prestecsButton = new JButton(CentralPanelMessages.getString("AdministradorLlibres.btnNewButton.text")); //$NON-NLS-1$
+		prestecsButton.setForeground(new Color(255, 255, 255));
+		prestecsButton.setBackground(new Color(0, 100, 0));
+		prestecsButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+		accionsButtonsPanel.add(prestecsButton);
 
 		lblNewLabel_1 = new JLabel("");
 		accionsButtonsPanel.add(lblNewLabel_1);
@@ -919,5 +922,9 @@ public class AdministradorLlibres extends JPanel {
 
 	public void setUsuariConnectat(Usuari usuariConnectat) {
 		this.usuariConnectat = usuariConnectat;
+	}
+	
+	public JButton getPrestecsButton() {
+		return prestecsButton;
 	}
 }
