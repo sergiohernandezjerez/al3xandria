@@ -177,9 +177,8 @@ public class FormulariAltaControlador implements ActionListener, MouseListener, 
 	}
 	
 	/**
-	 * Esborra tots els camps del formulari i deixa la selecció del combobox al
-	 * index 0
-	 * 
+	 * Esborra tots els camps del formulari quan l´usuari escull 
+	 * la opció de modificar les seves dades
 	 * @author SergioHernandez
 	 */
 	private void esborrarCampsModificarUsuari() {

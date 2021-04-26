@@ -20,6 +20,7 @@ public class FootPanelControlador implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		//comportament boto modificar dades d'usuari
 		if(footPanel.getModificarDadesLabel() == e.getSource()) {
 			formulariAltaUsuari.setTipusAccio("modificacio");
 			setUsuariConnectat(footPanel.getUsuariConectat());
@@ -29,6 +30,11 @@ public class FootPanelControlador implements MouseListener{
 		
 	}
 
+	/**
+	 * Mostra el formulari d'alta d'usuari i el prepara per 
+	 * que l'usuari pugui mofidicar les seves dades
+	 * @author SergioHernandez
+	 */
 	private void activarFormulariModificacio() {
 		formulariAltaUsuari.setVisible(true);
 		omplirDadesFormulari();
@@ -36,6 +42,11 @@ public class FootPanelControlador implements MouseListener{
 		
 	}
 
+	/**
+	 * Activa o desactiva els camps que es permeten cambiar a l'hora
+	 *  de modificar les dades d'usuari
+	 *  @author SergioHernandez
+	 */
 	private void activarEdicioFormulari() {
 		formulariAltaUsuari.getTitolLabel().setText("Modificar dades usuari");
 		formulariAltaUsuari.getNomField().setEditable(false);
@@ -55,6 +66,11 @@ public class FootPanelControlador implements MouseListener{
 		
 	}
 
+	/**
+	 * Omple els camps del formulari amb les dades de l'usuari
+	 * @author SergioHernandez
+	 */
+	
 	private void omplirDadesFormulari() {
 		formulariAltaUsuari.getNomField().setText(usuariConnectat.getNomUsuari());
 		formulariAltaUsuari.getCognomsField().setText(usuariConnectat.getCognomsUsuari());
