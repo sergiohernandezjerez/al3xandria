@@ -5,6 +5,19 @@
  */
 package al3xandria.pedroServer.Main;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
+import java.sql.SQLException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
 import al3xandria.pedroServer.controlador.ControladorServidor;
 import al3xandria.pedroServer.model.ModelServidor;
 
@@ -15,7 +28,7 @@ import al3xandria.pedroServer.model.ModelServidor;
  */
 public class MainServer {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, KeyStoreException, IOException, FileNotFoundException, CertificateException, UnrecoverableKeyException, KeyManagementException {
         
         ModelServidor model = new ModelServidor();
         ControladorServidor controlador = new ControladorServidor(model);       
@@ -23,3 +36,4 @@ public class MainServer {
         controlador.arrancar();       
     }   
 }
+

@@ -19,10 +19,13 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+
 import al3xandria.controlador.administradorLlibres.AdministradorLlibresControlador;
 import al3xandria.model.llibres.LlibresModel;
 import al3xandria.model.objects.CreateLlibres;
 import al3xandria.model.objects.Usuari;
+import al3xandria.model.prestecs.PrestecsModel;
 import al3xandria.vista.icons.Icons;
 
 import javax.swing.JTextArea;
@@ -44,6 +47,7 @@ public class AdministradorLlibres extends JPanel {
 	private LlibresModel llibresModel;
 	private String accio;
 	private CreateLlibres createLlibres;
+	private PrestecsModel prestecsModel;
 	private Usuari usuariConnectat;
 
 	private JTextField cercaField;
@@ -133,6 +137,8 @@ public class AdministradorLlibres extends JPanel {
 	private JButton cancellarButton;
 	private JLabel lblNewLabel_1;
 	private JButton prestecsButton;
+	private JLabel refrescarLabel;
+	
 
 	/**
 	 * Create the panel.
@@ -165,39 +171,40 @@ public class AdministradorLlibres extends JPanel {
 		fl_filtreButtonPanel.setAlignment(FlowLayout.LEFT);
 		filtresPanel.add(filtreButtonPanel, BorderLayout.WEST);
 
-		filtrePerLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.filtrePerLabel.text")); //$NON-NLS-1$
-		filtrePerLabel
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.filtrePerLabel.toolTipText")); //$NON-NLS-1$
+		filtrePerLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.filtrePerLabel.text")); //$NON-NLS-1$
+		filtrePerLabel.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.filtrePerLabel.toolTipText")); //$NON-NLS-1$
 		filtrePerLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		filtreButtonPanel.add(filtrePerLabel);
 
-		titolRadioButton = new JRadioButton(
-				CentralPanelMessages.getString("AdministradorLlibres.titolRadioButton.text")); //$NON-NLS-1$
+		titolRadioButton = new JRadioButton(CentralPanelMessages
+				.getString("AdministradorLlibres.titolRadioButton.text")); //$NON-NLS-1$
 		titolRadioButton.setSelected(true);
 		filtreButtonGroup.add(titolRadioButton);
-		titolRadioButton
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.titolRadioButton.toolTipText")); //$NON-NLS-1$
+		titolRadioButton.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.titolRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(titolRadioButton);
 
-		autorRadioButton = new JRadioButton(
-				CentralPanelMessages.getString("AdministradorLlibres.autorRadioButton.text")); //$NON-NLS-1$
+		autorRadioButton = new JRadioButton(CentralPanelMessages
+				.getString("AdministradorLlibres.autorRadioButton.text")); //$NON-NLS-1$
 		filtreButtonGroup.add(autorRadioButton);
-		autorRadioButton
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.autorRadioButton.toolTipText")); //$NON-NLS-1$
+		autorRadioButton.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.autorRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(autorRadioButton);
 
-		genereRadioButton = new JRadioButton(
-				CentralPanelMessages.getString("AdministradorLlibres.genereRadioButton.text")); //$NON-NLS-1$
+		genereRadioButton = new JRadioButton(CentralPanelMessages
+				.getString("AdministradorLlibres.genereRadioButton.text")); //$NON-NLS-1$
 		filtreButtonGroup.add(genereRadioButton);
-		genereRadioButton
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.genereRadioButton.toolTipText")); //$NON-NLS-1$
+		genereRadioButton.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.genereRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(genereRadioButton);
 
-		editorialRadioButton = new JRadioButton(
-				CentralPanelMessages.getString("AdministradorLlibres.editorialRadioButton.text")); //$NON-NLS-1$
+		editorialRadioButton = new JRadioButton(CentralPanelMessages
+				.getString("AdministradorLlibres.editorialRadioButton.text")); //$NON-NLS-1$
 		filtreButtonGroup.add(editorialRadioButton);
-		editorialRadioButton.setToolTipText(
-				CentralPanelMessages.getString("AdministradorLlibres.editorialRadioButton.toolTipText")); //$NON-NLS-1$
+		editorialRadioButton.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.editorialRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(editorialRadioButton);
 
 		filtreTextPanel = new JPanel();
@@ -207,36 +214,51 @@ public class AdministradorLlibres extends JPanel {
 
 		lupaLabel = new JLabel("");
 		lupaLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lupaLabel.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.lupaLabel.toolTipText")); //$NON-NLS-1$
+		lupaLabel.setToolTipText(CentralPanelMessages
+				.getString("ConsultaLlibresNoRegistrat.lupaLabel.toolTipText")); //$NON-NLS-1$
 		lupaLabel.setIcon(icones.getLupaIcon());
 		lupaLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lupaLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+		lupaLabel.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 		filtreTextPanel.add(lupaLabel);
 
 		cercaField = new JTextField();
-		cercaField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercaField.toolTipText")); //$NON-NLS-1$
+		cercaField.setToolTipText(CentralPanelMessages.getString(
+				"ConsultaLlibresNoRegistrat.cercaField.toolTipText")); //$NON-NLS-1$
 		filtreTextPanel.add(cercaField);
 		cercaField.setColumns(20);
 
 		esborrarLabel = new JLabel("");
 		esborrarLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		esborrarLabel
-				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.esborrarLabel.toolTipText")); //$NON-NLS-1$
+		esborrarLabel.setToolTipText(CentralPanelMessages.getString(
+				"ConsultaLlibresNoRegistrat.esborrarLabel.toolTipText")); //$NON-NLS-1$
 		esborrarLabel.setIcon(icones.getCancelIcon());
 		esborrarLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		esborrarLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+		esborrarLabel.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 		filtreTextPanel.add(esborrarLabel);
 
 		separacioLabel = new JLabel("   ");
 		filtreTextPanel.add(separacioLabel);
 
-		cercarButton = new JButton(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercarButton.text"));
+		cercarButton = new JButton(CentralPanelMessages
+				.getString("ConsultaLlibresNoRegistrat.cercarButton.text"));
 		cercarButton.setForeground(Color.BLACK);
 		cercarButton.setBackground(new Color(173, 216, 230));
-		cercarButton
-				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercarButton.toolTipText")); //$NON-NLS-1$
-		cercarButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+		cercarButton.setToolTipText(CentralPanelMessages.getString(
+				"ConsultaLlibresNoRegistrat.cercarButton.toolTipText")); //$NON-NLS-1$
+		cercarButton.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 		filtreTextPanel.add(cercarButton);
+
+		refrescarLabel = new JLabel(); // $NON-NLS-1$
+		refrescarLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		refrescarLabel.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.refrescarLabel.toolTipText")); //$NON-NLS-1$
+		refrescarLabel.setIcon(icones.getRefrescarIcon());
+		refrescarLabel.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
+		filtreTextPanel.add(refrescarLabel);
 
 		llistaTablePanel = new JPanel();
 		llistaTablePanel.setBackground(new Color(255, 255, 255));
@@ -244,7 +266,8 @@ public class AdministradorLlibres extends JPanel {
 		llistaTablePanel.setLayout(new BorderLayout(10, 0));
 
 		llibresTable = new JTable();
-		llibresTable.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		llibresTable
+				.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		llibresTable.setFillsViewportHeight(true);
 
@@ -252,7 +275,8 @@ public class AdministradorLlibres extends JPanel {
 
 		llibresTable.setFocusable(false);
 		llistatLlibresScrollPane = new JScrollPane(llibresTable);
-		llistatLlibresScrollPane.setPreferredSize(new java.awt.Dimension(0, 100));
+		llistatLlibresScrollPane
+				.setPreferredSize(new java.awt.Dimension(0, 100));
 
 		llistatLlibresScrollPane.setBackground(new Color(255, 255, 255));
 		llistaTablePanel.add(llistatLlibresScrollPane, BorderLayout.CENTER);
@@ -262,64 +286,77 @@ public class AdministradorLlibres extends JPanel {
 		llistaTablePanel.add(accionsButtonsPanel, BorderLayout.EAST);
 		accionsButtonsPanel.setLayout(new GridLayout(8, 0, 0, 0));
 
-		mostrarLlibreButton = new JButton(
-				CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.mostrarLlibreButton.text"));
+		mostrarLlibreButton = new JButton(CentralPanelMessages.getString(
+				"ConsultaLlibresNoRegistrat.mostrarLlibreButton.text"));
 		mostrarLlibreButton.setForeground(Color.WHITE);
 		mostrarLlibreButton.setBackground(Color.decode("#00838f"));
-		mostrarLlibreButton.setToolTipText(
-				CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.mostrarLlibreButton.toolTipText")); //$NON-NLS-1$
-		mostrarLlibreButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+		mostrarLlibreButton.setToolTipText(CentralPanelMessages.getString(
+				"ConsultaLlibresNoRegistrat.mostrarLlibreButton.toolTipText")); //$NON-NLS-1$
+		mostrarLlibreButton.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 		accionsButtonsPanel.add(mostrarLlibreButton);
 
-		altaLlibreButton = new JButton(CentralPanelMessages.getString("AdministradorLlibres.altaLlibreButton.text")); //$NON-NLS-1$
+		altaLlibreButton = new JButton(CentralPanelMessages
+				.getString("AdministradorLlibres.altaLlibreButton.text")); //$NON-NLS-1$
 		altaLlibreButton.setForeground(Color.WHITE);
 		altaLlibreButton.setBackground(new Color(70, 130, 180)); // $NON-NLS-1$
-		altaLlibreButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
-		altaLlibreButton
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.altaLlibreButton.toolTipText")); //$NON-NLS-1$
+		altaLlibreButton.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
+		altaLlibreButton.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.altaLlibreButton.toolTipText")); //$NON-NLS-1$
 		accionsButtonsPanel.add(altaLlibreButton);
 
-		baixaLlibreButton = new JButton(CentralPanelMessages.getString("AdministradorLlibres.baixaLlibreButton.text")); //$NON-NLS-1$
+		baixaLlibreButton = new JButton(CentralPanelMessages
+				.getString("AdministradorLlibres.baixaLlibreButton.text")); //$NON-NLS-1$
 		baixaLlibreButton.setBackground(new Color(165, 42, 42));
 		baixaLlibreButton.setForeground(Color.WHITE);
-		baixaLlibreButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
-		baixaLlibreButton
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.baixaLlibreButton.toolTipText")); //$NON-NLS-1$
+		baixaLlibreButton.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
+		baixaLlibreButton.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.baixaLlibreButton.toolTipText")); //$NON-NLS-1$
 		accionsButtonsPanel.add(baixaLlibreButton);
 
-		editarLlibreButton = new JButton(
-				CentralPanelMessages.getString("AdministradorLlibres.editarLlibreButton.text")); //$NON-NLS-1$
+		editarLlibreButton = new JButton(CentralPanelMessages
+				.getString("AdministradorLlibres.editarLlibreButton.text")); //$NON-NLS-1$
 		editarLlibreButton.setForeground(Color.WHITE);
 		editarLlibreButton.setBackground(Color.decode("#6a1b9a")); //$NON-NLS-1$
-		editarLlibreButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
-		editarLlibreButton
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.editarLlibreButton.toolTipText")); //$NON-NLS-1$
+		editarLlibreButton.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
+		editarLlibreButton.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.editarLlibreButton.toolTipText")); //$NON-NLS-1$
 		accionsButtonsPanel.add(editarLlibreButton);
 
-		confirmarButton = new JButton(CentralPanelMessages.getString("AdministradorLlibres.confirmarButton"));
+		confirmarButton = new JButton(CentralPanelMessages
+				.getString("AdministradorLlibres.confirmarButton"));
 		confirmarButton.setForeground(Color.WHITE);
 		confirmarButton.setBackground(new Color(255, 204, 51));
-		confirmarButton
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.confirmarButton.setToolTipText")); //$NON-NLS-1$
-		confirmarButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+		confirmarButton.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.confirmarButton.setToolTipText")); //$NON-NLS-1$
+		confirmarButton.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 		confirmarButton.setVisible(false);
-		
-		prestecsButton = new JButton(CentralPanelMessages.getString("AdministradorLlibres.btnNewButton.text")); //$NON-NLS-1$
+
+		prestecsButton = new JButton(CentralPanelMessages
+				.getString("AdministradorLlibres.btnNewButton.text")); //$NON-NLS-1$
+		prestecsButton.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.prestecsButton.toolTipText")); //$NON-NLS-1$
 		prestecsButton.setForeground(new Color(255, 255, 255));
 		prestecsButton.setBackground(new Color(0, 100, 0));
-		prestecsButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+		prestecsButton.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 		accionsButtonsPanel.add(prestecsButton);
 
 		lblNewLabel_1 = new JLabel("");
 		accionsButtonsPanel.add(lblNewLabel_1);
 		accionsButtonsPanel.add(confirmarButton);
 
-		cancellarButton = new JButton(CentralPanelMessages.getString("AdministradorLlibres.cancellarButton")); //$NON-NLS-1$
+		cancellarButton = new JButton(CentralPanelMessages
+				.getString("AdministradorLlibres.cancellarButton")); //$NON-NLS-1$
 		cancellarButton.setForeground(Color.WHITE);
 		cancellarButton.setBackground(new Color(255, 0, 0));
-		cancellarButton
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.cancellarButton.setToolTipText")); //$NON-NLS-1$
-		cancellarButton.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+		cancellarButton.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.cancellarButton.setToolTipText")); //$NON-NLS-1$
+		cancellarButton.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 		cancellarButton.setVisible(false);
 		accionsButtonsPanel.add(cancellarButton);
 
@@ -328,13 +365,17 @@ public class AdministradorLlibres extends JPanel {
 		dadesLlibrePanel.setLayout(new BorderLayout(0, 0));
 
 		dadesLlibreGridPanel = new JPanel();
-		dadesLlibreGridPanel.setBorder(new TitledBorder(null, "Dades llibre", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		dadesLlibreGridPanel.setBorder(new TitledBorder(null, "Dades llibre",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		dadesLlibrePanel.add(dadesLlibreGridPanel, BorderLayout.NORTH);
 		GridBagLayout gbl_dadesLlibreGridPanel = new GridBagLayout();
 		gbl_dadesLlibreGridPanel.columnWidths = new int[] { 619, 0 };
-		gbl_dadesLlibreGridPanel.rowHeights = new int[] { 22, 22, 22, 22, 22, 0 };
-		gbl_dadesLlibreGridPanel.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
-		gbl_dadesLlibreGridPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_dadesLlibreGridPanel.rowHeights = new int[] { 22, 22, 22, 22, 22,
+				0 };
+		gbl_dadesLlibreGridPanel.columnWeights = new double[] { 0.0,
+				Double.MIN_VALUE };
+		gbl_dadesLlibreGridPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
+				0.0, Double.MIN_VALUE };
 		dadesLlibreGridPanel.setLayout(gbl_dadesLlibreGridPanel);
 
 		paginadorPanel = new JPanel();
@@ -348,15 +389,18 @@ public class AdministradorLlibres extends JPanel {
 		paginadorPanel.setVisible(false);
 		dadesLlibreGridPanel.add(paginadorPanel, gbc_paginadorPanel1);
 
-		anteriorLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.anteriorLabel")); //$NON-NLS-1$
+		anteriorLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.anteriorLabel")); //$NON-NLS-1$
 		paginadorPanel.add(anteriorLabel);
 
 		anteriorIconLabel = new JLabel("");
-		anteriorIconLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		anteriorIconLabel.setIcon(icones.getAnteriorIcon());
 		anteriorIconLabel
-				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.anteriorLabel.toolTipText")); //$NON-NLS-1$
-		anteriorIconLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+				.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		anteriorIconLabel.setIcon(icones.getAnteriorIcon());
+		anteriorIconLabel.setToolTipText(CentralPanelMessages.getString(
+				"ConsultaLlibresNoRegistrat.anteriorLabel.toolTipText")); //$NON-NLS-1$
+		anteriorIconLabel.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 		paginadorPanel.add(anteriorIconLabel);
 
 		rowActualField = new JTextField();
@@ -365,15 +409,18 @@ public class AdministradorLlibres extends JPanel {
 		paginadorPanel.add(rowActualField);
 		rowActualField.setColumns(2);
 
-		ofLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.ofLabel.text")); //$NON-NLS-1$
+		ofLabel = new JLabel(CentralPanelMessages
+				.getString("ConsultaLlibresNoRegistrat.ofLabel.text")); //$NON-NLS-1$
 		paginadorPanel.add(ofLabel);
 
 		seguentIconLabel = new JLabel("");
-		seguentIconLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		seguentIconLabel.setIcon(icones.getSeguentIcon());
 		seguentIconLabel
-				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.seguentLabel.toolTipText")); //$NON-NLS-1$
-		seguentIconLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+				.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		seguentIconLabel.setIcon(icones.getSeguentIcon());
+		seguentIconLabel.setToolTipText(CentralPanelMessages.getString(
+				"ConsultaLlibresNoRegistrat.seguentLabel.toolTipText")); //$NON-NLS-1$
+		seguentIconLabel.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 
 		rowTotalsField = new JTextField();
 		rowTotalsField.setEditable(false);
@@ -382,7 +429,8 @@ public class AdministradorLlibres extends JPanel {
 		rowTotalsField.setColumns(2);
 		paginadorPanel.add(seguentIconLabel);
 
-		seguentLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.lblNewLabel_1.text")); //$NON-NLS-1$
+		seguentLabel = new JLabel(CentralPanelMessages
+				.getString("ConsultaLlibresNoRegistrat.lblNewLabel_1.text")); //$NON-NLS-1$
 		paginadorPanel.add(seguentLabel);
 
 		idTitolDisponiblePanel = new JPanel();
@@ -391,38 +439,46 @@ public class AdministradorLlibres extends JPanel {
 		gbc_idTitolDisponiblePanel.insets = new Insets(0, 0, 5, 0);
 		gbc_idTitolDisponiblePanel.gridx = 0;
 		gbc_idTitolDisponiblePanel.gridy = 1;
-		dadesLlibreGridPanel.add(idTitolDisponiblePanel, gbc_idTitolDisponiblePanel);
-		idTitolDisponiblePanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 2));
+		dadesLlibreGridPanel.add(idTitolDisponiblePanel,
+				gbc_idTitolDisponiblePanel);
+		idTitolDisponiblePanel
+				.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 2));
 
 		idPanel = new JPanel();
 		idTitolDisponiblePanel.add(idPanel);
 
-		idLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.idLabel.text")); //$NON-NLS-1$
+		idLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.idLabel.text")); //$NON-NLS-1$
 		idPanel.add(idLabel);
 
 		idLlibreField = new JTextField();
 		idLlibreField.setEditable(false);
-		idLlibreField.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.idLlibreField.toolTipText")); //$NON-NLS-1$
+		idLlibreField.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.idLlibreField.toolTipText")); //$NON-NLS-1$
 		idPanel.add(idLlibreField);
 		idLlibreField.setColumns(3);
 
 		titolPanel = new JPanel();
 		idTitolDisponiblePanel.add(titolPanel);
 
-		titolLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.titolLabel.text")); //$NON-NLS-1$
+		titolLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.titolLabel.text")); //$NON-NLS-1$
 		titolPanel.add(titolLabel);
 
 		titolField = new JTextField();
 		titolField.setEditable(false);
-		titolField.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.titolField.toolTipText")); //$NON-NLS-1$
+		titolField.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.titolField.toolTipText")); //$NON-NLS-1$
 		titolPanel.add(titolField);
 		titolField.setColumns(40);
 
 		disponiblePanel = new JPanel();
 		idTitolDisponiblePanel.add(disponiblePanel);
 
-		reservatLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.reservatLabel.text")); //$NON-NLS-1$
-		reservatLabel.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.reservatLabel.toolTipText")); //$NON-NLS-1$
+		reservatLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.reservatLabel.text")); //$NON-NLS-1$
+		reservatLabel.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.reservatLabel.toolTipText")); //$NON-NLS-1$
 		disponiblePanel.add(reservatLabel);
 
 		reservatCheckBox = new JCheckBox(""); //$NON-NLS-1$
@@ -435,97 +491,110 @@ public class AdministradorLlibres extends JPanel {
 		gbc_autorGenereEditorialPuntuacioPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_autorGenereEditorialPuntuacioPanel.gridx = 0;
 		gbc_autorGenereEditorialPuntuacioPanel.gridy = 2;
-		dadesLlibreGridPanel.add(autorGenereEditorialPuntuacioPanel, gbc_autorGenereEditorialPuntuacioPanel);
-		autorGenereEditorialPuntuacioPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 2));
+		dadesLlibreGridPanel.add(autorGenereEditorialPuntuacioPanel,
+				gbc_autorGenereEditorialPuntuacioPanel);
+		autorGenereEditorialPuntuacioPanel
+				.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 2));
 
 		autorsPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(autorsPanel);
 
-		autorLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.autorLabel.text")); //$NON-NLS-1$
+		autorLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.autorLabel.text")); //$NON-NLS-1$
 		autorsPanel.add(autorLabel);
 		autorLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		autorsComboBox = new JComboBox();
 		autorsComboBox.setEnabled(false);
-		autorsComboBox
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.autorsComboBox.toolTipText")); //$NON-NLS-1$
+		autorsComboBox.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.autorsComboBox.toolTipText")); //$NON-NLS-1$
 		autorsPanel.add(autorsComboBox);
 		autorsComboBox.addItem("Autors     ");
 
 		afegirAutorLabel = new JLabel(); // $NON-NLS-1$
 		afegirAutorLabel.setEnabled(false);
-		afegirAutorLabel
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.afegirAutorLabel.toolTipText")); //$NON-NLS-1$
+		afegirAutorLabel.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.afegirAutorLabel.toolTipText")); //$NON-NLS-1$
 		afegirAutorLabel.setIcon(icones.getAddIcon());
 		afegirAutorLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-		afegirAutorLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		afegirAutorLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+		afegirAutorLabel
+				.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		afegirAutorLabel.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 		autorsPanel.add(afegirAutorLabel);
 
 		generesPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(generesPanel);
 
-		generesLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.generesLabel.text")); //$NON-NLS-1$
+		generesLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.generesLabel.text")); //$NON-NLS-1$
 		generesPanel.add(generesLabel);
 		generesLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		generesComboBox = new JComboBox();
 		generesComboBox.setEnabled(false);
-		generesComboBox
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.generesComboBox.toolTipText")); //$NON-NLS-1$
+		generesComboBox.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.generesComboBox.toolTipText")); //$NON-NLS-1$
 		generesPanel.add(generesComboBox);
 		generesComboBox.addItem("Gèneres     ");
 
 		afegirGenereLabel = new JLabel(); // $NON-NLS-1$
 		afegirGenereLabel.setEnabled(false);
-		afegirGenereLabel
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.nouGenereLabel.toolTipText")); //$NON-NLS-1$
+		afegirGenereLabel.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.nouGenereLabel.toolTipText")); //$NON-NLS-1$
 		afegirGenereLabel.setIcon(icones.getAddIcon());
 		afegirGenereLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-		afegirGenereLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
-		afegirGenereLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		afegirGenereLabel.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
+		afegirGenereLabel
+				.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		generesPanel.add(afegirGenereLabel);
 
 		editorialsPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(editorialsPanel);
 
-		editorialsLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.editorialsLabel.text")); //$NON-NLS-1$
+		editorialsLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.editorialsLabel.text")); //$NON-NLS-1$
 		editorialsPanel.add(editorialsLabel);
 		editorialsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		editorialsComboBox = new JComboBox();
 		editorialsComboBox.setEnabled(false);
-		editorialsComboBox
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.editorialsComboBox.toolTipText")); //$NON-NLS-1$
+		editorialsComboBox.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.editorialsComboBox.toolTipText")); //$NON-NLS-1$
 		editorialsPanel.add(editorialsComboBox);
 		editorialsComboBox.addItem("Editorials     ");
 
 		afegirEditorialLabel = new JLabel(); // $NON-NLS-1$
 		afegirEditorialLabel.setEnabled(false);
-		afegirEditorialLabel
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.nouEditorialLabel.toolTipText")); //$NON-NLS-1$
+		afegirEditorialLabel.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.nouEditorialLabel.toolTipText")); //$NON-NLS-1$
 		afegirEditorialLabel.setIcon(icones.getAddIcon());
 		afegirEditorialLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-		afegirEditorialLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		afegirEditorialLabel.addMouseListener(new AdministradorLlibresControlador(this, usuariConnectat));
+		afegirEditorialLabel
+				.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		afegirEditorialLabel.addMouseListener(
+				new AdministradorLlibresControlador(this, usuariConnectat));
 		editorialsPanel.add(afegirEditorialLabel);
 
 		puntuacioPanel = new JPanel();
 		autorGenereEditorialPuntuacioPanel.add(puntuacioPanel);
 
-		puntuacioLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.puntuacioLabel.text")); //$NON-NLS-1$
+		puntuacioLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.puntuacioLabel.text")); //$NON-NLS-1$
 		puntuacioPanel.add(puntuacioLabel);
 
 		puntuacioField = new JTextField();
 		puntuacioField.setEditable(false);
-		puntuacioField
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.puntuacioField.toolTipText")); //$NON-NLS-1$
+		puntuacioField.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.puntuacioField.toolTipText")); //$NON-NLS-1$
 		puntuacioPanel.add(puntuacioField);
 		puntuacioField.setColumns(4);
 
 		isbnDataPaginesReservesPanel = new JPanel();
-		fl_isbnDataPaginesReservesPanel = (FlowLayout) isbnDataPaginesReservesPanel.getLayout();
+		fl_isbnDataPaginesReservesPanel = (FlowLayout) isbnDataPaginesReservesPanel
+				.getLayout();
 		fl_isbnDataPaginesReservesPanel.setHgap(10);
 		fl_isbnDataPaginesReservesPanel.setVgap(2);
 		fl_isbnDataPaginesReservesPanel.setAlignment(FlowLayout.LEADING);
@@ -534,29 +603,34 @@ public class AdministradorLlibres extends JPanel {
 		gbc_isbnDataPaginesReservesPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_isbnDataPaginesReservesPanel.gridx = 0;
 		gbc_isbnDataPaginesReservesPanel.gridy = 3;
-		dadesLlibreGridPanel.add(isbnDataPaginesReservesPanel, gbc_isbnDataPaginesReservesPanel);
+		dadesLlibreGridPanel.add(isbnDataPaginesReservesPanel,
+				gbc_isbnDataPaginesReservesPanel);
 
 		isbnPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(isbnPanel);
 
-		isbnLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.isbnLabel.text")); //$NON-NLS-1$
+		isbnLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.isbnLabel.text")); //$NON-NLS-1$
 		isbnPanel.add(isbnLabel);
 
 		isbnField = new JTextField();
 		isbnField.setEditable(false);
-		isbnField.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.isbnField.toolTipText")); //$NON-NLS-1$
+		isbnField.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.isbnField.toolTipText")); //$NON-NLS-1$
 		isbnPanel.add(isbnField);
 		isbnField.setColumns(9);
 
 		edicioPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(edicioPanel);
 
-		edicioLabel = new JLabel(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.lblNewLabel.text"));
+		edicioLabel = new JLabel(CentralPanelMessages
+				.getString("ConsultaLlibresNoRegistrat.lblNewLabel.text"));
 		edicioPanel.add(edicioLabel);
 
 		edicioField = new JTextField();
 		edicioField.setEditable(false);
-		edicioField.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.textField.toolTipText")); //$NON-NLS-1$
+		edicioField.setToolTipText(CentralPanelMessages
+				.getString("ConsultaLlibresNoRegistrat.textField.toolTipText")); //$NON-NLS-1$
 		edicioField.setText("");
 		edicioPanel.add(edicioField);
 		edicioField.setColumns(6);
@@ -564,41 +638,42 @@ public class AdministradorLlibres extends JPanel {
 		dataPublicacioPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(dataPublicacioPanel);
 
-		dataPublicacioLabel = new JLabel(
-				CentralPanelMessages.getString("AdministradorLlibres.dataPublicacioLabel.text")); //$NON-NLS-1$
+		dataPublicacioLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.dataPublicacioLabel.text")); //$NON-NLS-1$
 		dataPublicacioPanel.add(dataPublicacioLabel);
 
 		dataPublicacioField = new JTextField();
 		dataPublicacioField.setEditable(false);
-		dataPublicacioField
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.dataPublicacioField.toolTipText")); //$NON-NLS-1$
+		dataPublicacioField.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.dataPublicacioField.toolTipText")); //$NON-NLS-1$
 		dataPublicacioPanel.add(dataPublicacioField);
 		dataPublicacioField.setColumns(6);
 
 		numeroPaginesPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(numeroPaginesPanel);
 
-		numeroPaginesLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.numeroPaginesLabel.text")); //$NON-NLS-1$
+		numeroPaginesLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.numeroPaginesLabel.text")); //$NON-NLS-1$
 		numeroPaginesPanel.add(numeroPaginesLabel);
 
 		numeroPaginesField = new JTextField();
 		numeroPaginesField.setEditable(false);
-		numeroPaginesField
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.numeroPaginesField.toolTipText")); //$NON-NLS-1$
+		numeroPaginesField.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.numeroPaginesField.toolTipText")); //$NON-NLS-1$
 		numeroPaginesPanel.add(numeroPaginesField);
 		numeroPaginesField.setColumns(3);
 
 		numeroReservesPanel = new JPanel();
 		isbnDataPaginesReservesPanel.add(numeroReservesPanel);
 
-		numeroReservesLabel = new JLabel(
-				CentralPanelMessages.getString("AdministradorLlibres.numeroReservesLabel.text")); //$NON-NLS-1$
+		numeroReservesLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.numeroReservesLabel.text")); //$NON-NLS-1$
 		numeroReservesPanel.add(numeroReservesLabel);
 
 		numeroReservesField = new JTextField();
 		numeroReservesField.setEditable(false);
-		numeroReservesField
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.numeroReservesField.toolTipText")); //$NON-NLS-1$
+		numeroReservesField.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.numeroReservesField.toolTipText")); //$NON-NLS-1$
 		numeroReservesPanel.add(numeroReservesField);
 		numeroReservesField.setColumns(2);
 
@@ -614,14 +689,15 @@ public class AdministradorLlibres extends JPanel {
 		gbc_sinopsisPanel.gridy = 4;
 		dadesLlibreGridPanel.add(sinopsisPanel, gbc_sinopsisPanel);
 
-		sinopsisLabel = new JLabel(CentralPanelMessages.getString("AdministradorLlibres.sinopsisLabel.text")); //$NON-NLS-1$
+		sinopsisLabel = new JLabel(CentralPanelMessages
+				.getString("AdministradorLlibres.sinopsisLabel.text")); //$NON-NLS-1$
 		sinopsisLabel.setVerticalAlignment(SwingConstants.TOP);
 		sinopsisPanel.add(sinopsisLabel);
 
 		sinopsisTextArea = new JTextArea();
 		sinopsisTextArea.setEditable(false);
-		sinopsisTextArea
-				.setToolTipText(CentralPanelMessages.getString("AdministradorLlibres.sinopsisTextArea.toolTipText")); //$NON-NLS-1$
+		sinopsisTextArea.setToolTipText(CentralPanelMessages.getString(
+				"AdministradorLlibres.sinopsisTextArea.toolTipText")); //$NON-NLS-1$
 
 		sinopsisTextArea.setColumns(60);
 		sinopsisTextArea.setLineWrap(true);
@@ -640,10 +716,36 @@ public class AdministradorLlibres extends JPanel {
 	 * 
 	 * @author SergioHernandez
 	 */
-	private void llistarLlibres() {
+	public void llistarLlibres() {
 		llibresModel = new LlibresModel();
 		try {
+			llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			llibresTable.setModel(llibresModel.consultarTotsElsLlibres());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	/**
+	 * Mètode que assigna un model a table i l'omple amb els llibres
+	 * 
+	 * @author SergioHernandez
+	 */
+	public void llistarPrestecs() {
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.RIGHT);
+		prestecsModel = new PrestecsModel();
+		llibresModel = new LlibresModel();
+		try {
+			llibresTable.setModel(prestecsModel.consultarTotsElsPrestecs());
+			llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+			llibresTable.getColumn("Id").setCellRenderer(rightRenderer);
+			llibresTable.getColumn("num. renovacio").setCellRenderer(rightRenderer);
+			llibresTable.getColumn("usuari").setCellRenderer(rightRenderer);
+			llibresTable.getColumn("data inici").setCellRenderer(rightRenderer);
+			llibresTable.getColumn("data final").setCellRenderer(rightRenderer);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -670,17 +772,50 @@ public class AdministradorLlibres extends JPanel {
 //		}
 
 		// Per entregar el TEA3 els omplo amb addItem i CreateLlibres()
+		//Per entreagar el TEA4 els omplo fent una consulta a la base de dades
+		// per consultar quins tipus de autors, editorials i generes hi ha
 		createLlibres = new CreateLlibres();
 		if (generesComboBox.getItemCount() == 1) {
-			for (String genere : createLlibres.getGeneres()) {
+
+			for (String genere : llibresModel.getGeneres()) {
 				generesComboBox.addItem(genere);
 			}
 
-			for (String autor : createLlibres.getAutors()) {
+			for (String autor : llibresModel.getAutors()) {
 				autorsComboBox.addItem(autor);
 			}
 
-			for (String editorial : createLlibres.getEditorials()) {
+			for (String editorial : llibresModel.getEditorials()) {
+				editorialsComboBox.addItem(editorial);
+			}
+		}
+
+	}
+
+	/**
+	 * TEA4
+	 * actualitza la informació dels combobox quan s'introdueix 
+	 * un nou element a la taula autors, editorials o generes
+	 * @author SergioHernandez
+	 */
+	public void actualitzaComboBox() {
+		generesComboBox.removeAllItems();
+		autorsComboBox.removeAllItems();
+		editorialsComboBox.removeAllItems();
+		editorialsComboBox.addItem("Editorials     ");
+		generesComboBox.addItem("Gèneres     ");
+		autorsComboBox.addItem("Autors     ");
+		if (generesComboBox.getItemCount() == 1) {
+
+			for (String genere : llibresModel.getGeneres()) {
+				generesComboBox.addItem(genere);
+			}
+
+			for (String autor : llibresModel.getAutors()) {
+				autorsComboBox.addItem(autor);
+			}
+
+			for (String editorial : llibresModel.getEditorials()) {
 				editorialsComboBox.addItem(editorial);
 			}
 		}
@@ -923,8 +1058,30 @@ public class AdministradorLlibres extends JPanel {
 	public void setUsuariConnectat(Usuari usuariConnectat) {
 		this.usuariConnectat = usuariConnectat;
 	}
-	
+
 	public JButton getPrestecsButton() {
 		return prestecsButton;
+	}
+
+	public JLabel getRefrescarLabel() {
+		return refrescarLabel;
+	}
+
+	/**
+	 * Afegeix a la jtable el resultat de la cerca
+	 * 
+	 * @param filtre   el filtre que es vol buscar(autor, editorial, genere,
+	 *                 titol)
+	 * @param consulta el text de la consulta
+	 */
+	public void llistarLlibresConsulta(String filtre, String consulta) {
+		llibresModel = new LlibresModel();
+		try {
+			llibresTable.setModel(llibresModel
+					.consultarTotsElsLlibresPerFiltre(filtre, consulta));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }

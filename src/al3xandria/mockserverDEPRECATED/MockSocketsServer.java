@@ -1,4 +1,4 @@
-package al3xandria.mockserver;
+package al3xandria.mockserverDEPRECATED;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -153,21 +153,21 @@ public class MockSocketsServer {
 	 * @param contrasenya  --> contrasenya de l'usuari
 	 * @return String --> les dades de l'usuari o un codi d'error 440
 	 */
-	public String consultaLogin(String email, String contrasenya) {
-		String resultatConsulta = "";
-		gestioUsuaris = new CreateUsuaris();
-		Usuari usuari = new Usuari();
-		usuari = gestioUsuaris.buscarUsuari(email, contrasenya);
-		if (usuari != null) {
-			usuari.setIdSessio(generaIdSessio(usuari.getContrasenya()));
-			idsSessio.put(usuari.getIdSessio(), usuari.getEmail());
-			resultatConsulta = "0" + "," + usuari.getIdSessio() + "," + usuari.getTipusUsuari();
-		} else {
-			resultatConsulta = "440";
-		}
-
-		return resultatConsulta;
-	}
+//	public String consultaLogin(String email, String contrasenya) {
+//		String resultatConsulta = "";
+//		gestioUsuaris = new CreateUsuaris();
+//		Usuari usuari = new Usuari();
+//		usuari = gestioUsuaris.buscarUsuari(email, contrasenya);
+//		if (usuari != null) {
+//			usuari.setIdSessio(generaIdSessio(usuari.getContrasenya()));
+//			idsSessio.put(usuari.getIdSessio(), usuari.getEmail());
+//			resultatConsulta = "0" + "," + usuari.getIdSessio() + "," + usuari.getTipus_usuari();
+//		} else {
+//			resultatConsulta = "440";
+//		}
+//
+//		return resultatConsulta;
+//	}
 
 	
 	/**

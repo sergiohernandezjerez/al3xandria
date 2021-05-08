@@ -1,10 +1,26 @@
 package al3xandria.main;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
+import java.sql.SQLException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import al3xandria.mockserver.MockSocketsServer;
+import al3xandria.mockserverDEPRECATED.MockSocketsServer;
+import al3xandria.model.ComunicacioClientServidor;
+import al3xandria.pedroServer.controlador.ControladorServidor;
+import al3xandria.pedroServer.model.ModelServidor;
 import al3xandria.vista.principal.PrincipalFrame;
 
 /**
@@ -16,7 +32,7 @@ import al3xandria.vista.principal.PrincipalFrame;
  */
 public class al3xandriaMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InvalidKeyException, UnrecoverableKeyException, KeyManagementException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, KeyStoreException, FileNotFoundException, CertificateException, SQLException, IOException {
 
 		try {
 
@@ -31,6 +47,7 @@ public class al3xandriaMain {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		  
 		
 		//client
 		mostraCartellAplicacioIniciada();

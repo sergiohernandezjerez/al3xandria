@@ -554,6 +554,16 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 		}
 
 	}
+	
+	public void llistarLlibresConsulta(String filtre, String consulta) {
+		llibresModel = new LlibresModel();
+		try {
+			llibresTable.setModel(llibresModel.consultarTotsElsLlibresPerFiltre(filtre, consulta));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	/*-------------------------- Getters and Setters Methods --------------------------*/
 

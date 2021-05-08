@@ -60,7 +60,7 @@ public class HeadPanel extends JPanel {
 
 	public HeadPanel(FootPanel footPanel, CentralPanel centralPanel, Usuari usuariConectat) {
 		this.usuariConectat = usuariConectat;
-		usuariConectat.setTipusUsuari(null);
+		usuariConectat.setTipus_usuari(null);
 		setBackground(Color.WHITE);
 		icones = new Icons();
 

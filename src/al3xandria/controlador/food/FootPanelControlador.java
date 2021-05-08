@@ -72,17 +72,17 @@ public class FootPanelControlador implements MouseListener{
 	 */
 	
 	private void omplirDadesFormulari() {
-		formulariAltaUsuari.getNomField().setText(usuariConnectat.getNomUsuari());
-		formulariAltaUsuari.getCognomsField().setText(usuariConnectat.getCognomsUsuari());
+		formulariAltaUsuari.getNomField().setText(usuariConnectat.getNom_usuari());
+		formulariAltaUsuari.getCognomsField().setText(usuariConnectat.getCognoms_usuari());
 		formulariAltaUsuari.getEmailField().setText(usuariConnectat.getEmail());
 		formulariAltaUsuari.getTelefonField().setText(usuariConnectat.getTelefon());
 		formulariAltaUsuari.getAdrecaField().setText(usuariConnectat.getAdreca());
 		formulariAltaUsuari.getPoblacioField().setText(usuariConnectat.getPoblacio());
-		formulariAltaUsuari.getCodiPostalField().setText(usuariConnectat.getCodiPostal());
+		formulariAltaUsuari.getCodiPostalField().setText(usuariConnectat.getCodi_postal());
 		formulariAltaUsuari.getPaisField().setText(usuariConnectat.getPais());
 		formulariAltaUsuari.getProvinciaComboBox().setSelectedItem(usuariConnectat.getProvincia());
-		formulariAltaUsuari.getDniNieField().setText(usuariConnectat.getDniNie());
-		formulariAltaUsuari.getTipusUsuariComboBox().setSelectedItem(usuariConnectat.getTipusUsuari());
+		formulariAltaUsuari.getDniNieField().setText(usuariConnectat.getDni_nie());
+		formulariAltaUsuari.getTipusUsuariComboBox().setSelectedItem(usuariConnectat.getTipus_usuari());
 		formulariAltaUsuari.getContrasenyaLabel().setText("Nova contrasenya");
 		formulariAltaUsuari.getContrasenyaField().setText(usuariConnectat.getContrasenya());
 		formulariAltaUsuari.getRepetirContrasenyaField().setText(usuariConnectat.getContrasenya());

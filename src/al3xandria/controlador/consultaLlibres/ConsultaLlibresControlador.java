@@ -6,6 +6,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import al3xandria.model.ComunicacioClientServidor;
 import al3xandria.model.objects.Usuari;
 import al3xandria.strings.WarningStrings;
 import al3xandria.vista.centralPanel.ConsultaLlibres;
@@ -20,6 +21,7 @@ public class ConsultaLlibresControlador implements MouseListener {
 	private ConsultaLlibres consultaLlibres;
 	private JTable table;
 	private Usuari usuariConnectat;
+	private ComunicacioClientServidor comunicacioClientServidor = new ComunicacioClientServidor();
 
 	public ConsultaLlibresControlador(ConsultaLlibres consultaLlibres, Usuari usuariConnectat) {
 		this.consultaLlibres = consultaLlibres;
@@ -210,6 +212,9 @@ public class ConsultaLlibresControlador implements MouseListener {
 			// llibresModel = new LlibresModel();
 			// llibresModel.consultarTotsElsLlibresPerFiltre(filtre + "," + textDeLaCerca);
 
+			comunicacioClientServidor.iniciarComunicacio(usuariConnectat.getIdSessio() + "," + "consulta_llibre_" + filtre
+					+ "," + textDeLaCerca);
+	//dadesRebudesDelServidor = comunicacioClientServidor.getDadesDelServidor();
 			// S'envia l'string de cerca al servidor
 			mostraLaCerca("Filtre: " + filtre + "\n" + "Text a cercar: " + textDeLaCerca + "\n"
 					+ "Valors enviats al servidor: " + usuariConnectat.getIdSessio() + "," + "consulta_llibre_" + filtre

@@ -4,10 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
+
+import com.google.gson.Gson;
+
 import al3xandria.model.ControlDeDades;
 import al3xandria.model.objects.CreateUsuaris;
+import al3xandria.model.objects.Llibres;
 import al3xandria.model.objects.Usuari;
 import al3xandria.controlador.food.FootPanelControlador;
+import al3xandria.encrypt.Hash;
 import al3xandria.model.ComunicacioClientServidor;
 import al3xandria.strings.WarningStrings;
 import al3xandria.vista.headPanel.HeadPanelMessages;
@@ -97,14 +102,20 @@ public class BotoLoginLogout implements ActionListener {
 
 		createUsuaris = new CreateUsuaris();
 		comunicacioClientServidor
-				.iniciarComunicacio("login" + "," + emailUsuariIntroduit + "," + contrasenyaUsuariIntroduida);
+				.iniciarComunicacio("login" + "," + emailUsuariIntroduit + "," + Hash.sha1(contrasenyaUsuariIntroduida));
 		dadesRebudesDelServidor = comunicacioClientServidor.getDadesDelServidor();
 		if (dadesRebudesDelServidor != null) {
-			if (dadesRebudesDelServidor[0].equals("0")) {
+			if (dadesRebudesDelServidor[0].equals("1")) {
 				// es crea un usuari amb les dades de l'usuari que s'ha connectat amb exit
-				usuariConnectat = createUsuaris.buscarUsuari(emailUsuariIntroduit, contrasenyaUsuariIntroduida);
+				comunicacioClientServidor.iniciarComunicacio(dadesRebudesDelServidor[1]+",mostrar_usuari,"+emailUsuariIntroduit);
+				String dadesDeLusuari = comunicacioClientServidor.getData();
+				Gson gson = new Gson();
+				Usuari[] usuaris = gson.fromJson(dadesDeLusuari, Usuari[].class);
+				usuariConnectat = usuaris[0];
+				//usuariConnectat = createUsuaris.buscarUsuari(emailUsuariIntroduit, contrasenyaUsuariIntroduida);
 				// s'emmagatzema la id de sessió
 				usuariConnectat.setIdSessio(dadesRebudesDelServidor[1]);
+				System.out.println(usuariConnectat.getIdSessio() + "getidsessio");
 				permisPerFerLogin();
 			} else if (dadesRebudesDelServidor[0].equals("550")) {
 				errorUsuariJaHaFetLogin();
@@ -126,7 +137,7 @@ public class BotoLoginLogout implements ActionListener {
 	public void enviarDadesPerFerLogout() {
 		comunicacioClientServidor.iniciarComunicacio("logout," + usuariConnectat.getIdSessio());
 		dadesRebudesDelServidor = comunicacioClientServidor.getDadesDelServidor();
-		if (dadesRebudesDelServidor[0].equals("0")) {
+		if (dadesRebudesDelServidor[0].equals("1")) {
 			avisDeLogout();
 		} else if (dadesRebudesDelServidor[0].equals("440")) {
 			errorPeticioDeLogout();
@@ -163,12 +174,12 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getFerLoginButton().setToolTipText(HeadPanelMessages.getString("HeadPanel.ferLogoutButtonTolTip"));
 		footPanel.getEstasConectatComLabel()
 				.setText(FootPanelMessages.getString("FootPanel.estasConectatComLabel.text"));
-		footPanel.getTipuUsuariLabel().setText(usuariConnectat.getTipusUsuari());
+		footPanel.getTipuUsuariLabel().setText(usuariConnectat.getTipus_usuari());
 		footPanel.getEmailUsuariLabel().setText(usuariConnectat.getEmail());
 		footPanel.getIdSessioUsuariLabel().setText(usuariConnectat.getIdSessio());
 		footPanel.getCarnetUsuariLabel().setText(usuariConnectat.getCarnet());
-		footPanel.getPuntuacioUsuariLabel().setText(String.valueOf(usuariConnectat.getPuntuacioUsuari()));
-		footPanel.getNomUsuariLabel().setText(usuariConnectat.getNomUsuari());
+		footPanel.getPuntuacioUsuariLabel().setText(String.valueOf(usuariConnectat.getPuntuacio_usuari()));
+		footPanel.getNomUsuariLabel().setText(usuariConnectat.getNom_usuari());
 		footPanel.getModificarDadesIcon().setVisible(true);
 		footPanel.getModificarDadesLabel().setVisible(true);
 

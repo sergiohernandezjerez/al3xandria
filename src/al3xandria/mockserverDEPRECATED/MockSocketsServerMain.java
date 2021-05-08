@@ -1,5 +1,5 @@
 
-package al3xandria.mockserver;
+package al3xandria.mockserverDEPRECATED;
 
 import java.io.IOException;
 

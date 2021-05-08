@@ -53,6 +53,10 @@ public class AdministradorUsuarisControlador implements MouseListener {
 			}
 
 		}
+		
+		if(administradorUsuaris.getRefrescarLabel() == e.getSource()) {
+			refrescarElsUsuaris();
+		}
 
 		if (administradorUsuaris.getEsborrarLabel() == e.getSource()) {
 			esborrarCampCerca();
@@ -110,6 +114,11 @@ public class AdministradorUsuarisControlador implements MouseListener {
 			avisCancellacioAccio();
 		}
 
+	}
+
+	private void refrescarElsUsuaris() {
+		administradorUsuaris.llistarUsuaris();
+		
 	}
 
 	/**
@@ -671,7 +680,7 @@ public class AdministradorUsuarisControlador implements MouseListener {
 	 */
 	private void ferLaCerca() {
 		String textDeLaCerca = administradorUsuaris.getCercaField().getText();
-		String filtre = getFiltre();
+		String[] filtre = getFiltre();
 		String tipusUsuariString = administradorUsuaris.getFiltreComboBox().getSelectedItem().toString().toLowerCase();
 		if (administradorUsuaris.getFiltreComboBox().getSelectedIndex() == 0) {
 			tipusUsuariString = "tots";
@@ -685,10 +694,12 @@ public class AdministradorUsuarisControlador implements MouseListener {
 			// tipusUsuariString + "," + textDeLaCerca );
 
 			// S'envia l'string de cerca al servidor
-			mostraLaCerca(
-					"Filtre: " + filtre + "\n" + "Tipus usuari: " + tipusUsuariString + "\n" + "Text de la cerca: "
-							+ textDeLaCerca + "\n" + "Valors enviats al servidor: " + usuariConnectat.getIdSessio()
-							+ ",consulta_usuari_" + filtre + "," + tipusUsuariString + "," + textDeLaCerca);
+//			mostraLaCerca(
+//					"Filtre: " + filtre + "\n" + "Tipus usuari: " + tipusUsuariString + "\n" + "Text de la cerca: "
+//							+ textDeLaCerca + "\n" + "Valors enviats al servidor: " + usuariConnectat.getIdSessio()
+//							+ ",consulta_usuari_" + filtre + "," + tipusUsuariString + "," + textDeLaCerca);
+			administradorUsuaris.llistarUsuarisConsulta(filtre, textDeLaCerca);
+
 		}
 
 	}
@@ -723,17 +734,26 @@ public class AdministradorUsuarisControlador implements MouseListener {
 	 * @return el nom del filtre
 	 * @author SergioHernandez
 	 */
-	private String getFiltre() {
-		String filtre = null;
+	private String[] getFiltre() {
+		String[] filtre = new String[2];
 		ButtonGroup grup = administradorUsuaris.getFiltreButtonGroup();
 		if (grup.getSelection().equals(administradorUsuaris.getNomRadioButton().getModel())) {
-			filtre = "nom";
+			filtre[0] = "nom";
 		}
 		if (grup.getSelection().equals(administradorUsuaris.getCarnetRadioButton().getModel())) {
-			filtre = "carnet";
+			filtre[0] = "carnet";
 		}
-		if (grup.getSelection().equals(administradorUsuaris.getInactiusRadioButton().getModel())) {
-			filtre = "inactiu";
+		if (grup.getSelection().equals(administradorUsuaris.getDniNieRadioButton().getModel())) {
+			filtre[0] = "dni/nie";
+		}
+		if(administradorUsuaris.getFiltreComboBox().getSelectedIndex() == 0) {
+			filtre[1] = "tots";
+		}
+		if(administradorUsuaris.getFiltreComboBox().getSelectedIndex() == 1) {
+			filtre[1] = "usuari";
+		}
+		if(administradorUsuaris.getFiltreComboBox().getSelectedIndex() == 2) {
+			filtre[1] = "administrador";
 		}
 
 		return filtre;

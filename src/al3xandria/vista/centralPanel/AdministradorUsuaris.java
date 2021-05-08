@@ -19,7 +19,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
+
+import al3xandria.controlador.administradorLlibres.AdministradorLlibresControlador;
 import al3xandria.controlador.usuaris.AdministradorUsuarisControlador;
+import al3xandria.model.llibres.LlibresModel;
 import al3xandria.model.objects.CreateUsuaris;
 import al3xandria.model.objects.Usuari;
 import al3xandria.model.usuaris.UsuarisModel;
@@ -79,7 +82,7 @@ public class AdministradorUsuaris extends JPanel {
 	private JLabel filtrePerLabel;
 	private JRadioButton nomRadioButton;
 	private JRadioButton carnetRadioButton;
-	private JRadioButton inactiusRadioButton;
+	private JRadioButton dniNieRadioButton;
 	private JComboBox filtreComboBox;
 	private JPanel filtreTextPanel;
 	private FlowLayout fl_filtreTextPanel;
@@ -142,6 +145,8 @@ public class AdministradorUsuaris extends JPanel {
 
 	private JLabel esborrarLabel;
 
+	private JLabel refrescarLabel;
+
 	/**
 	 * Create the panel.
 	 */
@@ -191,12 +196,12 @@ public class AdministradorUsuaris extends JPanel {
 				.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.carnetRadioButton.toolTipText")); //$NON-NLS-1$
 		filtreButtonPanel.add(carnetRadioButton);
 
-		inactiusRadioButton = new JRadioButton(
+		dniNieRadioButton = new JRadioButton(
 				CentralPanelMessages.getString("AdministradorUsuaris.inactiusRadioButton.text"));
-		filtreButtonGroup.add(inactiusRadioButton);
-		inactiusRadioButton
+		filtreButtonGroup.add(dniNieRadioButton);
+		dniNieRadioButton
 				.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.inactiusRadioButton.toolTipText")); //$NON-NLS-1$
-		filtreButtonPanel.add(inactiusRadioButton);
+		filtreButtonPanel.add(dniNieRadioButton);
 
 		filtreComboBox = new JComboBox();
 		filtreComboBox
@@ -240,6 +245,15 @@ public class AdministradorUsuaris extends JPanel {
 		cercarButton.setToolTipText(CentralPanelMessages.getString("AdministradorUsuaris.cercarButton.toolTipText")); //$NON-NLS-1$
 		cercarButton.addMouseListener(new AdministradorUsuarisControlador(this, usuariConnectat));
 		filtreTextPanel.add(cercarButton);
+		
+		refrescarLabel = new JLabel(); // $NON-NLS-1$
+		refrescarLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		refrescarLabel.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.refrescarLabel.toolTipText")); //$NON-NLS-1$
+		refrescarLabel.setIcon(icones.getRefrescarIcon());
+		refrescarLabel.addMouseListener(
+				new AdministradorUsuarisControlador(this, usuariConnectat));
+		filtreTextPanel.add(refrescarLabel);
 
 		llistaTablePanel = new JPanel();
 		llistaTablePanel.setBackground(new Color(255, 255, 255));
@@ -637,8 +651,8 @@ public class AdministradorUsuaris extends JPanel {
 	 * 
 	 * @author SergioHernandez
 	 */
-	private void llistarUsuaris() {
-		usuarisModel = new UsuarisModel();
+	public void llistarUsuaris() {
+		usuarisModel = new UsuarisModel(usuariConnectat);
 		try {
 			usuarisTable.setModel(usuarisModel.consultarTotsElsUsuaris());
 		} catch (Exception e) {
@@ -730,8 +744,8 @@ public class AdministradorUsuaris extends JPanel {
 		return carnetRadioButton;
 	}
 
-	public JRadioButton getInactiusRadioButton() {
-		return inactiusRadioButton;
+	public JRadioButton getDniNieRadioButton() {
+		return dniNieRadioButton;
 	}
 
 	public JRadioButton getNomRadioButton() {
@@ -869,6 +883,10 @@ public class AdministradorUsuaris extends JPanel {
 	public JCheckBox getActiuCheckBox() {
 		return actiuCheckBox;
 	}
+	
+	public JLabel getRefrescarLabel() {
+		return refrescarLabel;
+	}
 
 	public JLabel getMostrarContrasenyaLabel() {
 		return mostrarContrasenyaLabel;
@@ -877,9 +895,21 @@ public class AdministradorUsuaris extends JPanel {
 	public Usuari getUsuariConnectat() {
 		return usuariConnectat;
 	}
+	
 
 	public void setUsuariConnectat(Usuari usuariConnectat) {
 		this.usuariConnectat = usuariConnectat;
+	}
+
+	public void llistarUsuarisConsulta(String[] filtre, String consulta) {
+		usuarisModel = new UsuarisModel(usuariConnectat);
+		try {
+			usuarisTable.setModel(usuarisModel
+					.consultarTotsElsUsuarisPerFiltre(filtre, consulta));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

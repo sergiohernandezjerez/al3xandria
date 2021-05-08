@@ -31,6 +31,7 @@ public class Icons {
 	private Icon seguentIcon;
 	private Icon anteriorIcon;
 	private Icon modificarDadesIcon;
+	private Icon refrescarIcon;
 
 	public Icons() {
 		consultaLlbresIcon = new ImageIcon(
@@ -98,6 +99,10 @@ public class Icons {
 		modificarDadesIcon = new ImageIcon(
 				new ImageIcon("." + File.separator + "resources" + File.separator + "modificarDadesIcon.png")
 				.getImage().getScaledInstance(12, 12, Image.SCALE_DEFAULT));
+		
+		refrescarIcon = new ImageIcon(
+				new ImageIcon("." + File.separator + "resources" + File.separator + "refrescarIcon.png")
+						.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 	}
 
 	/*-------------------------- Getters and Setters Methods --------------------------*/
@@ -173,6 +178,8 @@ public class Icons {
 		return modificarDadesIcon;
 	}
 	
-	
+	public Icon getRefrescarIcon() {
+		return refrescarIcon;
+	}
 
 }

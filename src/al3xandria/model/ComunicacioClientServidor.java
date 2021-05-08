@@ -1,12 +1,19 @@
 package al3xandria.model;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.security.KeyStore;
 
+import javax.net.SocketFactory;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 import javax.swing.JOptionPane;
 
 import al3xandria.model.objects.Usuari;
@@ -21,9 +28,12 @@ import al3xandria.vista.headPanel.HeadPanel;
  */
 public class ComunicacioClientServidor {
 
+	private static String CLAU_CLIENT = "F:" + File.separator + "workSpaces" + File.separator + "eclipse" + File.separator + "Al3xandria" + File.separator + "certs" + File.separator + "clientPedro" + File.separator + "client_ks";
+	private static String CLAU_CLIENT_PASSWORD = "456456";
 	private String[] dadesDelServidor;
 	private final int PORT = 5556;
 	private HeadPanel headPanel;
+	String data;
 	
 
 	/**
@@ -39,11 +49,16 @@ public class ComunicacioClientServidor {
 	 * @param dades
 	 */
 	public void iniciarComunicacio(String dades) {
+		//IMPLEMENTA
+        //Estableix el magatzem de claus a utilitzar per validar el certificat del servidor
+        System.setProperty("javax.net.ssl.trustStore", CLAU_CLIENT);
+        System.setProperty("javax.net.debug", "ssl,handshake");
+        ComunicacioClientServidor client = new ComunicacioClientServidor();
 		mostraCartellClientConnectat();
 		if (dades != null) {
 			try {
 
-				Socket socket = new Socket("localhost", 5556);
+				Socket socket = client.clientAmbCert();
 
 				PrintWriter output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
 				System.out.println("Dades enviades al server: " + dades);
@@ -51,11 +66,10 @@ public class ComunicacioClientServidor {
 				output.println(dades);
 
 				BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-				String data = input.readLine();
+				data = input.readLine();
 				dadesDelServidor = data.split(",");
 				System.out.println("Dades rebudes del server: " + data);
 								
-
 				socket.close();
 
 			} catch (Exception e) {
@@ -92,6 +106,30 @@ public class ComunicacioClientServidor {
 	public String[] getDadesDelServidor() {
 		return dadesDelServidor;
 	}
+	
+	public String getData() {
+		return data;
+	}
+	
+	private Socket clientSenseCert() throws Exception {
+        SocketFactory sf = SSLSocketFactory.getDefault();
+        Socket s = sf.createSocket("localhost", 8443);
+        return s;
+    }
+
+    Socket clientAmbCert() throws Exception {
+        SSLContext context = SSLContext.getInstance("TLS");
+        KeyStore ks = KeyStore.getInstance("jceks");
+
+        ks.load(new FileInputStream(CLAU_CLIENT), null);
+        KeyManagerFactory kf = KeyManagerFactory.getInstance("SunX509");
+        kf.init(ks, CLAU_CLIENT_PASSWORD.toCharArray());
+        context.init(kf.getKeyManagers(), null, null);
+
+        SocketFactory factory = context.getSocketFactory();
+        Socket s = factory.createSocket("localhost", 5556);
+        return s;
+    }
 	
 
 }

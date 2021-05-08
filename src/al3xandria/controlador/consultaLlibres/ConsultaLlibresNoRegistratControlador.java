@@ -7,8 +7,13 @@ import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.TableModel;
+
+import com.google.gson.Gson;
 
 import al3xandria.model.ComunicacioClientServidor;
+import al3xandria.model.llibres.LlibresModel;
+import al3xandria.model.objects.Llibres;
 import al3xandria.model.objects.Usuari;
 import al3xandria.strings.WarningStrings;
 import al3xandria.vista.centralPanel.ConsultaLlibresNoRegistrat;
@@ -19,6 +24,7 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 	private JTable table;
 	private Usuari usuariConnectat;
 	private ComunicacioClientServidor comunicacioClientServidor;
+	private LlibresModel llibresModel;
 
 	/**
 	 * Clase per controlar la consulta dels llibres per usuaris que no han fet login
@@ -166,8 +172,7 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 		if (textDeLaCerca.length() == 0) {
 			errorCampCercaBuit();
 		} else {
-			// llibresModel = new LlibresModel();
-			// llibresModel.consultarTotsElsLlibresPerFiltre(filtre + "," + textDeLaCerca);
+			
 
 			// S'envia l'string de cerca al servidor
 			//mostraLaCerca("Filtre: " + filtre + "\n" + "Text a cercar: " + textDeLaCerca + "\n"
@@ -175,15 +180,15 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 					//+ "," + textDeLaCerca);
 			
 			//Per simular la consulta al servidor
-			comunicacioClientServidor = new ComunicacioClientServidor();
-			comunicacioClientServidor.iniciarComunicacio(usuariConnectat.getIdSessio() + "," + "consulta_llibre_" + filtre
-					+ "," + textDeLaCerca);
-			String[] dadesDelServidor = comunicacioClientServidor.getDadesDelServidor();
-			if(dadesDelServidor[0].equals("0")) {
-				mostraLaCerca("llibre trobat");
-			}else {
-				mostraLaCerca("llibre no trobat");
-			}
+
+
+			consultaLlibresNoRegistrat.llistarLlibresConsulta(filtre, textDeLaCerca);
+			
+//			if(dadesDelServidor[0].equals("0")) {
+//				mostraLaCerca("llibre trobat");
+//			}else {
+//				mostraLaCerca("llibre no trobat");
+//			}
 			
 		}
 
