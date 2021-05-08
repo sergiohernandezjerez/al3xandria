@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package al3xandria.pedroServer.model;
+package al3xandria.server;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -40,9 +40,6 @@ import javax.net.ServerSocketFactory;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLServerSocket;
-
-import al3xandria.pedroServer.ConnexioBBDD.FuncionesBBDD;
-import al3xandria.pedroServer.controlador.ControladorServidor;
 
 /**
  *

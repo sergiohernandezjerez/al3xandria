@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package al3xandria.pedroServer.ConnexioBBDD;
+package al3xandria.server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

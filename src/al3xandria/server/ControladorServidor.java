@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package al3xandria.pedroServer.controlador;
+package al3xandria.server;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,8 +17,6 @@ import java.sql.SQLException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-
-import al3xandria.pedroServer.model.ModelServidor;
 
 
 /**

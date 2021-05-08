@@ -17,10 +17,9 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import al3xandria.mockserverDEPRECATED.MockSocketsServer;
 import al3xandria.model.ComunicacioClientServidor;
-import al3xandria.pedroServer.controlador.ControladorServidor;
-import al3xandria.pedroServer.model.ModelServidor;
+import al3xandria.server.ControladorServidor;
+import al3xandria.server.ModelServidor;
 import al3xandria.vista.principal.PrincipalFrame;
 
 /**
