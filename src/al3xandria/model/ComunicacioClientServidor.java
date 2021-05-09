@@ -28,7 +28,9 @@ import al3xandria.vista.headPanel.HeadPanel;
  */
 public class ComunicacioClientServidor {
 
-	private static String CLAU_CLIENT = "F:" + File.separator + "workSpaces" + File.separator + "eclipse" + File.separator + "Al3xandria" + File.separator + "certs" + File.separator + "clientPedro" + File.separator + "client_ks";
+	private static String CLAU_CLIENT = "F:" + File.separator + "workSpaces" + File.separator + 
+			"eclipse" + File.separator + "Al3xandria" + File.separator + "certs" 
+			+ File.separator + "client" + File.separator + "client_ks";
 	private static String CLAU_CLIENT_PASSWORD = "456456";
 	private String[] dadesDelServidor;
 	private final int PORT = 5556;

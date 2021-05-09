@@ -197,7 +197,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 	 * @return 1 si tot ok, 0 si no s'ha pogut fer
 	 * @author SergioHernandez
 	 */
-	private boolean enviarDadesModificarLlibreAlServidor() {
+	public boolean enviarDadesModificarLlibreAlServidor() {
 		comunicacioClientServidor = new ComunicacioClientServidor();
 		comunicacioClientServidor
 				.iniciarComunicacio(usuariConnectat.getIdSessio()
@@ -269,7 +269,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 	 * @return 1 si tot ok, 0 si no s'ha pogut fer
 	 * @author SergioHernandez
 	 */
-	private boolean enviarDadesLlibreAEliminarAlServidor() {
+	public boolean enviarDadesLlibreAEliminarAlServidor() {
 		comunicacioClientServidor = new ComunicacioClientServidor();
 		comunicacioClientServidor.iniciarComunicacio(
 				usuariConnectat.getIdSessio() + ",eliminar_llibre," + idLlibre);
@@ -335,7 +335,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 	 * @return 1 si tot ok, 0 si no s'ha pogut fer
 	 * @author SergioHernandez
 	 */
-	private boolean enviarDadesAltaLlibreAlServidor() {
+	public boolean enviarDadesAltaLlibreAlServidor() {
 		comunicacioClientServidor = new ComunicacioClientServidor();
 		comunicacioClientServidor
 				.iniciarComunicacio(usuariConnectat.getIdSessio()

@@ -72,7 +72,7 @@ public class ModelServidor extends Thread{
     private static final String SERVIDOR_CLAU = "F:" + File.separator + 
     		"workSpaces" + File.separator + "eclipse" + File.separator + 
     		"Al3xandria" + File.separator + "certs" + File.separator + 
-    		"serverPedro" + File.separator + "server_ks";
+    		"server" + File.separator + "server_ks";
     private static final String SERVIDOR_CLAU_PASSWORD = "123123";
  
 
