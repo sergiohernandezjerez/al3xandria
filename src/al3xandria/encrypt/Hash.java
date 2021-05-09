@@ -1,5 +1,9 @@
 package al3xandria.encrypt;
 
+/*
+ * Clase que codifica un text
+ * 
+ */
 public class Hash {
 	
 		 

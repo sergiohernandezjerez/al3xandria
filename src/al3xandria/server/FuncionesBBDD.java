@@ -5,17 +5,15 @@
  */
 package al3xandria.server;
 
-import java.math.BigInteger;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-
-import javax.sql.rowset.JoinRowSet;
-
-import org.postgresql.jdbc.PgResultSetMetaData;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 /**
@@ -277,12 +275,20 @@ public class FuncionesBBDD {
         String pais = data[11];
         String telefon = data[12];            
         String tipus_usuari = data[13];
+        Boolean actiu;
+        if(data[14].equals("true")) {
+        	actiu = true;
+        }else {
+        	actiu = false;
+        }
+
+        
         
         String sentencia_guardar =("INSERT INTO usuaris(nom_usuari, " 
                 + "cognoms_usuari, dni_nie, email, contrasenya, " 
                 + "adreca, codi_postal, poblacio, provincia, pais, "
-                + "telefon, tipus_usuari) "
-                + "values(?,?,?,?,?,?,?,?,?,?,?,?)");
+                + "telefon, tipus_usuari, actiu) "
+                + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
          
          try{
             conexio = ConexioBBDD.ConexioBBDD();
@@ -299,6 +305,7 @@ public class FuncionesBBDD {
             sentencia_preparada.setString(10, pais);
             sentencia_preparada.setString(11, telefon);
             sentencia_preparada.setString(12, tipus_usuari);
+            sentencia_preparada.setBoolean(13, actiu);
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
              
@@ -319,21 +326,27 @@ public class FuncionesBBDD {
      */
     public static int modificarUsuari(String []data){
 
-        int resultado = 0;
-        Integer carnet = Integer.parseInt(data[2]);
-        String nom = data[3];
-        String cognoms = data[4];
-        String dni_nie = data[5];
-        String email = data[6];
-        String contrasenya = data[7]; 
-        String adreca = data[8];
-        String codiPostal = data[9];
-        String poblacio = data[10]; 
-        String provincia = data[11]; 
-        String pais = data[12];
-        String telefon = data[13];            
-        String tipus_usuari = data[14];
-        Boolean actiu = Boolean.parseBoolean(data[15]);
+    	int resultado = 0;
+        String nom = data[2];
+        String cognoms = data[3];
+        String dni_nie = data[4];
+        String email = data[5];
+        String contrasenya = data[6]; 
+        String adreca = data[7];
+        String codiPostal = data[8];
+        String poblacio = data[9]; 
+        String provincia = data[10]; 
+        String pais = data[11];
+        String telefon = data[12];            
+        String tipus_usuari = data[13];
+        Boolean actiu;
+        if(data[14].equals("true")) {
+        	actiu = true;
+        }else {
+        	actiu = false;
+        }
+        int carnet = Integer.parseInt(data[15]);
+        
         String sentencia_guardar =("UPDATE usuaris set nom_usuari='"+nom+"',"
                     + "cognoms_usuari='"+cognoms+"', dni_nie='"+dni_nie+"',"
                     + "email='"+email+"', contrasenya='"+contrasenya+"',"
@@ -1058,18 +1071,19 @@ private static void modificarEditorialPerLlibre(String isbn, String nom_editoria
 
         int resultado = 0;
            
-        Integer carnet_usuari = Integer.parseInt(data[2]);
-        String isbn = data[3]; 
+        int id_usuari = Integer.parseInt(data[2]);
+        int id_llibre = Integer.parseInt(data[3]);
         
-        String sentencia_guardar =("INSERT INTO reserves(carnet_usuari, " 
-                + "isbn) " 
-                + "values(?,?)");
+        String sentencia_guardar =("INSERT INTO reserves(id_usuari, " 
+                + "id_llibre, data_reserva) " 
+                + "values(?,?,?)");
          
         try{
             conexio = ConexioBBDD.ConexioBBDD();
             sentencia_preparada = conexio.prepareStatement(sentencia_guardar);
-            sentencia_preparada.setInt(1, carnet_usuari);
-            sentencia_preparada.setString(2, isbn);
+            sentencia_preparada.setInt(1, id_usuari);
+            sentencia_preparada.setInt(2, id_llibre);
+            sentencia_preparada.setDate(3, new Date(new java.util.Date().getTime()));
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
              
@@ -1079,7 +1093,7 @@ private static void modificarEditorialPerLlibre(String isbn, String nom_editoria
             System.out.println(e);
         }  
         if (resultado==1){
-            afegirReservaTaulaLlibres(isbn);
+            afegirReservaTaulaLlibres(id_llibre);
             return resultado;
         }else {
             return  resultado;
@@ -1090,12 +1104,12 @@ private static void modificarEditorialPerLlibre(String isbn, String nom_editoria
      *
      * @param isbn
      */
-    public static  void afegirReservaTaulaLlibres(String isbn){                
+    public static  void afegirReservaTaulaLlibres(int id_llibre){                
          
         try{
             conexio = ConexioBBDD.ConexioBBDD();
             statement = conexio.createStatement();
-            resultSet = statement.executeQuery("update llibres set num_reserves = num_reserves+1 where isbn = '"+isbn+"'");
+            resultSet = statement.executeQuery("update llibres set num_reserves = num_reserves+1, reservat = true where id_llibre = '"+id_llibre+"'");
             //rsMD = resultSet.getMetaData();
              
         }catch(Exception e){             
@@ -1368,9 +1382,70 @@ private static void modificarEditorialPerLlibre(String isbn, String nom_editoria
         String retorn = ResultSetToString(resultSet);
         return retorn;
 	}
+
+	public static String ConsultaPrestecsUsuari(String[] dada) throws SQLException{
+		try {
+		conexio = ConexioBBDD.ConexioBBDD();
+        statement = conexio.createStatement();
+
+        resultSet = statement.executeQuery("select json_agg(t)::jsonb from "
+        		+ "(select p.id_prestec, l.titol, u.nom_usuari, p.data_inici, p.data_final, p.num_renovacio"
+        		+ "  from prestecs p, llibres l, usuaris u "
+        		+ "where p.id_llibre = l.id_llibre and p.id_usuari = u.id_usuari and u.id_usuari = '" +dada[2]+ "' order by data_final)t");
+
+    }catch (SQLException ex) {
+        System.err.println( ex.getMessage() );
+    }
+    String retorn = ResultSetToString(resultSet);
+    return retorn;
+	}
+
+	public static int ConsultaLlogarLlibre(String[] dada) {
+		 int resultado = 0;
+         
+	        int id_usuari = Integer.parseInt(dada[2]);
+	        int id_llibre = Integer.parseInt(dada[3]);
+	        Date today = new Date(Calendar.getInstance().getTime().getTime());
+	        
+	        String sentencia_guardar =("INSERT INTO prestecs(id_llibre, " 
+	                + "id_usuari, data_inici, data_final) " 
+	                + "values(?,?,?,?)");
+	         
+	        try{
+	            conexio = ConexioBBDD.ConexioBBDD();
+	            sentencia_preparada = conexio.prepareStatement(sentencia_guardar);
+	            sentencia_preparada.setInt(1, id_llibre);
+	            sentencia_preparada.setInt(2, id_usuari);
+	            sentencia_preparada.setDate(3, today);
+	            sentencia_preparada.setDate(4, new Date(addDays(today, 14).getTime()));
+	            resultado = sentencia_preparada.executeUpdate();
+	            sentencia_preparada.close();
+	             
+	            conexio.close();
+	             
+	        }catch(Exception e){             
+	            System.out.println(e);
+	        }  
+	        if (resultado==1){
+	            afegirReservaTaulaLlibres(id_llibre);
+	            return resultado;
+	        }else {
+	            return  resultado;
+	        }                      
+	}
 	
-	
-	
+	/**
+	 * Suma dias a una data
+	 * @param data data a la que es vol sumar els dies
+	 * @param dies dies que es volen sumar 
+	 * @return
+	 */
+	public static java.util.Date addDays(Date data, int dies) {
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(data);
+		cal.add(Calendar.DATE, dies);
+		return cal.getTime();
+		}
 	
 	
 	

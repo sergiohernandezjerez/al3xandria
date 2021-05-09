@@ -430,6 +430,13 @@ public class ModelServidor extends Thread{
                 break;
             case "fer_reserva":
                 enviarValor(FuncionesBBDD.ferReserva(dada));
+                break;
+            case "consulta_prestecs_usuari":
+            	enviarMissatge(FuncionesBBDD.ConsultaPrestecsUsuari(dada));
+                break;
+            case "llogar_llibre":
+            	enviarValor(FuncionesBBDD.ConsultaLlogarLlibre(dada));
+                break;
             default:
                 enviarMissatge("440");
         }

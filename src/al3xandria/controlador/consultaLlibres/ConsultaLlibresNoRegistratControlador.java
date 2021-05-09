@@ -41,6 +41,10 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		
+		if(consultaLlibresNoRegistrat.getRefrescarLabel() == e.getSource()) {
+			consultaLlibresNoRegistrat.llistarLlibres();
+		}
 
 		if (consultaLlibresNoRegistrat.getCercarButton() == e.getSource()) {
 			ferLaCerca();

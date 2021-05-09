@@ -75,7 +75,7 @@ class UsuriLlibresTest {
 	@Test
 	void testComprovacioCampsOmplertsAltaUsuariTotCorrecte() {
 		assertTrue(controlDeDades.comprovarCampsOmplertsAltaUsuari("Sergi", "Hernandez", "Carrer 3", "email@email.com",
-				"Montcada", "08110", "Españya", 2, "935684578", "lkjlkj", "52177001Y", "C54", 2));
+				"Montcada", "08110", "Españya", 2, "935684578", "lkjlkj", "52177001Y", 2));
 	}
 
 	// Comprova que les dades introduides per donar d'alta un usuari
@@ -84,7 +84,7 @@ class UsuriLlibresTest {
 	@Test
 	void testComprovacioCampsOmplertsAltaUsuariFaltaUnCamp() {
 		assertFalse(controlDeDades.comprovarCampsOmplertsAltaUsuari("", "Hernandez", "Carrer 3", "email@email.com",
-				"Montcada", "08110", "Españya", 2, "935684578", "lkjlkj", "52177001Y", "C54", 2));
+				"Montcada", "08110", "Españya", 2, "935684578", "lkjlkj", "52177001Y", 2));
 	}
 
 	// Comprova que les dades introduides per donar d'alta un usuari
@@ -93,7 +93,7 @@ class UsuriLlibresTest {
 	@Test
 	void testComprovacioCampsOmplertsAltaUsuariFaltenDosCamps() {
 		assertFalse(controlDeDades.comprovarCampsOmplertsAltaUsuari("Sergi", "Hernandez", "", "email@email.com",
-				"Montcada", "08110", "Españya", 2, "", "lkjlkj", "52177001Y", "C54", 2));
+				"Montcada", "08110", "Españya", 2, "", "lkjlkj", "52177001Y", 2));
 	}
 
 	// Comprova que les dades introduides per donar d'alta un llibre

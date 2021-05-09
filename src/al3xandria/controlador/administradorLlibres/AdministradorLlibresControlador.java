@@ -61,8 +61,8 @@ public class AdministradorLlibresControlador implements MouseListener {
 			}
 
 		}
-		
-		if(administradorLlibres.getRefrescarLabel() == e.getSource()) {
+
+		if (administradorLlibres.getRefrescarLabel() == e.getSource()) {
 			refrescarElsLlibres();
 		}
 
@@ -143,10 +143,15 @@ public class AdministradorLlibresControlador implements MouseListener {
 
 	}
 
+	/**
+	 * Torna a omplir el jtable amb les dades de tots els llibres
+	 * @author SergioHernandez
+	 */
 	private void refrescarElsLlibres() {
 		administradorLlibres.llistarLlibres();
 	}
 
+	
 	/**
 	 * Mostra tots els prèstecs que hi ha actualment
 	 * 
@@ -172,32 +177,38 @@ public class AdministradorLlibresControlador implements MouseListener {
 					"Dades del llibre modificat", JOptionPane.YES_NO_OPTION,
 					JOptionPane.WARNING_MESSAGE, null);
 			if (valor == JOptionPane.YES_OPTION) {
-				if(enviarDadesModificarLlibreAlServidor()) {
+				if (enviarDadesModificarLlibreAlServidor()) {
 					mostraDadesLlibreModificat(dadesLlibreModificat,
 							dadesLlibreToString());
 					refrescarElsLlibres();
-				}else {
+				} else {
 					mostraErrorModificacioLlibre();
 				}
-				
+
 			}
 		}
 
 	}
 
-
+	/**
+	 * Envia les dades al servidor per executar la consulta per modificar el
+	 * llibre
+	 * 
+	 * @return 1 si tot ok, 0 si no s'ha pogut fer
+	 * @author SergioHernandez
+	 */
 	private boolean enviarDadesModificarLlibreAlServidor() {
 		comunicacioClientServidor = new ComunicacioClientServidor();
-		comunicacioClientServidor.iniciarComunicacio(usuariConnectat.getIdSessio()+ ",modificar_llibre," + dadesLlibreToString());
+		comunicacioClientServidor
+				.iniciarComunicacio(usuariConnectat.getIdSessio()
+						+ ",modificar_llibre," + dadesLlibreToString());
 		String rebutString = comunicacioClientServidor.getData();
-		if(rebutString.equals("1")) {
+		if (rebutString.equals("1")) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-
-	
 
 	/**
 	 * Mostra un avís amb l'informació del llibre que s'ha modificat amb les
@@ -225,7 +236,10 @@ public class AdministradorLlibresControlador implements MouseListener {
 	 * @author SergioHernandez
 	 */
 	private void avisConfirmarBaixaLlibre() {
-		
+		int rowAMostrar = administradorLlibres.getLlibresTable()
+				.getSelectedRow();
+		administradorLlibres.setRowActiu(
+				administradorLlibres.getLlibresTable().getSelectedRow());
 		setAccio("default");
 		String dadesLlibreAEliminar = getDadesRowLLibre(
 				administradorLlibres.getRowActiu());
@@ -234,35 +248,38 @@ public class AdministradorLlibresControlador implements MouseListener {
 				"Dades del llibre a eliminar", JOptionPane.YES_NO_OPTION,
 				JOptionPane.WARNING_MESSAGE, null);
 		if (valor == JOptionPane.YES_OPTION) {
-			
-			if(enviarDadesLlibreAEliminarAlServidor()) {
+
+			if (enviarDadesLlibreAEliminarAlServidor()) {
 				mostraDadesLlibreAEliminar(dadesLlibreAEliminar,
-						getDadesRowToString(administradorLlibres.getRowActiu()));
+						getDadesRowToString(
+								administradorLlibres.getRowActiu()));
 				refrescarElsLlibres();
-			}else {
+			} else {
 				mostraErrorEliminarLlibre();
 			}
-			
+
 		}
 
 	}
 
 	/**
-	 * Envia les dades al servidor per executar la consulta per eliminar 
-	 * el llibre
+	 * Envia les dades al servidor per executar la consulta per eliminar el
+	 * llibre
+	 * 
 	 * @return 1 si tot ok, 0 si no s'ha pogut fer
 	 * @author SergioHernandez
 	 */
 	private boolean enviarDadesLlibreAEliminarAlServidor() {
 		comunicacioClientServidor = new ComunicacioClientServidor();
-		comunicacioClientServidor.iniciarComunicacio(usuariConnectat.getIdSessio()+ ",eliminar_llibre," + idLlibre);
+		comunicacioClientServidor.iniciarComunicacio(
+				usuariConnectat.getIdSessio() + ",eliminar_llibre," + idLlibre);
 		String rebutString = comunicacioClientServidor.getData();
-		if(rebutString.equals("1")) {
+		if (rebutString.equals("1")) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
-		
+
 	}
 
 	/**
@@ -282,7 +299,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 						+ usuariConnectat.getIdSessio() + ",eliminar_llibre,"
 						+ idLlibre + "," + dadesLlibreToString,
 				"Dades llibre eliminat", JOptionPane.INFORMATION_MESSAGE);
-		
+
 		setPanelPerDefecte();
 	}
 
@@ -299,11 +316,11 @@ public class AdministradorLlibresControlador implements MouseListener {
 					"Dades del llibre a afegir", JOptionPane.YES_NO_OPTION,
 					JOptionPane.WARNING_MESSAGE, null);
 			if (valor == JOptionPane.YES_OPTION) {
-				if(enviarDadesAltaLlibreAlServidor()) {
-					mostraDadesLlibreAlta(dadesLLibresAlta,
-							getDadesRowToString(administradorLlibres.getRowActiu()));
+				if (enviarDadesAltaLlibreAlServidor()) {
+					mostraDadesLlibreAlta(dadesLLibresAlta, getDadesRowToString(
+							administradorLlibres.getRowActiu()));
 					refrescarElsLlibres();
-				}else {
+				} else {
 					mostraErrorAltaLlibre();
 				}
 			}
@@ -312,21 +329,24 @@ public class AdministradorLlibresControlador implements MouseListener {
 	}
 
 	/**
-	 * Envia les dades al servidor per executar la consulta per eliminar 
-	 * el llibre
+	 * Envia les dades al servidor per executar la consulta per eliminar el
+	 * llibre
+	 * 
 	 * @return 1 si tot ok, 0 si no s'ha pogut fer
 	 * @author SergioHernandez
 	 */
 	private boolean enviarDadesAltaLlibreAlServidor() {
 		comunicacioClientServidor = new ComunicacioClientServidor();
-		comunicacioClientServidor.iniciarComunicacio(usuariConnectat.getIdSessio()+ ",insercio_llibre," + dadesLlibreToString());
+		comunicacioClientServidor
+				.iniciarComunicacio(usuariConnectat.getIdSessio()
+						+ ",insercio_llibre," + dadesLlibreToString());
 		String rebutString = comunicacioClientServidor.getData();
-		if(rebutString.equals("1")) {
+		if (rebutString.equals("1")) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
-		
+
 	}
 
 	/**
@@ -407,9 +427,10 @@ public class AdministradorLlibresControlador implements MouseListener {
 	 * Mostra un missatge amb les dades que s'enviaran al servidor per afegir un
 	 * nou elementa a les taules: autors, editorials o gèneres
 	 * 
-	 * Per el projecte final s'envien les peticions al servidor per afegir un nou
-	 * element. Si es produeix un error o l'element ja existeix es mostra 
+	 * Per el projecte final s'envien les peticions al servidor per afegir un
+	 * nou element. Si es produeix un error o l'element ja existeix es mostra
 	 * missatge d'error
+	 * 
 	 * @param nomTaula    a quina taula s'afegirà el valor
 	 * @param nouRegistre valor a afegir
 	 * @author SergioHernandez
@@ -420,51 +441,67 @@ public class AdministradorLlibresControlador implements MouseListener {
 
 		switch (nomTaula) {
 		case "Autor":
-			comunicacioClientServidor.iniciarComunicacio("0000000000000,insercio_autor,"+nouRegistre);
-			if(comunicacioClientServidor.getDadesDelServidor()[0].equals("1")) {
+			comunicacioClientServidor.iniciarComunicacio(
+					"0000000000000,insercio_autor," + nouRegistre);
+			if (comunicacioClientServidor.getDadesDelServidor()[0]
+					.equals("1")) {
 				mostraLaConsultaSegonsElement("Valors enviats al servidor: "
 						+ usuariConnectat.getIdSessio() + ",insertat_autor,"
 						+ nouRegistre);
 				administradorLlibres.actualitzaComboBox();
-			}else {
+			} else {
 				mostrarErrorIntroduirElement(nomTaula, nouRegistre);
 			}
-			
+
 			break;
-			
+
 		case "Genere":
-			comunicacioClientServidor.iniciarComunicacio("0000000000000,insercio_genere,"+nouRegistre);
-			if(comunicacioClientServidor.getDadesDelServidor()[0].equals("1")) {
-			mostraLaConsultaSegonsElement("Valors enviats al servidor: "
-					+ usuariConnectat.getIdSessio() + ",insertat_genere,"
-					+ nouRegistre);
-			administradorLlibres.actualitzaComboBox();
-			}else {
+			comunicacioClientServidor.iniciarComunicacio(
+					"0000000000000,insercio_genere," + nouRegistre);
+			if (comunicacioClientServidor.getDadesDelServidor()[0]
+					.equals("1")) {
+				mostraLaConsultaSegonsElement("Valors enviats al servidor: "
+						+ usuariConnectat.getIdSessio() + ",insertat_genere,"
+						+ nouRegistre);
+				administradorLlibres.actualitzaComboBox();
+			} else {
 				mostrarErrorIntroduirElement(nomTaula, nouRegistre);
 			}
 			break;
-			
+
 		case "Editorial":
-			comunicacioClientServidor.iniciarComunicacio("0000000000000,insercio_editorial,"+nouRegistre);
-			if(comunicacioClientServidor.getDadesDelServidor()[0].equals("1")) {
-			mostraLaConsultaSegonsElement("Valors enviats al servidor: "
-					+ usuariConnectat.getIdSessio() + ",insertat_editorial,"
-					+ nouRegistre);
-			administradorLlibres.actualitzaComboBox();
-		}else {
-			mostrarErrorIntroduirElement(nomTaula, nouRegistre);
-		}
+			comunicacioClientServidor.iniciarComunicacio(
+					"0000000000000,insercio_editorial," + nouRegistre);
+			if (comunicacioClientServidor.getDadesDelServidor()[0]
+					.equals("1")) {
+				mostraLaConsultaSegonsElement("Valors enviats al servidor: "
+						+ usuariConnectat.getIdSessio() + ",insertat_editorial,"
+						+ nouRegistre);
+				administradorLlibres.actualitzaComboBox();
+			} else {
+				mostrarErrorIntroduirElement(nomTaula, nouRegistre);
+			}
 			break;
-			
+
 		default:
 			break;
 		}
 	}
 
-	private void mostrarErrorIntroduirElement(String nomTaula, String nouRegistre) {
-		JOptionPane.showMessageDialog(administradorLlibres, "No s'ha pogut efegir l'element " + nouRegistre + " a la taula: " + nomTaula,
+	/**
+	 * Mostra un error quan no s'ha pogut afegir un element 
+	 * del tipus autor, editorial o genere
+	 * @param nomTaula nom de l'elements
+	 * @param nouRegistre dades del nou element
+	 * @author SergioHernandez
+	 */
+	private void mostrarErrorIntroduirElement(String nomTaula,
+			String nouRegistre) {
+		JOptionPane.showMessageDialog(administradorLlibres,
+				"No s'ha pogut efegir l'element " + nouRegistre
+						+ " a la taula: " + nomTaula,
 				"Error inserció", JOptionPane.ERROR_MESSAGE);
-		
+
 	}
 
 	/**
@@ -477,29 +514,32 @@ public class AdministradorLlibresControlador implements MouseListener {
 		JOptionPane.showMessageDialog(administradorLlibres, cerca,
 				"Dades de la consulta", JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	/**
 	 * Mostra un error quan no s'ha pogut eliminar un llibre
 	 */
 	private void mostraErrorEliminarLlibre() {
-		JOptionPane.showMessageDialog(administradorLlibres, "No s'ha pogut eliminar el llibre",
-				"Error eliminació", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(administradorLlibres,
+				"No s'ha pogut eliminar el llibre", "Error eliminació",
+				JOptionPane.ERROR_MESSAGE);
 	}
-	
+
 	/**
 	 * Mostra un error quan no s'ha pogut afegir un llibre
 	 */
 	private void mostraErrorAltaLlibre() {
-		JOptionPane.showMessageDialog(administradorLlibres, "No s'ha pogut afegir el llibre",
-				"Error alta", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(administradorLlibres,
+				"No s'ha pogut afegir el llibre", "Error alta",
+				JOptionPane.ERROR_MESSAGE);
 	}
-	
+
 	/**
-	 * Mostra un error quan no s'ha pogut afegir un llibre
+	 * Mostra un error quan no s'ha pogut modificar un llibre
 	 */
 	private void mostraErrorModificacioLlibre() {
-		JOptionPane.showMessageDialog(administradorLlibres, "No s'ha pogut modificar el llibre",
-				"Error modificació", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(administradorLlibres,
+				"No s'ha pogut modificar el llibre", "Error modificació",
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
@@ -564,7 +604,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		getDadesRow(rowAMostrar);
 
 	}
-	
+
 	/**
 	 * get l'id del llibre per pasar-lo per paràmetres al servidor
 	 * 
@@ -575,7 +615,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		return administradorLlibres.getIdLlibreField().getText();
 
 	}
-	
+
 	/**
 	 * get l'Isbn del llibre per pasar-lo per paràmetres al servidor
 	 * 
@@ -693,20 +733,25 @@ public class AdministradorLlibresControlador implements MouseListener {
 		esborrarDadesLlibres();
 		desactivarDadesLlibres();
 		administradorLlibres.getAltaLlibreButton().setEnabled(true);
-		administradorLlibres.getAltaLlibreButton().setToolTipText(CentralPanelMessages.getString(
-				"AdministradorLlibres.altaLlibreButton.toolTipText"));
+		administradorLlibres.getAltaLlibreButton()
+				.setToolTipText(CentralPanelMessages.getString(
+						"AdministradorLlibres.altaLlibreButton.toolTipText"));
 		administradorLlibres.getMostrarLlibreButton().setEnabled(true);
-		administradorLlibres.getMostrarLlibreButton().setToolTipText(CentralPanelMessages.getString(
-				"ConsultaLlibresNoRegistrat.mostrarLlibreButton.toolTipText"));
+		administradorLlibres.getMostrarLlibreButton()
+				.setToolTipText(CentralPanelMessages.getString(
+						"ConsultaLlibresNoRegistrat.mostrarLlibreButton.toolTipText"));
 		administradorLlibres.getBaixaLlibreButton().setEnabled(true);
-		administradorLlibres.getBaixaLlibreButton().setToolTipText(CentralPanelMessages.getString(
-				"AdministradorLlibres.baixaLlibreButton.toolTipText"));
+		administradorLlibres.getBaixaLlibreButton()
+				.setToolTipText(CentralPanelMessages.getString(
+						"AdministradorLlibres.baixaLlibreButton.toolTipText"));
 		administradorLlibres.getEditarLlibreButton().setEnabled(true);
-		administradorLlibres.getEditarLlibreButton().setToolTipText(CentralPanelMessages.getString(
-				"AdministradorLlibres.editarLlibreButton.toolTipText"));
+		administradorLlibres.getEditarLlibreButton()
+				.setToolTipText(CentralPanelMessages.getString(
+						"AdministradorLlibres.editarLlibreButton.toolTipText"));
 		administradorLlibres.getPrestecsButton().setEnabled(true);
-		administradorLlibres.getPrestecsButton().setToolTipText(CentralPanelMessages.getString(
-				"AdministradorLlibres.prestecsButton.toolTipText"));
+		administradorLlibres.getPrestecsButton()
+				.setToolTipText(CentralPanelMessages.getString(
+						"AdministradorLlibres.prestecsButton.toolTipText"));
 		administradorLlibres.getConfirmarButton().setVisible(false);
 		administradorLlibres.getCancellarButton().setVisible(false);
 		administradorLlibres.getPaginadorPanel().setVisible(false);
@@ -816,7 +861,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		administradorLlibres.getGeneresComboBox().setEnabled(true);
 		administradorLlibres.getPuntuacioField().setEditable(true);
 	}
-	
+
 	/**
 	 * Activa els camps per que estiguin editables
 	 * 
@@ -988,8 +1033,8 @@ public class AdministradorLlibresControlador implements MouseListener {
 //					+ textDeLaCerca + "\n" + "Valors enviats al servidor: "
 //					+ usuariConnectat.getIdSessio() + "," + "consulta_llibre_"
 //					+ filtre + "," + textDeLaCerca);
-			
-			//per el projecte final la consulta es fa al servidor
+
+			// per el projecte final la consulta es fa al servidor
 			administradorLlibres.llistarLlibresConsulta(filtre, textDeLaCerca);
 		}
 
@@ -1105,12 +1150,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 	public void setAccio(String accio) {
 		administradorLlibres.setAccio(accio);
 	}
-	
+
 	public void setIdLlibre(String string) {
 		this.idLlibre = string;
 	}
-	
-	
-	
-	
+
 }

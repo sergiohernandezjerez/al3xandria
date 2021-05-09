@@ -7,6 +7,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import al3xandria.encrypt.Hash;
+import al3xandria.model.ComunicacioClientServidor;
 import al3xandria.model.ControlDeDades;
 import al3xandria.model.objects.Usuari;
 import al3xandria.strings.WarningStrings;
@@ -25,6 +27,9 @@ public class AdministradorUsuarisControlador implements MouseListener {
 	private JTable table;
 	private Usuari usuariConnectat;
 	private ControlDeDades controlDeDades;
+	private ComunicacioClientServidor comunicacioClientServidor;
+	private Hash hash = new Hash();
+	private int carnet = 0;
 
 	/**
 	 * Constructor
@@ -116,6 +121,9 @@ public class AdministradorUsuarisControlador implements MouseListener {
 
 	}
 
+	/**
+	 * Torna a omplir la jtable amb tots els usuaris
+	 */
 	private void refrescarElsUsuaris() {
 		administradorUsuaris.llistarUsuaris();
 		
@@ -134,10 +142,43 @@ public class AdministradorUsuarisControlador implements MouseListener {
 					dadesUsuariModificat + "\n\n" + "Vols modificar l'usuari?", "Dades l'usuari modificat",
 					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null);
 			if (valor == JOptionPane.YES_OPTION) {
-				mostraDadesUsuariModificat(dadesUsuariModificat, dadesUsuariToString());
+				if(enviarDadesModificarUsuariAlServidor()) {
+					mostraDadesUsuariModificat(dadesUsuariModificat, dadesUsuariToString());
+					refrescarElsUsuaris();
+					setPanelPerDefecte();
+				}else {
+					mostraErrorModificacioUsuari();
+				}
+				
 			}
 		}
 
+	}
+
+	/**
+	 * Envia les dades al servidor per executar la consulta per modificar 
+	 * el usuri
+	 * @return 1 si tot ok, 0 si no s'ha pogut fer
+	 * @author SergioHernandez
+	 */
+	private boolean enviarDadesModificarUsuariAlServidor() {
+		comunicacioClientServidor = new ComunicacioClientServidor();
+		comunicacioClientServidor.iniciarComunicacio(usuariConnectat.getIdSessio()+ ",modificar_usuari," + dadesUsuariToString());
+		String rebutString = comunicacioClientServidor.getData();
+		if(rebutString.equals("1")) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	/**
+	 * Mostra un error quan no s'ha pogut modificar un usuari
+	 */
+	private void mostraErrorModificacioUsuari() {
+		JOptionPane.showMessageDialog(administradorUsuaris, "No s'ha pogut modificar l'usuari",
+				"Error modificació", JOptionPane.ERROR_MESSAGE);
+		
 	}
 
 	/**
@@ -168,17 +209,18 @@ public class AdministradorUsuarisControlador implements MouseListener {
 	private String dadesUsuariToString() {
 		String dadesUsuariModificat = administradorUsuaris.getNomField().getText() + ","
 				+ administradorUsuaris.getCognomsField().getText() + ","
-				+ administradorUsuaris.getDniNieField().getText() + "," + administradorUsuaris.getEmailField().getText()
-				+ "," + administradorUsuaris.getContrasenyaToString() + ","
-				+ administradorUsuaris.getCarnetField().getText() + ","
+				+ administradorUsuaris.getDniNieField().getText() + "," 
+				+ administradorUsuaris.getEmailField().getText()
+				+ "," + Hash.sha1(administradorUsuaris.getContrasenyaToString()) + ","
 				+ administradorUsuaris.getAdrecaField().getText() + ","
 				+ administradorUsuaris.getCodiPostalField().getText() + ","
 				+ administradorUsuaris.getPoblacioField().getText() + ","
 				+ administradorUsuaris.getProvinciaComboBox().getSelectedItem() + ","
-				+ administradorUsuaris.getPaisField().getText() + "," + administradorUsuaris.getTelefonField().getText()
-				+ "," + administradorUsuaris.getTipusUsuariComboBox().getSelectedItem() + ","
-				+ administradorUsuaris.getPuntuacioField().getText() + ","
-				+ administradorUsuaris.getActiuCheckBox().isSelected();
+				+ administradorUsuaris.getPaisField().getText() + "," 
+				+ administradorUsuaris.getTelefonField().getText()
+				+ "," + administradorUsuaris.getTipusUsuariComboBox().getSelectedItem().toString().toLowerCase() + ","
+				+ administradorUsuaris.getActiuCheckBox().isSelected()+ ","
+				+ administradorUsuaris.getCarnetField().getText();
 		return dadesUsuariModificat;
 	}
 
@@ -222,10 +264,43 @@ public class AdministradorUsuarisControlador implements MouseListener {
 					dadesUsuariAlta + "\n\n" + "Vols afegir l'usuari?", "Dades de l'usuari a afegir",
 					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null);
 			if (valor == JOptionPane.YES_OPTION) {
-				mostraDadesUsuariAlta(dadesUsuariAlta, dadesUsuariToString());
+				if(enviarDadesAltaUsuariAlServidor()) {
+					//mostraDadesUsuariAlta(dadesUsuariAlta, dadesUsuariToString());
+					refrescarElsUsuaris();
+					setPanelPerDefecte();
+				}else {
+					mostraErrorAltaUsuari();
+				}
+				
 			}
 		}
 
+	}
+
+	/**
+	 * Envia les dades al servidor per executar la consulta per afegir 
+	 * el usuari
+	 * @return 1 si tot ok, 0 si no s'ha pogut fer
+	 * @author SergioHernandez
+	 */
+	private boolean enviarDadesAltaUsuariAlServidor() {
+		comunicacioClientServidor = new ComunicacioClientServidor();
+		comunicacioClientServidor.iniciarComunicacio(usuariConnectat.getIdSessio()+ ",insercio_usuari," + dadesUsuariToString());
+		String rebutString = comunicacioClientServidor.getData();
+		if(rebutString.equals("1")) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	/**
+	 * Mostra un error quan no s'ha pogut afegir un usuari
+	 */
+	private void mostraErrorAltaUsuari() {
+		JOptionPane.showMessageDialog(administradorUsuaris, "No s'ha pogut afegir el llibre",
+				"Error alta", JOptionPane.ERROR_MESSAGE);
+		
 	}
 
 	/**
@@ -244,7 +319,7 @@ public class AdministradorUsuarisControlador implements MouseListener {
 				administradorUsuaris.getCodiPostalField().getText(), administradorUsuaris.getPaisField().getText(),
 				administradorUsuaris.getProvinciaComboBox().getSelectedIndex(),
 				administradorUsuaris.getTelefonField().getText(), administradorUsuaris.getContrasenyaToString(),
-				administradorUsuaris.getDniNieField().getText(), administradorUsuaris.getCarnetField().getText(),
+				administradorUsuaris.getDniNieField().getText(),
 				administradorUsuaris.getTipusUsuariComboBox().getSelectedIndex())) {
 			if (controlDeDades.comprovacioEmail(administradorUsuaris.getEmailField().getText())) {
 
@@ -310,15 +385,49 @@ public class AdministradorUsuarisControlador implements MouseListener {
 	 * @author SergioHernandez
 	 */
 	private void avisConfirmarBaixaUsuari() {
+		int rowAMostrar = administradorUsuaris.getUsuarisTable().getSelectedRow();
+		administradorUsuaris.setRowActiu(administradorUsuaris.getUsuarisTable().getSelectedRow());
 		setAccio("default");
 		String dadesUsuariAEliminar = getDadesRowLUsuari(administradorUsuaris.getRowActiu());
 		int valor = JOptionPane.showConfirmDialog(administradorUsuaris,
 				dadesUsuariAEliminar + "\n\n" + "Vols eliminar l'usuari?", "Dades del usuari a eliminar",
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null);
 		if (valor == JOptionPane.YES_OPTION) {
+			if(enviarDadesUsuariAEliminarAlServidor()) {
+				mostraDadesUsuariAEliminar(dadesUsuariAEliminar, getDadesRowToString(administradorUsuaris.getRowActiu()));
 
-			mostraDadesUsuariAEliminar(dadesUsuariAEliminar, getDadesRowToString(administradorUsuaris.getRowActiu()));
+				refrescarElsUsuaris();
+			}else {
+				mostraErrorEliminarUsuari();
+			}
+			
 		}
+	}
+
+	/**
+	 * Envia la consulta al servidor per eliminar un usuari
+	 * @return true si tot ha anat bé, false si no
+	 * @author SergioHernandez
+	 */
+	private boolean enviarDadesUsuariAEliminarAlServidor() {
+		comunicacioClientServidor = new ComunicacioClientServidor();
+		comunicacioClientServidor.iniciarComunicacio(usuariConnectat.getIdSessio()+ ",borrar_usuari," + carnet);
+		String rebutString = comunicacioClientServidor.getData();
+		if(rebutString.equals("1")) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	/**
+	 * Mostra un error quan no s'ha pogut eliminar un usuari
+	 * @author SergioHernandez
+	 */
+	private void mostraErrorEliminarUsuari() {
+		JOptionPane.showMessageDialog(administradorUsuaris, "No s'ha pogut eliminar l'usuari",
+				"Error eliminació", JOptionPane.ERROR_MESSAGE);
+		
 	}
 
 	/**
@@ -381,6 +490,7 @@ public class AdministradorUsuarisControlador implements MouseListener {
 				+ getValorCella(row, 10) + "\n" + "telèfon: " + getValorCella(row, 11) + "\n" + "carnet: "
 				+ getValorCella(row, 12) + "\n" + "tipus: " + getValorCella(row, 13) + "\n" + "puntuació: "
 				+ getValorCella(row, 14) + "\n" + "actiu?: " + getValorCella(row, 15);
+		setCarnet(Integer.parseInt(getValorCella(row, 12)));
 		return dadesRowToString;
 	}
 
@@ -449,7 +559,7 @@ public class AdministradorUsuarisControlador implements MouseListener {
 		administradorUsuaris.getDniNieField().setEditable(true);
 		administradorUsuaris.getEmailField().setEditable(true);
 		administradorUsuaris.getContrasenyaField().setEditable(true);
-		administradorUsuaris.getCarnetField().setEditable(true);
+		administradorUsuaris.getCarnetField().setEditable(false);
 		administradorUsuaris.getAdrecaField().setEditable(true);
 		administradorUsuaris.getCodiPostalField().setEditable(true);
 		administradorUsuaris.getPoblacioField().setEditable(true);
@@ -682,13 +792,13 @@ public class AdministradorUsuarisControlador implements MouseListener {
 		String textDeLaCerca = administradorUsuaris.getCercaField().getText();
 		String[] filtre = getFiltre();
 		String tipusUsuariString = administradorUsuaris.getFiltreComboBox().getSelectedItem().toString().toLowerCase();
-		if (administradorUsuaris.getFiltreComboBox().getSelectedIndex() == 0) {
-			tipusUsuariString = "tots";
-		}
+		
 
 		if (textDeLaCerca.length() == 0) {
 			errorCampCercaBuit();
-		} else {
+		}else if(filtre[0].equals("carnet") && !isNumeric(textDeLaCerca)){
+			errorCampCercaCarnetIncorrecta();
+		}else {
 			// usuarisModel = new UsuarisModel();
 			// usuarisModel.consultarTotsElsUsuarisPerFiltre(filtre + "," +
 			// tipusUsuariString + "," + textDeLaCerca );
@@ -702,6 +812,18 @@ public class AdministradorUsuarisControlador implements MouseListener {
 
 		}
 
+	}
+
+	/**
+	 * Mostra un missatge d'error si el text de cerca no és
+	 *  númeric
+	 */
+	private void errorCampCercaCarnetIncorrecta() {
+		JOptionPane.showMessageDialog(administradorUsuaris,
+				"El camp de cerca per carnet ha de ser numéric",
+				"Error cerca carnet",
+				JOptionPane.ERROR_MESSAGE);
+		
 	}
 
 	/**
@@ -795,5 +917,29 @@ public class AdministradorUsuarisControlador implements MouseListener {
 	public void setAccio(String accio) {
 		administradorUsuaris.setAccio(accio);
 	}
+	
+	public void setCarnet(int carnet) {
+		this.carnet = carnet;
+	}
+	
+	/**
+	 * Comprova que un String sigui un número
+	 * @param cadena
+	 * @return
+	 * @author https://es.stackoverflow.com/questions/92139/c%C3%B3mo-verificar-que-el-valor-de-una-variable-string-es-un-integer-en-java
+	 */
+	 public static boolean isNumeric(String cadena) {
+
+	        boolean resultado;
+
+	        try {
+	            Integer.parseInt(cadena);
+	            resultado = true;
+	        } catch (NumberFormatException excepcion) {
+	            resultado = false;
+	        }
+
+	        return resultado;
+	    }
 
 }

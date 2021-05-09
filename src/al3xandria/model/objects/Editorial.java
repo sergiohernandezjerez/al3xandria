@@ -1,9 +1,12 @@
 package al3xandria.model.objects;
 
+/**
+ * Clase per gestionar el json i treballar amb Editorials
+ * @author SergioHernandez
+ *
+ */
 public class Editorial {
-private String nom_editorial;
-	
-	
+	private String nom_editorial;
 
 	public Editorial(String nom_editorial) {
 		this.nom_editorial = nom_editorial;

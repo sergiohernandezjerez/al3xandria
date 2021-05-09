@@ -1,5 +1,11 @@
 package al3xandria.model.objects;
 
+
+/**
+ * Clase per gestionar el json i treballar amb Llibres
+ * @author SergioHernandez
+ *
+ */
 public class Llibres {
 
 	private int id_llibre;

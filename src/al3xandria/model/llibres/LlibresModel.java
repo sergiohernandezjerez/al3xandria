@@ -135,6 +135,14 @@ public class LlibresModel {
 		return llistatEditorials;
 	}
 
+	/**
+	 * Metode que genere una consulta per enviar al servidor segons 
+	 * el tipus de filtre escollit
+	 * @param filtre tipus de filtre per fer la cerca(titol, autor, editorial, genere)
+	 * @param consulta text de la consulta
+	 * @return totes les dades per omplir el jtable
+	 * @author SergioHernandez
+	 */
 	public DefaultTableModel consultarTotsElsLlibresPerFiltre(String filtre, String consulta) {
 		String tipusConsultaString = "";
 		

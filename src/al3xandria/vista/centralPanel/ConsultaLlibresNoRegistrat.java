@@ -19,6 +19,7 @@ import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
 
+import al3xandria.controlador.administradorLlibres.AdministradorLlibresControlador;
 import al3xandria.controlador.consultaLlibres.ConsultaLlibresNoRegistratControlador;
 import al3xandria.model.llibres.LlibresModel;
 import al3xandria.model.objects.Usuari;
@@ -124,6 +125,7 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 	private JLabel ofLabel;
 	private JTextField rowActualField;
 	private JTextField rowTotalsField;
+	private JLabel refrescarLabel;
 
 	/**
 	 * Create the panel.
@@ -226,6 +228,15 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercarButton.toolTipText")); //$NON-NLS-1$
 		cercarButton.addMouseListener(new ConsultaLlibresNoRegistratControlador(this, usuariConnectat));
 		filtreTextPanel.add(cercarButton);
+		
+		refrescarLabel = new JLabel(); // $NON-NLS-1$
+		refrescarLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		refrescarLabel.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.refrescarLabel.toolTipText")); //$NON-NLS-1$
+		refrescarLabel.setIcon(icons.getRefrescarIcon());
+		refrescarLabel.addMouseListener(
+				new ConsultaLlibresNoRegistratControlador(this, usuariConnectat));
+		filtreTextPanel.add(refrescarLabel);
 
 		llistaTablePanel = new JPanel();
 		llistaTablePanel.setBackground(new Color(255, 255, 255));
@@ -545,7 +556,11 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 
 	}
 
-	private void llistarLlibres() {
+	/**
+	 * LLista tots els llibres de la base de dades
+	 * @author SergioHernandez
+	 */
+	public void llistarLlibres() {
 		llibresModel = new LlibresModel();
 		try {
 			llibresTable.setModel(llibresModel.consultarTotsElsLlibres());
@@ -555,6 +570,12 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 
 	}
 	
+	/**
+	 * LLista tots els llibres que retorna la consulta
+	 * @param filtre filtre de la consulta (autor, editorial, genere, titol)
+	 * @param consulta
+	 * @author SergioHernandez
+	 */
 	public void llistarLlibresConsulta(String filtre, String consulta) {
 		llibresModel = new LlibresModel();
 		try {
@@ -773,6 +794,10 @@ public class ConsultaLlibresNoRegistrat extends JPanel {
 
 	public void setUsuariConnectat(Usuari usuariConnectat) {
 		this.usuariConnectat = usuariConnectat;
+	}
+	
+	public JLabel getRefrescarLabel() {
+		return refrescarLabel;
 	}
 
 }

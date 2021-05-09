@@ -1,5 +1,10 @@
 package al3xandria.model.objects;
 
+/**
+ * Clase per gestionar el json i treballar amb Autor
+ * @author SergioHernandez
+ *
+ */
 public class Autor {
 	private String nom_autor;
 	

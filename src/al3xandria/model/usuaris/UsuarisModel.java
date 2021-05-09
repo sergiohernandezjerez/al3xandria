@@ -46,6 +46,11 @@ public class UsuarisModel {
 	}
 	
 	
+	/**
+	 * Consulta tots els usuaris de la biblioteca
+	 * @return
+	 * @author SergioHernandez
+	 */
 	public DefaultTableModel consultarTotsElsUsuaris() {
 		Connection connection;
 		Statement statement;
@@ -162,6 +167,14 @@ public class UsuarisModel {
 		
 	}
 	
+	/**
+	 * Consulta els usuaris segons el tipus de filtre i tipus d'usuari escollits
+	 * @param filtre conté el tipus de filtre(nom, carnet o dni/nie)
+	 *  i el tipus d'usuari(usuari o administrador)
+	 * @param consulta
+	 * @return les dades per omplir el jtable
+	 * @author SergioHernandez
+	 */
 	public DefaultTableModel consultarTotsElsUsuarisPerFiltre(String[] filtre, String consulta) {
 		
 		String tipusConsultaString = "";

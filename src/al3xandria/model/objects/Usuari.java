@@ -2,6 +2,12 @@ package al3xandria.model.objects;
 
 import java.io.Serializable;
 
+
+/**
+ * Clase per gestionar el json i treballar amb usuaris
+ * @author SergioHernandez
+ *
+ */
 public class Usuari implements Serializable{
 
 	/**

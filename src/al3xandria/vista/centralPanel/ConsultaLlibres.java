@@ -18,9 +18,13 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+
+import al3xandria.controlador.administradorLlibres.AdministradorLlibresControlador;
 import al3xandria.controlador.consultaLlibres.ConsultaLlibresControlador;
 import al3xandria.model.llibres.LlibresModel;
 import al3xandria.model.objects.Usuari;
+import al3xandria.model.prestecs.PrestecsModel;
 import al3xandria.vista.icons.Icons;
 
 import javax.swing.JTextArea;
@@ -140,6 +144,8 @@ public class ConsultaLlibres extends JPanel {
 
 	private JTextField edicioField;
 	private JButton reservarButton;
+	private PrestecsModel prestecsModel;
+	private JLabel refrescarLabel;
 
 	/**
 	 * Create the panel.
@@ -235,6 +241,15 @@ public class ConsultaLlibres extends JPanel {
 				.setToolTipText(CentralPanelMessages.getString("ConsultaLlibresNoRegistrat.cercarButton.toolTipText")); //$NON-NLS-1$
 		cercarButton.addMouseListener(new ConsultaLlibresControlador(this, usuariConnectat));
 		filtreTextPanel.add(cercarButton);
+		
+		refrescarLabel = new JLabel(); // $NON-NLS-1$
+		refrescarLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		refrescarLabel.setToolTipText(CentralPanelMessages
+				.getString("AdministradorLlibres.refrescarLabel.toolTipText")); //$NON-NLS-1$
+		refrescarLabel.setIcon(icons.getRefrescarIcon());
+		refrescarLabel.addMouseListener(
+				new ConsultaLlibresControlador(this, usuariConnectat));
+		filtreTextPanel.add(refrescarLabel);
 
 		llistaTablePanel = new JPanel();
 		llistaTablePanel.setBackground(new Color(255, 255, 255));
@@ -644,8 +659,13 @@ public class ConsultaLlibres extends JPanel {
 
 	}
 
-	private void llistarLlibres() {
+	/**
+	 * llista tots els llibres de la base de dades
+	 * @author SergioHernandez
+	 */
+	public void llistarLlibres() {
 		llibresModel = new LlibresModel();
+		llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		try {
 			llibresTable.setModel(llibresModel.consultarTotsElsLlibres());
 		} catch (Exception e) {
@@ -877,5 +897,48 @@ public class ConsultaLlibres extends JPanel {
 	
 	public JButton getCancellarButton() {
 		return cancellarButton;
+	}
+
+	/**
+	 * Afegeix a la jtable el resultat de la cerca
+	 * 
+	 * @param filtre   el filtre que es vol buscar(autor, editorial, genere,
+	 *                 titol)
+	 * @param consulta el text de la consulta
+	 */
+	public void llistarLlibresConsulta(String filtre, String consulta) {
+		llibresModel = new LlibresModel();
+		llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		try {
+			llibresTable.setModel(llibresModel
+					.consultarTotsElsLlibresPerFiltre(filtre, consulta));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void llistarPrestecs() {
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.RIGHT);
+		prestecsModel = new PrestecsModel();
+		llibresModel = new LlibresModel();
+		try {
+			llibresTable.setModel(prestecsModel.consultarPrestecsUsuari(usuariConnectat.getIdSessio(), usuariConnectat.getId_usuari()));
+			llibresTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+			llibresTable.getColumn("Id").setCellRenderer(rightRenderer);
+			llibresTable.getColumn("num. renovacio").setCellRenderer(rightRenderer);
+			llibresTable.getColumn("usuari").setCellRenderer(rightRenderer);
+			llibresTable.getColumn("data inici").setCellRenderer(rightRenderer);
+			llibresTable.getColumn("data final").setCellRenderer(rightRenderer);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public JLabel getRefrescarLabel() {
+		return refrescarLabel;
 	}
 }

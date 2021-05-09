@@ -18,6 +18,11 @@ public class PrestecsModel {
 
 	private String[] titols = { "Id", "llibre", "usuari", "data inici", "data final", "num. renovacio"};
 	
+	
+	/**
+	 * Consulta tots els prestecs que hi ha a la biblioteca
+	 * @return
+	 */
 	public DefaultTableModel consultarTotsElsPrestecs() {
 		
 		tableModel = new DefaultTableModel(null, titols);
@@ -27,6 +32,36 @@ try {
 			
 			comunicacioClientServidor = new ComunicacioClientServidor();
 			comunicacioClientServidor.iniciarComunicacio("0000000000000,consulta_prestecs");
+			String dadesDelServidor = comunicacioClientServidor.getData();
+			Gson gson = new Gson();
+			llistatDePrestecs = new ArrayList<Prestecs>();
+			Prestecs[] llistat = gson.fromJson(dadesDelServidor, Prestecs[].class);
+			for(int i = 0; i<llistat.length;i++) {
+				System.out.println(llistat[i]);
+				llistatDePrestecs.add(llistat[i]);
+			}
+
+			return arrayToColumnes();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * Consulta tots els prestecs que hi ha a la biblioteca
+	 * @return
+	 */
+	public DefaultTableModel consultarPrestecsUsuari(String idSessio, int idUsuari) {
+		
+		tableModel = new DefaultTableModel(null, titols);
+		columnes = new String[6];
+		
+try {
+			
+			comunicacioClientServidor = new ComunicacioClientServidor();
+			comunicacioClientServidor.iniciarComunicacio(idSessio + ",consulta_prestecs_usuari," + idUsuari);
 			String dadesDelServidor = comunicacioClientServidor.getData();
 			Gson gson = new Gson();
 			llistatDePrestecs = new ArrayList<Prestecs>();

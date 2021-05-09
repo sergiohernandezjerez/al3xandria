@@ -1,5 +1,10 @@
 package al3xandria.model.objects;
 
+/**
+ * Clase per gestionar el json i treballar amb prestecs
+ * @author SergioHernandez
+ *
+ */
 public class Prestecs {
 
 	private int id_prestec;

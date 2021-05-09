@@ -295,8 +295,7 @@ public class ControlDeDades {
 	 */
 	public boolean comprovarCampsOmplertsAltaUsuari(String nom, String cognoms, String adreca, String email, 
 			String poblacio, String codiPostal, String pais, int provincia, String telefon, 
-			String contrasenya, String identificador, 
-			String carnet, int tipusUsuari) {
+			String contrasenya, String identificador, int tipusUsuari) {
 		ArrayList<String> campsBuits = new ArrayList<String>();
 		boolean totOmplert = false;
 		if (nom.length() == 0) {
@@ -332,9 +331,7 @@ public class ControlDeDades {
 		if (identificador.length() == 0) {
 			campsBuits.add("Numero Identificador");
 		}
-		if (carnet.length() == 0) {
-			campsBuits.add("Carnet");
-		}
+
 		if (tipusUsuari == 0) {
 			campsBuits.add("Tipus Usuari");
 		}
