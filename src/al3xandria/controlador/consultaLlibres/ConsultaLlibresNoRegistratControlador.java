@@ -27,11 +27,13 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 	private LlibresModel llibresModel;
 
 	/**
-	 * Clase per controlar la consulta dels llibres per usuaris que no han fet login
+	 * Clase per controlar la consulta dels llibres per usuaris que no han fet
+	 * login
 	 * 
 	 * @param consultaLlibresNoRegistrat
 	 */
-	public ConsultaLlibresNoRegistratControlador(ConsultaLlibresNoRegistrat consultaLlibresNoRegistrat,
+	public ConsultaLlibresNoRegistratControlador(
+			ConsultaLlibresNoRegistrat consultaLlibresNoRegistrat,
 			Usuari usuariConnectat) {
 		this.consultaLlibresNoRegistrat = consultaLlibresNoRegistrat;
 		this.table = consultaLlibresNoRegistrat.getLlibresTable();
@@ -41,8 +43,8 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
-		if(consultaLlibresNoRegistrat.getRefrescarLabel() == e.getSource()) {
+
+		if (consultaLlibresNoRegistrat.getRefrescarLabel() == e.getSource()) {
 			consultaLlibresNoRegistrat.llistarLlibres();
 		}
 
@@ -51,7 +53,8 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 		}
 
 		// mostra les dades d'un llibre si s'ha seleccionat
-		if (consultaLlibresNoRegistrat.getMostrarLlibreButton() == e.getSource()) {
+		if (consultaLlibresNoRegistrat.getMostrarLlibreButton() == e
+				.getSource()) {
 			consultaLlibresNoRegistrat.getPaginadorPanel().setVisible(true);
 			mostrarDadesLlibres();
 		}
@@ -68,7 +71,8 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 			pasarLlibreSeguent();
 		}
 
-		if (consultaLlibresNoRegistrat.getAnteriorIconLabel() == e.getSource()) {
+		if (consultaLlibresNoRegistrat.getAnteriorIconLabel() == e
+				.getSource()) {
 			pasarLlibreAnterior();
 		}
 
@@ -80,7 +84,8 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 	 * @author SergioHernandez
 	 */
 	private void pasarLlibreSeguent() {
-		if (consultaLlibresNoRegistrat.getRowActiu() + 1 == table.getRowCount()) {
+		if (consultaLlibresNoRegistrat.getRowActiu() + 1 == table
+				.getRowCount()) {
 			consultaLlibresNoRegistrat.setRowActiu(table.getRowCount() - 1);
 		} else {
 			consultaLlibresNoRegistrat.seguentRowActiu(1, table.getRowCount());
@@ -110,9 +115,11 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 	 * @author SergioHernandez
 	 */
 	public void mostrarDadesLlibres() {
-		int rowAMostrar = consultaLlibresNoRegistrat.getLlibresTable().getSelectedRow();
+		int rowAMostrar = consultaLlibresNoRegistrat.getLlibresTable()
+				.getSelectedRow();
 		if (rowAMostrar > -1) {
-			consultaLlibresNoRegistrat.setRowActiu(consultaLlibresNoRegistrat.getLlibresTable().getSelectedRow());
+			consultaLlibresNoRegistrat.setRowActiu(consultaLlibresNoRegistrat
+					.getLlibresTable().getSelectedRow());
 			getDadesRow(rowAMostrar);
 		} else {
 			errorLlibreNoSeleccionat();
@@ -128,28 +135,42 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 	 * @author SergioHernandez
 	 */
 	private void getDadesRow(int row) {
-		consultaLlibresNoRegistrat.getRowActualField()
-				.setText(String.valueOf(consultaLlibresNoRegistrat.getRowActiu() + 1));
-		consultaLlibresNoRegistrat.getRowTotalsField().setText(String.valueOf(table.getRowCount()));
-		consultaLlibresNoRegistrat.getLlibresTable().setRowSelectionInterval(row, row);
-		consultaLlibresNoRegistrat.getIdLlibreField().setText(getValorCella(row, 0));
-		consultaLlibresNoRegistrat.getIsbnField().setText(getValorCella(row, 1));
-		consultaLlibresNoRegistrat.getTitolField().setText(getValorCella(row, 2));
-		consultaLlibresNoRegistrat.getGenereField().setText(getValorCella(row, 3));
-		consultaLlibresNoRegistrat.getAutorsField().setText(getValorCella(row, 4));
-		consultaLlibresNoRegistrat.getDataPublicacioField().setText(getValorCella(row, 5));
-		consultaLlibresNoRegistrat.getEdicioField().setText(getValorCella(row, 6));
-		consultaLlibresNoRegistrat.getEditorialField().setText(getValorCella(row, 7));
-		consultaLlibresNoRegistrat.getSinopsisTextArea().setText(getValorCella(row, 8));
-		consultaLlibresNoRegistrat.getPuntuacioField().setText(getValorCella(row, 9));
-		consultaLlibresNoRegistrat.getNumeroPaginesField().setText(getValorCella(row, 10));
+		consultaLlibresNoRegistrat.getRowActualField().setText(
+				String.valueOf(consultaLlibresNoRegistrat.getRowActiu() + 1));
+		consultaLlibresNoRegistrat.getRowTotalsField()
+				.setText(String.valueOf(table.getRowCount()));
+		consultaLlibresNoRegistrat.getLlibresTable()
+				.setRowSelectionInterval(row, row);
+		consultaLlibresNoRegistrat.getIdLlibreField()
+				.setText(getValorCella(row, 0));
+		consultaLlibresNoRegistrat.getIsbnField()
+				.setText(getValorCella(row, 1));
+		consultaLlibresNoRegistrat.getTitolField()
+				.setText(getValorCella(row, 2));
+		consultaLlibresNoRegistrat.getGenereField()
+				.setText(getValorCella(row, 3));
+		consultaLlibresNoRegistrat.getAutorsField()
+				.setText(getValorCella(row, 4));
+		consultaLlibresNoRegistrat.getDataPublicacioField()
+				.setText(getValorCella(row, 5));
+		consultaLlibresNoRegistrat.getEdicioField()
+				.setText(getValorCella(row, 6));
+		consultaLlibresNoRegistrat.getEditorialField()
+				.setText(getValorCella(row, 7));
+		consultaLlibresNoRegistrat.getSinopsisTextArea()
+				.setText(getValorCella(row, 8));
+		consultaLlibresNoRegistrat.getPuntuacioField()
+				.setText(getValorCella(row, 9));
+		consultaLlibresNoRegistrat.getNumeroPaginesField()
+				.setText(getValorCella(row, 10));
 
 		if (getValorCella(row, 11).equals("true")) {
 			consultaLlibresNoRegistrat.getReservatCheckBox().setSelected(true);
 		} else {
 			consultaLlibresNoRegistrat.getReservatCheckBox().setSelected(false);
 		}
-		consultaLlibresNoRegistrat.getNumeroReservesField().setText(getValorCella(row, 12));
+		consultaLlibresNoRegistrat.getNumeroReservesField()
+				.setText(getValorCella(row, 12));
 
 	}
 
@@ -171,29 +192,15 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 	 * @author SergioHernandez
 	 */
 	public void ferLaCerca() {
-		String textDeLaCerca = consultaLlibresNoRegistrat.getCercaField().getText();
+		String textDeLaCerca = consultaLlibresNoRegistrat.getCercaField()
+				.getText();
 		String filtre = getFiltre();
 		if (textDeLaCerca.length() == 0) {
 			errorCampCercaBuit();
 		} else {
-			
+			consultaLlibresNoRegistrat.llistarLlibresConsulta(filtre,
+					textDeLaCerca);
 
-			// S'envia l'string de cerca al servidor
-			//mostraLaCerca("Filtre: " + filtre + "\n" + "Text a cercar: " + textDeLaCerca + "\n"
-					//+ "Valors enviats al servidor: " + usuariConnectat.getIdSessio() + "," + "consulta_llibre_" + filtre
-					//+ "," + textDeLaCerca);
-			
-			//Per simular la consulta al servidor
-
-
-			consultaLlibresNoRegistrat.llistarLlibresConsulta(filtre, textDeLaCerca);
-			
-//			if(dadesDelServidor[0].equals("0")) {
-//				mostraLaCerca("llibre trobat");
-//			}else {
-//				mostraLaCerca("llibre no trobat");
-//			}
-			
 		}
 
 	}
@@ -205,8 +212,8 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 	 * @author SergioHernandez
 	 */
 	public void mostraLaCerca(String cerca) {
-		JOptionPane.showMessageDialog(consultaLlibresNoRegistrat, cerca, "Dades de la cerca",
-				JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(consultaLlibresNoRegistrat, cerca,
+				"Dades de la cerca", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
@@ -229,16 +236,20 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 	public String getFiltre() {
 		String filtre = null;
 		ButtonGroup grup = consultaLlibresNoRegistrat.getFiltreButtonGroup();
-		if (grup.getSelection().equals(consultaLlibresNoRegistrat.getTitolRadioButton().getModel())) {
+		if (grup.getSelection().equals(
+				consultaLlibresNoRegistrat.getTitolRadioButton().getModel())) {
 			filtre = "titol";
 		}
-		if (grup.getSelection().equals(consultaLlibresNoRegistrat.getAutorRadioButton().getModel())) {
+		if (grup.getSelection().equals(
+				consultaLlibresNoRegistrat.getAutorRadioButton().getModel())) {
 			filtre = "autor";
 		}
-		if (grup.getSelection().equals(consultaLlibresNoRegistrat.getGenereRadioButton().getModel())) {
+		if (grup.getSelection().equals(
+				consultaLlibresNoRegistrat.getGenereRadioButton().getModel())) {
 			filtre = "genere";
 		}
-		if (grup.getSelection().equals(consultaLlibresNoRegistrat.getEditorialRadioButton().getModel())) {
+		if (grup.getSelection().equals(consultaLlibresNoRegistrat
+				.getEditorialRadioButton().getModel())) {
 			filtre = "editorial";
 		}
 		return filtre;
@@ -251,21 +262,25 @@ public class ConsultaLlibresNoRegistratControlador implements MouseListener {
 	 */
 	private void errorCampCercaBuit() {
 		JOptionPane.showMessageDialog(consultaLlibresNoRegistrat,
-				WarningStrings.getString("ConsultaLlibresNoRegistrat.missatgeCampCercaBuit"),
-				WarningStrings.getString("ConsultaLlibresNoRegistrat.titolMissatgeCampCercaBuit"),
+				WarningStrings.getString(
+						"ConsultaLlibresNoRegistrat.missatgeCampCercaBuit"),
+				WarningStrings.getString(
+						"ConsultaLlibresNoRegistrat.titolMissatgeCampCercaBuit"),
 				JOptionPane.ERROR_MESSAGE);
 
 	}
 
 	/**
-	 * Missatge d'error per avisar es vol fer una acció que requereix la selecció
-	 * d'un llibre a la table
+	 * Missatge d'error per avisar es vol fer una acció que requereix la
+	 * selecció d'un llibre a la table
 	 * 
 	 * @author SergioHernandez
 	 */
 	private void errorLlibreNoSeleccionat() {
-		JOptionPane.showMessageDialog(consultaLlibresNoRegistrat, "No s'ha seleccionat cap llibre",
-				WarningStrings.getString("Error selecció llibre"), JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(consultaLlibresNoRegistrat,
+				"No s'ha seleccionat cap llibre",
+				WarningStrings.getString("Error selecció llibre"),
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	@Override

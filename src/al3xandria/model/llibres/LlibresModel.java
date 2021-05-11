@@ -38,8 +38,9 @@ public class LlibresModel {
 	private ConnexioDB connexioDB = new ConnexioDB();
 	private ComunicacioClientServidor comunicacioClientServidor;
 
-	private String[] titols = { "Id", "isbn", "Títol", "Gènere", "Autor", "Data", "Edició", "Editorial", "Sinopsis",
-			"Puntuació", "Núm. Pàgines", "Reservat", "Núm. Reserves" };
+	private String[] titols = { "Id", "isbn", "Títol", "Gènere", "Autor",
+			"Data", "Edició", "Editorial", "Sinopsis", "Puntuació",
+			"Núm. Pàgines", "Reservat", "Núm. Reserves" };
 
 	public DefaultTableModel consultarTotsElsLlibres() {
 
@@ -47,24 +48,17 @@ public class LlibresModel {
 		columnes = new String[13];
 
 		try {
-			
 
-			//llistatDeLlibres = new ArrayList<Llibres>();
-			// Per fer proves utilitzaba una bd local i omplia l'array amb el resultset
-			// llistatDeLlibres = resultSetToArrayList(resultSet);
-
-			// Per entregar el TEA3 omplo l'array de llibres amb la classe CreateLlibres
-//			createLlibres = new CreateLlibres();
-//			llistatDeLlibres = createLlibres.getLlistatDeLlibres();
-			
-			//Per al projecte definitiu consulto els llibres amb el servidor
+			// Per al projecte definitiu consulto els llibres amb el servidor
 			comunicacioClientServidor = new ComunicacioClientServidor();
-			comunicacioClientServidor.iniciarComunicacio("0000000000000,consulta_llibre_tots");
+			comunicacioClientServidor
+					.iniciarComunicacio("0000000000000,consulta_llibre_tots");
 			String dadesDelServidor = comunicacioClientServidor.getData();
 			Gson gson = new Gson();
 			llistatDeLlibres = new ArrayList<Llibres>();
-			Llibres[] llistat = gson.fromJson(dadesDelServidor, Llibres[].class);
-			for(int i = 0; i<llistat.length;i++) {
+			Llibres[] llistat = gson.fromJson(dadesDelServidor,
+					Llibres[].class);
+			for (int i = 0; i < llistat.length; i++) {
 				System.out.println(llistat[i]);
 				llistatDeLlibres.add(llistat[i]);
 			}
@@ -77,109 +71,120 @@ public class LlibresModel {
 		}
 
 	}
-	
+
 	/**
 	 * Consulta tots els autors que hi ha a la bd
+	 * 
 	 * @return ArrayList<String> amb els autors
 	 */
-	public ArrayList<String> getAutors(){
+	public ArrayList<String> getAutors() {
 		comunicacioClientServidor = new ComunicacioClientServidor();
-		comunicacioClientServidor.iniciarComunicacio("0000000000000,consulta_autors");
+		comunicacioClientServidor
+				.iniciarComunicacio("0000000000000,consulta_autors");
 		String dadesDelServidor = comunicacioClientServidor.getData();
 		Gson gson = new Gson();
-		ArrayList<String> llistatAutors= new ArrayList<String>();
+		ArrayList<String> llistatAutors = new ArrayList<String>();
 		Autor[] llistat = gson.fromJson(dadesDelServidor, Autor[].class);
-		for(int i = 0; i<llistat.length;i++) {
+		for (int i = 0; i < llistat.length; i++) {
 			System.out.println(llistat[i]);
 			llistatAutors.add(llistat[i].getNom_autor());
 		}
-		
+
 		return llistatAutors;
 	}
-	
+
 	/**
 	 * Consulta tots els generes que hi ha a la bd
+	 * 
 	 * @return ArrayList<String> amb els generes
 	 */
-	public ArrayList<String> getGeneres(){
+	public ArrayList<String> getGeneres() {
 		comunicacioClientServidor = new ComunicacioClientServidor();
-		comunicacioClientServidor.iniciarComunicacio("0000000000000,consulta_generes");
+		comunicacioClientServidor
+				.iniciarComunicacio("0000000000000,consulta_generes");
 		String dadesDelServidor = comunicacioClientServidor.getData();
 		Gson gson = new Gson();
-		ArrayList<String> llistatGeneres= new ArrayList<String>();
+		ArrayList<String> llistatGeneres = new ArrayList<String>();
 		Genere[] llistat = gson.fromJson(dadesDelServidor, Genere[].class);
-		for(int i = 0; i<llistat.length;i++) {
+		for (int i = 0; i < llistat.length; i++) {
 			System.out.println(llistat[i]);
 			llistatGeneres.add(llistat[i].getNom_genere());
 		}
-		
+
 		return llistatGeneres;
 	}
-	
+
 	/**
 	 * Consulta totes les editorials que hi ha a la bd
+	 * 
 	 * @return ArrayList<String> amb les editorials
 	 */
-	public ArrayList<String> getEditorials(){
+	public ArrayList<String> getEditorials() {
 		comunicacioClientServidor = new ComunicacioClientServidor();
-		comunicacioClientServidor.iniciarComunicacio("0000000000000,consulta_editorials");
+		comunicacioClientServidor
+				.iniciarComunicacio("0000000000000,consulta_editorials");
 		String dadesDelServidor = comunicacioClientServidor.getData();
 		Gson gson = new Gson();
-		ArrayList<String> llistatEditorials= new ArrayList<String>();
-		Editorial[] llistat = gson.fromJson(dadesDelServidor, Editorial[].class);
-		for(int i = 0; i<llistat.length;i++) {
+		ArrayList<String> llistatEditorials = new ArrayList<String>();
+		Editorial[] llistat = gson.fromJson(dadesDelServidor,
+				Editorial[].class);
+		for (int i = 0; i < llistat.length; i++) {
 			System.out.println(llistat[i]);
 			llistatEditorials.add(llistat[i].getNom_editorial());
 		}
-		
+
 		return llistatEditorials;
 	}
 
 	/**
-	 * Metode que genere una consulta per enviar al servidor segons 
-	 * el tipus de filtre escollit
-	 * @param filtre tipus de filtre per fer la cerca(titol, autor, editorial, genere)
+	 * Metode que genere una consulta per enviar al servidor segons el tipus de
+	 * filtre escollit
+	 * 
+	 * @param filtre   tipus de filtre per fer la cerca(titol, autor, editorial,
+	 *                 genere)
 	 * @param consulta text de la consulta
 	 * @return totes les dades per omplir el jtable
 	 * @author SergioHernandez
 	 */
-	public DefaultTableModel consultarTotsElsLlibresPerFiltre(String filtre, String consulta) {
+	public DefaultTableModel consultarTotsElsLlibresPerFiltre(String filtre,
+			String consulta) {
 		String tipusConsultaString = "";
-		
-		if(filtre.equals("titol")) {
+
+		if (filtre.equals("titol")) {
 			tipusConsultaString = "consulta_llibre_titol";
 		}
-		if(filtre.equals("autor")) {
+		if (filtre.equals("autor")) {
 			tipusConsultaString = "consulta_llibre_autor";
 		}
-		if(filtre.equals("editorial")) {
+		if (filtre.equals("editorial")) {
 			tipusConsultaString = "consulta_llibre_editorial";
 		}
-		if(filtre.equals("genere")) {
+		if (filtre.equals("genere")) {
 			tipusConsultaString = "consulta_llibre_genere";
 		}
 		tableModel = new DefaultTableModel(null, titols);
 		columnes = new String[13];
-		
+
 		try {
 			comunicacioClientServidor = new ComunicacioClientServidor();
-			comunicacioClientServidor.iniciarComunicacio("0000000000000,"+tipusConsultaString+","+consulta);
+			comunicacioClientServidor.iniciarComunicacio(
+					"0000000000000," + tipusConsultaString + "," + consulta);
 			String dadesDelServidor = comunicacioClientServidor.getData();
-			if(dadesDelServidor.equals("null")) {
+			if (dadesDelServidor.equals("null")) {
 				mostrarMissatgeNoTrobat(filtre, consulta);
-			}else {
+			} else {
 				Gson gson = new Gson();
 				llistatDeLlibres = new ArrayList<Llibres>();
-				Llibres[] llistat = gson.fromJson(dadesDelServidor, Llibres[].class);
-				for(int i = 0; i<llistat.length;i++) {
+				Llibres[] llistat = gson.fromJson(dadesDelServidor,
+						Llibres[].class);
+				for (int i = 0; i < llistat.length; i++) {
 					System.out.println(llistat[i]);
 					llistatDeLlibres.add(llistat[i]);
 				}
 
 				return arrayToColumnes();
-				
+
 			}
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -191,16 +196,16 @@ public class LlibresModel {
 
 	/**
 	 * Mostra un missatge d'erro si no troba res a la cerca
-	 * @param filtre filtre de la cerca (autor, titol, editorial, genere)
+	 * 
+	 * @param filtre   filtre de la cerca (autor, titol, editorial, genere)
 	 * @param consulta text de la consulta
 	 */
-	private void mostrarMissatgeNoTrobat(String filtre,
-			String consulta) {
+	private void mostrarMissatgeNoTrobat(String filtre, String consulta) {
 		filtre = filtre.substring(0, 1).toUpperCase() + filtre.substring(1);
-			JOptionPane.showMessageDialog(null,
-					"No s'ha trobat " + consulta + " per el filtre: " + filtre,
-					WarningStrings.getString("Error de consulta!"),
-					JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null,
+				"No s'ha trobat " + consulta + " per el filtre: " + filtre,
+				WarningStrings.getString("Error de consulta!"),
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
@@ -249,7 +254,8 @@ public class LlibresModel {
 				llibre.setId_llibre(resultSet.getInt("id_llibre"));
 				llibre.setIsbn(String.valueOf(resultSet.getInt("isbn")));
 				llibre.setTitol(resultSet.getString("titol"));
-				llibre.setData_publicacio(resultSet.getDate("data_publicacio").toString());
+				llibre.setData_publicacio(
+						resultSet.getDate("data_publicacio").toString());
 				llibre.setEdicio(resultSet.getString("edicio"));
 				llibre.setPuntuacio(resultSet.getInt("puntuacio"));
 				llibre.setNum_reserves(resultSet.getInt("num_reserves"));
@@ -270,8 +276,6 @@ public class LlibresModel {
 
 	}
 
-	
-
 	public ArrayList<Llibres> getLlistatDeLlibres() {
 		return llistatDeLlibres;
 	}
@@ -279,8 +283,5 @@ public class LlibresModel {
 	private String consultaTotsElsAutors = "SELECT nom_autor FROM public.autors;";
 	private String consultaTotsElsGeneres = "SELECT nom_genere FROM public.generes;";
 	private String consultaTotsElsEditorials = "SELECT nom_editorial FROM public.editorials;";
-
-
-	
 
 }

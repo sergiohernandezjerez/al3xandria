@@ -29,6 +29,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 	private ComunicacioClientServidor comunicacioClientServidor;
 	private String idLlibre = "";
 
+	
 	/**
 	 * Constructor
 	 * 
@@ -57,9 +58,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 				setDadesLlibresPerMostrar();
 				desactivarDadesLlibres();
 				mostrarDadesLlibres();
-
 			}
-
 		}
 
 		if (administradorLlibres.getRefrescarLabel() == e.getSource()) {
@@ -95,7 +94,6 @@ public class AdministradorLlibresControlador implements MouseListener {
 				setAccio("baixa");
 				avisConfirmarBaixaLlibre();
 			}
-
 		}
 
 		// edita un llibre si s'ha seleccionat
@@ -105,7 +103,6 @@ public class AdministradorLlibresControlador implements MouseListener {
 				setAccio("editar");
 				setDadesLlibresPerEditar();
 			}
-
 		}
 
 		// mostra els prèstecs
@@ -118,7 +115,6 @@ public class AdministradorLlibresControlador implements MouseListener {
 		if (administradorLlibres.getConfirmarButton() == e.getSource()) {
 			if (getAccio().equals("alta")) {
 				avisConfirmarAltaLlibre();
-
 			}
 
 			if (getAccio().equals("editar")) {
@@ -143,8 +139,10 @@ public class AdministradorLlibresControlador implements MouseListener {
 
 	}
 
+	
 	/**
 	 * Torna a omplir el jtable amb les dades de tots els llibres
+	 * 
 	 * @author SergioHernandez
 	 */
 	private void refrescarElsLlibres() {
@@ -158,11 +156,10 @@ public class AdministradorLlibresControlador implements MouseListener {
 	 * @author SergioHernandez
 	 */
 	private void mostrarPrestecs() {
-
 		administradorLlibres.llistarPrestecs();
-
 	}
 
+	
 	/**
 	 * Mostra un avís per modificar un llibre Comproba que totes les dades
 	 * estiguin introduides i les mostra totes per informar a l'usuari
@@ -189,6 +186,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		}
 
 	}
+	
 
 	/**
 	 * Envia les dades al servidor per executar la consulta per modificar el
@@ -210,6 +208,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		}
 	}
 
+	
 	/**
 	 * Mostra un avís amb l'informació del llibre que s'ha modificat amb les
 	 * dades del mateix i la consulta que s'envia al servidor
@@ -230,6 +229,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		setPanelPerDefecte();
 	}
 
+	
 	/**
 	 * Mostra un avís amb l'informació del llibre que s'eliminarà
 	 * 
@@ -257,11 +257,10 @@ public class AdministradorLlibresControlador implements MouseListener {
 			} else {
 				mostraErrorEliminarLlibre();
 			}
-
 		}
-
 	}
 
+	
 	/**
 	 * Envia les dades al servidor per executar la consulta per eliminar el
 	 * llibre
@@ -279,9 +278,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 		} else {
 			return false;
 		}
-
 	}
 
+	
 	/**
 	 * Mostra un avis amb les dades del llibra que s'ha eliminat i mostra la
 	 * consulta que s'enviarà al servidor
@@ -303,6 +302,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		setPanelPerDefecte();
 	}
 
+	
 	/**
 	 * Mostra un avis amb les dades del llibre que es crearà
 	 * 
@@ -325,9 +325,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 				}
 			}
 		}
-
 	}
 
+	
 	/**
 	 * Envia les dades al servidor per executar la consulta per eliminar el
 	 * llibre
@@ -346,9 +346,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 		} else {
 			return false;
 		}
-
 	}
 
+	
 	/**
 	 * Comprova que totes les dades introduïdes per fer l'alta d'un llibre
 	 * siguin correctes. Camps buits i format d'isbn
@@ -378,6 +378,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		return dadesCorrectes;
 	}
 
+	
 	/**
 	 * Mostra les dades del llibre que s'ha donat d'alta i la consulta que
 	 * s'enviarà al servidor
@@ -397,6 +398,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		setPanelPerDefecte();
 	}
 
+	
 	/**
 	 * Formulari per afegir dades noves a: autors, editorials i gèneres
 	 * 
@@ -423,6 +425,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		}
 	}
 
+	
 	/**
 	 * Mostra un missatge amb les dades que s'enviaran al servidor per afegir un
 	 * nou elementa a les taules: autors, editorials o gèneres
@@ -488,10 +491,12 @@ public class AdministradorLlibresControlador implements MouseListener {
 		}
 	}
 
+	
 	/**
-	 * Mostra un error quan no s'ha pogut afegir un element 
-	 * del tipus autor, editorial o genere
-	 * @param nomTaula nom de l'elements
+	 * Mostra un error quan no s'ha pogut afegir un element del tipus autor,
+	 * editorial o genere
+	 * 
+	 * @param nomTaula    nom de l'elements
 	 * @param nouRegistre dades del nou element
 	 * @author SergioHernandez
 	 */
@@ -501,9 +506,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 				"No s'ha pogut efegir l'element " + nouRegistre
 						+ " a la taula: " + nomTaula,
 				"Error inserció", JOptionPane.ERROR_MESSAGE);
-
 	}
 
+	
 	/**
 	 * Mostra la consulta que es farà al servidor
 	 * 
@@ -515,6 +520,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 				"Dades de la consulta", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	
 	/**
 	 * Mostra un error quan no s'ha pogut eliminar un llibre
 	 */
@@ -524,6 +530,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
+	
 	/**
 	 * Mostra un error quan no s'ha pogut afegir un llibre
 	 */
@@ -533,6 +540,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
+	
 	/**
 	 * Mostra un error quan no s'ha pogut modificar un llibre
 	 */
@@ -542,6 +550,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
+	
 	/**
 	 * Missatge que informa que l'acció actual es cancel.larà Alta, editar o
 	 * baixa
@@ -557,9 +566,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 		if (valor == JOptionPane.YES_OPTION) {
 			setPanelPerDefecte();
 		}
-
 	}
 
+	
 	/**
 	 * Mostra la informació del llibre següent
 	 * 
@@ -571,11 +580,10 @@ public class AdministradorLlibresControlador implements MouseListener {
 		} else {
 			administradorLlibres.seguentRowActiu(1, table.getRowCount());
 			getDadesRow(administradorLlibres.getRowActiu());
-
 		}
-
 	}
 
+	
 	/**
 	 * Mostra la informació del llibre anterior
 	 * 
@@ -590,6 +598,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		}
 	}
 
+	
 	/**
 	 * Mostra les dades del llibre seleccionat
 	 * 
@@ -602,9 +611,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 		administradorLlibres.setRowActiu(
 				administradorLlibres.getLlibresTable().getSelectedRow());
 		getDadesRow(rowAMostrar);
-
 	}
 
+	
 	/**
 	 * get l'id del llibre per pasar-lo per paràmetres al servidor
 	 * 
@@ -613,9 +622,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 	 */
 	private String getIdLlibre() {
 		return administradorLlibres.getIdLlibreField().getText();
-
 	}
 
+	
 	/**
 	 * get l'Isbn del llibre per pasar-lo per paràmetres al servidor
 	 * 
@@ -626,6 +635,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		return administradorLlibres.getIsbnField().getText();
 	}
 
+	
 	/**
 	 * Dades del llibre ja modificat per mostrar en el missatge d'informació
 	 * 
@@ -662,6 +672,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		return dadesLlibreModificat;
 	}
 
+	
 	/**
 	 * Dades del llibre per fer l'alta per mostrar en el missatge d'informació
 	 * 
@@ -697,6 +708,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		return dadesLlibreAlta;
 	}
 
+	
 	/**
 	 * Dades del llibre per modificar per enviar com a paràmetre al servidor
 	 * 
@@ -723,6 +735,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		return dadesLlibreModificat;
 	}
 
+	
 	/**
 	 * Posa el panel de les dades del llibre per defecte
 	 * 
@@ -758,6 +771,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		administradorLlibres.getReservatCheckBox().setEnabled(false);
 	}
 
+	
 	/**
 	 * Configurar el panel per mostra les dades d'un llibre
 	 * 
@@ -770,6 +784,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		administradorLlibres.omplirComboBox();
 	}
 
+	
 	/**
 	 * Configurar el panel per editar les dades d'un llibre
 	 * 
@@ -796,6 +811,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		activarDadesLlibresPerEditar();
 	}
 
+	
 	/**
 	 * Configurar el panel per inserir les dades d'un llibre per fer l'alta
 	 * 
@@ -821,6 +837,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		activarDadesLlibres();
 	}
 
+	
 	/**
 	 * Esborra els camps amb l'informació que hi hagi
 	 * 
@@ -843,6 +860,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		administradorLlibres.getNumeroReservesField().setText("");
 	}
 
+	
 	/**
 	 * Activa els camps per que estiguin editables
 	 * 
@@ -862,6 +880,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		administradorLlibres.getPuntuacioField().setEditable(true);
 	}
 
+	
 	/**
 	 * Activa els camps per que estiguin editables
 	 * 
@@ -881,6 +900,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		administradorLlibres.getPuntuacioField().setEditable(true);
 	}
 
+	
 	/**
 	 * Desactiva els camps per que no estiguin editables
 	 * 
@@ -897,9 +917,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 		administradorLlibres.getEditorialsComboBox().setEnabled(false);
 		administradorLlibres.getGeneresComboBox().setEnabled(false);
 		administradorLlibres.getPuntuacioField().setEditable(false);
-
 	}
 
+	
 	/**
 	 * Extreu les dades d'una fila i les introdueix als camps del llibre per
 	 * mostrar, o editar
@@ -939,9 +959,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 		}
 		administradorLlibres.getNumeroReservesField()
 				.setText(getValorCella(row, 12));
-
 	}
 
+	
 	/**
 	 * Extreu les dades d'una fila i crea un cadena amb salts de linea
 	 * 
@@ -966,6 +986,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		return dadesRowToString;
 	}
 
+	
 	/**
 	 * Extreu les dades d'una fila i crea un cadea separada per comes
 	 * 
@@ -983,6 +1004,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		return dadesRowToString;
 	}
 
+	
 	/**
 	 * Comprova si un llibre està selecciona
 	 * 
@@ -1000,6 +1022,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		}
 	}
 
+	
 	/**
 	 * Converteix la informació d'una cel.la en un String
 	 * 
@@ -1012,6 +1035,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		return table.getValueAt(row, column).toString();
 	}
 
+	
 	/**
 	 * Fa la cerca amb els valor introduïts En aquest cas només mostro la
 	 * consulta que s'enviarà al servidor
@@ -1024,15 +1048,6 @@ public class AdministradorLlibresControlador implements MouseListener {
 		if (textDeLaCerca.length() == 0) {
 			errorCampCercaBuit();
 		} else {
-			// llibresModel = new LlibresModel();
-			// llibresModel.consultarTotsElsLlibresPerFiltre(filtre + "," +
-			// textDeLaCerca);
-
-			// S'envia l'string de cerca al servidor
-//			mostraLaCerca("Filtre: " + filtre + "\n" + "Text a cercar: "
-//					+ textDeLaCerca + "\n" + "Valors enviats al servidor: "
-//					+ usuariConnectat.getIdSessio() + "," + "consulta_llibre_"
-//					+ filtre + "," + textDeLaCerca);
 
 			// per el projecte final la consulta es fa al servidor
 			administradorLlibres.llistarLlibresConsulta(filtre, textDeLaCerca);
@@ -1040,6 +1055,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 
 	}
 
+	
 	/**
 	 * Missatge que mostra la consulta que s'envia al servidor
 	 * 
@@ -1051,6 +1067,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 				"Dades de la cerca", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	
 	/**
 	 * Esborra les dades introduïdes al camp de la cerca
 	 * 
@@ -1059,9 +1076,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 	private void esborrarCampCerca() {
 		administradorLlibres.getCercaField().setText("");
 		administradorLlibres.getCercaField().requestFocus();
-
 	}
 
+	
 	/**
 	 * Extreu el filtre que s'ha seleccionat per fer la cerca
 	 * 
@@ -1090,6 +1107,7 @@ public class AdministradorLlibresControlador implements MouseListener {
 		return filtre;
 	}
 
+	
 	/**
 	 * Mostra un error si el camp de cerca està buit
 	 * 
@@ -1102,9 +1120,9 @@ public class AdministradorLlibresControlador implements MouseListener {
 				WarningStrings.getString(
 						"ConsultaLlibresNoRegistrat.titolMissatgeCampCercaBuit"),
 				JOptionPane.ERROR_MESSAGE);
-
 	}
 
+	
 	/**
 	 * Mostra un error si no s'ha seleccionat cap llibre
 	 * 

@@ -89,6 +89,7 @@ public class ConsultaLlibresControlador implements MouseListener {
 
 	/**
 	 * Métode que permet llogar un llibre
+	 * 
 	 * @author SergioHernandez
 	 */
 	private void llogarLlibre() {
@@ -110,13 +111,12 @@ public class ConsultaLlibresControlador implements MouseListener {
 			} else {
 				mostraErrorLlogarLlibre();
 			}
-
 		}
-
 	}
 
 	/**
 	 * Envia la consulta al servidor per llogar un llibre
+	 * 
 	 * @return true si tot ha anat bé, false si no
 	 * @author SergioHernandez
 	 */
@@ -135,6 +135,7 @@ public class ConsultaLlibresControlador implements MouseListener {
 
 	/**
 	 * Métode que permet fer la reserva d'un llibre
+	 * 
 	 * @author SergioHernandez
 	 */
 	private void reservarLlibre() {
@@ -156,13 +157,12 @@ public class ConsultaLlibresControlador implements MouseListener {
 			} else {
 				mostraErrorReservarLlibre();
 			}
-
 		}
-
 	}
 
 	/**
 	 * Envia la consulta al servidor per reservar un llibre
+	 * 
 	 * @return true si tot ha anat bé, false si no
 	 * @author SergioHernandez
 	 */
@@ -181,6 +181,7 @@ public class ConsultaLlibresControlador implements MouseListener {
 
 	/**
 	 * Mostra un error al reservar un llibre
+	 * 
 	 * @author SergioHernandez
 	 */
 	private void mostraErrorReservarLlibre() {
@@ -192,6 +193,7 @@ public class ConsultaLlibresControlador implements MouseListener {
 
 	/**
 	 * Mostra un error al llogar un llibre
+	 * 
 	 * @author SergioHernandez
 	 */
 	private void mostraErrorLlogarLlibre() {
@@ -203,6 +205,7 @@ public class ConsultaLlibresControlador implements MouseListener {
 
 	/**
 	 * Torna a omplir el jtable amb tots els llibres
+	 * 
 	 * @author SergioHernandez
 	 */
 	private void refrescarElsLlibres() {
@@ -212,6 +215,7 @@ public class ConsultaLlibresControlador implements MouseListener {
 
 	/**
 	 * Mostra les dades del llibre que es vol reservar
+	 * 
 	 * @param dadesLlibreAReservar
 	 * @param dadesRowToString
 	 * @author SergioHernandez
@@ -246,11 +250,6 @@ public class ConsultaLlibresControlador implements MouseListener {
 	}
 
 	private void mostrarPrestecs() {
-		// Es mostrarà quan estigui implementat el prèstec de llibres
-		// consultaLlibres.getCancellarButton().setVisible(true);
-		// consultaLlibres.getCancellarButton().setEnabled(true);
-//		JOptionPane.showMessageDialog(consultaLlibres, "Falta implementar la consulta dels prèstecs\nde l'usuari",
-//				WarningStrings.getString("Consultar prèstecs"), JOptionPane.ERROR_MESSAGE);
 		consultaLlibres.llistarPrestecs();
 
 	}
@@ -377,7 +376,6 @@ public class ConsultaLlibresControlador implements MouseListener {
 		return dadesRowToString;
 	}
 
-
 	/**
 	 * Converteix la informació d'una cel.la en un String
 	 * 
@@ -402,19 +400,10 @@ public class ConsultaLlibresControlador implements MouseListener {
 		if (textDeLaCerca.length() == 0) {
 			errorCampCercaBuit();
 		} else {
-			// llibresModel = new LlibresModel();
-			// llibresModel.consultarTotsElsLlibresPerFiltre(filtre + "," +
-			// textDeLaCerca);
-
 			comunicacioClientServidor.iniciarComunicacio(
 					usuariConnectat.getIdSessio() + "," + "consulta_llibre_"
 							+ filtre + "," + textDeLaCerca);
-			// dadesRebudesDelServidor =
-			// comunicacioClientServidor.getDadesDelServidor();
-			// S'envia l'string de cerca al servidor
-//			mostraLaCerca("Filtre: " + filtre + "\n" + "Text a cercar: " + textDeLaCerca + "\n"
-//					+ "Valors enviats al servidor: " + usuariConnectat.getIdSessio() + "," + "consulta_llibre_" + filtre
-//					+ "," + textDeLaCerca);
+
 			consultaLlibres.llistarLlibresConsulta(filtre, textDeLaCerca);
 		}
 
@@ -519,7 +508,7 @@ public class ConsultaLlibresControlador implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	private void setIdLlibre(int id_llibre) {
 		this.idLlibre = id_llibre;
 

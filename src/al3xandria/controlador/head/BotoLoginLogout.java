@@ -43,7 +43,6 @@ public class BotoLoginLogout implements ActionListener {
 	private String estatDelBotoLogin;
 	private String contrasenyaUsuariIntroduida;
 
-
 	/**
 	 * Constructor
 	 * 
@@ -51,29 +50,34 @@ public class BotoLoginLogout implements ActionListener {
 	 * @param footPanel    --> Panel FootPanel
 	 * @param centralPanel --> Panel CentralPanel
 	 */
-	public BotoLoginLogout(HeadPanel headPanel, FootPanel footPanel, CentralPanel centralPanel) {
+	public BotoLoginLogout(HeadPanel headPanel, FootPanel footPanel,
+			CentralPanel centralPanel) {
 		this.headPanel = headPanel;
 		this.footPanel = footPanel;
 		this.centralPanel = centralPanel;
-		
+
 		controlDeDades = new ControlDeDades();
 	}
 
 	/**
-	 * Escolta quan es fa clic al botó Login i comprova si els camps estan omplerts
-	 * i si el format de l'email és correcte. Si la funció del botó es Login envia
-	 * les dades per fer login i si és Logout, envia les dades per fer logout. Tambè
-	 * mostra els errors de camps buit i format d'email incorrecte
+	 * Escolta quan es fa clic al botó Login i comprova si els camps estan
+	 * omplerts i si el format de l'email és correcte. Si la funció del botó es
+	 * Login envia les dades per fer login i si és Logout, envia les dades per
+	 * fer logout. Tambè mostra els errors de camps buit i format d'email
+	 * incorrecte
 	 * 
 	 * @author SergioHernandez
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		emailUsuariIntroduit = headPanel.getEmailintroduitPerLusuari().getText();
+		emailUsuariIntroduit = headPanel.getEmailintroduitPerLusuari()
+				.getText();
 		estatDelBotoLogin = headPanel.getFerLoginButton().getText();
-		contrasenyaUsuariIntroduida = headPanel.getContrasenyaIntroduidaPerLusuariToString();
+		contrasenyaUsuariIntroduida = headPanel
+				.getContrasenyaIntroduidaPerLusuariToString();
 
-		if (controlDeDades.comprovarCampsOmplertsLogin(emailUsuariIntroduit, contrasenyaUsuariIntroduida)) {
+		if (controlDeDades.comprovarCampsOmplertsLogin(emailUsuariIntroduit,
+				contrasenyaUsuariIntroduida)) {
 			if (estatDelBotoLogin.equals("Login")) {
 				if (controlDeDades.comprovacioEmail(emailUsuariIntroduit)) {
 
@@ -88,11 +92,11 @@ public class BotoLoginLogout implements ActionListener {
 		}
 	}
 
-
 	/**
 	 * Envia tres valors separats per comes (login, email, contrasenya) i rep la
 	 * resposta del servidor:<br>
-	 * usuari trobat: 0,idSessio, tipus d'usuari --> dona permís per fer login<br>
+	 * usuari trobat: 0,idSessio, tipus d'usuari --> dona permís per fer
+	 * login<br>
 	 * usuari no trobat: 440 --> mostra missatge error<br>
 	 * usuari ja està logeat: 550 --> mostra missatge error
 	 * 
@@ -102,20 +106,29 @@ public class BotoLoginLogout implements ActionListener {
 
 		createUsuaris = new CreateUsuaris();
 		comunicacioClientServidor
-				.iniciarComunicacio("login" + "," + emailUsuariIntroduit + "," + Hash.sha1(contrasenyaUsuariIntroduida));
-		dadesRebudesDelServidor = comunicacioClientServidor.getDadesDelServidor();
+				.iniciarComunicacio("login" + "," + emailUsuariIntroduit + ","
+						+ Hash.sha1(contrasenyaUsuariIntroduida));
+		dadesRebudesDelServidor = comunicacioClientServidor
+				.getDadesDelServidor();
 		if (dadesRebudesDelServidor != null) {
 			if (dadesRebudesDelServidor[0].equals("1")) {
-				// es crea un usuari amb les dades de l'usuari que s'ha connectat amb exit
-				comunicacioClientServidor.iniciarComunicacio(dadesRebudesDelServidor[1]+",mostrar_usuari,"+emailUsuariIntroduit);
+				// es crea un usuari amb les dades de l'usuari que s'ha
+				// connectat amb exit
+				comunicacioClientServidor
+						.iniciarComunicacio(dadesRebudesDelServidor[1]
+								+ ",mostrar_usuari," + emailUsuariIntroduit);
 				String dadesDeLusuari = comunicacioClientServidor.getData();
 				Gson gson = new Gson();
-				Usuari[] usuaris = gson.fromJson(dadesDeLusuari, Usuari[].class);
+				Usuari[] usuaris = gson.fromJson(dadesDeLusuari,
+						Usuari[].class);
 				usuariConnectat = usuaris[0];
-				//usuariConnectat = createUsuaris.buscarUsuari(emailUsuariIntroduit, contrasenyaUsuariIntroduida);
+				// usuariConnectat =
+				// createUsuaris.buscarUsuari(emailUsuariIntroduit,
+				// contrasenyaUsuariIntroduida);
 				// s'emmagatzema la id de sessió
 				usuariConnectat.setIdSessio(dadesRebudesDelServidor[1]);
-				System.out.println(usuariConnectat.getIdSessio() + "getidsessio");
+				System.out
+						.println(usuariConnectat.getIdSessio() + "getidsessio");
 				permisPerFerLogin();
 			} else if (dadesRebudesDelServidor[0].equals("550")) {
 				errorUsuariJaHaFetLogin();
@@ -127,16 +140,18 @@ public class BotoLoginLogout implements ActionListener {
 	}
 
 	/**
-	 * Envia dos valors separats per comes (logout, idSessio) i rep la resposta del
-	 * servidor<br>
+	 * Envia dos valors separats per comes (logout, idSessio) i rep la resposta
+	 * del servidor<br>
 	 * logout correcte: 0 --> mostra avís de logout<br>
 	 * el logout no s'ha pogut fer: 440 --> mostra missatge error<br>
 	 * 
 	 * @author SergioHernandez
 	 */
 	public void enviarDadesPerFerLogout() {
-		comunicacioClientServidor.iniciarComunicacio("logout," + usuariConnectat.getIdSessio());
-		dadesRebudesDelServidor = comunicacioClientServidor.getDadesDelServidor();
+		comunicacioClientServidor
+				.iniciarComunicacio("logout," + usuariConnectat.getIdSessio());
+		dadesRebudesDelServidor = comunicacioClientServidor
+				.getDadesDelServidor();
 		if (dadesRebudesDelServidor[0].equals("1")) {
 			avisDeLogout();
 		} else if (dadesRebudesDelServidor[0].equals("440")) {
@@ -170,15 +185,20 @@ public class BotoLoginLogout implements ActionListener {
 	 * @author SergioHernandez
 	 */
 	public void usuariAFetLogin() {
-		headPanel.getFerLoginButton().setText(HeadPanelMessages.getString("HeadPanel.ferLogoutButton.text"));
-		headPanel.getFerLoginButton().setToolTipText(HeadPanelMessages.getString("HeadPanel.ferLogoutButtonTolTip"));
-		footPanel.getEstasConectatComLabel()
-				.setText(FootPanelMessages.getString("FootPanel.estasConectatComLabel.text"));
-		footPanel.getTipuUsuariLabel().setText(usuariConnectat.getTipus_usuari());
+		headPanel.getFerLoginButton().setText(
+				HeadPanelMessages.getString("HeadPanel.ferLogoutButton.text"));
+		headPanel.getFerLoginButton().setToolTipText(
+				HeadPanelMessages.getString("HeadPanel.ferLogoutButtonTolTip"));
+		footPanel.getEstasConectatComLabel().setText(FootPanelMessages
+				.getString("FootPanel.estasConectatComLabel.text"));
+		footPanel.getTipuUsuariLabel()
+				.setText(usuariConnectat.getTipus_usuari());
 		footPanel.getEmailUsuariLabel().setText(usuariConnectat.getEmail());
-		footPanel.getIdSessioUsuariLabel().setText(usuariConnectat.getIdSessio());
+		footPanel.getIdSessioUsuariLabel()
+				.setText(usuariConnectat.getIdSessio());
 		footPanel.getCarnetUsuariLabel().setText(usuariConnectat.getCarnet());
-		footPanel.getPuntuacioUsuariLabel().setText(String.valueOf(usuariConnectat.getPuntuacio_usuari()));
+		footPanel.getPuntuacioUsuariLabel()
+				.setText(String.valueOf(usuariConnectat.getPuntuacio_usuari()));
 		footPanel.getNomUsuariLabel().setText(usuariConnectat.getNom_usuari());
 		footPanel.getModificarDadesIcon().setVisible(true);
 		footPanel.getModificarDadesLabel().setVisible(true);
@@ -199,8 +219,8 @@ public class BotoLoginLogout implements ActionListener {
 	}
 
 	/**
-	 * Torna el panel de login al seu estat per defecte i modifica el panel central
-	 * a l'estat per defecte
+	 * Torna el panel de login al seu estat per defecte i modifica el panel
+	 * central a l'estat per defecte
 	 * 
 	 * @author SergioHernandez
 	 */
@@ -236,11 +256,13 @@ public class BotoLoginLogout implements ActionListener {
 	public void avisDeLogout() {
 
 		int valor = JOptionPane.showConfirmDialog(headPanel,
-				WarningStrings.getString("BotoLoginLogout.optionPaneAvisDeLogout"),
-				WarningStrings.getString("BotoLoginLogout.dialogAvisDeLogout"), JOptionPane.YES_NO_OPTION,
-				JOptionPane.WARNING_MESSAGE, null);
+				WarningStrings
+						.getString("BotoLoginLogout.optionPaneAvisDeLogout"),
+				WarningStrings.getString("BotoLoginLogout.dialogAvisDeLogout"),
+				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null);
 		if (valor == JOptionPane.YES_OPTION) {
-			comunicacioClientServidor.iniciarComunicacio("logoutOK," + emailUsuariIntroduit);
+			comunicacioClientServidor
+					.iniciarComunicacio("logoutOK," + emailUsuariIntroduit);
 			permisPerFerLogout();
 		}
 
@@ -266,8 +288,10 @@ public class BotoLoginLogout implements ActionListener {
 	 */
 	public void errorDadesPerFerLogin() {
 		JOptionPane.showMessageDialog(headPanel,
-				WarningStrings.getString("BotoLoginLogout.missatgeErrorDadesPerFerLogin"),
-				WarningStrings.getString("BotoLoginLogout.titolMissatgeErrorDadesPerFerLogin"),
+				WarningStrings.getString(
+						"BotoLoginLogout.missatgeErrorDadesPerFerLogin"),
+				WarningStrings.getString(
+						"BotoLoginLogout.titolMissatgeErrorDadesPerFerLogin"),
 				JOptionPane.ERROR_MESSAGE);
 		headPanel.getEmailintroduitPerLusuari().requestFocus();
 	}
@@ -279,8 +303,10 @@ public class BotoLoginLogout implements ActionListener {
 	 */
 	public void errorPeticioDeLogout() {
 		JOptionPane.showMessageDialog(headPanel,
-				WarningStrings.getString("BotoLoginLogout.missatgeErrorPeticioDeLogout"),
-				WarningStrings.getString("BotoLoginLogout.titolMissatgeErrorPeticioDeLogout"),
+				WarningStrings.getString(
+						"BotoLoginLogout.missatgeErrorPeticioDeLogout"),
+				WarningStrings.getString(
+						"BotoLoginLogout.titolMissatgeErrorPeticioDeLogout"),
 				JOptionPane.ERROR_MESSAGE);
 	}
 
@@ -292,8 +318,10 @@ public class BotoLoginLogout implements ActionListener {
 	 */
 	public void errorUsuariJaHaFetLogin() {
 		JOptionPane.showMessageDialog(headPanel,
-				WarningStrings.getString("BotoLoginLogout.missatgeErrorUsuariJaHaFetLogin"),
-				WarningStrings.getString("BotoLoginLogout.titolMissatgeErrorUsuariJaHaFetLogin"),
+				WarningStrings.getString(
+						"BotoLoginLogout.missatgeErrorUsuariJaHaFetLogin"),
+				WarningStrings.getString(
+						"BotoLoginLogout.titolMissatgeErrorUsuariJaHaFetLogin"),
 				JOptionPane.ERROR_MESSAGE);
 	}
 
@@ -333,19 +361,22 @@ public class BotoLoginLogout implements ActionListener {
 		headPanel.getHasOblidatLaContrasenyaLabel().setEnabled(true);
 		headPanel.getMostrarContrasenya().setEnabled(true);
 		headPanel.getNouUsuariButton().setEnabled(true);
-		headPanel.getNouUsuariButton().setToolTipText(HeadPanelMessages.getString("HeadPanel.nouUsuariButton.toolTipText"));
-		headPanel.getEmailintroduitPerLusuari()
-				.setToolTipText(HeadPanelMessages.getString("HeadPanel.emailintroduitPerLusuari.toolTipText"));
+		headPanel.getNouUsuariButton().setToolTipText(HeadPanelMessages
+				.getString("HeadPanel.nouUsuariButton.toolTipText"));
+		headPanel.getEmailintroduitPerLusuari().setToolTipText(HeadPanelMessages
+				.getString("HeadPanel.emailintroduitPerLusuari.toolTipText"));
 		headPanel.getContrasenyaIntroduidaPerLusuari()
-				.setToolTipText(HeadPanelMessages.getString("HeadPanel.contrasenyaIntroduidaPerLusuari.toolTipText"));
-		headPanel.getNouUsuariButton()
-				.setToolTipText(HeadPanelMessages.getString("HeadPanel.nouUsuariButton.toolTipText"));
-		headPanel.getEsborrarDadesLoginLabel()
-				.setToolTipText(HeadPanelMessages.getString("FormulariAltaUsuari.cancellarButton.toolTipText"));
+				.setToolTipText(HeadPanelMessages.getString(
+						"HeadPanel.contrasenyaIntroduidaPerLusuari.toolTipText"));
+		headPanel.getNouUsuariButton().setToolTipText(HeadPanelMessages
+				.getString("HeadPanel.nouUsuariButton.toolTipText"));
+		headPanel.getEsborrarDadesLoginLabel().setToolTipText(HeadPanelMessages
+				.getString("FormulariAltaUsuari.cancellarButton.toolTipText"));
 		headPanel.getHasOblidatLaContrasenyaLabel()
-				.setToolTipText(HeadPanelMessages.getString("HeadPanel.hasOblidatLaContrasenyaLabel.toolTipText"));
-		headPanel.getMostrarContrasenya()
-				.setToolTipText(HeadPanelMessages.getString("HeadPanel.mostrarContrasenya.toolTipText"));
+				.setToolTipText(HeadPanelMessages.getString(
+						"HeadPanel.hasOblidatLaContrasenyaLabel.toolTipText"));
+		headPanel.getMostrarContrasenya().setToolTipText(HeadPanelMessages
+				.getString("HeadPanel.mostrarContrasenya.toolTipText"));
 	}
 
 	/**
@@ -355,13 +386,15 @@ public class BotoLoginLogout implements ActionListener {
 	 */
 	public void setPanelLoginDefault() {
 		headPanel.getFerLoginButton().setText("Login");
-		headPanel.getFerLoginButton()
-				.setToolTipText(HeadPanelMessages.getString("HeadPanel.ferLoginButton.toolTipText"));
+		headPanel.getFerLoginButton().setToolTipText(HeadPanelMessages
+				.getString("HeadPanel.ferLoginButton.toolTipText"));
 		headPanel.getEmailintroduitPerLusuari().setText("");
 		headPanel.getContrasenyaIntroduidaPerLusuari().setText("");
 		headPanel.getNouUsuariButton().setEnabled(true);
-		footPanel.getEstasConectatComLabel().setText(FootPanelMessages.getString("FootPanel.usuariNoConnectat.text"));
-		footPanel.getTipuUsuariLabel().setText(FootPanelMessages.getString("FootPanel.tipusUsuariAnominLabel"));
+		footPanel.getEstasConectatComLabel().setText(FootPanelMessages
+				.getString("FootPanel.usuariNoConnectat.text"));
+		footPanel.getTipuUsuariLabel().setText(FootPanelMessages
+				.getString("FootPanel.tipusUsuariAnominLabel"));
 
 		footPanel.getEmailUsuariLabel().setText("");
 		footPanel.getIdSessioUsuariLabel().setText("");
@@ -371,6 +404,5 @@ public class BotoLoginLogout implements ActionListener {
 		footPanel.getModificarDadesIcon().setVisible(false);
 		footPanel.getModificarDadesLabel().setVisible(false);
 	}
-	
 
 }

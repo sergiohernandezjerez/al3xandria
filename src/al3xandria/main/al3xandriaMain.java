@@ -47,16 +47,10 @@ public class al3xandriaMain {
 			e.printStackTrace();
 		}
 		  
-		
-		//client
 		mostraCartellAplicacioIniciada();
 		PrincipalFrame principalFrame = new PrincipalFrame();
 		principalFrame.setVisible(true);
 		
-		//servidor
-//		int port = 5556;
-//		MockSocketsServer mss = new MockSocketsServer();
-//		mss.run(port);
 	}
 	
 	//creat per fer el video
